@@ -30,12 +30,11 @@ const Home = observer(({ categories } : IHome) => {
 
 
 export async function getStaticProps({ locale, req } : any){
-	console.log(locale)
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage(locale)
-
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	console.log(categoryResponse)
 	return {
 		props:{ categories: categoryResponse.data.data},
-		revalidate: 60
+		revalidate: 600
 	};
 }
 
