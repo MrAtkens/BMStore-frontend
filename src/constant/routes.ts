@@ -1,8 +1,6 @@
 //Common --- without authentication
 export const HOME = '/';
-export const SHOP = '/shop';
 export const PRODUCT = (id: string) => `/product/${id}`;
-export const CATEGORY = (id: string) => `/category/${id}`;
 export const PAYMENT = '/payment'
 export const CART = '/cart'
 export const CHECKOUT = '/checkout'
@@ -10,6 +8,28 @@ export const WISHLIST = '/wishlist'
 export const RECENTLY_VIEWED_PRODUCTS = '/recently'
 export const CONTACTS = '/contacts'
 export const ABOUT_US = '/about'
+
+//Products catalog
+export function SHOP_PAGE(page?: number, searchText?: string, category?: string, filter?: string, price_min?: number, price_max?: number) : string {
+	let shopUrl = '/shop'
+
+	if(page !== undefined){
+		shopUrl += `?page=${page}`
+	}
+	if(searchText !== undefined){
+		shopUrl += `?searchText=${searchText}`
+	}
+	if(category !== undefined){
+		shopUrl += `?category=${category}`
+	}
+	if(filter !== undefined){
+		shopUrl += `?filter=${filter}`
+	}
+	if(price_min !== undefined || price_max !== undefined){
+		shopUrl += `?price_min=${price_min}` + `?price_max=${price_max}`
+	}
+	return shopUrl
+}
 
 
 //User --- with authentication

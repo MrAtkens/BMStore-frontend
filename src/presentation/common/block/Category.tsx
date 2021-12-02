@@ -3,7 +3,7 @@ import { Tabs } from 'antd';
 import Link from 'next/link';
 import Image from 'next/image'
 
-import {CATEGORY, SHOP} from 'constant/routes';
+import { SHOP_PAGE } from 'constant/routes';
 import {ICategory} from "domain/interfaces/ICategory";
 
 const { TabPane } = Tabs;
@@ -37,7 +37,7 @@ const Category = ({categories} : ICategoryBlock) => {
                                         key={category.slug}>
                                         <div className="ps-block__item">
                                             <Link
-                                                href={CATEGORY(category.slug)}
+                                                href={SHOP_PAGE(undefined, undefined, category.slug)}
                                                 key={category.name}>
                                                 <a>
                                                     <Image

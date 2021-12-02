@@ -1,3 +1,6 @@
+import Router from 'next/router';
+import Cookies from 'js-cookie';
+
 import {
     toastServerError,
     toastUnauthorizedError,
@@ -11,8 +14,10 @@ import {
     toastBuySuccess, toastProductAddToWishList, toastProductRemoveFromWishList
 } from './toastify'
 
-import Router from 'next/router';
+
 import {toastProductAddToCompareList} from "~/utilities/toastify";
+import { LOGIN } from '../constant/routes';
+import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from '../constant/storageNames';
 
 
 export const authorizationStatusValidation = (status) => {
@@ -44,8 +49,8 @@ export const userGetDataStatus = (status) => {
         toastUserNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
+
     }
 }
 
@@ -58,8 +63,7 @@ export const userEditStatus = (status) => {
         toastUserNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
     }
 }
 
@@ -72,8 +76,8 @@ export const userBuy = (status) => {
         toastUserNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
+
     }
 }
 
@@ -84,8 +88,8 @@ export const productGet = (status) => {
         toastProductNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
+
     }
 }
 
@@ -98,8 +102,8 @@ export const productAddToWishList = (status, title) => {
         toastProductNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
+
     }
 }
 
@@ -112,8 +116,7 @@ export const productRemoveFromWishList = (status, title) => {
         toastProductNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
     }
 }
 
@@ -128,8 +131,8 @@ export const productAddToCompareList = (status, title) => {
         toastProductNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
+
     }
 }
 
@@ -142,7 +145,14 @@ export const productRemoveFromCompareList = (status, title) => {
         toastProductNotFound()
     else if (status === 401) {
         toastUnauthorizedError()
-        localStorage.removeItem('jwt_token');
-        Router.push("/account/login")
+        leaveFromSystem()
     }
+}
+
+
+const leaveFromSystem = () => {
+    Cookies.remove(USER_FIRST_PART)
+    Cookies.remove(USER_SECOND_PART)
+    Cookies.remove(USER_THIRD_PART)
+    Router.push({LOGIN})
 }

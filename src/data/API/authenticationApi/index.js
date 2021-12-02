@@ -16,11 +16,10 @@ const userSingInApi = async (email, password) => {
   })
 }
 
-const userSingUpApi = async (firstName, lastName, phoneNumber, email, password) => {
+const userSingUpApi = async (firstName, lastName, email, password) => {
   return await axios.post(`${BackendUrl}/user/identity/SingUp`, {
     firstName: firstName,
     lastName: lastName,
-    phoneNumber: phoneNumber,
     email: email,
     password: password
   }).then(response => {

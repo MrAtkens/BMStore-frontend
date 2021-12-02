@@ -1,0 +1,14 @@
+import React from 'react';
+import { Skeleton } from 'antd';
+
+
+const SkeletonPostGrid = () => {
+    return (
+        <div className="ps-skeleton--product">
+            <Skeleton.Input active={true} size="default" style={{height: 200}} />
+            <Skeleton paragraph={{ rows: 4 }} />
+        </div>
+    );
+};
+
+export default SkeletonPostGrid;

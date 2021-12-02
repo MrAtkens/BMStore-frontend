@@ -12,8 +12,8 @@ const nextConfig = withPWA({
 		ignoreDuringBuilds: true,
 	},
 	env: {
-		title: 'Martfury',
-		titleDescription: 'Multipurpose Marketplace React Ecommerce Template',
+		title: 'CATS',
+		titleDescription: 'Магазин строй материалов',
 	},
 	pwa: {
 		dest: 'public',
@@ -23,7 +23,7 @@ const nextConfig = withPWA({
 	i18n: {
 		// These are all the locales you want to support in
 		// your application
-		locales: ['ru', 'en', 'kz'],
+		locales: ['ru'],
 		// This is the default locale you want to be used when visiting
 		// a non-locale prefixed path e.g. `/hello`
 		defaultLocale: 'ru'

@@ -1,5 +1,4 @@
 import React from "react";
-import {observer} from "mobx-react-lite";
 
 import { categoryApiService } from "data/API"
 
@@ -13,7 +12,7 @@ interface IHome{
 	categories: Array<ICategory>
 }
 
-const Home = observer(({ categories } : IHome) => {
+const Home = ({ categories } : IHome) => {
 
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
@@ -26,7 +25,7 @@ const Home = observer(({ categories } : IHome) => {
 			</main>
 		</Layout>
 	);
-})
+}
 
 
 export async function getStaticProps({ locale, req } : any){

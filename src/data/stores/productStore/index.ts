@@ -11,6 +11,8 @@ interface IProductStore{
     product: IProduct,
     productCountPage: number,
     pageNumber: number,
+    activeCategory: string,
+    activeFilter: string,
     priceMin: number,
     priceMax: number
 }
@@ -30,6 +32,8 @@ class ProductStore implements IProductStore{
 
     productCountPage = 8;
     pageNumber = 0;
+    activeCategory = "";
+    activeFilter = "";
     priceMin = 0;
     priceMax = 10000;
 
