@@ -15,7 +15,7 @@ import {
 } from './toastify'
 
 
-import {toastProductAddToCompareList} from "~/utilities/toastify";
+import {toastProductAddToCompareList} from './toastify';
 import { LOGIN } from '../constant/routes';
 import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from '../constant/storageNames';
 

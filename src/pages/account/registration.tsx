@@ -5,7 +5,7 @@ import { categoryApiService } from 'data/API';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Register from 'presentation/page/Register';
 import Layout from 'presentation/layout';
-import { ICategory } from '../../domain/interfaces/ICategory';
+import { ICategory } from 'domain/interfaces/ICategory';
 
 interface IRegisterPage{
 	categories: Array<ICategory>
@@ -36,9 +36,9 @@ const RegisterPage = ({categories} : IRegisterPage) => {
 
 export async function getStaticProps({ locale, req } : any){
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	console.log(categoryResponse)
+	console.log(categoryResponse.data)
 	return {
-		props:{ categories: categoryResponse.data.data},
+		props:{ categories: categoryResponse.data},
 		revalidate: 600
 	};
 }

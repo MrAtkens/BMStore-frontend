@@ -1,36 +1,19 @@
 import React, { useRef, useState } from 'react';
 import Router from 'next/router';
 
-import {ICategory} from "domain/interfaces/ICategory";
+// interface ISearchHeader{
+//     categories: Array<ICategory>
+// }
 
-interface ISearchHeader{
-    categories: Array<ICategory>
-}
-
-const SearchHeader = ({ categories }: ISearchHeader) => {
+const SearchHeader = () => {
     const inputEl = useRef(null);
-    const [isSearch, setIsSearch] = useState(false);
     const [keyword, setKeyword] = useState('');
-    const [resultItems, setResultItems] = useState(null);
-    const [loading, setLoading] = useState(false);
 
-    function handleClearKeyword() {
-        setKeyword('');
-        setIsSearch(false);
-        setLoading(false);
-    }
 
     function handleSubmit(e : any) {
         e.preventDefault();
         Router.push(`/search?keyword=${keyword}`);
     }
-
-    const selectOptionView = categories.map((category) => (
-        <option value={category.slug} key={category.slug}>
-            {category.name}
-        </option>
-    ));
-
 
     return (
         <form
@@ -38,9 +21,6 @@ const SearchHeader = ({ categories }: ISearchHeader) => {
             method="get"
             action="/"
             onSubmit={handleSubmit}>
-            <div className="ps-form__categories">
-                <select className="form-control">{selectOptionView}</select>
-            </div>
             <div className="ps-form__input">
                 <input
                     ref={inputEl}
@@ -52,12 +32,6 @@ const SearchHeader = ({ categories }: ISearchHeader) => {
                 />
             </div>
             <button onClick={handleSubmit}>Поиск</button>
-            <div
-                className={`ps-panel--search-result${
-                    isSearch ? ' active ' : ''
-                }`}>
-                <div className='ps-panel__content'/>
-            </div>
         </form>
     );
 };

@@ -1,4 +1,4 @@
-import Document, {Html, Head, Main, NextScript, DocumentContext} from 'next/document'
+import Document, {Html, Head, Main, NextScript} from 'next/document'
 import React from "react";
 
 import {GOOGLE_ANALYTICS, GTM, YANDEX_METRIKA} from "../constant/webAnalytics";

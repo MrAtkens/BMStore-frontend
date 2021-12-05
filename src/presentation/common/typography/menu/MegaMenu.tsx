@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import {CATEGORY} from "constant/routes";
+import { SHOP_PAGE } from "constant/routes";
 
 interface IMegaMenu{
     source: ICategory
@@ -14,21 +14,21 @@ const MegaMenu = ({source} : IMegaMenu) => {
         megaContentView = (
             <div className="mega-menu__column">
                 <h4>{source.name}</h4>
-                {/*<ul className="mega-menu__list">*/}
-                {/*    {source.sub?.map(item => (*/}
-                {/*        <li key={item.id}>*/}
-                {/*            <Link href={`/${item.slug}`}>*/}
-                {/*                <a>{item.title}</a>*/}
-                {/*            </Link>*/}
-                {/*        </li>*/}
-                {/*    ))}*/}
-                {/*</ul>*/}
+                <ul className="mega-menu__list">
+                    {source.children?.map(item => (
+                        <li key={item.id}>
+                            <Link href={SHOP_PAGE(undefined, undefined, item.id)}>
+                                <a>{item.name}</a>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
         );
     }
     return (
         <li className="menu-item-has-children has-mega-menu">
-            <Link href={CATEGORY(source.slug)}>
+            <Link href={SHOP_PAGE(undefined, undefined, source.id)}>
                 <a>
                     {source.name}
                 </a>

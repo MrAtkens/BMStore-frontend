@@ -18,20 +18,16 @@ function getImageURL(source : string) {
 export default function useProduct() {
     return {
         getImage: (product : IProduct) => {
-            if (product) {
-                if (product.imageUrl) {
-                    return (
-                        <>
-                            <LazyLoad>
-                                <img
-                                    src={getImageURL(product.imageUrl)}
-                                    alt={product.title}
-                                />
-                            </LazyLoad>
-                        </>
-                    );
-                }
-            }
+            return (
+                <>
+                    <LazyLoad>
+                        <img
+                            src={getImageURL(product.imageUrl)}
+                            alt={product.title}
+                        />
+                    </LazyLoad>
+                </>
+            )
         },
         price: (product : IProduct) => {
             // Для скидок
@@ -64,10 +60,10 @@ export default function useProduct() {
             )
         },
         filters: (product: IProduct) => {
-            return product.filter.map(filter => (
-                <Link key={filter.id} href={SHOP_PAGE(undefined, undefined, undefined, undefined)}>
+            return product.filters.map(filter => (
+                <Link key={filter.categoryId} href={SHOP_PAGE(undefined, undefined, undefined, undefined)}>
                     <a className='text-capitalize'>
-                        {filter.name} : {filter.value}
+                        {filter.name} : {filter.slug}
                     </a>
                 </Link>
             ));

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CART, CHECKOUT, PRODUCT, SHOP } from 'constant/routes';
+import { CART, CHECKOUT, PRODUCT, SHOP_PAGE } from 'constant/routes';
 import { IProduct } from 'domain/interfaces/IProduct';
 import cartStore from 'data/stores/cartStore'
 import { calculateAmount } from 'helper/stores/cartHelper';
@@ -66,7 +66,7 @@ const PanelCartMobile = observer(() => {
         cartItemsView = <p>Корзина пуста</p>;
         footerView = (
             <div className="ps-cart__footer">
-                <Link href={SHOP}>
+                <Link href={SHOP_PAGE()}>
                     <a className="ps-btn ps-btn--fullwidth">Купить сейчас</a>
                 </Link>
             </div>

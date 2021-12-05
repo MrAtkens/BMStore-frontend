@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import { CATEGORY } from 'constant/routes';
+import Menu from '../../common/typography/menu/Menu';
 
 interface IWidgetShopCategories{
     categories: Array<ICategory>
@@ -11,7 +10,7 @@ interface IWidgetShopCategories{
 
 const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
     const Router = useRouter();
-    const [loading, setLoading] = useState(false);
+    const [loading] = useState(false);
 
     const { category } = Router.query;
 
@@ -23,14 +22,13 @@ const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
     let categoriesView;
     if (!loading) {
         if (categories && categories.length > 0) {
-            const items = categories.map((item) => (
-                <li
-                    key={item.slug}
-                    className={item.slug === category ? 'active' : ''}>
-                    <Link href={CATEGORY(item.slug)}>{item.name}</Link>
-                </li>
-            ));
-            categoriesView = <ul className="ps-list--categories">{items}</ul>;
+            categoriesView =
+                <ul className="ps-list--categories">
+                    <Menu
+                        source={categories}
+                        className="menu--dropdown"
+                    />
+                </ul>;
         } else {
         }
     } else {

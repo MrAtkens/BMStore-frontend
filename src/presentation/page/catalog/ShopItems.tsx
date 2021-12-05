@@ -3,12 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { Pagination } from 'antd';
 
-import Product from '~/components/elements/products/Product';
-import ProductWide from '~/components/elements/products/ProductWide';
+import Product from 'presentation/common/control/products/Product';
+import ProductWide from 'presentation/common/control/products/ProductWide';
 import ModuleShopSortBy from 'presentation/common/typography/ModuleShopSortBy';
 import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
 
-import productStore from "data/stores/productStore"
 import { IProduct } from 'domain/interfaces/IProduct';
 import { generateTempArray } from 'helper/commons/header';
 import { SHOP_PAGE } from 'constant/routes';
@@ -24,8 +23,8 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     const { page } = Router.query;
     const { query } = Router;
     const [listView, setListView] = useState(true);
-    const [total, setTotal] = useState(0);
-    const [products, setProducts] = useState(initialProducts);
+    const [total] = useState(0);
+    const [products] = useState(initialProducts);
 
     const [classes, setClasses] = useState(
         'col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6'
@@ -41,25 +40,23 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     }
 
 
-    function handleSetColumns() {
+    const handleSetColumns = () => {
         switch (columns) {
             case 2:
                 setClasses('col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6');
                 return 3;
-                break;
             case 4:
                 setClasses('col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6');
                 return 4;
-                break;
             case 6:
                 setClasses('col-xl-2 col-lg-4 col-md-6 col-sm-6 col-6');
                 return 6;
-                break;
 
             default:
                 setClasses('col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6');
+                return 0;
         }
-    }
+    };
 
     useEffect(() => {
         if (query) {
@@ -89,7 +86,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
                 );
             } else {
                 productItemsView = products.map((item) => (
-                    <ProductWide product={item} />
+                    <ProductWide key={item.id} product={item} />
                 ));
             }
         } else {

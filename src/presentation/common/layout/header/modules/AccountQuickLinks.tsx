@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import userStore from "data/stores/userStore"
 import { accountLinks } from 'constant/menus/quickLinks';
+import { LOGIN, REGISTER } from 'constant/routes';
 
 const AccountQuickLinks = observer(() => {
 
@@ -44,10 +45,10 @@ const AccountQuickLinks = observer(() => {
                     <i className='icon-user'/>
                 </div>
                 <div className="ps-block__right">
-                    <Link href="/account/login">
+                    <Link href={LOGIN}>
                         <a>Вход</a>
                     </Link>
-                    <Link href="/account/register">
+                    <Link href={REGISTER}>
                         <a>Регистрация</a>
                     </Link>
                 </div>

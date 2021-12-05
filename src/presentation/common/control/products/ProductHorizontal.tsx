@@ -1,19 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import useProduct from 'presentation/hook/useProduct';
-import { PRODUCT } from 'constant/routes';
 import { IProduct } from 'domain/interfaces/IProduct';
+import { PRODUCT } from 'constant/routes';
 
-interface IProductOnCart{
-    product: IProduct,
-    children: any
-}
-
-const ProductOnCart = ({ product, children } : IProductOnCart) => {
-    const { getImage, title } = useProduct();
-
+const ProductHorizontal = (product : IProduct) => {
+    const { getImage, price, title } = useProduct();
     return (
-        <div className="ps-product--cart-mobile">
+        <div className="ps-product--horizontal">
             <div className="ps-product__thumbnail">
                 <Link href={PRODUCT(product.id)}>
                     <a>{getImage(product)}</a>
@@ -21,15 +15,13 @@ const ProductOnCart = ({ product, children } : IProductOnCart) => {
             </div>
             <div className="ps-product__content">
                 {title(product)}
-                <p>
-                    <small>
-                        ${product.price} x {product.quantity}
-                    </small>
-                </p>{' '}
-                {children}
+                {/*<div className="ps-product__rating">*/}
+                {/*    <Rating />*/}
+                {/*</div>*/}
+                {price(product)}
             </div>
         </div>
     );
 };
 
-export default ProductOnCart;
+export default ProductHorizontal;

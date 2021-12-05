@@ -1,4 +1,6 @@
 //Common --- without authentication
+import { Filter } from 'domain/interfaces/IFilter';
+
 export const HOME = '/';
 export const PRODUCT = (id: string) => `/product/${id}`;
 export const PAYMENT = '/payment'
@@ -10,7 +12,7 @@ export const CONTACTS = '/contacts'
 export const ABOUT_US = '/about'
 
 //Products catalog
-export function SHOP_PAGE(page?: number, searchText?: string, category?: string, filter?: string, price_min?: number, price_max?: number) : string {
+export function SHOP_PAGE(page?: number, searchText?: string, category?: string, filter?: Array<Filter>, price_min?: number, price_max?: number) : string {
 	let shopUrl = '/shop'
 
 	if(page !== undefined){
@@ -23,7 +25,9 @@ export function SHOP_PAGE(page?: number, searchText?: string, category?: string,
 		shopUrl += `?category=${category}`
 	}
 	if(filter !== undefined){
-		shopUrl += `?filter=${filter}`
+		filter.map(filter => {
+			shopUrl += `?${filter.slug}=${filter.name}`
+		})
 	}
 	if(price_min !== undefined || price_max !== undefined){
 		shopUrl += `?price_min=${price_min}` + `?price_max=${price_max}`

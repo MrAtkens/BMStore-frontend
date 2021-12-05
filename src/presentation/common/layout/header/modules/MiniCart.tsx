@@ -8,7 +8,7 @@ import {CART, CHECKOUT} from 'constant/routes';
 
 import cartStore from "data/stores/cartStore"
 
-const MiniCart = observer (() => {
+const MiniCart = observer(() => {
 
     function handleRemoveItem(e : any, productId : string) {
         e.preventDefault();
@@ -38,8 +38,8 @@ const MiniCart = observer (() => {
                 <div className="ps-cart__items">{productItems}</div>
                 <div className="ps-cart__footer">
                     <h3>
-                        Sub Total:
-                        <strong>${amount ? amount : 0}</strong>
+                        Стоимость:
+                        <strong>{amount ? amount : 0} тг</strong>
                     </h3>
                     <figure>
                         <Link href={CART}>

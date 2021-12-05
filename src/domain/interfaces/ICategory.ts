@@ -1,5 +1,7 @@
 export interface ICategory{
-	name: string,
+	id: string,
 	imageUrl: string,
-	slug: string
+	children: any,
+	slug: string,
+	name: string,
 }

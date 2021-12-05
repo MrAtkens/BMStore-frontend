@@ -6,7 +6,7 @@ export interface IProduct{
 	title : string,
 	price : number,
 	category: ICategory,
+	filters: Array<IFilter>
 	quantity : number,
 	imageUrl : string,
-	filter: Array<IFilter>
 }

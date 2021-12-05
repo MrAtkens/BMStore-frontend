@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu } from 'antd';
 import Link from 'next/link';
 
-import { CATEGORY } from 'constant/routes';
+import { SHOP_PAGE } from 'constant/routes';
 import {ICategory} from "domain/interfaces/ICategory";
 
 interface IPanelCategories{
@@ -32,7 +32,7 @@ const PanelCategories = ({ categories } : IPanelCategories) => {
             onOpenChange={onOpenChange}>
             {categories.map(category => (
                 <Menu.Item key={category.slug}>
-                    <Link href={CATEGORY(category.slug)}>
+                    <Link href={SHOP_PAGE(undefined, undefined, category.slug)}>
                         {category.name}
                     </Link>
                 </Menu.Item>

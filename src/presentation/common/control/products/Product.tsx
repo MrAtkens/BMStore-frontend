@@ -1,12 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
-import ModuleProductActions from '~/components/elements/products/modules/ModuleProductActions';
+import ModuleProductActions from './modules/ModuleProductActions';
 import useProduct from 'presentation/hook/useProduct';
 import { IProduct } from 'domain/interfaces/IProduct';
 import { PRODUCT } from 'constant/routes';
 
-const Product = (product : IProduct) => {
-    const { getImage, price, filters, title } = useProduct();
+interface IProductComponent{
+    product : IProduct
+}
+
+const Product = ({product} : IProductComponent) => {
+    const { getImage, price, title } = useProduct();
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">

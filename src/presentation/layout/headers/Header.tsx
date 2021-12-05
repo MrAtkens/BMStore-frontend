@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import {ICategory} from "domain/interfaces/ICategory";
+import { stickyHeader } from 'helper/commons/header';
+import { ABOUT_US, CONTACTS, HOME, PAYMENTS } from 'constant/routes';
+
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
 import Menu from "presentation/common/typography/menu/Menu";
-import { stickyHeader } from 'helper/commons/header';
-import { ABOUT_US, CONTACTS, HOME, PAYMENTS } from 'constant/routes';
-import {ICategory} from "domain/interfaces/ICategory";
 
 interface IHeader{
     categories: Array<ICategory>
@@ -15,9 +16,7 @@ interface IHeader{
 
 const Header = ({categories} : IHeader) => {
     useEffect(() => {
-        if (process.browser) {
-            window.addEventListener('scroll', stickyHeader);
-        }
+        window.addEventListener('scroll', stickyHeader);
     }, []);
 
     return (
@@ -78,7 +77,7 @@ const Header = ({categories} : IHeader) => {
                         </div>
                     </div>
                     <div className="header__content-center">
-                        <SearchHeader categories={categories} />
+                        <SearchHeader/>
                     </div>
                     <div className="header__content-right">
                         <ElectronicHeaderActions />

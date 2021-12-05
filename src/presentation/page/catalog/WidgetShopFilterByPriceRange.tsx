@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
-import { SHOP } from 'constant/routes';
+import { SHOP_PAGE } from 'constant/routes';
 
 const WidgetShopFilterByPriceRange = () => {
     const Router = useRouter();
@@ -12,7 +12,7 @@ const WidgetShopFilterByPriceRange = () => {
         setMin(value[0]);
         setMax(value[1]);
 
-        Router.push(SHOP+`?price_max=${value[0]}&price_min=${value[1]}`);
+        Router.push(SHOP_PAGE(undefined, undefined, undefined, undefined, value[0], value[1]));
     }
 
     return (

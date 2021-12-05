@@ -37,7 +37,7 @@ export async function getStaticProps({ locale, req } : any){
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
 	console.log(categoryResponse)
 	return {
-		props:{ categories: categoryResponse.data.data},
+		props:{ categories: categoryResponse.data},
 		revalidate: 600
 	};
 }

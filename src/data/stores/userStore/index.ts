@@ -4,8 +4,8 @@ import Cookies from 'js-cookie'
 
 import {
     authorizationStatusValidation,
-    registrationStatusValidation,
-    userEditStatus,
+    //registrationStatusValidation,
+    // userEditStatus,
     userGetDataStatus
 } from 'helper/responseStatus'
 import { authenticationService, userApiService } from "data/API"
@@ -53,18 +53,18 @@ class UserStore implements IUserStore{
 
     }
 
-    async registration(user : IUser, password : string){
-        const response = await authenticationService.userSingUpApi(user.firstName, user.lastName, user.email, password);
-        console.log(response)
-        registrationStatusValidation(response.status)
-        if(response.status === 200){
-            await Router.push("/account/login")
-        }
-        else{
-            this.isSubmitting = false
-            return false;
-        }
-    }
+    // async registration(user : IUser, password : string){
+    //     const response = await authenticationService.userSingUpApi(user.firstName, user.lastName, user.email, password);
+    //     console.log(response)
+    //     registrationStatusValidation(response.status)
+    //     if(response.status === 200){
+    //         await Router.push("/account/login")
+    //     }
+    //     else{
+    //         this.isSubmitting = false
+    //         return false;
+    //     }
+    // }
 
     async getUserData(){
         const response = await userApiService.getUserApi();

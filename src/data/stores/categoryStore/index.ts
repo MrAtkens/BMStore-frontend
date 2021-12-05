@@ -9,8 +9,10 @@ interface ICategoryStore{
 class CategoryStore implements ICategoryStore {
     categories = [] as Array<ICategory>;
     activeCategory = {
-        name: "",
+        id: "",
         imageUrl: "",
+        children: [],
+        name: "",
         slug: "",
     };
 
@@ -24,8 +26,10 @@ class CategoryStore implements ICategoryStore {
 
     setActiveDefault(){
         this.activeCategory = {
-            name: "",
+            id: "",
             imageUrl: "",
+            children: [],
+            name: "",
             slug: "",
         }
     }

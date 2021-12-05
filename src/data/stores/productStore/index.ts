@@ -2,13 +2,13 @@ import {makeAutoObservable} from "mobx";
 
 import { productsApiService } from "data/API"
 import { IProduct } from 'domain/interfaces/IProduct';
-import { getRelatedItemsFromStorage, updateRelatedToStorage } from '../../../helper/stores/productsHelper';
-import { getWishListItemsFromStorage, updateWishListToStorage } from '../../../helper/stores/wishListHelper';
+import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
+import { getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
 
 interface IProductStore{
     products : Array<IProduct>,
     relatedProducts: Array<IProduct>,
-    product: IProduct,
+    // product: IProduct,
     productCountPage: number,
     pageNumber: number,
     activeCategory: string,
@@ -22,13 +22,13 @@ class ProductStore implements IProductStore{
     relatedProducts = [] as Array<IProduct>;
     wishList = [] as Array<IProduct>;
 
-    product = {
-        id: "",
-        title: "",
-        price : 0,
-        quantity : 0,
-        imageUrl : "",
-    };
+    // product = {
+    //     id: "",
+    //     title: "",
+    //     price : 0,
+    //     quantity : 0,
+    //     imageUrl : "",
+    // };
 
     productCountPage = 8;
     pageNumber = 0;
@@ -46,15 +46,15 @@ class ProductStore implements IProductStore{
         this.products = response.data;
     }
 
-    async getProductById(){
-        const response = await productsApiService.getProductById();
-        this.product = response.data;
-        if(this.relatedProducts.length === 10){
-            this.relatedProducts.shift()
-        }
-        this.relatedProducts.push(this.product)
-        updateRelatedToStorage(this.relatedProducts)
-    }
+    // async getProductById(){
+    //     const response = await productsApiService.getProductById();
+    //     this.product = response.data;
+    //     if(this.relatedProducts.length === 10){
+    //         this.relatedProducts.shift()
+    //     }
+    //     this.relatedProducts.push(this.product)
+    //     updateRelatedToStorage(this.relatedProducts)
+    // }
 
     setRelatedProducts(){
        this.relatedProducts = getRelatedItemsFromStorage()

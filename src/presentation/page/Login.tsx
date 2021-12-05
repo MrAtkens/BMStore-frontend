@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { observer } from 'mobx-react-lite/src/observer';
+import { observer } from 'mobx-react-lite';
 
 import { Form, Input } from 'antd';
 import { LOGIN, REGISTER } from 'constant/routes';
@@ -20,14 +20,14 @@ const Login = observer(() => {
 					className="ps-form--account"
 					onFinish={onFinish}>
 					<ul className="ps-tab-list">
-						<li>
+						<li className="active">
 							<Link href={LOGIN}>
 								<a>Вход</a>
 							</Link>
 						</li>
-						<li className="active">
+						<li>
 							<Link href={REGISTER}>
-								<a>Авторизация</a>
+								<a>Регистрация</a>
 							</Link>
 						</li>
 					</ul>

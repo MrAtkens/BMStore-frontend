@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { ABOUT_US, CONTACTS, SHOP_PAGE } from '../../../../constant/routes';
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
@@ -15,104 +16,73 @@ const FooterWidgets = () => (
                 <ul className="ps-list--social">
                     <li>
                         <a className="facebook" href="#">
-                            <i className="fa fa-facebook"></i>
+                            <i className='fa fa-facebook'/>
                         </a>
                     </li>
                     <li>
                         <a className="twitter" href="#">
-                            <i className="fa fa-twitter"></i>
+                            <i className='fa fa-twitter'/>
                         </a>
                     </li>
                     <li>
                         <a className="google-plus" href="#">
-                            <i className="fa fa-google-plus"></i>
+                            <i className='fa fa-google-plus'/>
                         </a>
                     </li>
                     <li>
                         <a className="instagram" href="#">
-                            <i className="fa fa-instagram"></i>
+                            <i className='fa fa-instagram'/>
                         </a>
                     </li>
                 </ul>
             </div>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Quick links</h4>
+            <h4 className="widget-title">Ссылки</h4>
             <ul className="ps-list--link">
                 <li>
                     <Link href="/page/blank">
-                        <a>Policy</a>
-                    </Link>
-                </li>
-
-                <li>
-                    <Link href="/page/blank">
-                        <a>Term & Condition</a>
+                        <a>Политика</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Shipping</a>
+                    <Link href={SHOP_PAGE()}>
+                        <a>Магазин</a>
                     </Link>
                 </li>
                 <li>
                     <Link href="/page/blank">
-                        <a>Return</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/page/faqs">
-                        <a>FAQs</a>
+                        <a>Возвраты</a>
                     </Link>
                 </li>
             </ul>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Company</h4>
+            <h4 className="widget-title">Компания</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link href="/page/about-us">
-                        <a>About Us</a>
+                    <Link href={ABOUT_US}>
+                        <a>О нас</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Affilate</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/page/blank">
-                        <a>Career</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/page/contact-us">
-                        <a>Contact</a>
+                    <Link href={CONTACTS}>
+                        <a>Контакты</a>
                     </Link>
                 </li>
             </ul>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Bussiness</h4>
+            <h4 className="widget-title">Магазин</h4>
             <ul className="ps-list--link">
-                <li>
-                    <Link href="/page/about-us">
-                        <a>Our Press</a>
-                    </Link>
-                </li>
                 <li>
                     <Link href="/account/checkout">
-                        <a>Checkout</a>
+                        <a>Оплаты</a>
                     </Link>
                 </li>
                 <li>
                     <Link href="/account/user-information">
-                        <a>My account</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/shop">
-                        <a>Shop</a>
+                        <a>Аккаунт</a>
                     </Link>
                 </li>
             </ul>

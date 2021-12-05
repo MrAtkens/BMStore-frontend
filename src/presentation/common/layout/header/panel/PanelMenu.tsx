@@ -78,6 +78,7 @@ const PanelMenu = () => {
                         </SubMenu>
                     );
                 }
+                return null
             })}
         </Menu>
     );

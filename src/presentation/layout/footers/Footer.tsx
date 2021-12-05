@@ -1,6 +1,5 @@
 import React from 'react';
 import FooterWidgets from 'presentation/common/layout/footer/FooterWidgets';
-import FooterLinks from 'presentation/common/layout/footer/FooterLinks';
 import FooterCopyright from 'presentation/common/layout/footer/FooterCopyright';
 
 const Footer = () => (
@@ -12,8 +11,8 @@ const Footer = () => (
                         <i className='icon-rocket'/>
                     </div>
                     <div className="ps-block__right">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $99</p>
+                        <h4>Бесплатная доставка</h4>
+                        <p>На все товары которые стоят больше 20000тг</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -21,8 +20,8 @@ const Footer = () => (
                         <i className='icon-sync'/>
                     </div>
                     <div className="ps-block__right">
-                        <h4>90 Days Return</h4>
-                        <p>If goods have problems</p>
+                        <h4>90 дней на возврат</h4>
+                        <p>Если товар не был повреждён</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -30,8 +29,8 @@ const Footer = () => (
                         <i className='icon-credit-card'/>
                     </div>
                     <div className="ps-block__right">
-                        <h4>Secure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Безопасные платяжи</h4>
+                        <p>100% безопасные транзакций</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -39,13 +38,12 @@ const Footer = () => (
                         <i className='icon-bubbles'/>
                     </div>
                     <div className="ps-block__right">
-                        <h4>24/7 Support</h4>
-                        <p>Dedicated support</p>
+                        <h4>Поддержка 24/7</h4>
+                        <p>Качественная тех поддержка</p>
                     </div>
                 </div>
             </div>
             <FooterWidgets />
-            <FooterLinks />
             <FooterCopyright />
         </div>
     </footer>
