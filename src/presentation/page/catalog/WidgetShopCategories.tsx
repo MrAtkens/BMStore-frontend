@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import Menu from '../../common/typography/menu/Menu';
+import Menu from 'presentation/common/typography/menu/Menu';
 
 interface IWidgetShopCategories{
     categories: Array<ICategory>
 }
 
 const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
-    const Router = useRouter();
     const [loading] = useState(false);
-
-    const { category } = Router.query;
-
-    useEffect(() => {
-
-    }, [category])
 
     // Views
     let categoriesView;
