@@ -15,13 +15,20 @@ const MegaMenu = ({source} : IMegaMenu) => {
             <div className="mega-menu__column">
                 <h4>{source.name}</h4>
                 <ul className="mega-menu__list">
-                    {source.children?.map(item => (
-                        <li key={item.id}>
-                            <Link href={SHOP_PAGE(undefined, undefined, item.id)}>
-                                <a>{item.name}</a>
-                            </Link>
-                        </li>
-                    ))}
+                    {source.children?.map(item => {
+                        if (item.children.length != 0) {
+                            return <MegaMenu key={item.id} source={item} />
+                        }
+                        else {
+                            return (
+                                <li key={item.id}>
+                                    <Link href={SHOP_PAGE(undefined, undefined, item.id)}>
+                                        <a>{item.name}</a>
+                                    </Link>
+                                </li>
+                            );
+                        }
+                    })}
                 </ul>
             </div>
         );
