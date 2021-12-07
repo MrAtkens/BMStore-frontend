@@ -65,10 +65,6 @@
             color: $color-text;
             text-transform: capitalize;
             @include transition(all 0.8s $ease-out-expo);
-
-            &:hover {
-                color: $color-1st;
-            }
         }
 
         &:last-child {
@@ -173,9 +169,6 @@
                     }
                 }
 
-                &:hover {
-                    color: $color-1st;
-                }
             }
         }
     }
@@ -387,7 +380,6 @@
     }
 
     > li {
-        padding: 0 20px;
         transition: all 0.4s ease;
 
         > a {
@@ -416,14 +408,6 @@
             }
         }
 
-        &:hover {
-            background-color: $color-1st;
-            &.has-mega-menu {
-                .mega-menu {
-                    @include show;
-                }
-            }
-        }
     }
 }
 

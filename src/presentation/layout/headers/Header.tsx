@@ -8,7 +8,7 @@ import { ABOUT_US, CONTACTS, HOME, PAYMENTS } from 'constant/routes';
 
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
-import Menu from "presentation/common/typography/menu/Menu";
+import CustomMenu from "presentation/common/typography/menu/CustomMenu";
 
 interface IHeader{
     categories: Array<ICategory>
@@ -69,8 +69,9 @@ const Header = ({categories} : IHeader) => {
                                 <span> Категории</span>
                             </div>
                             <div className="menu__content">
-                                <Menu
+                                <CustomMenu
                                     source={categories}
+                                    mode={'horizontal'}
                                     className="menu--dropdown"
                                 />
                             </div>
@@ -93,16 +94,18 @@ const Header = ({categories} : IHeader) => {
                                 <span> Категории</span>
                             </div>
                             <div className="menu__content">
-                                <Menu
+                                <CustomMenu
                                     source={categories}
+                                    mode={'inline'}
                                     className="menu--dropdown"
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="navigation__right">
-                        <Menu
+                        <CustomMenu
                             source={categories}
+                            mode={'horizontal'}
                             className="menu"
                         />
                         <div className="ps-block--header-hotline inline">

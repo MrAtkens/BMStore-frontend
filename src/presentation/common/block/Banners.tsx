@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Link from 'next/link';
 
 import { SHOP_PAGE } from 'constant/routes';
-import Menu from "presentation/common/typography/menu/Menu"
+import CustomMenu from "presentation/common/typography/menu/CustomMenu"
 import {ICategory} from "domain/interfaces/ICategory";
 
 interface IBanners{
@@ -24,7 +24,7 @@ const Banners = ({categories} : IBanners) => {
         <section className="ps-home-banner">
             <div className="container">
                 <div className="ps-section__left">
-                    <Menu source={categories} className="menu--dropdown" />
+                    <CustomMenu mode={'inline'} source={categories} className="menu--dropdown" />
                 </div>
                 <div className="ps-section__center">
                     <Slider {...carouselSettings}>
