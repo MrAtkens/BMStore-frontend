@@ -18,7 +18,6 @@ const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
     function handleSelectFilter(value : string) {
         //Проверка на то есть ли на самом деле данное значение в фильтре и нужно ли его убирать
         if(filters?.includes(value)){
-            console.log(filters)
             //Удаление параметра из url и переадресация на новый без данного параметра
             Router.push(removeParamFromUrl(Router.asPath, "filters"))
         }

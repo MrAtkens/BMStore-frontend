@@ -134,6 +134,7 @@ const NavigationList = ({categories} : INavigationList) => {
             </Drawer>
             <div className="navigation__content">
                 <a
+                    href="#"
                     className={`navigation__item ${
                         menuDrawer ? 'active' : ''
                     }`}
@@ -142,6 +143,7 @@ const NavigationList = ({categories} : INavigationList) => {
                     <span> Меню</span>
                 </a>
                 <a
+                    href="#"
                     className={`navigation__item ${
                         categoriesDrawer ? 'active' : ''
                     }`}
@@ -150,6 +152,7 @@ const NavigationList = ({categories} : INavigationList) => {
                     <span> Категории</span>
                 </a>
                 <a
+                    href="#"
                     className={`navigation__item ${
                         searchDrawer ? 'active' : ''
                     }`}
@@ -158,6 +161,7 @@ const NavigationList = ({categories} : INavigationList) => {
                     <span> Поиск</span>
                 </a>
                 <a
+                    href="#"
                     className={`navigation__item ${
                         cartDrawer ? 'active' : ''
                     }`}

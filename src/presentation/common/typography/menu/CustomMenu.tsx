@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Menu } from 'antd';
 
@@ -15,6 +15,12 @@ interface IMenu{
 const CustomMenu = ({ source, className, mode } : IMenu) => {
     const [current, setCurrent] = useState('f8959b59-bae3-4be6-98f9-2d3bfc1faed4');
     const Router = useRouter()
+    const { category } = Router.query
+
+    useEffect(() => {
+        if(category !== undefined)
+            setCurrent(category.toString())
+    }, [Router.query, category])
 
     const handleClick = e => {
         setCurrent(e.key)
@@ -55,7 +61,6 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
             <Menu.Item>Здесь нет меню</Menu.Item>
         );
     }
-    console.log(menuView)
     if(mode === 'horizontal')
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'horizontal'} className={className}>{menuView}</Menu>;
     else if(mode === 'vertical')

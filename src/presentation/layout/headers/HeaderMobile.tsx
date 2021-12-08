@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
-import { HOME, PAYMENTS } from 'constant/routes';
+import { HOME, PAYMENTS, SHOP_PAGE } from 'constant/routes';
+import { editParamFromUrl } from 'helper/commons/products';
 
 const HeaderMobile = () => {
+    const inputEl = useRef(null);
+    const [keyword, setKeyword] = useState('');
+    const Router = useRouter()
+    const { searchText } = Router.query
+
+    function handleSubmit(e : any) {
+        e.preventDefault();
+        if(searchText?.includes("searchText")){
+            //Удаление параметра из url и переадресация на новый без данного параметра
+            Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
+        }
+        else {
+            if (Router.asPath.includes("?"))
+                Router.push(Router.asPath + `&searchText=${keyword}`)
+            else
+                Router.push(SHOP_PAGE(undefined, keyword))
+        }
+    }
+
     return (
         <header className="header header--mobile">
             <div className="header__top">
@@ -44,11 +65,15 @@ const HeaderMobile = () => {
                     method="get">
                     <div className="form-group--nest">
                         <input
+                            ref={inputEl}
+                            value={keyword}
                             className="form-control"
                             type="text"
-                            placeholder="Поиск..."
+                            name="search_text"
+                            placeholder="Я ищу..."
+                            onChange={(e) => setKeyword(e.target.value)}
                         />
-                        <button>
+                        <button onClick={handleSubmit} name="search">
                             <i className='icon-magnifier'/>
                         </button>
                     </div>

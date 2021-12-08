@@ -1,18 +1,27 @@
 import React, { useRef, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
-// interface ISearchHeader{
-//     categories: Array<ICategory>
-// }
+import { SHOP_PAGE } from 'constant/routes';
+import { editParamFromUrl } from 'helper/commons/products';
 
 const SearchHeader = () => {
     const inputEl = useRef(null);
     const [keyword, setKeyword] = useState('');
-
+    const Router = useRouter()
+    const { searchText } = Router.query
 
     function handleSubmit(e : any) {
         e.preventDefault();
-        Router.push(`/search?keyword=${keyword}`);
+        if(searchText?.includes("searchText")){
+            //Удаление параметра из url и переадресация на новый без данного параметра
+            Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
+        }
+        else {
+            if (Router.asPath.includes("?"))
+                Router.push(Router.asPath + `&searchText=${keyword}`)
+            else
+                Router.push(SHOP_PAGE(undefined, keyword))
+        }
     }
 
     return (

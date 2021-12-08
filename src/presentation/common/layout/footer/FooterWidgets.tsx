@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ABOUT_US, CONTACTS, SHOP_PAGE } from '../../../../constant/routes';
+import { ABOUT_US, CHECKOUT, CONTACTS, SHOP_PAGE, USER } from 'constant/routes';
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
@@ -15,22 +15,22 @@ const FooterWidgets = () => (
                 </p>
                 <ul className="ps-list--social">
                     <li>
-                        <a className="facebook" href="#">
+                        <a aria-label="facebook" className="facebook" href="#">
                             <i className='fa fa-facebook'/>
                         </a>
                     </li>
                     <li>
-                        <a className="twitter" href="#">
+                        <a aria-label="twitter" className="twitter" href="#">
                             <i className='fa fa-twitter'/>
                         </a>
                     </li>
                     <li>
-                        <a className="google-plus" href="#">
+                        <a aria-label="google-plus" className="google-plus" href="#">
                             <i className='fa fa-google-plus'/>
                         </a>
                     </li>
                     <li>
-                        <a className="instagram" href="#">
+                        <a aria-label="instagram" className="instagram" href="#">
                             <i className='fa fa-instagram'/>
                         </a>
                     </li>
@@ -76,12 +76,12 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Магазин</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link href="/account/checkout">
+                    <Link href={CHECKOUT}>
                         <a>Оплаты</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/account/user-information">
+                    <Link href={USER}>
                         <a>Аккаунт</a>
                     </Link>
                 </li>

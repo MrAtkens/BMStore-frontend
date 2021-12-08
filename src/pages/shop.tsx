@@ -1,5 +1,6 @@
 import React from "react";
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 import { categoryApiService, filtersApiService } from "data/API"
 import { ICategory } from "domain/interfaces/ICategory";
@@ -34,6 +35,12 @@ const Shop = ({ categories, filters } : IShop) => {
 
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
+			<Head>
+				<title>Каталог</title>
+				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
+				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
+				<meta name="author" content="Bazar-Jok Group"/>
+			</Head>
 			<BreadCrumb breadcrumb={breadCrumb} layout={"default"} />
 			<div className="ps-page--shop" id="shop-sidebar">
 				<div className="container">

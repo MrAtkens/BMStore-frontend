@@ -1,4 +1,6 @@
 import React from 'react';
+import Head from 'next/head';
+
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
 
@@ -25,6 +27,12 @@ const WishlistPage = ({ categories } : IWishlistPage) => {
 
     return (
         <Layout categories={categories} title={"Главная страница - CATS"}>
+            <Head>
+                <title>Избранные</title>
+                <meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
+                <meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
+                <meta name="author" content="Bazar-Jok Group"/>
+            </Head>
             <div className="ps-page--simple">
                 <BreadCrumb breadcrumb={breadCrumb} layout={"default"} />
                 <Wishlist />
