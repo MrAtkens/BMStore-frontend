@@ -9,11 +9,14 @@ const WidgetShopFilterByPriceRange = () => {
     const [max, setMax] = useState(1000000);
 
     useEffect(() => {
-        console.log(Router.query)
         if(Router.query.price_min !== undefined)
             setMin(parseInt(Router.query.price_min.toString()))
+        else
+            setMin(50)
         if(Router.query.price_max !== undefined)
             setMax(parseInt(Router.query.price_max.toString()))
+        else
+            setMax(1000000)
     }, [Router.query])
 
 
@@ -41,6 +44,7 @@ const WidgetShopFilterByPriceRange = () => {
                 <h4 className="widget-title">По цене</h4>
                 <Slider
                     range
+                    value={[min, max]}
                     defaultValue={[50, 1000000]}
                     max={1000000}
                     onAfterChange={(e) => handleChangeRange(e)}
