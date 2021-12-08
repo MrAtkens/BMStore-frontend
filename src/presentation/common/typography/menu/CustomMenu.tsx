@@ -15,10 +15,11 @@ interface IMenu{
 const CustomMenu = ({ source, className, mode } : IMenu) => {
     const [current, setCurrent] = useState('f8959b59-bae3-4be6-98f9-2d3bfc1faed4');
     const Router = useRouter()
+
     const handleClick = e => {
         console.log('click ', e);
         setCurrent(e.key)
-        Router.push(SHOP_PAGE(undefined, undefined, e.key))
+        Router.push(SHOP_PAGE(undefined, undefined, e.key), undefined, { scroll: false })
     };
 
     const renderMultiple = (category : ICategory) => {

@@ -103,11 +103,19 @@ const Header = ({categories} : IHeader) => {
                         </div>
                     </div>
                     <div className="navigation__right">
-                        <CustomMenu
-                            source={categories}
-                            mode={'horizontal'}
-                            className="menu"
-                        />
+                        {categories.length >= 6 ? (
+                            <CustomMenu
+                                source={categories.slice(0, 5)}
+                                mode={'horizontal'}
+                                className="menu"
+                            />
+                        ) : (
+                            <CustomMenu
+                                source={categories}
+                                mode={'horizontal'}
+                                className="menu"
+                            />
+                        )}
                         <div className="ps-block--header-hotline inline">
                             <p>
                                 <i className='icon-telephone'/>Телефон:

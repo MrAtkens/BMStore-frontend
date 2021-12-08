@@ -28,13 +28,13 @@ const WidgetShopFilterByPriceRange = () => {
         if(Router.asPath.includes("price_min") || Router.asPath.includes("price_max")){
             let url = editParamFromUrl(Router.asPath, "price_min", value[0])
             url = editParamFromUrl(url, "price_max", value[1])
-            Router.push(url);
+            Router.push(url, undefined, { scroll: false });
         }
         else {
             if (Router.asPath.includes("?"))
-                Router.push(Router.asPath + `&price_min=${value[0]}&price_max=${value[1]}`)
+                Router.push(Router.asPath + `&price_min=${value[0]}&price_max=${value[1]}`, undefined, { scroll: false })
             else
-                Router.push(Router.asPath + `?price_min=${value[0]}&price_max=${value[1]}`)
+                Router.push(Router.asPath + `?price_min=${value[0]}&price_max=${value[1]}`, undefined, { scroll: false })
         }
     }
 
@@ -47,7 +47,7 @@ const WidgetShopFilterByPriceRange = () => {
                     value={[min, max]}
                     defaultValue={[50, 1000000]}
                     max={1000000}
-                    onAfterChange={(e) => handleChangeRange(e)}
+                    onChange={(e) => handleChangeRange(e)}
                 />
                 <p>
                     Цена: {min} тг - {max} тг
