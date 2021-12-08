@@ -17,7 +17,6 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
     const Router = useRouter()
 
     const handleClick = e => {
-        console.log('click ', e);
         setCurrent(e.key)
         Router.push(SHOP_PAGE(undefined, undefined, e.key), undefined, { scroll: false })
     };
@@ -25,7 +24,7 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
     const renderMultiple = (category : ICategory) => {
         if(category.children.length != 0 )
             return(
-                <SubMenu key={category.id} title={category.name}>
+                <SubMenu onTitleClick={handleClick} key={category.id} title={category.name}>
                     {category.children?.map(itemDropDown => {
                         if(itemDropDown.children.length != 0)
                             return renderMultiple(itemDropDown)
@@ -61,7 +60,7 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'horizontal'} className={className}>{menuView}</Menu>;
     else if(mode === 'vertical')
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
-    return <Menu onClick={handleClick} selectedKeys={[current]} mode={'inline'} className={className}>{menuView}</Menu>;
+    return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
 };
 
 export default CustomMenu;
