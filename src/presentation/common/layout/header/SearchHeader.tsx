@@ -17,10 +17,7 @@ const SearchHeader = () => {
             Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
         }
         else {
-            if (Router.asPath.includes("?"))
-                Router.push(Router.asPath + `&searchText=${keyword}`)
-            else
-                Router.push(SHOP_PAGE(undefined, keyword))
+            Router.push(SHOP_PAGE(undefined, keyword))
         }
     }
 

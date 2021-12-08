@@ -10,7 +10,7 @@ const MasterLayout = ({ children } : any) => {
 			{children}
 			<PageLoader />
 			<BackTop>
-				<button name="to_top" className="ps-btn--backtop">
+				<button aria-label="to_top" className="ps-btn--backtop">
 					<i className='icon-arrow-up'/>
 				</button>
 			</BackTop>

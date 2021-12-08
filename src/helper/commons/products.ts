@@ -14,7 +14,6 @@ export const removeParamFromUrl = (url, parameterName) => {
 	if(secondSub.length !== 1) {
 		secondSub.map(item => {
 			if (item.includes(parameterName)) {
-				console.log(item)
 				const index = secondSub.indexOf(item)
 				secondSub.splice(index, 1)
 			}
@@ -49,9 +48,7 @@ export const editParamFromUrl = (url, parameterName, value) => {
 				const index = secondSub.indexOf(item)
 				let parameter = item.split('=')
 				parameter[1] = value
-				console.log("Изменение данных")
 				secondSub[index] = parameter[0] + '=' + parameter[1];
-				console.log(secondSub[index])
 			}
 		})
 	}
@@ -59,12 +56,9 @@ export const editParamFromUrl = (url, parameterName, value) => {
 
 	answer += '?'
 	secondSub.map(item => {
-		console.log(item)
 		answer += item + '&'
 	})
-	console.log("Ответ")
 	answer = answer.substring(0, answer.length - 1);
-	console.log(answer)
 	return answer
 
 }

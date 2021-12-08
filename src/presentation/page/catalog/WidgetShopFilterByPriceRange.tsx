@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
-import { editParamFromUrl } from '../../../helper/commons/products';
+import { editParamFromUrl } from 'helper/commons/products';
 
 const WidgetShopFilterByPriceRange = () => {
     const Router = useRouter();

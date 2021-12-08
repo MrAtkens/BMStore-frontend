@@ -29,7 +29,7 @@ const Category = ({categories} : ICategoryBlock) => {
                                     <TabPane
                                         tab={
                                             <div className="ps-block__tab-list">
-                                                <a href="javascript:void(0)">{category.name}</a>
+                                                <div className="tab-container">{category.name}</div>
                                             </div>
                                         }
                                         key={category.id}>
@@ -38,7 +38,7 @@ const Category = ({categories} : ICategoryBlock) => {
                                                 <Link
                                                     href={SHOP_PAGE(undefined, undefined, category.id)}
                                                     key={category.name}>
-                                                    <a href="javascript:void(0)">
+                                                    <div className="image-container">
                                                         <Image
                                                             layout='responsive'
                                                             width={600}
@@ -47,7 +47,7 @@ const Category = ({categories} : ICategoryBlock) => {
                                                             alt={category.name}
                                                         />
                                                         <span>{category.name}</span>
-                                                    </a>
+                                                    </div>
                                                 </Link>
                                             ) : null}
                                         </div>

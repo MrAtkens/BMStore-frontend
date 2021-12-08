@@ -941,12 +941,13 @@
         align-items: center;
         text-align: center;
 
-        a {
+        .image-container {
             display: block;
             width: 150px;
             max-width: calc(100% / 8);
             margin-bottom: 40px;
             overflow: hidden;
+            cursor: pointer;
 
             img {
                 max-height: 120px;
@@ -983,11 +984,12 @@
         }
 
         .ps-block__tab-list {
-            a {
+            .tab-container {
                 display: block;
                 padding: 20px 0;
                 text-align: center;
                 border-bottom: 2px solid transparent;
+                cursor: pointer;
 
                 i {
                     font-size: 36px;
@@ -1018,9 +1020,9 @@
         .ant-tabs-tab-active {
             color: $color-1st;
 
-            &:hover {
-                color: $color-1st;
-            }
+            //&:hover {
+            //    color: $color-1st;
+            //}
         }
 
         .ant-tabs-ink-bar {
@@ -1056,7 +1058,7 @@
         .ps-block__item {
             margin-bottom: 30px;
 
-            a {
+            p {
                 max-width: calc(100% / 5);
             }
         }
@@ -1069,7 +1071,7 @@
             margin-bottom: 30px;
             padding: 0 10px;
 
-            a {
+            p {
                 max-width: 25%;
             }
         }
@@ -1079,7 +1081,7 @@
             padding: 0 15px;
         }
         .ps-block__item {
-            a {
+            .image-container {
                 max-width: 33.3333%;
             }
         }
@@ -1288,7 +1290,7 @@
         border: 1px solid transparent;
         transition: all 0.4s ease;
 
-        a {
+        .image-container {
             @include max-area;
         }
 
