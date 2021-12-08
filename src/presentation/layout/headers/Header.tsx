@@ -103,9 +103,9 @@ const Header = ({categories} : IHeader) => {
                         </div>
                     </div>
                     <div className="navigation__right">
-                        {categories.length >= 6 ? (
+                        {categories.length >= 4 ? (
                             <CustomMenu
-                                source={categories.slice(0, 5)}
+                                source={categories.slice(0, 4)}
                                 mode={'horizontal'}
                                 className="menu"
                             />
