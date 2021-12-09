@@ -2,7 +2,7 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
 import { IProduct } from 'domain/interfaces/IProduct';
-import { PRODUCT, SHOP_PAGE } from '../../constant/routes';
+import { PRODUCT } from '../../constant/routes';
 
 function getImageURL(source : string) {
     let imageURL;
@@ -61,7 +61,7 @@ export default function useProduct() {
         },
         filters: (product: IProduct) => {
             return product.filters.map(filter => (
-                <Link key={filter.categoryId} href={SHOP_PAGE(undefined, undefined, undefined, undefined)}>
+                <Link key={filter.categoryId} href={`/shop?category=${filter.categoryId}&${filter.name}=${filter.slug}`}>
                     <a className='text-capitalize'>
                         {filter.name} : {filter.slug}
                     </a>

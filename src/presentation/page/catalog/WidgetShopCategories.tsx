@@ -17,7 +17,7 @@ const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
             categoriesView =
                 <ul className="ps-list--categories">
                     <CustomMenu
-                        mode={'inline'}
+                        mode={'vertical'}
                         source={categories}
                         className="menu--dropdown"
                     />
@@ -30,7 +30,7 @@ const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
 
     return (
         <aside className="widget widget_shop">
-            <h4 className="widget-title">Категорий </h4>
+            <h4 className="widget-title">Категории </h4>
             {categoriesView}
         </aside>
     );

@@ -26,7 +26,7 @@ const Header = ({categories} : IHeader) => {
             <div className="header__top">
                 <div className="container">
                     <div className="header__left">
-                        <p>Привествуем в интернет магазине CATS!</p>
+                        <p>Приветствуем в интернет-магазине CATS!</p>
                     </div>
                     <div className="header__right">
                         <ul className="header__top-links">
@@ -71,7 +71,7 @@ const Header = ({categories} : IHeader) => {
                             <div className="menu__content">
                                 <CustomMenu
                                     source={categories}
-                                    mode={'horizontal'}
+                                    mode={'vertical'}
                                     className="menu--dropdown"
                                 />
                             </div>
@@ -96,7 +96,7 @@ const Header = ({categories} : IHeader) => {
                             <div className="menu__content">
                                 <CustomMenu
                                     source={categories}
-                                    mode={'inline'}
+                                    mode={'vertical'}
                                     className="menu--dropdown"
                                 />
                             </div>
@@ -107,21 +107,19 @@ const Header = ({categories} : IHeader) => {
                             <CustomMenu
                                 source={categories.slice(0, 4)}
                                 mode={'horizontal'}
-                                className="menu"
                             />
                         ) : (
                             <CustomMenu
                                 source={categories}
                                 mode={'horizontal'}
-                                className="menu"
                             />
                         )}
-                        <div className="ps-block--header-hotline inline">
-                            <p>
-                                <i className='icon-telephone'/>Телефон:
-                                <strong> 88003355335</strong>
-                            </p>
-                        </div>
+                    </div>
+                    <div className="ps-block--header-hotline inline">
+                        <p>
+                            <i className='icon-telephone'/>Телефон:
+                            <strong> 88003355335</strong>
+                        </p>
                     </div>
                 </div>
             </nav>

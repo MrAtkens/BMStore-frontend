@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
+import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { categoryApiService, filtersApiService } from "data/API"
+import filtersStore from "data/stores/filtersStore"
 import { ICategory } from "domain/interfaces/ICategory";
 import { IFilter } from 'domain/interfaces/IFilter';
 
@@ -14,6 +17,7 @@ import WidgetShopFilter from 'presentation/page/catalog/WidgetShopFilter';
 import WidgetShopCategories from 'presentation/page/catalog/WidgetShopCategories';
 import WidgetShopFilterByPriceRange from 'presentation/page/catalog/WidgetShopFilterByPriceRange'
 // import ShopItems from 'presentation/page/catalog/ShopItems'
+
 
 interface IShop{
 	categories: Array<ICategory>,
@@ -31,7 +35,12 @@ const breadCrumb = [
 	},
 ];
 
-const Shop = ({ categories, filters } : IShop) => {
+const Shop = observer(({ categories, filters } : IShop) => {
+	const Router = useRouter()
+
+	useEffect(() => {
+		filtersStore.setFilters(filters)
+	}, [Router.query])
 
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
@@ -47,8 +56,8 @@ const Shop = ({ categories, filters } : IShop) => {
 					<div className="ps-layout--shop">
 						<div className="ps-layout__left">
 							<WidgetShopCategories categories={categories}/>
-							{filters === null || filters.map(item => (
-									<WidgetShopFilter key={item.categoryId} filter={item}/>
+							{filtersStore.filters === null || filtersStore.filters.map(item => (
+									<WidgetShopFilter key={item.slug} filter={item}/>
 							))}
 							<WidgetShopFilterByPriceRange />
 						</div>
@@ -63,20 +72,17 @@ const Shop = ({ categories, filters } : IShop) => {
 			</div>
 		</Layout>
 	);
-}
+})
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	console.log(context.query.category)
 	let filterResponse = null
 
 	if(context.query.category !== undefined){
 		const response = await filtersApiService.getFilters("ru", context.query.category)
-		console.log(response.data.data)
 		filterResponse = response.data.data;
 	}
 
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	// console.log(categoryResponse.data)
 	return {
 		props:{ categories: categoryResponse.data, filters: filterResponse},
 	};

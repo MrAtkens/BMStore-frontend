@@ -2376,7 +2376,7 @@
 
 .ps-block--header-hotline {
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row-reverse;
     align-items: center;
 
     .ps-block__left {

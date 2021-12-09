@@ -7,6 +7,13 @@ export const generateTempArray = (maxItems) => {
 	return result;
 };
 
+export const addParamToUrl = (url, parameterName, value) => {
+	if(!url.includes('?'))
+		url += "/shop?" + parameterName + "=" + value
+	else
+		url += "&" + parameterName + "=" + value
+	return url
+}
 
 export const removeParamFromUrl = (url, parameterName) => {
 	const firstSub = url.split('?')

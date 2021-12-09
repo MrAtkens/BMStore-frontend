@@ -35,8 +35,8 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
         setListView(!listView);
     }
 
-    function handlePagination(page : number) {
-        Router.push(SHOP_PAGE(page));
+    function handlePagination(pageNumber : number) {
+        Router.push(SHOP_PAGE("page", pageNumber.toString()));
     }
 
 

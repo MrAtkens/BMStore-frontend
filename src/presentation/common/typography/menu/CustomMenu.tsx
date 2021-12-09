@@ -25,9 +25,9 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
     const handleClick = e => {
         setCurrent(e.key)
         if(searchText !== undefined)
-            Router.push(SHOP_PAGE(undefined, searchText?.toString(), e.key), undefined, { scroll: false })
+            Router.push(`/shop?category=${e.key}&searchText=${searchText?.toString()}`, undefined, { scroll: false })
         else
-            Router.push(SHOP_PAGE(undefined, undefined, e.key), undefined, { scroll: false })
+            Router.push(SHOP_PAGE("category", e.key), undefined, { scroll: false })
     };
 
     const renderMultiple = (category : ICategory) => {

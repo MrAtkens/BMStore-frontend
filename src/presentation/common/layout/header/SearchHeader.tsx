@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { SHOP_PAGE } from 'constant/routes';
-import { editParamFromUrl } from 'helper/commons/products';
+import { addParamToUrl, editParamFromUrl, removeParamFromUrl } from 'helper/commons/products';
 
 const SearchHeader = () => {
     const inputEl = useRef(null);
@@ -12,20 +11,25 @@ const SearchHeader = () => {
 
     function handleSubmit(e : any) {
         e.preventDefault();
-        if(searchText?.includes("searchText")){
-            //Удаление параметра из url и переадресация на новый без данного параметра
-            Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
-        }
-        else {
-            Router.push(SHOP_PAGE(undefined, keyword))
+        console.log(searchText)
+        console.log(searchText === '')
+        if(keyword !== '') {
+            if (keyword === '' && searchText !== undefined) {
+                Router.push(removeParamFromUrl(Router.asPath, "searchText"))
+            } else {
+                if (Router.asPath?.includes("searchText")) {
+                    //Удаление параметра из url и переадресация на новый без данного параметра
+                    Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
+                } else {
+                    Router.push(addParamToUrl(Router.asPath, "searchText", keyword))
+                }
+            }
         }
     }
 
     return (
         <form
             className="ps-form--quick-search"
-            method="get"
-            action="/"
             onSubmit={handleSubmit}>
             <div className="ps-form__input">
                 <input

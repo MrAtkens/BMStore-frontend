@@ -18,7 +18,7 @@ const Category = ({categories} : ICategoryBlock) => {
             <div className="container">
                 <div className="ps-section__header">
                     <h3>
-                        Категорий <span>популярных товаров</span>
+                        Категории <span>популярных товаров</span>
                     </h3>
                 </div>
                 <div className="ps-section__content">
@@ -36,7 +36,7 @@ const Category = ({categories} : ICategoryBlock) => {
                                         <div className="ps-block__item">
                                             {category.imageUrl !== null && category.imageUrl !== undefined ? (
                                                 <Link
-                                                    href={SHOP_PAGE(undefined, undefined, category.id)}
+                                                    href={SHOP_PAGE("category", category.id)}
                                                     key={category.name}>
                                                     <div className="image-container">
                                                         <Image

@@ -178,8 +178,6 @@
     text-align: left;
 
     > li {
-        display: inline-block;
-
         > a {
             display: inline-block;
             padding: 15px 25px;
@@ -199,11 +197,6 @@
             > a {
                 padding-left: 0;
             }
-        }
-
-        &:last-child {
-            margin-right: 0;
-            padding-right: 0;
         }
 
         .sub-toggle {
@@ -381,6 +374,7 @@
 
     > li {
         transition: all 0.4s ease;
+        margin-bottom: 0 !important;
 
         > a {
             display: block;

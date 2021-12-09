@@ -32,7 +32,7 @@ const PanelCategories = ({ categories } : IPanelCategories) => {
             onOpenChange={onOpenChange}>
             {categories.map(category => (
                 <Menu.Item key={category.slug}>
-                    <Link href={SHOP_PAGE(undefined, undefined, category.slug)}>
+                    <Link href={SHOP_PAGE("category", category.id)}>
                         {category.name}
                     </Link>
                 </Menu.Item>

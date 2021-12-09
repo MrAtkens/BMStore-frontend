@@ -12,7 +12,7 @@ const Footer = () => (
                     </div>
                     <div className="ps-block__right">
                         <h4>Бесплатная доставка</h4>
-                        <p>На все товары которые стоят больше 20000тг</p>
+                        <p>На все товары, которые стоят больше 20000 тг.</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -29,8 +29,8 @@ const Footer = () => (
                         <i className='icon-credit-card'/>
                     </div>
                     <div className="ps-block__right">
-                        <h4>Безопасные платяжи</h4>
-                        <p>100% безопасные транзакций</p>
+                        <h4>Безопасные платежи</h4>
+                        <p>100% безопасные транзакции</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -39,7 +39,7 @@ const Footer = () => (
                     </div>
                     <div className="ps-block__right">
                         <h4>Поддержка 24/7</h4>
-                        <p>Качественная тех поддержка</p>
+                        <p>Качественная техподдержка</p>
                     </div>
                 </div>
             </div>

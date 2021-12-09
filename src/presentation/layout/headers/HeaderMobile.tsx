@@ -23,7 +23,7 @@ const HeaderMobile = () => {
             if (Router.asPath.includes("?"))
                 Router.push(Router.asPath + `&searchText=${keyword}`)
             else
-                Router.push(SHOP_PAGE(undefined, keyword))
+                Router.push(SHOP_PAGE("searchText", keyword))
         }
     }
 
