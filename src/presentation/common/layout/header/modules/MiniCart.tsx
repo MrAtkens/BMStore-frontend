@@ -24,10 +24,10 @@ const MiniCart = observer(() => {
         const amount = calculateAmount(cartStore.carts);
         const productItems = cartStore.carts.map((item) => {
             return (
-                <ProductOnCart product={item} key={item.id}>
+                <ProductOnCart product={item.product} key={item.product.id} quantity={item.productQuantity}>
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveItem(e, item.id)}>
+                        onClick={(e) => handleRemoveItem(e, item.product.id)}>
                         <i className='icon-cross'/>
                     </a>
                 </ProductOnCart>

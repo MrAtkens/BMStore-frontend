@@ -1,18 +1,19 @@
 import {makeAutoObservable} from "mobx";
-import { IProduct } from 'domain/interfaces/IProduct';
 import {
 	addItemToCartHelper,
 	decreaseQtyCartItemHelper, getCartItemsFromStorage,
 	increaseQtyCartItemHelper,
 	removeCartItemHelper
 } from 'helper/stores/cartHelper';
+import { ICartProduct } from 'domain/interfaces/ICartProduct';
+import { IProduct } from '../../../domain/interfaces/IProduct';
 
 interface ICartStore{
-	carts : Array<IProduct>
+	carts : Array<ICartProduct>
 }
 
 class CartStore implements ICartStore{
-	carts = [] as Array<IProduct>;
+	carts = [] as Array<ICartProduct>;
 
 	constructor() {
 		makeAutoObservable(this)
@@ -22,16 +23,16 @@ class CartStore implements ICartStore{
 		return this.carts
 	}
 
-	increaseFromCart(product: IProduct){
+	increaseFromCart(product: ICartProduct){
 		this.setCart(increaseQtyCartItemHelper(product))
 	}
 
-	decreaseFromCart(product: IProduct){
+	decreaseFromCart(product: ICartProduct){
 		this.setCart(decreaseQtyCartItemHelper(product))
 	}
 
-	addToCart(product: IProduct){
-		this.setCart(addItemToCartHelper(product))
+	addToCart(product: IProduct, productQuantity: number){
+		this.setCart(addItemToCartHelper({product, productQuantity}))
 	}
 
 	removeFromCart(productId: string){
@@ -42,7 +43,7 @@ class CartStore implements ICartStore{
 		this.carts = getCartItemsFromStorage();
 	}
 
-	setCart(carts : Array<IProduct>){
+	setCart(carts : Array<ICartProduct>){
 		this.carts = carts;
 	}
 }

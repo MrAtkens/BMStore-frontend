@@ -1,16 +1,19 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
-import { IProduct } from 'domain/interfaces/IProduct';
-import { PRODUCT } from '../../constant/routes';
+import { IImage, IProduct } from 'domain/interfaces/IProduct';
+import { PRODUCT } from 'constant/routes';
 
-function getImageURL(source : string) {
+function getImageURL(images : Array<IImage>) {
     let imageURL;
 
-    if (source) {
-        imageURL = source
+    if (images) {
+        images.map(image => {
+            if(image.isMain)
+                imageURL = image.url;
+        })
     } else {
-        imageURL = `/static/img/undefined-product-thumbnail.jpg`;
+        imageURL = `/static/img/not-found.jpg`;
     }
     return imageURL;
 }
@@ -19,14 +22,12 @@ export default function useProduct() {
     return {
         getImage: (product : IProduct) => {
             return (
-                <>
-                    <LazyLoad>
-                        <img
-                            src={getImageURL(product.imageUrl)}
-                            alt={product.title}
-                        />
-                    </LazyLoad>
-                </>
+                <LazyLoad>
+                    <img
+                        src={getImageURL(product.images)}
+                        alt={product.info.title}
+                    />
+                </LazyLoad>
             )
         },
         price: (product : IProduct) => {
@@ -61,17 +62,15 @@ export default function useProduct() {
         },
         filters: (product: IProduct) => {
             return product.filters.map(filter => (
-                <Link key={filter.categoryId} href={`/shop?category=${filter.categoryId}&${filter.name}=${filter.slug}`}>
-                    <a className='text-capitalize'>
-                        {filter.name} : {filter.slug}
-                    </a>
-                </Link>
+                <a key={filter.key} className='text-capitalize'>
+                    {filter.key} : {filter.value}
+                </a>
             ));
         },
         title: (product: IProduct) => {
             return (
                 <Link href={PRODUCT(product.id)}>
-                    <a className="ps-product__title">{product.title}</a>
+                    <a className="ps-product__title">{product.info.title}</a>
                 </Link>
             );
         },

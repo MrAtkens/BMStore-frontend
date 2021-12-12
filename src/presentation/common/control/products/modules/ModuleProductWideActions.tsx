@@ -16,7 +16,7 @@ const ModuleProductWideActions = observer(({ product } : IModuleProductWideActio
 
     function handleAddItemToCart(e : any) {
         e.preventDefault();
-        cartStore.addToCart(product)
+        cartStore.addToCart(product, 1)
     }
 
     function handleAddItemToWishlist(e : any) {
@@ -25,7 +25,7 @@ const ModuleProductWideActions = observer(({ product } : IModuleProductWideActio
         const modal = Modal.success({
             centered: true,
             title: 'Успешно!',
-            content: `Вы добавили товар ${product.title} в избранное`,
+            content: `Вы добавили товар ${product.info.title} в избранное`,
         });
         modal.update;
     }

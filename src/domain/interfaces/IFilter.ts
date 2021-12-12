@@ -2,6 +2,7 @@ export interface Filter{
 	name: string,
 	slug: string,
 	filterGroupId: string
+	filterId: string
 }
 
 interface Filters{

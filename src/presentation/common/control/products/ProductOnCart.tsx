@@ -6,10 +6,11 @@ import { IProduct } from 'domain/interfaces/IProduct';
 
 interface IProductOnCart{
     product: IProduct,
-    children: any
+    children: any,
+    quantity: number
 }
 
-const ProductOnCart = ({ product, children } : IProductOnCart) => {
+const ProductOnCart = ({ product, children, quantity } : IProductOnCart) => {
     const { getImage, title } = useProduct();
 
     return (
@@ -23,7 +24,7 @@ const ProductOnCart = ({ product, children } : IProductOnCart) => {
                 {title(product)}
                 <p>
                     <small>
-                        ${product.price} x {product.quantity}
+                        ${product.price} x {quantity}
                     </small>
                 </p>{' '}
                 {children}

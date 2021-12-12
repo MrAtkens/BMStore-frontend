@@ -1,9 +1,9 @@
-import React  from 'react';
-import { Radio } from 'antd';
+import React from 'react';
+import { Checkbox } from 'antd';
 import { useRouter } from 'next/router';
 
 import { IFilter } from 'domain/interfaces/IFilter';
-import { removeParamFromUrl } from 'helper/commons/products';
+import { generateShopUrl, removeParamFromUrl } from '../../../helper/commons/products';
 
 
 interface IWidgetShopFilters{
@@ -12,20 +12,25 @@ interface IWidgetShopFilters{
 
 const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
     const Router = useRouter();
-    const { filters } = Router.query;
+    const { filters, category, searchText, price_min, price_max } = Router.query;
 
-
-    function handleSelectFilter(value : string) {
-        //Проверка на то есть ли на самом деле данное значение в фильтре и нужно ли его убирать
-        if(filters?.includes(value)){
-            //Удаление параметра из url и переадресация на новый без данного параметра
-            Router.push(removeParamFromUrl(Router.asPath, "filters"))
-        }
-        else {
-            if (Router.asPath.includes("?"))
-                Router.push(Router.asPath + `&filters=${value}`)
-            else
-                Router.push(Router.asPath + `?filters=${value}`)
+    function onChange(checkedValues) {
+        console.log(filters)
+        if(checkedValues.length === 0)
+            Router.push(removeParamFromUrl(Router.asPath, "filters"), undefined, {scroll: false})
+        else{
+            let isAvailable = false
+            checkedValues.map(item => {
+                if(filters?.includes(item)){
+                    console.log(generateShopUrl(category, filters, searchText, price_min, price_max))
+                    Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max)}, undefined, {shallow: true, scroll: false})
+                    isAvailable = true
+                }
+            })
+            if(!isAvailable){
+                console.log(generateShopUrl(category, filters, searchText, price_min, price_max))
+                Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max)}, undefined, {shallow: true, scroll: false})
+            }
         }
     }
 
@@ -33,11 +38,10 @@ const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
         <aside className="widget widget_shop widget_shop--brand">
             <h4 className="widget-title">{filter.name}</h4>
             <figure>
-                {
-                    filter.filters.data.map(item => (
-                        <Radio checked={filters === item.slug} key={item.slug} onClick={() => handleSelectFilter(item.slug)} value={item.slug}>{item.name}</Radio>
-                    ))
-                }
+                <Checkbox.Group
+                    options={filter.filters.data.map(column => ({label:column.name, value: column.filterId}))}
+                    onChange={onChange}
+                />
             </figure>
         </aside>
     );

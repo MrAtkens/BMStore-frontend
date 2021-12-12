@@ -11,6 +11,7 @@ import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct
 import { IProduct } from 'domain/interfaces/IProduct';
 import { generateTempArray } from 'helper/commons/header';
 import { SHOP_PAGE } from 'constant/routes';
+import productStore from 'data/stores/productStore'
 
 interface IShopItems{
     columns: number,
@@ -21,10 +22,7 @@ interface IShopItems{
 const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IShopItems) => {
     const Router = useRouter();
     const { page } = Router.query;
-    const { query } = Router;
     const [listView, setListView] = useState(true);
-    const [total] = useState(0);
-    const [products] = useState(initialProducts);
 
     const [classes, setClasses] = useState(
         'col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6'
@@ -38,7 +36,6 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     function handlePagination(pageNumber : number) {
         Router.push(SHOP_PAGE("page", pageNumber.toString()));
     }
-
 
     const handleSetColumns = () => {
         switch (columns) {
@@ -59,33 +56,28 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     };
 
     useEffect(() => {
-        if (query) {
-            if (query.page) {
-
-            }
-        } else {
-
-        }
+        productStore.setProducts(initialProducts)
         handleSetColumns();
-    }, [query]);
+    }, [Router.query]);
 
     // Views
     let productItemsView;
-    if (!products || products.length < 0) {
-        if (products && products.length > 0) {
+    if (productStore.products.length > 0) {
+        if (productStore.products && productStore.products.length > 0) {
             if (listView) {
-                const items = products.map((item) => (
+                const items = productStore.products.map((item) => (
                     <div className={classes} key={item.id}>
                         <Product product={item} />
                     </div>
                 ));
+                console.log(items)
                 productItemsView = (
                     <div className="ps-shop-items">
                         <div className="row">{items}</div>
                     </div>
                 );
             } else {
-                productItemsView = products.map((item) => (
+                productItemsView = productStore.products.map((item) => (
                     <ProductWide key={item.id} product={item} />
                 ));
             }
@@ -105,7 +97,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
         <div className="ps-shopping">
             <div className="ps-shopping__header">
                 <p>
-                    <strong className="mr-2">{total}</strong>
+                    <strong className="mr-2">{productStore.products.length}</strong>
                     Найденых продуктов
                 </p>
                 <div className="ps-shopping__actions">
@@ -135,7 +127,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
             <div className="ps-shopping__footer text-center">
                 <div className="ps-pagination">
                     <Pagination
-                        total={total - 1}
+                        total={productStore.products.length}
                         pageSize={pageSize}
                         responsive={true}
                         showSizeChanger={false}

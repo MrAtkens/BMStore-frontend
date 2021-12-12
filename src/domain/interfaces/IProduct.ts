@@ -1,12 +1,23 @@
-import { ICategory } from './ICategory';
-import { IFilter } from './IFilter';
+
+interface IInfo{
+	title: string,
+	description: string
+}
+interface IFilter{
+	key: string,
+	value: string
+}
+export interface IImage{
+	url: string,
+	isMain: boolean
+}
 
 export interface IProduct{
 	id : string,
-	title : string,
 	price : number,
-	category: ICategory,
-	filters: Array<IFilter>
-	quantity : number,
-	imageUrl : string,
+	slug : string,
+	info : IInfo,
+	images : Array<IImage>
+	filters : Array<IFilter>,
+	category : string
 }

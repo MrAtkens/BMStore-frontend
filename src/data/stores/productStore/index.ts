@@ -8,7 +8,7 @@ import { getWishListItemsFromStorage, updateWishListToStorage } from 'helper/sto
 interface IProductStore{
     products : Array<IProduct>,
     relatedProducts: Array<IProduct>,
-    // product: IProduct,
+    product: IProduct,
     productCountPage: number,
     pageNumber: number,
     activeCategory: string,
@@ -18,17 +18,22 @@ interface IProductStore{
 }
 
 class ProductStore implements IProductStore{
-    products = [];
+    products = [] as Array<IProduct>;
     relatedProducts = [] as Array<IProduct>;
     wishList = [] as Array<IProduct>;
 
-    // product = {
-    //     id: "",
-    //     title: "",
-    //     price : 0,
-    //     quantity : 0,
-    //     imageUrl : "",
-    // };
+    product = {
+        id: "",
+        price : 0,
+        info: {
+            title: "",
+            description: ""
+        },
+        category: "",
+        slug: "",
+        images : [],
+        filters : [],
+    };
 
     productCountPage = 8;
     pageNumber = 0;
@@ -70,11 +75,13 @@ class ProductStore implements IProductStore{
     }
 
     removeFromWishList(product : IProduct){
-        const index = this.wishList.findIndex(item => {
-            item.id = product.id
-        })
-        this.wishList.slice(index, index)
+        const index = this.wishList.indexOf(product)
+        this.wishList = this.wishList.slice(index, index)
         updateWishListToStorage(this.wishList)
+    }
+
+    setProducts(products : Array<IProduct>){
+        this.products = products;
     }
 }
 

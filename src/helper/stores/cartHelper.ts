@@ -1,4 +1,5 @@
-import { IProduct } from 'domain/interfaces/IProduct';
+import { ICartProduct } from 'domain/interfaces/ICartProduct';
+
 import { CART } from 'constant/storageNames';
 
 export function getCartItemsFromStorage() {
@@ -10,58 +11,58 @@ export function getCartItemsFromStorage() {
 	}
 }
 
-export function updateCartToStorage(products : Array<IProduct>) {
+export function updateCartToStorage(products : Array<ICartProduct>) {
 	localStorage.setItem(CART, JSON.stringify(products));
 }
 
-export function addItemToCartHelper(product: IProduct) {
+export function addItemToCartHelper(cartProduct: ICartProduct) {
 	let cart;
 	let cookieCart = getCartItemsFromStorage();
 	if (cookieCart) {
 		cart = cookieCart;
-		const existItem = cart.items.find((item : IProduct) => item.id === product.id);
+		const existItem = cart.items.find((item : ICartProduct) => item.product.id === cartProduct.product.id);
 		if (existItem) {
-			existItem.quantity += product.quantity;
+			existItem.productQuantity += cartProduct.productQuantity;
 		} else {
-			/* if (!product.quantity) {
-				product.quantity = 1;
-			}*/
-			cart.items.push(product);
+			if (!cartProduct.productQuantity) {
+				cartProduct.productQuantity = 1;
+			}
+			cart.items.push(cartProduct);
 		}
 	} else {
 		cart = {
-			items: [] as Array<IProduct>
+			items: [] as Array<ICartProduct>
 		};
-		cart.items.push(product);
+		cart.items.push(cartProduct);
 	}
 	updateCartToStorage(cart);
 	return cart;
 }
 
-export function increaseQtyCartItemHelper(product : IProduct) {
+export function increaseQtyCartItemHelper(cartProduct : ICartProduct) {
 	let cart;
 	let cookieCart = getCartItemsFromStorage();
 	if (cookieCart) {
 		cart = cookieCart;
-		const selectedItem = cart.items.find((item : IProduct) => item.id === product.id);
+		const selectedItem = cart.items.find((item : ICartProduct) => item.product.id === cartProduct.product.id);
 
 		if (selectedItem) {
-			selectedItem.quantity = selectedItem.quantity + 1;
+			selectedItem.productQuantity = selectedItem.productQuantity + 1;
 		}
 		updateCartToStorage(cart);
 		return cart;
 	}
 }
 
-export function decreaseQtyCartItemHelper(product : IProduct) {
+export function decreaseQtyCartItemHelper(cartProduct : ICartProduct) {
 	let cart;
 	let cookieCart = getCartItemsFromStorage();
 	if (cookieCart) {
 		cart = cookieCart;
-		const selectedItem = cart.items.find((item : IProduct) => item.id === product.id);
+		const selectedItem = cart.items.find((item : ICartProduct) => item.product.id === cartProduct.product.id);
 
 		if (selectedItem) {
-			selectedItem.quantity = selectedItem.quantity - 1;
+			selectedItem.productQuantity = selectedItem.productQuantity - 1;
 		}
 		updateCartToStorage(cart);
 		return cart;
@@ -73,23 +74,23 @@ export function removeCartItemHelper(productId : string) {
 	let cookieCart = getCartItemsFromStorage();
 	if (cookieCart) {
 		cart = cookieCart;
-		const index = cart.items.findIndex((item : IProduct) => item.id === productId);
+		const index = cart.items.findIndex((item : ICartProduct) => item.product.id === productId);
 		cart.items.splice(index, 1);
 		updateCartToStorage(cart);
 		return cart;
 	}
 }
 
-export function calculateAmount(obj : Array<IProduct>) {
+export function calculateAmount(obj : Array<ICartProduct>) {
 	return Object.values(obj)
-		.reduce((acc, { quantity, price }) => acc + quantity * price, 0)
+		.reduce((acc, { productQuantity, product }) => acc + productQuantity * product.price, 0)
 		.toFixed(2);
 }
 
-export function calculateCartQuantity(obj : IProduct) {
-	return Object.values(obj).reduce((acc, { quantity }) => acc + quantity, 0);
+export function calculateCartQuantity(obj : ICartProduct) {
+	return Object.values(obj).reduce((acc, { productQuantity }) => acc + productQuantity, 0);
 }
 
-export function calculateArrayQuantity(obj : IProduct) {
+export function calculateArrayQuantity(obj : ICartProduct) {
 	return Object.values(obj).reduce((acc) => acc + 1, 0);
 }

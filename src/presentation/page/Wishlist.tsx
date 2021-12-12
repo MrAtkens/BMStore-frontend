@@ -9,7 +9,7 @@ const Wishlist = observer(() => {
 
     function handleAddItemToCart(e, product) {
         e.preventDefault();
-        cartStore.addToCart(product)
+        cartStore.addToCart(product, 1)
     }
 
     function handleRemoveWishlistItem(e, product) {
@@ -65,7 +65,7 @@ const Wishlist = observer(() => {
             </div>
         );
     } else {
-        return(
+        wishlistItemsView = (
             <div className="alert alert-danger" role="alert">
                 Ваш список пуст
             </div>

@@ -5,18 +5,17 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { categoryApiService, filtersApiService } from "data/API"
+import { products } from "constant/products"
 import filtersStore from "data/stores/filtersStore"
 import { ICategory } from "domain/interfaces/ICategory";
 import { IFilter } from 'domain/interfaces/IFilter';
-
-// import { IProduct } from 'domain/interfaces/IProduct';
 
 import Layout from "presentation/layout"
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import WidgetShopFilter from 'presentation/page/catalog/WidgetShopFilter';
 import WidgetShopCategories from 'presentation/page/catalog/WidgetShopCategories';
 import WidgetShopFilterByPriceRange from 'presentation/page/catalog/WidgetShopFilterByPriceRange'
-// import ShopItems from 'presentation/page/catalog/ShopItems'
+import ShopItems from 'presentation/page/catalog/ShopItems'
 
 
 interface IShop{
@@ -65,7 +64,7 @@ const Shop = observer(({ categories, filters } : IShop) => {
 							<div className="ps-page__header">
 								<h1>Каталог</h1>
 							</div>
-							{/*<ShopItems columns={4} pageSize={12}  initialProducts={products}/>*/}
+							<ShopItems columns={4} pageSize={12}  initialProducts={products}/>
 						</div>
 					</div>
 				</div>

@@ -24,24 +24,28 @@ const PanelCartMobile = observer(() => {
     if (cartStore.carts && cartStore.carts.length > 0) {
         const amount = calculateAmount(cartStore.carts);
         const items = cartStore.carts.map((item) => (
-            <div className="ps-product--cart-mobile" key={item.id}>
+            <div className="ps-product--cart-mobile" key={item.product.id}>
                 <div className="ps-product__thumbnail">
-                    <Link href={PRODUCT(item.id)}>
-                        <Image src={item.imageUrl} width={100} height={100}/>
+                    <Link href={PRODUCT(item.product.id)}>
+                        <Image src={item.product.images.map((item) => {
+                            if(item.isMain)
+                                return item.url
+                            return "/static/img/not-found.jpg"
+                        })} width={100} height={100}/>
                     </Link>
                 </div>
                 <div className="ps-product__content">
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveCartItem(e, item)}>
+                        onClick={(e) => handleRemoveCartItem(e, item.product)}>
                         <i className='icon-cross'/>
                     </a>
-                    {item.title}
-                    <Link href={PRODUCT(item.id)}>
-                        <a className="ps-product__title">{item.title}</a>
+                    {item.product.info.title}
+                    <Link href={PRODUCT(item.product.id)}>
+                        <a className="ps-product__title">{item.product.info.title}</a>
                     </Link>
                     <small>
-                        {item.quantity} x ${item.price}
+                        {item.productQuantity} x ${item.product.price}
                     </small>
                 </div>
             </div>

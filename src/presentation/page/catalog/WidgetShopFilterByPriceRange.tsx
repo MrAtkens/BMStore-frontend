@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
-import { editParamFromUrl } from 'helper/commons/products';
+import { generateShopUrl } from 'helper/commons/products';
 
 const WidgetShopFilterByPriceRange = () => {
     const Router = useRouter();
     const [min, setMin] = useState(50);
     const [max, setMax] = useState(1000000);
+    const { filters, category, searchText } = Router.query;
 
     useEffect(() => {
         if(Router.query.price_min !== undefined)
@@ -26,15 +27,11 @@ const WidgetShopFilterByPriceRange = () => {
 
         //Проверка на то есть ли у нас уже введённые данные о макс и мин цене в url и их изменение
         if(Router.asPath.includes("price_min") || Router.asPath.includes("price_max")){
-            let url = editParamFromUrl(Router.asPath, "price_min", value[0])
-            url = editParamFromUrl(url, "price_max", value[1])
-            Router.push(url, undefined, { scroll: false });
+            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, value[0], value[1])}, undefined, {shallow: true, scroll: false})
         }
         else {
-            if (Router.asPath.includes("?"))
-                Router.push(Router.asPath + `&price_min=${value[0]}&price_max=${value[1]}`, undefined, { scroll: false })
-            else
-                Router.push(Router.asPath + `?price_min=${value[0]}&price_max=${value[1]}`, undefined, { scroll: false })
+            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, value[0], value[1])}, undefined, {shallow: true, scroll: false})
+
         }
     }
 
