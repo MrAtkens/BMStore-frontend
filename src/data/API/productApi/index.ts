@@ -1,40 +1,42 @@
 import axios from 'axios'
 
-import { Filter } from 'domain/interfaces/IFilter';
 import { BackendUrl } from '../settings'
 
 axios.defaults.withCredentials = true
 
-function getProductsUrl(page?: number, searchText?: string, categoryId?: string, filter?: Array<Filter>, price_min?: number, price_max?: number) : string {
-    let shopUrl = BackendUrl + "/products"
+function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, price_max) : string {
+    let shopUrl = BackendUrl + "/products?language=ru"
 
-    if(page !== undefined){
-        shopUrl += `?page=${page}`
+    if(take !== undefined){
+        shopUrl += `&take=${take}`
+    }
+    if(take !== undefined) {
+        shopUrl += `&skip=${skip}`
     }
     if(searchText !== undefined){
-        shopUrl += `?searchText=${searchText}`
+        shopUrl += `&searchText=${searchText}`
     }
     if(categoryId !== undefined){
-        shopUrl += `?category=${categoryId}`
+        shopUrl += `&category=${categoryId}`
     }
-    if(filter !== undefined){
-        filter.map(filter => {
-            shopUrl += `?${filter.slug}=${filter.name}`
+    if(filters !== undefined){
+        filters.map(filter => {
+            shopUrl += `&filters=${filter}`
         })
     }
     if(price_min !== undefined){
-        shopUrl += `?price_min=${price_min}`
+        shopUrl += `&price_min=${price_min}`
     }
     if(price_max !== undefined){
-        shopUrl += `?price_max=${price_max}`
+        shopUrl += `&price_max=${price_max}`
     }
 
     return shopUrl
 }
 
 
-const getProducts = async (page?: number, searchText?: string, category?: string, filter?: Array<Filter>, price_min?: number, price_max?: number) => {
-    const url = getProductsUrl(page, searchText, category, filter, price_min, price_max)
+const getProducts = async (take, skip, searchText, category, filter, price_min, price_max) => {
+    const url = getProductsUrl(take, skip, searchText, category, filter, price_min, price_max)
     return await axios.get(url).then(response => {
         console.log(response)
         return response

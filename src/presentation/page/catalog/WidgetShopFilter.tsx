@@ -3,7 +3,7 @@ import { Checkbox } from 'antd';
 import { useRouter } from 'next/router';
 
 import { IFilter } from 'domain/interfaces/IFilter';
-import { generateShopUrl, removeParamFromUrl } from '../../../helper/commons/products';
+import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
 
 
 interface IWidgetShopFilters{
@@ -12,7 +12,7 @@ interface IWidgetShopFilters{
 
 const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
     const Router = useRouter();
-    const { filters, category, searchText, price_min, price_max } = Router.query;
+    const { filters, category, searchText, price_min, price_max, page } = Router.query;
 
     function onChange(checkedValues) {
         console.log(filters)
@@ -22,14 +22,12 @@ const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
             let isAvailable = false
             checkedValues.map(item => {
                 if(filters?.includes(item)){
-                    console.log(generateShopUrl(category, filters, searchText, price_min, price_max))
-                    Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max)}, undefined, {shallow: true, scroll: false})
+                    Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max, page)}, undefined, {shallow: true, scroll: false})
                     isAvailable = true
                 }
             })
             if(!isAvailable){
-                console.log(generateShopUrl(category, filters, searchText, price_min, price_max))
-                Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max)}, undefined, {shallow: true, scroll: false})
+                Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max, page)}, undefined, {shallow: true, scroll: false})
             }
         }
     }

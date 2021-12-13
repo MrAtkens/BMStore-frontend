@@ -1,6 +1,4 @@
 import {makeAutoObservable} from "mobx";
-
-import { productsApiService } from "data/API"
 import { IProduct } from 'domain/interfaces/IProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
 import { getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
@@ -46,10 +44,10 @@ class ProductStore implements IProductStore{
         makeAutoObservable(this)
     }
 
-    async getProducts(){
-        const response = await productsApiService.getProducts();
-        this.products = response.data;
-    }
+    // async getProducts(){
+    //     const response = await productsApiService.getProducts();
+    //     this.products = response.data;
+    // }
 
     // async getProductById(){
     //     const response = await productsApiService.getProductById();

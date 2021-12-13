@@ -8,21 +8,21 @@ import ProductWide from 'presentation/common/control/products/ProductWide';
 import ModuleShopSortBy from 'presentation/common/typography/ModuleShopSortBy';
 import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
 
-import { IProduct } from 'domain/interfaces/IProduct';
+import productStore from 'data/stores/productStore';
+
 import { generateTempArray } from 'helper/commons/header';
-import { SHOP_PAGE } from 'constant/routes';
-import productStore from 'data/stores/productStore'
+import { generateShopUrl } from 'helper/commons/products';
 
 interface IShopItems{
     columns: number,
     pageSize: number,
-    initialProducts: Array<IProduct>
 }
 
-const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IShopItems) => {
+const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
     const Router = useRouter();
-    const { page } = Router.query;
+    const [page, setPage] = useState(1)
     const [listView, setListView] = useState(true);
+    const { filters, category, searchText, price_min, price_max } = Router.query
 
     const [classes, setClasses] = useState(
         'col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6'
@@ -34,9 +34,10 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     }
 
     function handlePagination(pageNumber : number) {
-        Router.push(SHOP_PAGE("page", pageNumber.toString()));
+        Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, price_min, price_max, pageNumber)}, undefined, {shallow: true, scroll: false})
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleSetColumns = () => {
         switch (columns) {
             case 2:
@@ -56,9 +57,9 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
     };
 
     useEffect(() => {
-        productStore.setProducts(initialProducts)
+        setPage(parseInt(Router.query.page as string))
         handleSetColumns();
-    }, [Router.query]);
+    }, [Router.query, handleSetColumns]);
 
     // Views
     let productItemsView;
@@ -70,7 +71,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
                         <Product product={item} />
                     </div>
                 ));
-                console.log(items)
+                console.log(productStore.products)
                 productItemsView = (
                     <div className="ps-shop-items">
                         <div className="row">{items}</div>
@@ -131,7 +132,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12, initialProducts } : IS
                         pageSize={pageSize}
                         responsive={true}
                         showSizeChanger={false}
-                        current={page !== undefined ? parseInt(page as string) : 1}
+                        current={page !== undefined ? page : 1}
                         onChange={(e) => handlePagination(e)}
                     />
                 </div>

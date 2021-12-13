@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { Menu } from 'antd';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import { SHOP_PAGE } from 'constant/routes';
+import { generateShopUrl } from 'helper/commons/products';
+
 const { SubMenu } = Menu;
 
 interface IMenu{
@@ -24,10 +25,7 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
 
     const handleClick = e => {
         setCurrent(e.key)
-        if(searchText !== undefined)
-            Router.push(`/shop?category=${e.key}&searchText=${searchText?.toString()}`, undefined, { scroll: false })
-        else
-            Router.push(SHOP_PAGE("category", e.key), undefined, { scroll: false })
+        Router.push({pathname: '/shop', query: generateShopUrl(e.key, undefined, searchText, undefined, undefined, 1)}, undefined, {shallow: true, scroll: false})
     };
 
     const renderMultiple = (category : ICategory) => {
