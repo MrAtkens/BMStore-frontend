@@ -5,7 +5,6 @@ import { Pagination } from 'antd';
 
 import Product from 'presentation/common/control/products/Product';
 import ProductWide from 'presentation/common/control/products/ProductWide';
-import ModuleShopSortBy from 'presentation/common/typography/ModuleShopSortBy';
 import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
 
 import productStore from 'data/stores/productStore';
@@ -34,7 +33,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
     }
 
     function handlePagination(pageNumber : number) {
-        Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, price_min, price_max, pageNumber)}, undefined, {shallow: true, scroll: false})
+        Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, price_min, price_max, pageNumber)}, undefined, {shallow: false, scroll: false})
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,19 +58,19 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
     useEffect(() => {
         setPage(parseInt(Router.query.page as string))
         handleSetColumns();
-    }, [Router.query, handleSetColumns]);
+    }, [Router.query]);
 
     // Views
     let productItemsView;
-    if (productStore.products.length > 0) {
+    if (productStore.productsLoading) {
         if (productStore.products && productStore.products.length > 0) {
             if (listView) {
+                console.log(productStore.products)
                 const items = productStore.products.map((item) => (
                     <div className={classes} key={item.id}>
                         <Product product={item} />
                     </div>
                 ));
-                console.log(productStore.products)
                 productItemsView = (
                     <div className="ps-shop-items">
                         <div className="row">{items}</div>
@@ -102,7 +101,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
                     Найденых продуктов
                 </p>
                 <div className="ps-shopping__actions">
-                    <ModuleShopSortBy />
+                    {/*<ModuleShopSortBy />*/}
                     <div className="ps-shopping__view">
                         <p>Вид</p>
                         <ul className="ps-tab-list">
@@ -128,7 +127,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
             <div className="ps-shopping__footer text-center">
                 <div className="ps-pagination">
                     <Pagination
-                        total={productStore.products.length}
+                        total={Math.floor(productStore.productCount/pageSize) > 1 ? Math.floor(productStore.productCount/pageSize) : 1}
                         pageSize={pageSize}
                         responsive={true}
                         showSizeChanger={false}

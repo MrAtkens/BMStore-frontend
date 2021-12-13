@@ -71,7 +71,7 @@ export const generateShopUrl = (category, filters, searchText, price_min, price_
 	let obj : JSObject = {};
 	if(category !== undefined)
 		obj.category = category
-	if(filters !== undefined)
+	if(filters !== undefined && filters.length !== 0)
 		obj.filters = filters
 	if(searchText !== undefined)
 		obj.searchText = searchText

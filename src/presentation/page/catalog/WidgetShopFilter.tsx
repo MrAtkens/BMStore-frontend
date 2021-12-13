@@ -1,48 +1,38 @@
-import React from 'react';
+import React  from 'react';
 import { Checkbox } from 'antd';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 
 import { IFilter } from 'domain/interfaces/IFilter';
-import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
-
+import { generateShopUrl } from 'helper/commons/products';
+import filterStore from "data/stores/filtersStore"
 
 interface IWidgetShopFilters{
     filter: IFilter
 }
 
-const WidgetShopFilter = ({ filter } : IWidgetShopFilters) => {
+const WidgetShopFilter = observer(({ filter } : IWidgetShopFilters) => {
     const Router = useRouter();
     const { filters, category, searchText, price_min, price_max, page } = Router.query;
 
-    function onChange(checkedValues) {
+    function onChange(e) {
         console.log(filters)
-        if(checkedValues.length === 0)
-            Router.push(removeParamFromUrl(Router.asPath, "filters"), undefined, {scroll: false})
-        else{
-            let isAvailable = false
-            checkedValues.map(item => {
-                if(filters?.includes(item)){
-                    Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max, page)}, undefined, {shallow: true, scroll: false})
-                    isAvailable = true
-                }
-            })
-            if(!isAvailable){
-                Router.push({pathname: '/shop', query: generateShopUrl(category, checkedValues, searchText, price_min, price_max, page)}, undefined, {shallow: true, scroll: false})
-            }
-        }
+        console.log(e)
+        filterStore.setActiveFilters(e.target)
+        console.log(filterStore.activeFilters)
+        Router.push({pathname: '/shop', query: generateShopUrl(category, filterStore.activeFilters, searchText, price_min, price_max, page)}, undefined, {shallow: false, scroll: false})
     }
 
     return (
         <aside className="widget widget_shop widget_shop--brand">
             <h4 className="widget-title">{filter.name}</h4>
             <figure>
-                <Checkbox.Group
-                    options={filter.filters.data.map(column => ({label:column.name, value: column.filterId}))}
-                    onChange={onChange}
-                />
+                {filter.filters.data.map(item => (
+                    <Checkbox key={item.filterId} value={item.filterId} onChange={onChange}>{item.name}</Checkbox>
+                ))}
             </figure>
         </aside>
     );
-};
+});
 
 export default WidgetShopFilter;

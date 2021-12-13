@@ -1,12 +1,8 @@
 
-interface IInfo{
-	title: string,
-	description: string
-}
-interface IFilter{
-	key: string,
-	value: string
-}
+// interface IFilter{
+// 	key: string,
+// 	value: string
+// }
 export interface IImage{
 	url: string,
 	isMain: boolean
@@ -14,10 +10,11 @@ export interface IImage{
 
 export interface IProduct{
 	id : string,
-	price : number,
 	slug : string,
-	info : IInfo,
+	title: string,
+	description: string
+	price : number,
 	images : Array<IImage>
-	filters : Array<IFilter>,
-	category : string
+	// filters : Array<IFilter>,
+	// category : string
 }

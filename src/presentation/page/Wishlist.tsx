@@ -47,7 +47,7 @@ const Wishlist = observer(() => {
                                 <td>
                                     <ProductCart product={product} />
                                 </td>
-                                <td>{product.category}</td>
+                                {/*<td>{product.category}</td>*/}
                                 <td className="price">{product.price} тг</td>
                                 <td>
                                     <a

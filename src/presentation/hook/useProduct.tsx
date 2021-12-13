@@ -25,7 +25,7 @@ export default function useProduct() {
                 <LazyLoad>
                     <img
                         src={getImageURL(product.images)}
-                        alt={product.info.title}
+                        alt={product.title}
                     />
                 </LazyLoad>
             )
@@ -61,16 +61,16 @@ export default function useProduct() {
             )
         },
         filters: (product: IProduct) => {
-            return product.filters.map(filter => (
-                <a key={filter.key} className='text-capitalize'>
-                    {filter.key} : {filter.value}
-                </a>
-            ));
+            // return product.filters.map(filter => (
+            //     <a key={filter.key} className='text-capitalize'>
+            //         {filter.key} : {filter.value}
+            //     </a>
+            // ));
         },
         title: (product: IProduct) => {
             return (
                 <Link href={PRODUCT(product.id)}>
-                    <a className="ps-product__title">{product.info.title}</a>
+                    <a className="ps-product__title">{product.title}</a>
                 </Link>
             );
         },

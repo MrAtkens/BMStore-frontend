@@ -21,7 +21,8 @@ const SearchHeader = () => {
             if (keyword === '' && searchText !== undefined)
                 Router.push(removeParamFromUrl(Router.asPath, "searchText"))
         else
-            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, keyword.replace(' ', ''), price_min, price_max, page)}, undefined, {shallow: true, scroll: false})
+            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, keyword.replace(' ', ''),
+                    price_min, price_max, page)}, undefined, {shallow: false, scroll: false})
 
     }
 

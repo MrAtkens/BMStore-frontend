@@ -5,30 +5,36 @@ import { BackendUrl } from '../settings'
 axios.defaults.withCredentials = true
 
 function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, price_max) : string {
-    let shopUrl = BackendUrl + "/products?language=ru"
+    let shopUrl = BackendUrl + "/products?Language=ru"
 
-    if(take !== undefined){
-        shopUrl += `&take=${take}`
+    if(take !== undefined && !isNaN(take)){
+        shopUrl += `&Take=${take}`
     }
-    if(take !== undefined) {
-        shopUrl += `&skip=${skip}`
+    if(take !== undefined && !isNaN(take)) {
+        shopUrl += `&Skip=${skip}`
     }
     if(searchText !== undefined){
-        shopUrl += `&searchText=${searchText}`
+        shopUrl += `&Text=${searchText}`
     }
     if(categoryId !== undefined){
-        shopUrl += `&category=${categoryId}`
+        shopUrl += `&CategoryId=${categoryId}`
     }
     if(filters !== undefined){
-        filters.map(filter => {
-            shopUrl += `&filters=${filter}`
-        })
+        console.log(filters)
+        if (typeof filters === 'string' || filters instanceof String){
+            shopUrl += `&Filters=${filters}`
+        }
+        else{
+            filters.map(filter => {
+                shopUrl += `&filters=${filter}`
+            })
+        }
     }
     if(price_min !== undefined){
-        shopUrl += `&price_min=${price_min}`
+        shopUrl += `&PriceMin=${price_min}`
     }
     if(price_max !== undefined){
-        shopUrl += `&price_max=${price_max}`
+        shopUrl += `&PriceMax=${price_max}`
     }
 
     return shopUrl
@@ -38,7 +44,6 @@ function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, 
 const getProducts = async (take, skip, searchText, category, filter, price_min, price_max) => {
     const url = getProductsUrl(take, skip, searchText, category, filter, price_min, price_max)
     return await axios.get(url).then(response => {
-        console.log(response)
         return response
     }).catch(error => {
         return error.response

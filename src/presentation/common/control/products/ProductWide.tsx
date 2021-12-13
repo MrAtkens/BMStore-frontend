@@ -24,10 +24,10 @@ const ProductWide = ({product} : IProductWide) => {
                 <div className="ps-product__content">
                     {title(product)}
                     <ul className="ps-product__desc">
-                        <li>{product.info.description}</li>
-                        {product.filters.map(item => (
-                            <li key={item.key}>{item.key} : {item.value}</li>
-                        ))}
+                        <li>{product.description}</li>
+                        {/*{product.filters.map(item => (*/}
+                        {/*    <li key={item.key}>{item.key} : {item.value}</li>*/}
+                        {/*))}*/}
                     </ul>
                 </div>
                 <ModuleProductWideActions product={product} />

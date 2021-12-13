@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { GetServerSideProps } from 'next';
 import { observer } from 'mobx-react-lite';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { categoryApiService, filtersApiService, productsApiService } from "data/API"
@@ -21,7 +22,8 @@ import ShopItems from 'presentation/page/catalog/ShopItems'
 
 interface IShop{
 	categories: Array<ICategory>,
-	products: Array<IProduct>
+	products: Array<IProduct>,
+	productCount: number,
 	filters: Array<IFilter>,
 }
 
@@ -36,12 +38,14 @@ const breadCrumb = [
 	},
 ];
 
-const Shop = observer(({ categories, filters, products } : IShop) => {
+const Shop = observer(({ categories, products, productCount, filters } : IShop) => {
+	const Router = useRouter()
 
 	useEffect(() => {
+		console.log(products)
 		filtersStore.setFilters(filters)
-		productStore.setProducts(products)
-	}, [filters, products])
+		productStore.setProducts(products, productCount)
+	}, [Router.query])
 
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
@@ -77,19 +81,18 @@ const Shop = observer(({ categories, filters, products } : IShop) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	let filterResponse = null
-	console.log(context.query)
-	const {category, searchText, page, filters, price_min, price_max} = context.query
+	const {category, page, searchText, filters, price_min, price_max} = context.query
 
 	if(category !== undefined){
 		const response = await filtersApiService.getFilters("ru", category)
 		filterResponse = response.data.data;
 	}
-
+	console.log(context.query)
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	const productResponse = await productsApiService.getProducts(parseInt(page as string), (parseInt(page as string)- 1)*12, searchText, category, filters, price_min, price_max)
+	const productResponse = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
 	console.log(productResponse)
 	return {
-		props:{ categories: categoryResponse.data, filters: filterResponse, products: productResponse.data},
+		props:{ categories: categoryResponse.data, filters: filterResponse, products: productResponse.data.data},
 	};
 }
 
