@@ -23,7 +23,7 @@ const ModuleProductActions = observer(({ product } : IModuleProductActions) => {
         const modal = Modal.success({
             centered: true,
             title: 'Успешно!',
-            content: `Вы добавили товар ${product.info.title} в избранное`,
+            content: `Вы добавили товар ${product.title} в избранное`,
         });
         modal.update;
     }

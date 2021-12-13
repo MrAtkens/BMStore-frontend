@@ -1,54 +1,40 @@
 import {makeAutoObservable} from "mobx";
-
-import { productsApiService } from "data/API"
 import { IProduct } from 'domain/interfaces/IProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
 import { getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
 
 interface IProductStore{
     products : Array<IProduct>,
+    productCount: number,
     relatedProducts: Array<IProduct>,
     product: IProduct,
     productCountPage: number,
     pageNumber: number,
-    activeCategory: string,
-    activeFilter: string,
-    priceMin: number,
-    priceMax: number
+    productsLoading: boolean
 }
 
 class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
+    productCount = 0;
     relatedProducts = [] as Array<IProduct>;
     wishList = [] as Array<IProduct>;
 
     product = {
         id: "",
         price : 0,
-        info: {
-            title: "",
-            description: ""
-        },
-        category: "",
+        title: "",
+        description: "",
         slug: "",
         images : [],
-        filters : [],
     };
 
     productCountPage = 8;
     pageNumber = 0;
-    activeCategory = "";
-    activeFilter = "";
-    priceMin = 0;
-    priceMax = 10000;
+
+    productsLoading = false
 
     constructor() {
         makeAutoObservable(this)
-    }
-
-    async getProducts(){
-        const response = await productsApiService.getProducts();
-        this.products = response.data;
     }
 
     // async getProductById(){
@@ -80,8 +66,14 @@ class ProductStore implements IProductStore{
         updateWishListToStorage(this.wishList)
     }
 
-    setProducts(products : Array<IProduct>){
-        this.products = products;
+    setProductLoading(state : boolean){
+        this.productsLoading = state;
+    }
+
+    setProducts(products : Array<IProduct>, count){
+        this.products = products
+        this.productCount = count
+        this.productsLoading = true
     }
 }
 

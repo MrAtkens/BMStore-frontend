@@ -7,14 +7,6 @@ export const generateTempArray = (maxItems) => {
 	return result;
 };
 
-export const addParamToUrl = (url, parameterName, value) => {
-	if(!url.includes('?'))
-		url += "/shop?" + parameterName + "=" + value
-	else
-		url += "&" + parameterName + "=" + value
-	return url
-}
-
 export const removeParamFromUrl = (url, parameterName) => {
 	const firstSub = url.split('?')
 	let secondSub = firstSub[1].split('&')
@@ -70,58 +62,16 @@ export const editParamFromUrl = (url, parameterName, value) => {
 }
 
 
-export const editFilterParamFromUrl = (url, parameterName, value) => {
-	const firstSub = url.split('?')
-	let secondSub = firstSub[1].split('&')
-	console.log(secondSub)
-	if(secondSub.length === 0) {
-		secondSub = []
-	}
-	else{
-		secondSub.map(item => {
-			if (item.includes("filters")) {
-				const index = secondSub.indexOf(item)
-				let parameter = item.split('=')
-				parameter[1] = value
-				console.log(parameter[1])
-				let filters = parameter[1].split(':')
-				console.log("Filters")
-				console.log(filters)
-				const editedFilters = filters.map(item => {
-					if(item.includes(parameterName)){
-						let filter = item.split('-')
-						filter[1] = value
-						return `${filter[0]}-${filter[1]}`
-					}
-					return item
-				})
-				console.log("Edited")
-				console.log(editedFilters)
-				secondSub[index] = parameter[0] + '=' + editedFilters.toString();
-			}
-		})
-	}
-	let answer = firstSub[0]
-
-	answer += '?'
-	secondSub.map(item => {
-		answer += item + '&'
-	})
-	answer = answer.substring(0, answer.length - 1);
-	return answer
-}
-
-
 interface JSObject {
 	[key: string]: any
 }
 
 
-export const generateShopUrl = (category, filters, searchText, price_min, price_max) => {
+export const generateShopUrl = (category, filters, searchText, price_min, price_max, page) => {
 	let obj : JSObject = {};
 	if(category !== undefined)
 		obj.category = category
-	if(filters !== undefined)
+	if(filters !== undefined && filters.length !== 0)
 		obj.filters = filters
 	if(searchText !== undefined)
 		obj.searchText = searchText
@@ -129,5 +79,7 @@ export const generateShopUrl = (category, filters, searchText, price_min, price_
 		obj.price_min = price_min
 	if(price_max !== undefined)
 		obj.price_max = price_max
+	if(page !== undefined)
+		obj.page = page
 	return obj
 }

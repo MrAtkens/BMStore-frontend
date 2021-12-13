@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
-import { GetServerSideProps } from 'next';
 import { observer } from 'mobx-react-lite';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { categoryApiService, filtersApiService } from "data/API"
-import { products } from "constant/products"
+import { categoryApiService, filtersApiService, productsApiService } from "data/API"
 import filtersStore from "data/stores/filtersStore"
+import productStore from "data/stores/productStore"
+
 import { ICategory } from "domain/interfaces/ICategory";
 import { IFilter } from 'domain/interfaces/IFilter';
+import { IProduct } from 'domain/interfaces/IProduct';
 
 import Layout from "presentation/layout"
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
@@ -20,7 +22,9 @@ import ShopItems from 'presentation/page/catalog/ShopItems'
 
 interface IShop{
 	categories: Array<ICategory>,
-	filters: Array<IFilter>
+	products: Array<IProduct>,
+	productCount: number,
+	filters: Array<IFilter>,
 }
 
 const breadCrumb = [
@@ -34,11 +38,13 @@ const breadCrumb = [
 	},
 ];
 
-const Shop = observer(({ categories, filters } : IShop) => {
+const Shop = observer(({ categories, products, productCount, filters } : IShop) => {
 	const Router = useRouter()
 
 	useEffect(() => {
+		console.log(products)
 		filtersStore.setFilters(filters)
+		productStore.setProducts(products, productCount)
 	}, [Router.query])
 
 	return (
@@ -64,7 +70,7 @@ const Shop = observer(({ categories, filters } : IShop) => {
 							<div className="ps-page__header">
 								<h1>Каталог</h1>
 							</div>
-							<ShopItems columns={4} pageSize={12}  initialProducts={products}/>
+							<ShopItems columns={4} pageSize={12}/>
 						</div>
 					</div>
 				</div>
@@ -75,15 +81,18 @@ const Shop = observer(({ categories, filters } : IShop) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	let filterResponse = null
+	const {category, page, searchText, filters, price_min, price_max} = context.query
 
-	if(context.query.category !== undefined){
-		const response = await filtersApiService.getFilters("ru", context.query.category)
+	if(category !== undefined){
+		const response = await filtersApiService.getFilters("ru", category)
 		filterResponse = response.data.data;
 	}
-
+	console.log(context.query)
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	const productResponse = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
+	console.log(productResponse)
 	return {
-		props:{ categories: categoryResponse.data, filters: filterResponse},
+		props:{ categories: categoryResponse.data, filters: filterResponse, products: productResponse.data.data},
 	};
 }
 

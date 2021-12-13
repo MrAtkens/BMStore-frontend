@@ -7,7 +7,7 @@ const SearchHeader = () => {
     const inputEl = useRef(null);
     const [keyword, setKeyword] = useState("");
     const Router = useRouter()
-    const { filters, category, searchText, price_min, price_max } = Router.query
+    const { filters, category, searchText, price_min, price_max, page } = Router.query
 
     useEffect(() => {
         console.log(searchText)
@@ -21,7 +21,8 @@ const SearchHeader = () => {
             if (keyword === '' && searchText !== undefined)
                 Router.push(removeParamFromUrl(Router.asPath, "searchText"))
         else
-            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, keyword.replace(' ', ''), price_min, price_max)}, undefined, {shallow: true, scroll: false})
+            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, keyword.replace(' ', ''),
+                    price_min, price_max, page)}, undefined, {shallow: false, scroll: false})
 
     }
 
