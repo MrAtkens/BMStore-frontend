@@ -27,6 +27,10 @@ class FilterStore implements ICategoryStore {
         }
         this.activeFilters = filters
     }
+
+    setActiveFiltersFromUrl(filters){
+        this.activeFilters = filters
+    }
 }
 
 export default new FilterStore();

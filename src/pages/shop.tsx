@@ -21,10 +21,10 @@ import ShopItems from 'presentation/page/catalog/ShopItems'
 
 
 interface IShop{
-	categories: Array<ICategory>,
+	categoriesData: Array<ICategory>,
 	products: Array<IProduct>,
 	productCount: number,
-	filters: Array<IFilter>,
+	filtersData: Array<IFilter>,
 }
 
 const breadCrumb = [
@@ -38,17 +38,22 @@ const breadCrumb = [
 	},
 ];
 
-const Shop = observer(({ categories, products, productCount, filters } : IShop) => {
+const Shop = observer(({ categoriesData, products, productCount, filtersData } : IShop) => {
 	const Router = useRouter()
+	const { filters } = Router.query
 
 	useEffect(() => {
-		console.log(products)
-		filtersStore.setFilters(filters)
+		if(filters !== undefined)
+			filtersStore.setActiveFiltersFromUrl(filters)
+	}, [])
+
+	useEffect(() => {
+		filtersStore.setFilters(filtersData)
 		productStore.setProducts(products, productCount)
 	}, [Router.query])
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categoriesData} title={"Главная страница - CATS"}>
 			<Head>
 				<title>Каталог</title>
 				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
@@ -60,7 +65,7 @@ const Shop = observer(({ categories, products, productCount, filters } : IShop) 
 				<div className="container">
 					<div className="ps-layout--shop">
 						<div className="ps-layout__left">
-							<WidgetShopCategories categories={categories}/>
+							<WidgetShopCategories categories={categoriesData}/>
 							{filtersStore.filters === null || filtersStore.filters.map(item => (
 									<WidgetShopFilter key={item.slug} filter={item}/>
 							))}
@@ -87,12 +92,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		const response = await filtersApiService.getFilters("ru", category)
 		filterResponse = response.data.data;
 	}
-	console.log(context.query)
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	console.log(searchText)
 	const productResponse = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
-	console.log(productResponse)
+	console.log(productResponse.data)
 	return {
-		props:{ categories: categoryResponse.data, filters: filterResponse, products: productResponse.data.data},
+		props:{ categoriesData: categoryResponse.data, filtersData: filterResponse, products: productResponse.data.data},
 	};
 }
 

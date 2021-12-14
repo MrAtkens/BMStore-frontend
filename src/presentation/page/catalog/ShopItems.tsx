@@ -65,7 +65,6 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
     if (productStore.productsLoading) {
         if (productStore.products && productStore.products.length > 0) {
             if (listView) {
-                console.log(productStore.products)
                 const items = productStore.products.map((item) => (
                     <div className={classes} key={item.id}>
                         <Product product={item} />

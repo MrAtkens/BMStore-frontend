@@ -21,12 +21,15 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
     useEffect(() => {
         if(category !== undefined)
             setCurrent(category.toString())
-    }, [Router.query])
+    }, [])
 
-    const handleClick = e => {
+    const handleClick = async e => {
         setCurrent(e.key)
-        Router.push({pathname: '/shop', query: generateShopUrl(e.key, undefined, searchText?.toString(), undefined, undefined, 1)}, undefined,
-            {shallow: false, scroll: false})
+        await Router.push({
+                pathname: '/shop',
+                query: generateShopUrl(e.key, undefined, searchText?.toString(), undefined, undefined, 1)
+            }, undefined,
+            { shallow: false, scroll: false })
     };
 
     const renderMultiple = (category : ICategory) => {

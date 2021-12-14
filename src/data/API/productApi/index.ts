@@ -20,13 +20,12 @@ function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, 
         shopUrl += `&CategoryId=${categoryId}`
     }
     if(filters !== undefined){
-        console.log(filters)
         if (typeof filters === 'string' || filters instanceof String){
             shopUrl += `&Filters=${filters}`
         }
         else{
             filters.map(filter => {
-                shopUrl += `&filters=${filter}`
+                shopUrl += `&Filters=${filter}`
             })
         }
     }
