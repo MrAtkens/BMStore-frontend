@@ -13,14 +13,14 @@ interface IWidgetShopFilters{
 
 const WidgetShopFilter = observer(({ filter } : IWidgetShopFilters) => {
     const Router = useRouter();
-    const { filters, category, searchText, price_min, price_max, page } = Router.query;
+    const { category, searchText, price_min, price_max, page } = Router.query;
 
-    function onChange(e) {
-        console.log(filters)
-        console.log(e)
+    async function onChange(e) {
         filterStore.setActiveFilters(e.target)
-        console.log(filterStore.activeFilters)
-        Router.push({pathname: '/shop', query: generateShopUrl(category, filterStore.activeFilters, searchText, price_min, price_max, page)}, undefined, {shallow: false, scroll: false})
+        await Router.push({
+            pathname: '/shop',
+            query: generateShopUrl(category, filterStore.activeFilters, searchText, price_min, price_max, page)
+        }, undefined, { shallow: false, scroll: false })
     }
 
     return (
@@ -28,7 +28,7 @@ const WidgetShopFilter = observer(({ filter } : IWidgetShopFilters) => {
             <h4 className="widget-title">{filter.name}</h4>
             <figure>
                 {filter.filters.data.map(item => (
-                    <Checkbox key={item.filterId} value={item.filterId} onChange={onChange}>{item.name}</Checkbox>
+                    <Checkbox checked={filterStore.activeFilters.includes(item.filterId)} key={item.filterId} value={item.filterId} onChange={onChange}>{item.name}</Checkbox>
                 ))}
             </figure>
         </aside>
