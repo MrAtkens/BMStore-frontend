@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
+import { SHOP_PAGE } from 'constant/routes';
+import productStore from '../../../../data/stores/productStore';
 
 const SearchHeader = () => {
     const inputEl = useRef(null);
@@ -16,11 +18,19 @@ const SearchHeader = () => {
 
     function handleSubmit(e : any) {
         e.preventDefault();
-        if (keyword === '' && searchText !== undefined)
-            Router.push(removeParamFromUrl(Router.asPath, "searchText"))
-        else
-            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, keyword,
-                price_min, price_max, page)}, undefined, {shallow: false, scroll: false})
+        productStore.setProductLoading(false)
+        if(keyword === ''){
+            Router.push(SHOP_PAGE(), undefined, { scroll: false })
+        }
+        else {
+            if (keyword === '' && searchText !== undefined)
+                Router.push(removeParamFromUrl(Router.asPath, "searchText"))
+            else
+                Router.push({
+                    pathname: '/shop', query: generateShopUrl(category, filters, keyword,
+                        price_min, price_max, page)
+                }, undefined, { shallow: false, scroll: false })
+        }
     }
 
     return (

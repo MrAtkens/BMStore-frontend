@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from 'antd';
 import { observer } from 'mobx-react-lite';
 
 import useProduct from 'presentation/hook/useProduct';
@@ -21,13 +20,7 @@ const ModuleProductWideActions = observer(({ product } : IModuleProductWideActio
 
     function handleAddItemToWishlist(e : any) {
         e.preventDefault();
-        productStore.addToWishList(product);
-        const modal = Modal.success({
-            centered: true,
-            title: 'Успешно!',
-            content: `Вы добавили товар ${product.title} в избранное`,
-        });
-        modal.update;
+        productStore.addToWishList(product)
     }
 
 

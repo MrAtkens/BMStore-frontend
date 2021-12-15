@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { observer } from 'mobx-react-lite';
+
+import {ICategory} from "domain/interfaces/ICategory";
+import productStore from "data/stores/productStore"
 
 import Header from 'presentation/layout/headers/Header';
 import HeaderMobile from 'presentation/layout/headers/HeaderMobile';
 import Footer from 'presentation/layout/footers/Footer';
 import NavigationList from 'presentation/common/layout/header/modules/NavigationList';
-
-import {ICategory} from "domain/interfaces/ICategory";
 
 interface IPageContainer{
     children?: any,
@@ -14,12 +16,16 @@ interface IPageContainer{
     categories: Array<ICategory>
 }
 
-const Layout = ({
+const Layout = observer(({
     children,
     title = 'CATS',
     categories
 } : IPageContainer) => {
     let titleView;
+
+    useEffect(() => {
+        productStore.setWishList()
+    }, [])
 
     if (title !== '') {
         titleView = process.env.title + ' | ' + title;
@@ -39,6 +45,6 @@ const Layout = ({
             <NavigationList categories={categories}/>
         </>
     );
-};
+});
 
 export default Layout;

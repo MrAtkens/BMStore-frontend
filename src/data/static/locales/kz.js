@@ -44,8 +44,8 @@ const kazakhLocalization = {
         "submit_button": "Get a discount"
     },
     "home_current_products":{
-        "title": "actual products",
-        "sub_title": "Our customers often purchase these products",
+        "title": "actual product",
+        "sub_title": "Our customers often purchase these product",
         "sort": "Sort by",
         "sortType": {
             "filter_popularity": "Popularity",
@@ -75,7 +75,7 @@ const kazakhLocalization = {
         "loadButton": "Load more",
     },
     "purchaseButton": "Purchase in 1 click",
-    "getAllButton": "View all products",
+    "getAllButton": "View all product",
 }
 
 export default kazakhLocalization;
