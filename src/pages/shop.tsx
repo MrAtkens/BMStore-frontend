@@ -86,6 +86,7 @@ const Shop = observer(({ categoriesData, products, productCount, filtersData } :
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	let filterResponse = null
+	let productResponse = [] as Array<IProduct>
 	const {category, page, searchText, filters, price_min, price_max} = context.query
 
 	if(category !== undefined){
@@ -93,11 +94,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		filterResponse = response.data.data;
 	}
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	console.log("Поиск")
 	console.log(searchText)
-	const productResponse = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
-	console.log(productResponse.data)
+	const response = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
+	console.log(response)
+	if(response.data !== undefined)
+		productResponse = response.data.data
 	return {
-		props:{ categoriesData: categoryResponse.data, filtersData: filterResponse, products: productResponse.data.data},
+		props:{ categoriesData: categoryResponse.data, filtersData: filterResponse, products: productResponse, productCount: response.data.count},
 	};
 }
 

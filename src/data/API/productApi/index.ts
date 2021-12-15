@@ -14,7 +14,7 @@ function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, 
         shopUrl += `&Skip=${skip}`
     }
     if(searchText !== undefined){
-        shopUrl += `&Text=${searchText}`
+        shopUrl += `&Text=${encodeURIComponent(searchText)}`
     }
     if(categoryId !== undefined){
         shopUrl += `&CategoryId=${categoryId}`
@@ -49,8 +49,17 @@ const getProducts = async (take, skip, searchText, category, filter, price_min, 
     })
 }
 
+const getProductById = async (id) => {
+    return await axios.get(`${BackendUrl}/products/${id}?lang=ru`).then(response => {
+        return response
+    }).catch(error => {
+        return error.response
+    })
+}
+
 
 
 export const productsApiService = {
     getProducts,
+    getProductById
 };

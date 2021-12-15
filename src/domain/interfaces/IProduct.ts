@@ -1,8 +1,9 @@
 
-// interface IFilter{
-// 	key: string,
-// 	value: string
-// }
+interface ProductFilter{
+	filterGroupId: string,
+	name: string,
+	filterId: string
+}
 export interface IImage{
 	url: string,
 	isMain: boolean
@@ -15,6 +16,7 @@ export interface IProduct{
 	description: string
 	price : number,
 	images : Array<IImage>
-	// filters : Array<IFilter>,
-	// category : string
+	filters : Array<ProductFilter>,
+	categoryId : string,
+	categoryName : string
 }

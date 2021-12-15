@@ -1,0 +1,33 @@
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image'
+
+import { HOME } from '../constant/routes';
+
+
+const Error = () => {
+    return (
+        <div className="site-content">
+            <div className="ps-page--404">
+                <div className="container">
+                    <div className="ps-section__content">
+                        <figure>
+                            <Image width={830} height={360} src="/static/img/404.jpg" alt="CATS страница 404" />
+                            <h3>Упс походу страницу не найти</h3>
+                            <p>
+                                Скорее всего вы не верно ввели адресс либо произошла ошибка
+                                <br />
+                                Вернуться назад
+                                <Link href={HOME}>
+                                    <a> Главная</a>
+                                </Link>
+                            </p>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Error;

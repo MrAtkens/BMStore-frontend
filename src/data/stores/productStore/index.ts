@@ -1,7 +1,9 @@
 import {makeAutoObservable} from "mobx";
+import { Modal } from 'antd';
+
 import { IProduct } from 'domain/interfaces/IProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
-import { getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
+import { checkIsProductHas, getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
 
 interface IProductStore{
     products : Array<IProduct>,
@@ -26,6 +28,9 @@ class ProductStore implements IProductStore{
         description: "",
         slug: "",
         images : [],
+        categoryId: "",
+        categoryName: "",
+        filters: []
     };
 
     productCountPage = 8;
@@ -56,14 +61,32 @@ class ProductStore implements IProductStore{
     }
 
     addToWishList(product : IProduct){
-        this.wishList.push(product)
-        updateWishListToStorage(this.wishList)
+        if(checkIsProductHas(product.id)) {
+            const modal = Modal.success({
+                centered: true,
+                title: `Данный товар уже есть в списке избранных ${product.title}`,
+            });
+            modal.update;
+        }
+        else{
+            this.wishList.push(product)
+            updateWishListToStorage(this.wishList)
+            const modal = Modal.success({
+                centered: true,
+                title: 'Успешно!',
+                content: `Вы добавили товар ${product.title} в избранное`,
+            });
+            modal.update;
+        }
     }
 
     removeFromWishList(product : IProduct){
         const index = this.wishList.indexOf(product)
-        this.wishList = this.wishList.slice(index, index)
-        updateWishListToStorage(this.wishList)
+        let currentWishList = this.wishList
+        currentWishList.splice(index, 1)
+        console.log(currentWishList)
+        updateWishListToStorage(currentWishList)
+        this.setWishList()
     }
 
     setProductLoading(state : boolean){
@@ -74,6 +97,10 @@ class ProductStore implements IProductStore{
         this.products = products
         this.productCount = count
         this.productsLoading = true
+    }
+
+    get isProductsLoading(){
+        return this.productsLoading
     }
 }
 

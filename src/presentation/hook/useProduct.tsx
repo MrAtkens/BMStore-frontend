@@ -61,11 +61,11 @@ export default function useProduct() {
             )
         },
         filters: (product: IProduct) => {
-            // return product.filters.map(filter => (
-            //     <a key={filter.key} className='text-capitalize'>
-            //         {filter.key} : {filter.value}
-            //     </a>
-            // ));
+            return product.filters.map(filter => (
+                <a key={filter.filterId} className='text-capitalize'>
+                    {filter.filterGroupId} : {filter.name}
+                </a>
+            ));
         },
         title: (product: IProduct) => {
             return (

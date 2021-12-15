@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
 import { generateShopUrl } from 'helper/commons/products';
+import productStore from 'data/stores/productStore';
 
 const WidgetShopFilterByPriceRange = () => {
     const Router = useRouter();
@@ -25,6 +26,7 @@ const WidgetShopFilterByPriceRange = () => {
         setMin(value[0]);
         setMax(value[1]);
 
+        productStore.setProductLoading(false)
         //Проверка на то есть ли у нас уже введённые данные о макс и мин цене в url и их изменение
         if(Router.asPath.includes("price_min") || Router.asPath.includes("price_max")){
             Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, value[0], value[1], page)}, undefined, {shallow: false, scroll: false})

@@ -62,7 +62,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
 
     // Views
     let productItemsView;
-    if (productStore.productsLoading) {
+    if (productStore.isProductsLoading) {
         if (productStore.products && productStore.products.length > 0) {
             if (listView) {
                 const items = productStore.products.map((item) => (
@@ -96,7 +96,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
         <div className="ps-shopping">
             <div className="ps-shopping__header">
                 <p>
-                    <strong className="mr-2">{productStore.products.length}</strong>
+                    <strong className="mr-2">{productStore.productCount}</strong>
                     Найденых продуктов
                 </p>
                 <div className="ps-shopping__actions">

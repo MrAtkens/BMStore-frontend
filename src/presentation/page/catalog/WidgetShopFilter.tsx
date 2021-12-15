@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { IFilter } from 'domain/interfaces/IFilter';
 import { generateShopUrl } from 'helper/commons/products';
 import filterStore from "data/stores/filtersStore"
+import productStore from 'data/stores/productStore';
 
 interface IWidgetShopFilters{
     filter: IFilter
@@ -17,6 +18,7 @@ const WidgetShopFilter = observer(({ filter } : IWidgetShopFilters) => {
 
     async function onChange(e) {
         filterStore.setActiveFilters(e.target)
+        productStore.setProductLoading(false)
         await Router.push({
             pathname: '/shop',
             query: generateShopUrl(category, filterStore.activeFilters, searchText, price_min, price_max, page)

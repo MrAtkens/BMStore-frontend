@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import { Menu } from 'antd';
 
 import { ICategory } from 'domain/interfaces/ICategory';
 import { generateShopUrl } from 'helper/commons/products';
+import filterStore from "data/stores/filtersStore"
+import productStore from "data/stores/productStore"
 
 const { SubMenu } = Menu;
 
@@ -13,7 +16,7 @@ interface IMenu{
     mode: string
 }
 
-const CustomMenu = ({ source, className, mode } : IMenu) => {
+const CustomMenu = observer(({ source, className, mode } : IMenu) => {
     const [current, setCurrent] = useState('f8959b59-bae3-4be6-98f9-2d3bfc1faed4');
     const Router = useRouter()
     const { category, searchText } = Router.query
@@ -25,6 +28,8 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
 
     const handleClick = async e => {
         setCurrent(e.key)
+        productStore.setProductLoading(false)
+        filterStore.setActiveFiltersFromUrl([])
         await Router.push({
                 pathname: '/shop',
                 query: generateShopUrl(e.key, undefined, searchText?.toString(), undefined, undefined, 1)
@@ -71,6 +76,6 @@ const CustomMenu = ({ source, className, mode } : IMenu) => {
     else if(mode === 'vertical')
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
     return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
-};
+});
 
 export default CustomMenu;
