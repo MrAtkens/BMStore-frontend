@@ -16,18 +16,18 @@ const MiniCart = observer(() => {
     }
 
     useEffect(() => {
-        cartStore.getFromStorage()
+        cartStore.getCartFromApi()
     }, []);
 
     let cartItemsView;
-    if (cartStore.carts && cartStore.carts.length > 0) {
-        const amount = calculateAmount(cartStore.carts);
-        const productItems = cartStore.carts.map((item) => {
+    if (cartStore.cart && cartStore.cart.length > 0) {
+        const amount = calculateAmount(cartStore.cart);
+        const productItems = cartStore.cart.map((item) => {
             return (
-                <ProductOnCart product={item.product} key={item.product.id} quantity={item.productQuantity}>
+                <ProductOnCart product={item} key={item.productId} quantity={item.count}>
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveItem(e, item.product.id)}>
+                        onClick={(e) => handleRemoveItem(e,item.productId)}>
                         <i className='icon-cross'/>
                     </a>
                 </ProductOnCart>
@@ -64,12 +64,14 @@ const MiniCart = observer(() => {
 
     return (
         <div className="ps-cart--mini">
-            <a className="header__extra" href="#">
-                <i className='icon-bag2'/>
-                <span>
-                    <i>{cartStore.carts ? cartStore.carts.length : 0}</i>
-                </span>
-            </a>
+            <Link href={CART}>
+                <a className="header__extra" href="#">
+                    <i className='icon-bag2'/>
+                    <span>
+                        <i>{cartStore.cart ? cartStore.cart.length : 0}</i>
+                    </span>
+                </a>
+            </Link>
             {cartItemsView}
         </div>
     );

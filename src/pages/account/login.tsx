@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
+import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Login from 'presentation/page/Login';
@@ -16,7 +17,7 @@ const LoginPage = ({categories} : ILoginPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: '/',
+			url: HOME,
 		},
 		{
 			text: 'Вход в аккаунт',
@@ -42,7 +43,6 @@ const LoginPage = ({categories} : ILoginPage) => {
 
 export async function getStaticProps({ locale, req } : any){
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	console.log(categoryResponse)
 	return {
 		props:{ categories: categoryResponse.data},
 		revalidate: 600

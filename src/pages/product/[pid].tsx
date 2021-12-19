@@ -6,8 +6,9 @@ import Head from 'next/head';
 import { categoryApiService, productsApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { IProduct } from 'domain/interfaces/IProduct';
+import { HOME, SHOP_PAGE } from 'constant/routes';
 
-import ProductDetailBox from 'presentation/common/control/ProductDetailBox';
+import ProductDetailBox from 'presentation/page/ProductDetailBox';
 
 import SkeletonProductDetail from 'presentation/common/block/skeletons/SkeletonProductDetail';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
@@ -31,11 +32,11 @@ const ProductPage = ({categoriesData, product} : IProductPage) => {
     const breadCrumb = [
         {
             text: 'Главная',
-            url: '/',
+            url: HOME,
         },
         {
             text: 'Каталог',
-            url: '/shop'
+            url: SHOP_PAGE()
         },
         {
             text: pageProduct ? pageProduct.title : 'Загрузка...',

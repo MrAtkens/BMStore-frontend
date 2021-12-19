@@ -1,6 +1,7 @@
 
 interface ProductFilter{
 	filterGroupId: string,
+	filterGroupName: string,
 	name: string,
 	filterId: string
 }

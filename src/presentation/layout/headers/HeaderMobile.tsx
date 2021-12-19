@@ -1,32 +1,38 @@
 import React, { useRef, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
-import { HOME, PAYMENTS, SHOP_PAGE } from 'constant/routes';
-import { editParamFromUrl } from 'helper/commons/products';
 
-const HeaderMobile = () => {
+import productStore from 'data/stores/productStore';
+import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
+import { HOME, PAYMENTS, SHOP_PAGE } from 'constant/routes';
+
+import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
+
+const HeaderMobile = observer(() => {
     const inputEl = useRef(null);
     const [keyword, setKeyword] = useState('');
     const Router = useRouter()
-    const { searchText } = Router.query
+    const { filters, category, searchText, price_min, price_max, page } = Router.query
 
     function handleSubmit(e : any) {
         e.preventDefault();
-        if(searchText?.includes("searchText")){
-            //Удаление параметра из url и переадресация на новый без данного параметра
-            Router.push(editParamFromUrl(Router.asPath, "searchText", keyword))
+        productStore.setProductLoading(false)
+        if(keyword === ''){
+            Router.push(SHOP_PAGE(), undefined, { scroll: false })
         }
         else {
-            if (Router.asPath.includes("?"))
-                Router.push(Router.asPath + `&searchText=${keyword}`)
+            if (keyword === '' && searchText !== undefined)
+                Router.push(removeParamFromUrl(Router.asPath, "searchText"))
             else
-                Router.push(SHOP_PAGE("searchText", keyword))
+                Router.push({
+                    pathname: '/shop', query: generateShopUrl(category, filters, keyword,
+                        price_min, price_max, page)
+                }, undefined, { shallow: false, scroll: false })
         }
     }
-
     return (
         <header className="header header--mobile">
             <div className="header__top">
@@ -81,7 +87,7 @@ const HeaderMobile = () => {
             </div>
         </header>
     )
-}
+})
 
 
 export default HeaderMobile;

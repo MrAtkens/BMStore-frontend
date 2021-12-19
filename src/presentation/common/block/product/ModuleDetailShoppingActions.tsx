@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router';
 
 import { IProduct } from 'domain/interfaces/IProduct';
 import cartStore from "data/stores/cartStore"
 import productStore from "data/stores/productStore"
+import { CHECKOUT } from 'constant/routes';
 
 interface IModuleDetailShoppingActions{
     product: IProduct,
@@ -15,17 +17,18 @@ const ModuleDetailShoppingActions = observer(({
     extended = false
 } : IModuleDetailShoppingActions) => {
     const [quantity, setQuantity] = useState(1);
-    function handleAddItemToCart(e) {
+    const Router = useRouter()
+
+    async function handleAddItemToCart(e) {
         e.preventDefault();
-        cartStore.addToCart(product, 1)
+        await cartStore.addToCart(product.id, quantity)
     }
 
-    function handleBuyNow(e) {
+    async function handleBuyNow(e) {
         e.preventDefault();
-        cartStore.addToCart(product, 1)
-        // setTimeout(function () {
-        //     Router.push('/account/checkout');
-        // }, 1000);
+        await cartStore.addToCart(product.id, quantity).then(() => {
+            Router.push(CHECKOUT);
+        })
     }
 
     const handleAddItemToWishlist = (e) => {
