@@ -32,7 +32,6 @@ const userSingUpApi = async (firstName, lastName, email, password) => {
 
 const userPasswordResetApi = async (email, responseUrl) => {
     return await axios.get(`${BackendUrl}/user/identity/PasswordReset`).then(response => {
-    console.log(response)
     return response
   }).catch(error => {
     return error.response

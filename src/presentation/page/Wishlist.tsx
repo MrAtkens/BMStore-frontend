@@ -1,9 +1,10 @@
 import React  from 'react';
 import { observer } from 'mobx-react-lite';
 
-import ProductCart from 'presentation/common/control/products/ProductCart';
 import cartStore from "data/stores/cartStore"
 import productStore from "data/stores/productStore"
+
+import ProductCartWishList from 'presentation/common/control/products/ProductCartWishList';
 
 const Wishlist = observer(() => {
 
@@ -45,7 +46,7 @@ const Wishlist = observer(() => {
                                     </a>
                                 </td>
                                 <td>
-                                    <ProductCart product={product} />
+                                    <ProductCartWishList product={product} />
                                 </td>
                                 <td>{product.categoryName}</td>
                                 <td className="price">{product.price} тг</td>

@@ -11,7 +11,7 @@ interface IModuleDetailActionsMobile{
 const ModuleDetailActionsMobile = observer(({ product } : IModuleDetailActionsMobile) => {
     const handleAddItemToCart = (e) => {
         e.preventDefault();
-        cartStore.addToCart(product, 1)
+        cartStore.addToCart(product.id, 1)
     };
 
     return (

@@ -1,6 +1,8 @@
-import { IProduct } from './IProduct';
 
 export interface ICartProduct{
-	product: IProduct,
-	productQuantity: number
+	productId: string,
+	title: string,
+	price: number,
+	imageUrl: string,
+	count: number
 }

@@ -11,6 +11,7 @@ import productStore from "data/stores/productStore"
 import { ICategory } from "domain/interfaces/ICategory";
 import { IFilter } from 'domain/interfaces/IFilter';
 import { IProduct } from 'domain/interfaces/IProduct';
+import { HOME } from 'constant/routes';
 
 import Layout from "presentation/layout"
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
@@ -30,7 +31,7 @@ interface IShop{
 const breadCrumb = [
 	{
 		text: 'Главная',
-		url: '/',
+		url: HOME,
 	},
 	{
 		text: 'Каталог',
@@ -94,10 +95,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		filterResponse = response.data.data;
 	}
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	console.log("Поиск")
-	console.log(searchText)
 	const response = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
-	console.log(response)
 	if(response.data !== undefined)
 		productResponse = response.data.data
 	return {

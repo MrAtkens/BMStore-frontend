@@ -10,7 +10,7 @@ const ModuleProductDetailDescription = ({ product } : IModuleProductDetailDescri
         <p>{product.description}</p>
         <ul className="ps-list--dot">
             {product.filters.map(item => (
-                <li key={item.filterId}>{item.filterGroupId} : {item.name}</li>
+                <li key={item.filterId}>{item.filterGroupName} : {item.name}</li>
             ))}
         </ul>
     </div>

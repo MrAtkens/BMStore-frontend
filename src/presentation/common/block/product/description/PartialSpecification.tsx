@@ -11,7 +11,7 @@ const PartialSpecification = ({ product } : IPartialSpecification) => (
             <tbody>
             {product.filters.map(item =>(
                 <tr key={item.filterId}>
-                    <td>{item.filterGroupId}</td>
+                    <td>{item.filterGroupName}</td>
                     <td>{item.name}</td>
                 </tr>
             ))}

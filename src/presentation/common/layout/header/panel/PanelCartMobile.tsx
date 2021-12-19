@@ -4,48 +4,44 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { CART, CHECKOUT, PRODUCT, SHOP_PAGE } from 'constant/routes';
-import { IProduct } from 'domain/interfaces/IProduct';
 import cartStore from 'data/stores/cartStore'
+
 import { calculateAmount } from 'helper/stores/cartHelper';
 
 const PanelCartMobile = observer(() => {
 
-    function handleRemoveCartItem(e : any, product : IProduct) {
+    function handleRemoveCartItem(e : any, productId : string) {
         e.preventDefault();
-        cartStore.removeFromCart(product.id)
+        cartStore.removeFromCart(productId)
     }
 
     useEffect(() => {
-        cartStore.getFromStorage()
+        cartStore.getCartFromApi()
     }, []);
     //view
     let cartItemsView, footerView;
 
-    if (cartStore.carts && cartStore.carts.length > 0) {
-        const amount = calculateAmount(cartStore.carts);
-        const items = cartStore.carts.map((item) => (
-            <div className="ps-product--cart-mobile" key={item.product.id}>
+    if (cartStore.cart && cartStore.cart.length > 0) {
+        const amount = calculateAmount(cartStore.cart);
+        const items = cartStore.cart.map((item) => (
+            <div className="ps-product--cart-mobile" key={item.productId}>
                 <div className="ps-product__thumbnail">
-                    <Link href={PRODUCT(item.product.id)}>
-                        <Image src={item.product.images.map((item) => {
-                            if(item.isMain)
-                                return item.url
-                            return "/static/img/not-found.jpg"
-                        })} width={100} height={100}/>
+                    <Link href={PRODUCT(item.productId)}>
+                        <Image alt={item.title} src={item.imageUrl} width={100} height={100}/>
                     </Link>
                 </div>
                 <div className="ps-product__content">
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveCartItem(e, item.product)}>
+                        onClick={(e) => handleRemoveCartItem(e, item.productId)}>
                         <i className='icon-cross'/>
                     </a>
-                    {item.product.title}
-                    <Link href={PRODUCT(item.product.id)}>
-                        <a className="ps-product__title">{item.product.title}</a>
+                    {item.title}
+                    <Link href={PRODUCT(item.productId)}>
+                        <a className="ps-product__title">{item.title}</a>
                     </Link>
                     <small>
-                        {item.productQuantity} x ${item.product.price}
+                        {item.count} x ${item.price}
                     </small>
                 </div>
             </div>

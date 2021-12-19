@@ -15,7 +15,7 @@ const MobileHeaderActions = observer(() => {
                 <a className="header__extra" href="#">
                     <i className='icon-bag2'/>
                     <span>
-                        <i>{cartStore.carts ? cartStore.carts.length : 0}</i>
+                        <i>{cartStore.cart ? cartStore.cart.length : 0}</i>
                     </span>
                 </a>
             </Link>

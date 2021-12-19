@@ -1,6 +1,7 @@
 import React from 'react';
-import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
+import LazyLoad from 'react-lazyload';
+
 import { IImage, IProduct } from 'domain/interfaces/IProduct';
 import { PRODUCT } from 'constant/routes';
 
@@ -63,7 +64,7 @@ export default function useProduct() {
         filters: (product: IProduct) => {
             return product.filters.map(filter => (
                 <a key={filter.filterId} className='text-capitalize'>
-                    {filter.filterGroupId} : {filter.name}
+                    {filter.filterGroupName} : {filter.name}
                 </a>
             ));
         },

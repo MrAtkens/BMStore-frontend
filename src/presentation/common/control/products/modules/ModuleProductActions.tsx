@@ -13,7 +13,7 @@ const ModuleProductActions = observer(({ product } : IModuleProductActions) => {
 
     function handleAddItemToCart(e : any) {
         e.preventDefault();
-        cartStore.addToCart(product, 1)
+        cartStore.addToCart(product.id, 1)
     }
 
     function handleAddItemToWishlist(e : any) {

@@ -4,13 +4,12 @@ import { observer } from 'mobx-react-lite';
 
 import { Form, Input } from 'antd';
 import { LOGIN, REGISTER } from 'constant/routes';
-import userStore from "data/stores/userStore"
 
 const Login = observer(() => {
 
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
-		await userStore.authenticate(values.email, values.password)
+		// await userStore.authenticate(values.email, values.password)
 	};
 
 	return (

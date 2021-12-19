@@ -84,7 +84,6 @@ class ProductStore implements IProductStore{
         const index = this.wishList.indexOf(product)
         let currentWishList = this.wishList
         currentWishList.splice(index, 1)
-        console.log(currentWishList)
         updateWishListToStorage(currentWishList)
         this.setWishList()
     }

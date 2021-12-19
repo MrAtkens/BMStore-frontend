@@ -7,18 +7,14 @@ axios.defaults.withCredentials = true
 function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, price_max) : string {
     let shopUrl = BackendUrl + "/products?Language=ru"
 
-    if(take !== undefined && !isNaN(take)){
+    if(take !== undefined && !isNaN(take))
         shopUrl += `&Take=${take}`
-    }
-    if(take !== undefined && !isNaN(take)) {
+    if(skip !== undefined && !isNaN(skip))
         shopUrl += `&Skip=${skip}`
-    }
-    if(searchText !== undefined){
+    if(searchText !== undefined)
         shopUrl += `&Text=${encodeURIComponent(searchText)}`
-    }
-    if(categoryId !== undefined){
+    if(categoryId !== undefined)
         shopUrl += `&CategoryId=${categoryId}`
-    }
     if(filters !== undefined){
         if (typeof filters === 'string' || filters instanceof String){
             shopUrl += `&Filters=${filters}`
@@ -29,12 +25,10 @@ function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, 
             })
         }
     }
-    if(price_min !== undefined){
+    if(price_min !== undefined)
         shopUrl += `&PriceMin=${price_min}`
-    }
-    if(price_max !== undefined){
+    if(price_max !== undefined)
         shopUrl += `&PriceMax=${price_max}`
-    }
 
     return shopUrl
 }

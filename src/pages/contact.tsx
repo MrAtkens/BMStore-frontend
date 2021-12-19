@@ -6,41 +6,45 @@ import { ICategory } from 'domain/interfaces/ICategory';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
-import Wishlist from 'presentation/page/Wishlist';
+import ContactInfo from 'presentation/page/contact/ContactInfo';
+import ContactForm from 'presentation/page/contact/ContactForm';
+import ContactMap from 'presentation/page/contact/ContactMap';
 import Layout from 'presentation/layout';
 
-interface IWishlistPage{
+interface IContactUsPage{
     categories: Array<ICategory>
 }
 
-const breadCrumb = [
-    {
-        text: 'Главная',
-        url: HOME,
-    },
-    {
-        text: 'Избранное',
-        url: null
-    },
-];
-
-const WishlistPage = ({ categories } : IWishlistPage) => {
+const ContactUsPage = ({ categories } : IContactUsPage) => {
+    const breadCrumb = [
+        {
+            text: 'Главная',
+            url: HOME,
+        },
+        {
+            text: 'Контакты',
+            url: null
+        },
+    ];
 
     return (
         <Layout categories={categories} title={"Главная страница - CATS"}>
             <Head>
-                <title>Избранные</title>
-                <meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
+                <title>CATS — Контакты</title>
+                <meta name="description" content="CATS — Интернет-магазин стройматериалов"/>
                 <meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
                 <meta name="author" content="Bazar-Jok Group"/>
             </Head>
-            <div className="ps-page--simple">
+            <div className="ps-page--single" id="contact-us">
                 <BreadCrumb breadcrumb={breadCrumb} layout={"default"} />
-                <Wishlist />
+                <ContactMap />
+                <ContactInfo />
+                <ContactForm />
             </div>
         </Layout>
     );
-}
+};
+
 
 export async function getStaticProps({ locale, req } : any){
     const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
@@ -50,4 +54,5 @@ export async function getStaticProps({ locale, req } : any){
     };
 }
 
-export default WishlistPage;
+
+export default ContactUsPage;
