@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import LazyLoad from 'react-lazyload';
 
 import { IImage, IProduct } from 'domain/interfaces/IProduct';
@@ -24,7 +25,9 @@ export default function useProduct() {
         getImage: (product : IProduct) => {
             return (
                 <LazyLoad>
-                    <img
+                    <Image
+                        width={200}
+                        height={200}
                         src={getImageURL(product.images)}
                         alt={product.title}
                     />

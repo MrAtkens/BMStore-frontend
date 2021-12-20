@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import Slider from 'react-slick';
+import Image from "next/image"
 
 import NextArrow from 'presentation/common/typography/NextArrow';
 import PrevArrow from 'presentation/common/typography/PrevArrow';
@@ -88,13 +89,13 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
     if (productImages.length > 0) {
         imagesView = productImages.map((item) => (
             <div className="item" key={item}>
-                <img src={item} alt={item} />
+                <Image width={420} height={420} src={item} alt={item} />
             </div>
         ));
         galleryImagesView = productImages.map((item, index) => (
             <div className="item" key={item}>
                 <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
-                    <img src={item} alt={item} />
+                    <Image width={420} height={420} src={item} alt={item} />
                 </a>
             </div>
         ));

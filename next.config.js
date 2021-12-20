@@ -5,7 +5,8 @@ const path = require('path')
 
 const nextConfig = withPWA({
 	images: {
-		domains: ['cdn.icon-icons.com', 'image.freepik.com', 'cdn4.vectorstock.com', 'encrypted-tbn0.gstatic.com'],
+		domains: ['cdn.icon-icons.com', 'image.freepik.com', 'cdn4.vectorstock.com', 'encrypted-tbn0.gstatic.com',
+			'thumbs.dreamstime.com', 'truevalue.com'],
 		minimumCacheTTL: 60000,
 	},
 	eslint: {
