@@ -3,7 +3,6 @@ export const HOME = '/';
 export const PRODUCT = (id: string) => `/product/${id}`;
 export const PAYMENT = '/payment'
 export const WISHLIST = '/wishlist'
-export const RECENTLY_VIEWED_PRODUCTS = '/recently'
 export const CONTACTS = '/contacts'
 export const ABOUT_US = '/about'
 

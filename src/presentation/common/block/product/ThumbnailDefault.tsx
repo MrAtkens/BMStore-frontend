@@ -89,13 +89,13 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
     if (productImages.length > 0) {
         imagesView = productImages.map((item) => (
             <div className="item" key={item}>
-                <Image width={420} height={420} src={item} alt={item} />
-            </div>
+				<img src={item} alt={item} />
+			</div>
         ));
         galleryImagesView = productImages.map((item, index) => (
             <div className="item" key={item}>
                 <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
-                    <Image width={420} height={420} src={item} alt={item} />
+					<Image width={400} height={400} src={item} alt={item} />
                 </a>
             </div>
         ));
@@ -168,7 +168,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                 <div className="ps-wrapper">
                     <Slider
                         {...gallerySetting}
-                        ref={(slider) => (galleryCarousel.current = slider)}
+                        ref={slider => (galleryCarousel.current = slider)}
                         asNavFor={variant}
                         className="ps-product__gallery ps-carousel inside">
                         {galleryImagesView}

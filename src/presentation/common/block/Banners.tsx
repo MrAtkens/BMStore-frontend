@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { SHOP_PAGE } from 'constant/routes';
@@ -40,44 +41,34 @@ const Banners = ({categories} : IBanners) => {
                         </div>
                         <div className="item">
                             <Link href={SHOP_PAGE()}>
-                                <a>
-                                    <img src="/static/img/slider/home-5/3.jpg" alt="CATS" />
-                                </a>
+                                <img src="/static/img/slider/home-5/3.jpg" alt="CATS" />
                             </Link>
                         </div>
                         <div className='item'/>
                     </Slider>
                     <Link href={SHOP_PAGE()}>
-                        <a>
-                            <img src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
-                        </a>
+                        <img src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
                     </Link>
                 </div>
                 <div className="ps-section__right">
                     <Link href={SHOP_PAGE()}>
-                        <a>
-                            <img src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
-                        </a>
+                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
+
                     </Link>
                     <Link href={SHOP_PAGE()}>
-                        <a>
-                            <img src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
-                        </a>
+                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
+
                     </Link>
                     <Link href={SHOP_PAGE()}>
-                        <a className="wide">
-                            <img src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
-                        </a>
+                        <Image width={382} height={194} src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
+
                     </Link>
                     <Link href={SHOP_PAGE()}>
-                        <a>
-                            <img src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
-                        </a>
+                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
+
                     </Link>
                     <Link href={SHOP_PAGE()}>
-                        <a>
-                            <img src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
-                        </a>
+                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
                     </Link>
                 </div>
             </div>

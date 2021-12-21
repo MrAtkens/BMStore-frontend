@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { calculateAmount } from 'helper/stores/cartHelper';
 import cartStore from "data/stores/cartStore"
+import { PRODUCT } from 'constant/routes';
 
 const ModulePaymentOrderSummary = observer(() => {
 
@@ -13,7 +14,7 @@ const ModulePaymentOrderSummary = observer(() => {
     if (cartStore.cart && cartStore.cart.length > 0) {
         amount = calculateAmount(cartStore.cart);
         listItemsView = cartStore.cart.map((item) => (
-            <Link href="/" key={item.productId}>
+            <Link href={PRODUCT(item.productId)} key={item.productId}>
                 <a>
                     <strong>
                         {item.title}

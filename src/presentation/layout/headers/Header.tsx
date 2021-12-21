@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import {ICategory} from "domain/interfaces/ICategory";
 import { stickyHeader } from 'helper/commons/header';
-import { ABOUT_US, CONTACTS, HOME, PAYMENTS } from 'constant/routes';
+import { CONTACTS, HOME, PAYMENTS } from 'constant/routes';
 
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
@@ -32,14 +32,14 @@ const Header = ({categories} : IHeader) => {
                         <ul className="header__top-links">
                             <li>
                                 <Link href={CONTACTS}>
-                                    <a>Адреса</a>
+                                    <a>Контакты</a>
                                 </Link>
                             </li>
-                            <li>
-                                <Link href={ABOUT_US}>
-                                    <a>О нас</a>
-                                </Link>
-                            </li>
+                            {/*<li>*/}
+                            {/*    <Link href={ABOUT_US}>*/}
+                            {/*        <a>О нас</a>*/}
+                            {/*    </Link>*/}
+                            {/*</li>*/}
                             <li>
                                 <Link href={PAYMENTS}>
                                     <a>Узнать статус заказа</a>
