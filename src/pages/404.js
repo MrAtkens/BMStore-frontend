@@ -12,14 +12,13 @@ const Error = () => {
                 <div className="container">
                     <div className="ps-section__content">
                         <figure>
-                            <Image width={830} height={360} src="/static/img/404.jpg" alt="CATS страница 404" />
-                            <h3>Упс походу страницу не найти</h3>
+                            <Image width={800} height={360} src="/static/img/404.jpg" alt="CATS страница 404" />
+                            <h3>Упс, похоже, страница не найдена</h3>
                             <p>
-                                Скорее всего вы не верно ввели адресс либо произошла ошибка
+                                Скорее всего. Вы неверно ввели адрес, либо произошла ошибка
                                 <br />
-                                Вернуться назад
                                 <Link href={HOME}>
-                                    <a> Главная</a>
+                                    <a>Вернуться назад</a>
                                 </Link>
                             </p>
                         </figure>

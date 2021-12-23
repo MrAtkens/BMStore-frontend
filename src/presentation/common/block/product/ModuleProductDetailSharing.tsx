@@ -11,9 +11,6 @@ const ModuleProductDetailSharing = () => (
         <a className="google" href="#">
             <i className='fa fa-google-plus'/>
         </a>
-        <a className="linkedin" href="#">
-            <i className='fa fa-linkedin'/>
-        </a>
         <a className="instagram" href="#">
             <i className='fa fa-instagram'/>
         </a>

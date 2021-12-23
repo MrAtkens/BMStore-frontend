@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import LazyLoad from 'react-lazyload';
 
 import { ICartProduct } from 'domain/interfaces/ICartProduct';
 import { PRODUCT } from 'constant/routes';
+
 
 function getImageURL(url : string) {
 	let imageURL;
@@ -21,7 +23,7 @@ export default function useCartProduct() {
 		getImage: (product : ICartProduct) => {
 			return (
 				<LazyLoad>
-					<img src={getImageURL(product.imageUrl)} alt={product.title} />
+					<Image width={150} height={150} src={getImageURL(product.imageUrl)} alt={product.title} />
 			</LazyLoad>
 		)
 		},

@@ -1,24 +1,30 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-import { Form, Input } from 'antd';
+import { Checkbox, Form, Input } from 'antd';
 
 import { CART } from 'constant/routes';
 
 const FormCheckoutInformation = () =>{
+    const [state, setState] = useState(false)
 
-    const handleLoginSubmit = () => {
-        Router.push('/account/shipping');
+    const onFinish = async (values: any) => {
+        console.log(state)
+        console.log('Success:', values);
+        // await userStore.authenticate(values.email, values.password)
     };
+
+    const onChange = async (e) => {
+        setState(e.target.checked)
+    }
 
     return (
         <Form
             className="ps-form__billing-info"
-            onFinish={handleLoginSubmit}>
-            <h3 className="ps-form__heading">Контактная информация</h3>
+            onFinish={onFinish}>
+            <h3 className="ps-form__heading">Контактные данные</h3>
             <div className="form-group">
                 <Form.Item
-                    name="name"
+                    name="phoneNumber"
                     rules={[
                         {
                             required: true,
@@ -28,9 +34,9 @@ const FormCheckoutInformation = () =>{
                     ]}>
                     <Input
                         className="form-control"
-                        type="text"
                         placeholder="Номер телефона"
-                    />
+                        type="number"
+                        addonBefore="+7"  />
                 </Form.Item>
             </div>
             {/*<div className="form-group">*/}
@@ -45,44 +51,22 @@ const FormCheckoutInformation = () =>{
             {/*        </label>*/}
             {/*    </div>*/}
             {/*</div>*/}
-            <h3 className="ps-form__heading">Адресс доставки</h3>
-            <div className="row">
-                <div className="col-sm-6">
-                    <div className="form-group">
-                        <Form.Item
-                            name="firstName"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста введите имя!',
-                                },
-                            ]}>
-                            <Input
-                                className="form-control"
-                                type="text"
-                                placeholder="Имя"
-                            />
-                        </Form.Item>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    <div className="form-group">
-                        <Form.Item
-                            name="lastName"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста введите фамилию!',
-                                },
-                            ]}>
-                            <Input
-                                className="form-control"
-                                type="text"
-                                placeholder="Фамилия"
-                            />
-                        </Form.Item>
-                    </div>
-                </div>
+            <h3 className="ps-form__heading">Данные доставки</h3>
+            <div className="form-group">
+                <Form.Item
+                    name="name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Введите ваше ФИО!',
+                        },
+                    ]}>
+                    <Input
+                        className="form-control"
+                        type="text"
+                        placeholder="ФИО получателя"
+                    />
+                </Form.Item>
             </div>
             <div className="form-group">
                 <Form.Item
@@ -101,69 +85,13 @@ const FormCheckoutInformation = () =>{
                 </Form.Item>
             </div>
             <div className="form-group">
-                <Form.Item
-                    name="apartment"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Введите номер квартиры!',
-                        },
-                    ]}>
-                    <Input
-                        className="form-control"
-                        type="text"
-                        placeholder="Номер квартиры, офиса или что то ещё"
-                    />
-                </Form.Item>
-            </div>
-            <div className="row">
-                <div className="col-sm-6">
-                    <div className="form-group">
-                        <Form.Item
-                            name="city"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Введите наименование город!',
-                                },
-                            ]}>
-                            <Input
-                                className="form-control"
-                                type="city"
-                                placeholder="Город"
-                            />
-                        </Form.Item>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    <div className="form-group">
-                        <Form.Item
-                            name="postalCode"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Введите почтовый индекс!',
-                                },
-                            ]}>
-                            <Input
-                                className="form-control"
-                                type="postalCode"
-                                placeholder="Почтовый индекс"
-                            />
-                        </Form.Item>
-                    </div>
-                </div>
-            </div>
-            <div className="form-group">
                 <div className="ps-checkbox">
-                    <input
+                    <Checkbox
+                        value={state}
                         className="form-control"
-                        type="checkbox"
-                        id="save-information"
-                    />
-                    <label htmlFor="save-information">
-                        Сохранить данные на следующию покупку
-                    </label>
+                        onChange={onChange}>
+                        Сохранить данные на следующую покупку
+                    </Checkbox>
                 </div>
             </div>
             <div className="ps-form__submit">
