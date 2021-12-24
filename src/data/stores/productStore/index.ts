@@ -2,13 +2,16 @@ import {makeAutoObservable} from "mobx";
 import { Modal } from 'antd';
 
 import { IProduct } from 'domain/interfaces/IProduct';
+import { IWishProduct } from 'domain/interfaces/IWishProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
-import { checkIsProductHas, getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
+import { getUserId } from 'helper/stores/userHelper';
+import { wishListApiService } from "data/API";
 
 interface IProductStore{
     products : Array<IProduct>,
     productCount: number,
     relatedProducts: Array<IProduct>,
+    wishList: Array<IWishProduct>
     product: IProduct,
     productCountPage: number,
     pageNumber: number,
@@ -19,7 +22,7 @@ class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
     productCount = 0;
     relatedProducts = [] as Array<IProduct>;
-    wishList = [] as Array<IProduct>;
+    wishList = [] as Array<IWishProduct>;
 
     product = {
         id: "",
@@ -56,21 +59,32 @@ class ProductStore implements IProductStore{
        this.relatedProducts = getRelatedItemsFromStorage()
     }
 
-    setWishList(){
-        this.wishList = getWishListItemsFromStorage()
+    async setWishList() {
+        const response = await wishListApiService.getWishList(getUserId())
+        console.log(response)
+        this.wishList = response.data.data
     }
 
-    addToWishList(product : IProduct){
-        if(checkIsProductHas(product.id)) {
+    async addToWishList(product: IProduct) {
+        let isHas = false
+        console.log(product)
+        console.log(this.wishList.length)
+        if(this.wishList.length !== 0)
+            this.wishList.map(item => {
+                if (item.productId === product.id)
+                    isHas = true
+            })
+
+        if (isHas) {
             const modal = Modal.success({
                 centered: true,
                 title: `Данный товар уже есть в списке избранных ${product.title}`,
             });
             modal.update;
-        }
-        else{
-            this.wishList.push(product)
-            updateWishListToStorage(this.wishList)
+        } else {
+            const response = await wishListApiService.addToWishList(product.id, getUserId())
+            console.log(response)
+            this.wishList = response.data.value.data
             const modal = Modal.success({
                 centered: true,
                 title: 'Успешно!',
@@ -80,12 +94,10 @@ class ProductStore implements IProductStore{
         }
     }
 
-    removeFromWishList(product : IProduct){
-        const index = this.wishList.indexOf(product)
-        let currentWishList = this.wishList
-        currentWishList.splice(index, 1)
-        updateWishListToStorage(currentWishList)
-        this.setWishList()
+    async removeFromWishList(productId: string) {
+        const response = await wishListApiService.removeWishList(productId, getUserId())
+        console.log(response)
+        this.wishList = response.data.value.data
     }
 
     setProductLoading(state : boolean){

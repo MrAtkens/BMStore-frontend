@@ -1,22 +1,24 @@
 import React  from 'react';
+import Link from 'next/link';
 import { observer } from 'mobx-react-lite';
 
 import cartStore from "data/stores/cartStore"
 import productStore from "data/stores/productStore"
 
-import ProductCartWishList from 'presentation/common/control/products/ProductCartWishList';
+import ProductCartWishList from 'presentation/common/control/products/ProductWishList';
+import { SHOP_PAGE } from 'constant/routes';
 
 const Wishlist = observer(() => {
 
-    function handleAddItemToCart(e, product) {
-        e.preventDefault();
-        cartStore.addToCart(product, 1)
-    }
+    async function handleAddItemToCart(e, productId :string) {
+		e.preventDefault();
+		await cartStore.addToCart(productId, 1)
+	}
 
-    function handleRemoveWishlistItem(e, product) {
-        e.preventDefault();
-        productStore.removeFromWishList(product)
-    }
+    async function handleRemoveWishlistItem(e, productId :string) {
+		e.preventDefault();
+		await productStore.removeFromWishList(productId)
+	}
 
     // views
     let wishlistItemsView;
@@ -35,12 +37,12 @@ const Wishlist = observer(() => {
                     </thead>
                     <tbody>
                         {productStore.wishList.map((product) => (
-                            <tr key={product.id}>
+                            <tr key={product.productId}>
                                 <td>
                                     <a
                                         href="#"
                                         onClick={(e) =>
-                                            handleRemoveWishlistItem(e, product)
+                                            handleRemoveWishlistItem(e, product.productId)
                                         }>
                                         <i className='icon-cross'/>
                                     </a>
@@ -48,13 +50,17 @@ const Wishlist = observer(() => {
                                 <td>
                                     <ProductCartWishList product={product} />
                                 </td>
-                                <td>{product.categoryName}</td>
+                                <td className="wish-list-title">
+                                    <Link href={SHOP_PAGE("category", product.categoryId)}>
+                                        {product.categoryName}
+                                    </Link>
+                                </td>
                                 <td className="price">{product.price} тг</td>
                                 <td>
                                     <a
                                         className="ps-btn"
                                         onClick={(e) =>
-                                            handleAddItemToCart(e, product)
+                                            handleAddItemToCart(e, product.productId)
                                         }>
                                         Добавить в корзину
                                     </a>
