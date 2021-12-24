@@ -3,7 +3,8 @@ import { Modal } from 'antd';
 
 import { IProduct } from 'domain/interfaces/IProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
-import { checkIsProductHas, getWishListItemsFromStorage, updateWishListToStorage } from 'helper/stores/wishListHelper';
+import { wishListApiService } from "data/API";
+import { getUserId } from '../../../helper/stores/userHelper';
 
 interface IProductStore{
     products : Array<IProduct>,
@@ -56,21 +57,25 @@ class ProductStore implements IProductStore{
        this.relatedProducts = getRelatedItemsFromStorage()
     }
 
-    setWishList(){
-        this.wishList = getWishListItemsFromStorage()
+    async setWishList() {
+        this.wishList = await wishListApiService.getWishList(getUserId())
     }
 
-    addToWishList(product : IProduct){
-        if(checkIsProductHas(product.id)) {
+    async addToWishList(product: IProduct) {
+        let isHas = false
+        this.wishList.map(item => {
+            if (item.id === product.id)
+                isHas = true
+        })
+
+        if (isHas) {
             const modal = Modal.success({
                 centered: true,
                 title: `Данный товар уже есть в списке избранных ${product.title}`,
             });
             modal.update;
-        }
-        else{
-            this.wishList.push(product)
-            updateWishListToStorage(this.wishList)
+        } else {
+            this.wishList = await wishListApiService.addToWishList(product.id, getUserId())
             const modal = Modal.success({
                 centered: true,
                 title: 'Успешно!',
@@ -80,12 +85,11 @@ class ProductStore implements IProductStore{
         }
     }
 
-    removeFromWishList(product : IProduct){
+    async removeFromWishList(product: IProduct) {
         const index = this.wishList.indexOf(product)
         let currentWishList = this.wishList
         currentWishList.splice(index, 1)
-        updateWishListToStorage(currentWishList)
-        this.setWishList()
+        this.wishList = await wishListApiService.removeWishList(product.id, getUserId())
     }
 
     setProductLoading(state : boolean){

@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { observer } from 'mobx-react-lite';
 
-import {ICategory} from "domain/interfaces/ICategory";
-import productStore from "data/stores/productStore"
+import {ICategory} from 'domain/interfaces/ICategory';
+import productStore from 'data/stores/productStore';
+import cartStore from 'data/stores/cartStore';
 
 import Header from 'presentation/layout/headers/Header';
 import HeaderMobile from 'presentation/layout/headers/HeaderMobile';
@@ -24,6 +25,7 @@ const Layout = observer(({
     let titleView;
 
     useEffect(() => {
+        cartStore.getCartFromApi()
         productStore.setWishList()
     }, [])
 

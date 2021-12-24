@@ -34,16 +34,6 @@ const Banners = ({categories} : IBanners) => {
                                 <img src="/static/img/slider/home-5/1.jpg" alt="CATS" />
                             </Link>
                         </div>
-                        <div className="item">
-                            <Link href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/2.jpg" alt="CATS" />
-                            </Link>
-                        </div>
-                        <div className="item">
-                            <Link href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/3.jpg" alt="CATS" />
-                            </Link>
-                        </div>
                         <div className='item'/>
                     </Slider>
                     <Link href={SHOP_PAGE()}>

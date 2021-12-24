@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,9 +15,6 @@ const PanelCartMobile = observer(() => {
         cartStore.removeFromCart(productId)
     }
 
-    useEffect(() => {
-        cartStore.getCartFromApi()
-    }, []);
     //view
     let cartItemsView, footerView;
 

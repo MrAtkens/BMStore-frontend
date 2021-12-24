@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
@@ -14,10 +14,6 @@ const MiniCart = observer(() => {
         e.preventDefault();
         cartStore.removeFromCart(productId);
     }
-
-    useEffect(() => {
-        cartStore.getCartFromApi()
-    }, []);
 
     let cartItemsView;
     if (cartStore.cart && cartStore.cart.length > 0) {
