@@ -166,7 +166,7 @@ export const menu = {
 							"url": "/account/order-tracking"
 						},
 						{
-							"text": "My Account",
+							"text": "My account",
 							"url": "/account/login"
 						},
 						{

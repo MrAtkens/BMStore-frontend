@@ -43,9 +43,8 @@ export default class MyDocument extends Document {
                     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png"/>
 
                     <link
-                        href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap:300,400,500,600,700&amp;amp;subset=latin-ext"
-                        rel="stylesheet"
-                    />
+                        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+                        rel="stylesheet"/>
                     {/* eslint-disable react/no-danger */}
                     {/*<script dangerouslySetInnerHTML={{ __html: YANDEX_METRIKA }} />*/}
                     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RKPH5DDHTX" />

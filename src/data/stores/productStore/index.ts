@@ -2,14 +2,16 @@ import {makeAutoObservable} from "mobx";
 import { Modal } from 'antd';
 
 import { IProduct } from 'domain/interfaces/IProduct';
+import { IWishProduct } from 'domain/interfaces/IWishProduct';
 import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
+import { getUserId } from 'helper/stores/userHelper';
 import { wishListApiService } from "data/API";
-import { getUserId } from '../../../helper/stores/userHelper';
 
 interface IProductStore{
     products : Array<IProduct>,
     productCount: number,
     relatedProducts: Array<IProduct>,
+    wishList: Array<IWishProduct>
     product: IProduct,
     productCountPage: number,
     pageNumber: number,
@@ -20,7 +22,7 @@ class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
     productCount = 0;
     relatedProducts = [] as Array<IProduct>;
-    wishList = [] as Array<IProduct>;
+    wishList = [] as Array<IWishProduct>;
 
     product = {
         id: "",
@@ -58,15 +60,20 @@ class ProductStore implements IProductStore{
     }
 
     async setWishList() {
-        this.wishList = await wishListApiService.getWishList(getUserId())
+        const response = await wishListApiService.getWishList(getUserId())
+        console.log(response)
+        this.wishList = response.data.data
     }
 
     async addToWishList(product: IProduct) {
         let isHas = false
-        this.wishList.map(item => {
-            if (item.id === product.id)
-                isHas = true
-        })
+        console.log(product)
+        console.log(this.wishList.length)
+        if(this.wishList.length !== 0)
+            this.wishList.map(item => {
+                if (item.productId === product.id)
+                    isHas = true
+            })
 
         if (isHas) {
             const modal = Modal.success({
@@ -75,7 +82,9 @@ class ProductStore implements IProductStore{
             });
             modal.update;
         } else {
-            this.wishList = await wishListApiService.addToWishList(product.id, getUserId())
+            const response = await wishListApiService.addToWishList(product.id, getUserId())
+            console.log(response)
+            this.wishList = response.data.value.data
             const modal = Modal.success({
                 centered: true,
                 title: 'Успешно!',
@@ -85,11 +94,10 @@ class ProductStore implements IProductStore{
         }
     }
 
-    async removeFromWishList(product: IProduct) {
-        const index = this.wishList.indexOf(product)
-        let currentWishList = this.wishList
-        currentWishList.splice(index, 1)
-        this.wishList = await wishListApiService.removeWishList(product.id, getUserId())
+    async removeFromWishList(productId: string) {
+        const response = await wishListApiService.removeWishList(productId, getUserId())
+        console.log(response)
+        this.wishList = response.data.value.data
     }
 
     setProductLoading(state : boolean){

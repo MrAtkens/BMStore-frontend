@@ -18,11 +18,12 @@ function generateGuid() {
 
 export function getUserId() {
 	const userId = localStorage.getItem(USER_ID);
-	if (userId) {
+	if (userId || userId !== null) {
 		return JSON.parse(userId);
 	} else {
 		let guid = generateGuid()
 		localStorage.setItem(USER_ID, JSON.stringify(guid));
+		console.log(guid)
 		return guid;
 	}
 }

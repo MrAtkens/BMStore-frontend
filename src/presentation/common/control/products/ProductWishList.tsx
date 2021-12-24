@@ -1,21 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { IProduct } from 'domain/interfaces/IProduct';
+import { IWishProduct } from 'domain/interfaces/IWishProduct';
 import { PRODUCT } from 'constant/routes';
 
-import useProduct from 'presentation/hook/useProduct';
+import useProduct from 'presentation/hook/useWishProduct';
 
-interface ProductCart{
-    product : IProduct
+interface IProductWishList{
+    product : IWishProduct
 }
 
-const ProductCartWishList = ({product} : ProductCart) => {
+const ProductWishList = ({product} : IProductWishList) => {
     const { getImage, title } = useProduct();
     return (
         <div className="ps-product--cart">
             <div className="ps-product__thumbnail">
-                <Link href={PRODUCT(product.id)}>
+                <Link href={PRODUCT(product.productId)}>
                     <a>{getImage(product)}</a>
                 </Link>
             </div>
@@ -24,4 +24,4 @@ const ProductCartWishList = ({product} : ProductCart) => {
     );
 };
 
-export default ProductCartWishList;
+export default ProductWishList;

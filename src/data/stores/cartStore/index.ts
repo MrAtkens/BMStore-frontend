@@ -35,6 +35,7 @@ class CartStore implements ICartStore{
 	}
 
 	async addToCart(productId: string, productQuantity: number){
+		console.log(productId)
 		const response = await cartApiService.addToCart(productId, getUserId(), productQuantity)
 		if(response.data !== undefined)
 			this.setCart(response.data.data)

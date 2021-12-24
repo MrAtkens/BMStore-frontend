@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { Checkbox, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 
 import { CART } from 'constant/routes';
 
 const FormCheckoutInformation = () =>{
-    const [state, setState] = useState(false)
 
     const onFinish = async (values: any) => {
-        console.log(state)
         console.log('Success:', values);
         // await userStore.authenticate(values.email, values.password)
     };
-
-    const onChange = async (e) => {
-        setState(e.target.checked)
-    }
 
     return (
         <Form
@@ -35,22 +29,10 @@ const FormCheckoutInformation = () =>{
                     <Input
                         className="form-control"
                         placeholder="Номер телефона"
-                        type="number"
-                        addonBefore="+7"  />
+                        type="text"
+                    />
                 </Form.Item>
             </div>
-            {/*<div className="form-group">*/}
-            {/*    <div className="ps-checkbox">*/}
-            {/*        <input*/}
-            {/*            className="form-control"*/}
-            {/*            type="checkbox"*/}
-            {/*            id="keep-update"*/}
-            {/*        />*/}
-            {/*        <label htmlFor="keep-update">*/}
-            {/*            Keep me up to date on news and exclusive offers?*/}
-            {/*        </label>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <h3 className="ps-form__heading">Данные доставки</h3>
             <div className="form-group">
                 <Form.Item
@@ -84,16 +66,18 @@ const FormCheckoutInformation = () =>{
                     />
                 </Form.Item>
             </div>
-            <div className="form-group">
-                <div className="ps-checkbox">
-                    <Checkbox
-                        value={state}
-                        className="form-control"
-                        onChange={onChange}>
-                        Сохранить данные на следующую покупку
-                    </Checkbox>
-                </div>
-            </div>
+            {/*<div className="form-group">*/}
+            {/*    <div className="ps-checkbox">*/}
+            {/*        <input*/}
+            {/*            className="form-control"*/}
+            {/*            type="checkbox"*/}
+            {/*            id="keep-update"*/}
+            {/*        />*/}
+            {/*        <label htmlFor="keep-update">*/}
+            {/*            Keep me up to date on news and exclusive offers?*/}
+            {/*        </label>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className="ps-form__submit">
                 <Link href={CART}>
                     <a>

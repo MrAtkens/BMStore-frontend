@@ -1,6 +1,6 @@
 const kazakhLocalization = {
     "header": {
-        "account": "Account",
+        "account": "account",
         "language": "Language",
         "currency": "Currency",
         "ios": "IOS Application",
