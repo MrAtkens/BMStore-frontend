@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { Form, Input } from 'antd';
 import { LOGIN, REGISTER } from 'constant/routes';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const Register = () => {
 
@@ -33,39 +34,20 @@ const Register = () => {
 							<h5>Регистрация аккаунта</h5>
 							<div className="form-group">
 								<Form.Item
-									name="firstName"
+									name="name"
 									rules={[
 										{
 											required: true,
 											type: 'string',
 											min: 2,
-											max: 60,
-											message: 'Пожалуйста введите ваше имя!',
+											max: 100,
+											message: 'Пожалуйста введите ваше ФИО!',
 										},
 									]}>
 									<Input
 										className="form-control"
 										type="firstName"
-										placeholder="Имя"
-									/>
-								</Form.Item>
-							</div>
-							<div className="form-group">
-								<Form.Item
-									name="lastName"
-									rules={[
-										{
-											required: true,
-											type: 'string',
-											min: 2,
-											max: 60,
-											message: 'Пожалуйста введите вашу фамилию!',
-										},
-									]}>
-									<Input
-										className="form-control"
-										type="lastName"
-										placeholder="Фамилия"
+										placeholder="ФИО"
 									/>
 								</Form.Item>
 							</div>
@@ -106,9 +88,10 @@ const Register = () => {
 											message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',
 										},
 									]}>
-									<Input
+									<Input.Password
 										className="form-control"
 										type="password"
+										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
 										placeholder="Пароль..."
 									/>
 								</Form.Item>

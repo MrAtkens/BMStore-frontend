@@ -8,14 +8,14 @@ import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
-import Orders from 'presentation/page/account/Orders';
+import UserInformation from 'presentation/page/account/UserInformation';
 import Layout from 'presentation/layout';
 
 interface ILoginPage{
 	categories: Array<ICategory>
 }
 
-const OrdersPage = ({categories} : ILoginPage) => {
+const UserPage = ({categories} : ILoginPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
@@ -46,7 +46,7 @@ const OrdersPage = ({categories} : ILoginPage) => {
 								</div>
 							</div>
 							<div className="col-lg-8">
-								<Orders/>
+								<UserInformation/>
 							</div>
 						</div>
 					</div>
@@ -64,4 +64,4 @@ export async function getStaticProps({ locale, req } : any){
 	};
 }
 
-export default OrdersPage;
+export default UserPage;

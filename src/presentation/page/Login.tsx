@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { observer } from 'mobx-react-lite';
 
 import { Form, Input } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { LOGIN, REGISTER } from 'constant/routes';
 
 const Login = observer(() => {
@@ -70,9 +71,10 @@ const Login = observer(() => {
 											message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',
 										},
 									]}>
-									<Input
+									<Input.Password
 										className="form-control"
 										type="password"
+										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
 										placeholder="Пароль..."
 									/>
 								</Form.Item>
