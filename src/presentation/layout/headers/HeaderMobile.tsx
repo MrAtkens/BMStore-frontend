@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import productStore from 'data/stores/productStore';
 import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
-import { HOME, PAYMENTS, SHOP_PAGE } from 'constant/routes';
+import { HOME, ORDERS, SHOP_PAGE } from 'constant/routes';
 
 import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
 
@@ -42,7 +42,7 @@ const HeaderMobile = observer(() => {
                 <div className="header__right">
                     <ul className="navigation__extra">
                         <li>
-                            <Link href={PAYMENTS}>
+                            <Link href={ORDERS}>
                                 <a>Узнать статус покупки</a>
                             </Link>
                         </li>

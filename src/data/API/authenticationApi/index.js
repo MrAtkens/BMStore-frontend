@@ -4,26 +4,25 @@ import { BackendUrl } from '../settings'
 axios.defaults.withCredentials = true
 
 
-const userSingInApi = async (email, password) => {
+const userSingInApi = async (phone, password) => {
   return await axios.post(`${BackendUrl}/user/identity/SignIn`, {
-    email: email,
+    phone: phone,
     password: password
   }).then(response => {
-    console.log(response)
     return response
   }).catch(error => {
     return error.response
   })
 }
 
-const userSingUpApi = async (firstName, lastName, email, password) => {
-  return await axios.post(`${BackendUrl}/user/identity/SingUp`, {
-    firstName: firstName,
-    lastName: lastName,
+const userSingUpApi = async (fullname, phone, email, password, address) => {
+  return await axios.post(`${BackendUrl}/user/identity/SignUp`, {
+    fullname: fullname,
+    phoneNumber: phone,
     email: email,
-    password: password
+    password: password,
+    address: address
   }).then(response => {
-    console.log(response)
     return response
   }).catch(error => {
     return error.response
@@ -43,7 +42,6 @@ const userPostPasswordResetApi = async (password, operationId) => {
     password: password,
     operationId: operationId
   }).then(response => {
-    console.log(response)
     return response
   }).catch(error => {
     return error.response

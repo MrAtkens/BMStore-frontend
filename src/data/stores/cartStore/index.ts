@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 import { cartApiService } from 'data/API';
 import { ICartProduct } from 'domain/interfaces/ICartProduct';
 import { getUserId } from 'helper/stores/userHelper';
+import { productAddToCart, productRemoveFromCart } from 'helper/responseStatus';
 
 interface ICartStore{
 	cart : Array<ICartProduct>,
@@ -34,17 +35,23 @@ class CartStore implements ICartStore{
 		}
 	}
 
-	async addToCart(productId: string, productQuantity: number){
+	async addToCart(productId: string, productQuantity: number, title: string){
 		console.log(productId)
 		const response = await cartApiService.addToCart(productId, getUserId(), productQuantity)
-		if(response.data !== undefined)
+		if(response.data !== undefined) {
+			console.log(response.status)
 			this.setCart(response.data.data)
+			productAddToCart(response.status, title)
+		}
 	}
 
-	async removeFromCart(productId: string) {
+	async removeFromCart(productId: string, title: string) {
 		const response = await cartApiService.removeFromCart(productId, getUserId())
-		if (response.data !== undefined)
+		if (response.data !== undefined) {
+			console.log(response.status)
 			this.setCart(response.data.data)
+			productRemoveFromCart(response.status, title)
+		}
 	}
 
 

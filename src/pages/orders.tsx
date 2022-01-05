@@ -2,12 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
-import { accountLinks } from 'data/static/accountLinks';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
-import AccountMenuSidebar from 'presentation/common/block/account/AccountMenuSidebar';
 import Orders from 'presentation/page/account/Orders';
 import Layout from 'presentation/layout';
 
@@ -15,7 +13,7 @@ interface ILoginPage{
 	categories: Array<ICategory>
 }
 
-const LoginPage = ({categories} : ILoginPage) => {
+const OrdersPage = ({categories} : ILoginPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
@@ -40,12 +38,9 @@ const LoginPage = ({categories} : ILoginPage) => {
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
-							<div className="col-lg-4">
-								<div className="ps-page__left">
-									<AccountMenuSidebar data={accountLinks} />
-								</div>
+							<div className="col-lg-12">
+								<Orders/>
 							</div>
-							<Orders/>
 						</div>
 					</div>
 				</section>
@@ -62,4 +57,4 @@ export async function getStaticProps({ locale, req } : any){
 	};
 }
 
-export default LoginPage;
+export default OrdersPage;

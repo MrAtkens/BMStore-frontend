@@ -1,8 +1,6 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document'
 import React from "react";
 
-import {GOOGLE_ANALYTICS, GTM} from "constant/webAnalytics";
-
 export default class MyDocument extends Document {
     render() {
         return (
@@ -45,12 +43,7 @@ export default class MyDocument extends Document {
                     <link
                         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
                         rel="stylesheet"/>
-                    {/* eslint-disable react/no-danger */}
                     {/*<script dangerouslySetInnerHTML={{ __html: YANDEX_METRIKA }} />*/}
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RKPH5DDHTX" />
-                    <script dangerouslySetInnerHTML={{ __html: GOOGLE_ANALYTICS }} />
-                    <script dangerouslySetInnerHTML={{ __html: GTM }} />
-                    {/* eslint-enable react/no-danger */}
                 </Head>
                 <body>
                 {/*<noscript>*/}
@@ -63,7 +56,6 @@ export default class MyDocument extends Document {
                 {/*    </div>*/}
                 {/*</noscript>*/}
                 <noscript>
-                    {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
                     <iframe
                         src="https://www.googletagmanager.com/ns.html?id=GTM-TH8Z9FN"
                         height="0"

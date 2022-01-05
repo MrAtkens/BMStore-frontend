@@ -1,6 +1,6 @@
 import React from 'react';
-import FormCheckoutInformation from 'presentation/common/block/checkout/FormCheckoutInformation';
-import ModulePaymentOrderSummary from 'presentation/common/block/checkout/ModulePaymentOrderSummary';
+import FormCheckoutInformation from 'presentation/common/control/checkout/FormCheckoutInformation';
+import ModulePaymentOrderSummary from 'presentation/common/control/checkout/ModulePaymentOrderSummary';
 
 const Checkout = () => {
     return (

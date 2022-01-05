@@ -1,10 +1,15 @@
-import { WISHLIST } from 'constant/routes';
+import { ORDERS, USER, WISHLIST } from 'constant/routes';
 
 export const accountLinks = [
 	{
 		text: 'Аккаунт',
-		url: '/account/user-information',
+		url: USER,
 		icon: 'icon-user',
+	},
+	{
+		text: 'Заказы',
+		url: ORDERS,
+		icon: 'icon-papers',
 	},
 	{
 		text: 'Избранные',

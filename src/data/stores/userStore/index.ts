@@ -4,10 +4,9 @@ import Cookies from 'js-cookie'
 
 import {
     authorizationStatusValidation,
-    //registrationStatusValidation,
-    // userEditStatus,
+    registrationStatusValidation, userEditStatus,
     userGetDataStatus
-} from 'helper/responseStatus'
+} from 'helper/responseStatus';
 import { authenticationService, userApiService } from "data/API"
 import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from 'constant/storageNames';
 import { IUser } from 'domain/interfaces/IUser';
@@ -23,22 +22,23 @@ class UserStore implements IUserStore{
     isSubmitting = false
     user = {
         id: "",
-        firstName: "",
-        lastName: "",
+        fullName: "",
+        phone: "",
         email: "",
+        address: ""
     }
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async authenticate(email: string, password: string){
-        const response = await authenticationService.userSingInApi(email, password);
+    async authenticate(phone: string, password: string){
+        const response = await authenticationService.userSingInApi(phone, password);
         console.log(response)
         authorizationStatusValidation(response.status)
+        const token = response.data.token
         if(response.status === 200){
-            const split = response.data.split('.');
-            console.log(split)
+            const split = token.split('.');
             Cookies.set(USER_FIRST_PART, split[0], {expires: 7})
             Cookies.set(USER_SECOND_PART, split[1], {expires: 7})
             Cookies.set(USER_THIRD_PART, split[2], {expires: 7})
@@ -53,25 +53,24 @@ class UserStore implements IUserStore{
 
     }
 
-    // async registration(user : IUser, password : string){
-    //     const response = await authenticationService.userSingUpApi(user.firstName, user.lastName, user.email, password);
-    //     console.log(response)
-    //     registrationStatusValidation(response.status)
-    //     if(response.status === 200){
-    //         await Router.push("/account/login")
-    //     }
-    //     else{
-    //         this.isSubmitting = false
-    //         return false;
-    //     }
-    // }
+    async registration(fullName: string, phoneNumber: string, email:string, password : string, address: string){
+        const response = await authenticationService.userSingUpApi(fullName, phoneNumber, email, password, address);
+        console.log(response)
+        registrationStatusValidation(response.status)
+        if(response.status === 200){
+            await Router.push("/account/login")
+        }
+        else{
+            this.isSubmitting = false
+        }
+    }
 
     async getUserData(){
         const response = await userApiService.getUserApi();
-        console.log(response)
+        console.log(response.data)
         userGetDataStatus(response.status)
         if(response.status === 200) {
-            this.setUser(response.data.id, response.data.firstName, response.data.lastName, response.data.email)
+            this.setUser(response.data.id, response.data.fullname, response.data.phone, response.data.email, response.data.address)
             this.setIsAuth(true);
         }
         else{
@@ -90,14 +89,14 @@ class UserStore implements IUserStore{
         window.location.href = "/"
     }
 
-    // async userEdit(firstName: string, lastName: string, email: string, password: string){
-    //     const response = await accountService.userEditApi(firstName, lastName, email, password)
-    //     console.log(response)
-    //     userEditStatus(response.status)
-    //     if(response.status === 200) {
-    //         await this.getUserData()
-    //     }
-    // }
+    async userEdit(fullName: string, address: string, phone: string){
+        const response = await userApiService.editUserData(fullName, address, phone)
+        console.log(response)
+        userEditStatus(response.status)
+        if(response.status === 200) {
+            await this.getUserData()
+        }
+    }
 
     setId(id: string){
         this.user.id = id
@@ -107,11 +106,13 @@ class UserStore implements IUserStore{
         this.isAuthenticated = auth
     }
 
-    setUser(id: string, email: string, firstName: string, lastName: string){
+    setUser(id: string, fullName: string, phone: string, email: string, address: string){
         this.user.id = id
         this.user.email = email
-        this.user.firstName = firstName
-        this.user.lastName = lastName
+        this.user.fullName = fullName
+        this.user.phone = phone
+        this.user.email = email
+        this.user.address = address
     }
 
 
@@ -120,8 +121,7 @@ class UserStore implements IUserStore{
     }
 
     get showFirstLastName(){
-        console.log(this.user.lastName)
-        return this.user.lastName + " " + this.user.firstName
+        return this.user.fullName
     }
 
 }

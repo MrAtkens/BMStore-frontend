@@ -3,12 +3,15 @@ import Link from 'next/link';
 import { Form, Input } from 'antd';
 
 import { CART } from 'constant/routes';
+import { getWidget } from 'constant/payment';
 
 const FormCheckoutInformation = () =>{
 
     const onFinish = async (values: any) => {
         console.log('Success:', values);
         // await userStore.authenticate(values.email, values.password)
+        getWidget('test_api_00000000000000000000001', 'Оплата товаров в example.com',
+            100, 'RUB', 'user@example.com', '1234567', 'user@example.com')
     };
 
     return (
@@ -40,7 +43,7 @@ const FormCheckoutInformation = () =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Введите ваше ФИО!',
+                            message: 'Введите ваше ФИО',
                         },
                     ]}>
                     <Input
@@ -56,7 +59,7 @@ const FormCheckoutInformation = () =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста введите адресс!',
+                            message: 'Пожалуйста введите адресс доставки',
                         },
                     ]}>
                     <Input

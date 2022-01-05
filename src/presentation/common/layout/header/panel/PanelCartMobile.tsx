@@ -10,9 +10,9 @@ import { calculateAmount } from 'helper/stores/cartHelper';
 
 const PanelCartMobile = observer(() => {
 
-    function handleRemoveCartItem(e : any, productId : string) {
+    const handleRemoveCartItem = async (e: any, productId: string, title: string) => {
         e.preventDefault();
-        cartStore.removeFromCart(productId)
+        await cartStore.removeFromCart(productId, title)
     }
 
     //view
@@ -30,7 +30,7 @@ const PanelCartMobile = observer(() => {
                 <div className="ps-product__content">
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveCartItem(e, item.productId)}>
+                        onClick={(e) => handleRemoveCartItem(e, item.productId, item.title)}>
                         <i className='icon-cross'/>
                     </a>
                     {item.title}

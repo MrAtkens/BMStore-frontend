@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
 import { Form, Input } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+
 import { LOGIN, REGISTER } from 'constant/routes';
 
-const Register = () => {
+import userStore from 'data/stores/userStore';
 
-	const onFinish = (values: any) => {
+const Register = observer(() => {
+
+	const [phone, setPhone] = useState(0)
+
+	const onFinish = async (values: any) => {
 		console.log('Success:', values);
+		await userStore.registration(values.name, values.phone, values.email, values.password, values.address)
+	};
+
+	const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newNumber = parseInt(e.target.value || '0', 10);
+		if (Number.isNaN(phone)) {
+			return;
+		}
+		else
+			setPhone(newNumber)
 	};
 
 	return (
@@ -33,39 +50,43 @@ const Register = () => {
 							<h5>Регистрация аккаунта</h5>
 							<div className="form-group">
 								<Form.Item
-									name="firstName"
+									name="name"
 									rules={[
 										{
 											required: true,
 											type: 'string',
 											min: 2,
-											max: 60,
-											message: 'Пожалуйста введите ваше имя!',
+											max: 100,
+											message: 'Пожалуйста введите ваше ФИО',
 										},
 									]}>
 									<Input
 										className="form-control"
-										type="firstName"
-										placeholder="Имя"
+										type="text"
+										placeholder="ФИО"
 									/>
 								</Form.Item>
 							</div>
 							<div className="form-group">
 								<Form.Item
-									name="lastName"
+									name="phone"
 									rules={[
 										{
 											required: true,
-											type: 'string',
-											min: 2,
-											max: 60,
-											message: 'Пожалуйста введите вашу фамилию!',
+											message: 'Пожалуйста введите ваш номер телефона',
 										},
+										{
+											min: 10,
+											max: 20,
+											message: 'Не корректный номер телефона',
+										}
 									]}>
 									<Input
+										defaultValue={""}
+										value={phone}
+										onChange={onNumberChange}
 										className="form-control"
-										type="lastName"
-										placeholder="Фамилия"
+										placeholder="+7"
 									/>
 								</Form.Item>
 							</div>
@@ -74,19 +95,38 @@ const Register = () => {
 									name="email"
 									rules={[
 										{
-											type: 'email',
-											message: 'Не валидная почта!',
+											required: true,
+											message: 'Пожалуйста введите вашу почту',
 										},
 										{
+											type: "email",
+											message: 'Пожалуйста введите корректную почту',
+										},
+
+									]}>
+									<Input
+										className="form-control"
+										type="text"
+										placeholder="Почта"
+									/>
+								</Form.Item>
+							</div>
+							<div className="form-group">
+								<Form.Item
+									name="address"
+									rules={[
+										{
 											required: true,
-											message:
-												'Пожалуйста введите вашу почту!',
+											type: 'string',
+											min: 2,
+											max: 200,
+											message: 'Пожалуйста введите адресс доставки',
 										},
 									]}>
 									<Input
 										className="form-control"
-										type="email"
-										placeholder="Почта"
+										type="text"
+										placeholder="Адресс"
 									/>
 								</Form.Item>
 							</div>
@@ -100,15 +140,15 @@ const Register = () => {
 												'Пожалуйста, введите пароль!',
 										},
 										{
-											pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
-											min: 8,
+											min: 6,
 											max: 60,
-											message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',
+											message: 'Пароль должен содержать минимум 6 символов'
 										},
 									]}>
-									<Input
+									<Input.Password
 										className="form-control"
 										type="password"
+										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
 										placeholder="Пароль..."
 									/>
 								</Form.Item>
@@ -121,31 +161,11 @@ const Register = () => {
 								</button>
 							</div>
 						</div>
-						<div className="ps-form__footer">
-							<p>Регистрируйтесь через:</p>
-							<ul className="ps-list--social">
-								<li>
-									<a className="facebook" href="#">
-										<i className='fa fa-facebook'/>
-									</a>
-								</li>
-								<li>
-									<a className="google" href="#">
-										<i className='fa fa-google-plus'/>
-									</a>
-								</li>
-								<li>
-									<a className="instagram" href="#">
-										<i className='fa fa-instagram'/>
-									</a>
-								</li>
-							</ul>
-						</div>
 					</div>
 				</Form>
 			</div>
 		</div>
 	);
-}
+})
 
 export default Register;

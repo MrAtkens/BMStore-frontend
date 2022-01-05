@@ -11,14 +11,14 @@ interface IModuleProductActions{
 
 const ModuleProductActions = observer(({ product } : IModuleProductActions) => {
 
-    function handleAddItemToCart(e : any) {
+    const handleAddItemToCart = async (e: any) => {
         e.preventDefault();
-        cartStore.addToCart(product.id, 1)
+        await cartStore.addToCart(product.id, 1, product.title)
     }
 
-    function handleAddItemToWishlist(e : any) {
+    const handleAddItemToWishlist = async (e: any) => {
         e.preventDefault();
-        productStore.addToWishList(product)
+        await productStore.addToWishList(product)
     }
 
     return (

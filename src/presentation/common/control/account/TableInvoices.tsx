@@ -12,30 +12,6 @@ const TableInvoices = () => {
             amount: '42.99',
             status: 'Successful delivery',
         },
-        {
-            id: '2',
-            invoiceId: '593347935',
-            title: 'Herschel Leather Duffle Bag In Brown Color',
-            dateCreate: '20-1-2020',
-            amount: '199.99',
-            status: 'Cancel',
-        },
-        {
-            id: '3',
-            invoiceId: '593347935',
-            title: 'Xbox One Wireless Controller Black Color',
-            dateCreate: '20-1-2020',
-            amount: '199.99',
-            status: 'Cancel',
-        },
-        {
-            id: '4',
-            invoiceId: '615397400',
-            title: 'Grand Slam Indoor Of Show Jumping Novel',
-            dateCreate: '20-1-2020',
-            amount: '41.00',
-            status: 'Cancel',
-        },
     ];
     const tableColumn = [
         {
@@ -45,7 +21,7 @@ const TableInvoices = () => {
             key: 'invoiceId',
             width: '120px',
             render: (text, record) => (
-                <Link href="/account/invoice-detail">
+                <Link href="">
                     {record.invoiceId}
                 </Link>
             ),

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import {ICategory} from "domain/interfaces/ICategory";
 import { stickyHeader } from 'helper/commons/header';
-import { CONTACTS, HOME, PAYMENTS } from 'constant/routes';
+import { CONTACTS, HOME, ORDERS } from 'constant/routes';
 
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
@@ -41,7 +41,7 @@ const Header = ({categories} : IHeader) => {
                             {/*    </Link>*/}
                             {/*</li>*/}
                             <li>
-                                <Link href={PAYMENTS}>
+                                <Link href={ORDERS}>
                                     <a>Узнать статус заказа</a>
                                 </Link>
                             </li>
