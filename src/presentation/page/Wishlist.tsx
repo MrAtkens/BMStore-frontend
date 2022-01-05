@@ -10,14 +10,14 @@ import { SHOP_PAGE } from 'constant/routes';
 
 const Wishlist = observer(() => {
 
-    async function handleAddItemToCart(e, productId :string) {
-		e.preventDefault();
-		await cartStore.addToCart(productId, 1)
-	}
+    const handleAddItemToCart = async (e, productId: string, title: string) => {
+        e.preventDefault();
+        await cartStore.addToCart(productId, 1, title)
+    }
 
-    async function handleRemoveWishlistItem(e, productId :string) {
+    const handleRemoveWishlistItem = async (e, productId: string, title: string) => {
 		e.preventDefault();
-		await productStore.removeFromWishList(productId)
+		await productStore.removeFromWishList(productId, title)
 	}
 
     // views
@@ -42,7 +42,7 @@ const Wishlist = observer(() => {
                                     <a
                                         href="#"
                                         onClick={(e) =>
-                                            handleRemoveWishlistItem(e, product.productId)
+                                            handleRemoveWishlistItem(e, product.productId, product.title)
                                         }>
                                         <i className='icon-cross'/>
                                     </a>
@@ -60,7 +60,7 @@ const Wishlist = observer(() => {
                                     <a
                                         className="ps-btn"
                                         onClick={(e) =>
-                                            handleAddItemToCart(e, product.productId)
+                                            handleAddItemToCart(e, product.productId, product.title)
                                         }>
                                         Добавить в корзину
                                     </a>

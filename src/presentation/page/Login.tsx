@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { observer } from 'mobx-react-lite';
-
 import { Form, Input } from 'antd';
+import { observer } from 'mobx-react-lite';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+
+
+import userStore from "data/stores/userStore"
 import { LOGIN, REGISTER } from 'constant/routes';
 
 const Login = observer(() => {
 
+	const [phone, setPhone] = useState(0)
+
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
-		// await userStore.authenticate(values.email, values.password)
+		await userStore.authenticate(values.phone, values.password)
+	};
+
+	const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newNumber = parseInt(e.target.value || '0', 10);
+		if (Number.isNaN(phone)) {
+			return;
+		}
+		else
+			setPhone(newNumber)
 	};
 
 	return (
@@ -36,22 +49,24 @@ const Login = observer(() => {
 							<h5>Вход аккаунта</h5>
 							<div className="form-group">
 								<Form.Item
-									name="email"
+									name="phone"
 									rules={[
 										{
-											type: 'email',
-											message: 'Не валидная почта!',
+											required: true,
+											message: 'Пожалуйста введите ваш номер телефона',
 										},
 										{
-											required: true,
-											message:
-												'Пожалуйста введите вашу почту!',
-										},
+											min: 10,
+											max: 20,
+											message: 'Не корректный номер телефона',
+										}
 									]}>
 									<Input
+										defaultValue={""}
+										value={phone}
+										onChange={onNumberChange}
 										className="form-control"
-										type="email"
-										placeholder="Почта"
+										placeholder="+7"
 									/>
 								</Form.Item>
 							</div>
@@ -62,13 +77,14 @@ const Login = observer(() => {
 										{
 											required: true,
 											message:
-												'Пожалуйста, введите пароль!',
+												'Пожалуйста, введите пароль',
 										},
 										{
-											pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
-											min: 8,
+											// pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
+											// message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не 1 знак',
+											min: 6,
 											max: 60,
-											message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',
+											message: 'Пароль должен содержать минимум 6 символов'
 										},
 									]}>
 									<Input.Password
@@ -87,26 +103,26 @@ const Login = observer(() => {
 								</button>
 							</div>
 						</div>
-						<div className="ps-form__footer">
-							<p>Вход через соц сеть:</p>
-							<ul className="ps-list--social">
-								<li>
-									<a className="facebook" href="#">
-										<i className='fa fa-facebook'/>
-									</a>
-								</li>
-								<li>
-									<a className="google" href="#">
-										<i className='fa fa-google-plus'/>
-									</a>
-								</li>
-								<li>
-									<a className="instagram" href="#">
-										<i className='fa fa-instagram'/>
-									</a>
-								</li>
-							</ul>
-						</div>
+						{/*<div className="ps-form__footer">*/}
+						{/*	<p>Вход через соц сеть:</p>*/}
+						{/*	<ul className="ps-list--social">*/}
+						{/*		<li>*/}
+						{/*			<a className="facebook" href="#">*/}
+						{/*				<i className='fa fa-facebook'/>*/}
+						{/*			</a>*/}
+						{/*		</li>*/}
+						{/*		<li>*/}
+						{/*			<a className="google" href="#">*/}
+						{/*				<i className='fa fa-google-plus'/>*/}
+						{/*			</a>*/}
+						{/*		</li>*/}
+						{/*		<li>*/}
+						{/*			<a className="instagram" href="#">*/}
+						{/*				<i className='fa fa-instagram'/>*/}
+						{/*			</a>*/}
+						{/*		</li>*/}
+						{/*	</ul>*/}
+						{/*</div>*/}
 					</div>
 				</Form>
 			</div>

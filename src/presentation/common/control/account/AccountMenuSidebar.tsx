@@ -1,36 +1,57 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router'
 
-const AccountMenuSidebar = ({ data }) => (
-    <aside className="ps-widget--account-dashboard">
-        <div className="ps-widget__header">
-            <Image width={60} height={60} src="/static/img/users/3.jpg" />
-            <figure>
-                <figcaption>Здравствуйте</figcaption>
-                <p>ФИО</p>
-            </figure>
-        </div>
-        <div className="ps-widget__content">
-            <ul>
-                {data.map(link => (
-                    <li key={link.text} className={link.active ? 'active' : ''}>
-                        <Link href={link.url}>
-                            <a>
-                                <i className={link.icon}/>
-                                {link.text}
-                            </a>
-                        </Link>
+import { HOME } from 'constant/routes';
+import userStore from 'data/stores/userStore'
+
+interface IAccountLinks{
+    text: string,
+    url: string,
+    icon: string
+}
+
+interface IAccountMenuSidebar{
+    data: Array<IAccountLinks>
+}
+
+const AccountMenuSidebar = observer(({ data } : IAccountMenuSidebar) => {
+    const Router = useRouter()
+
+    const onLogOut = () => {
+        userStore.singOut().then(() => {
+            Router.push(HOME)
+        })
+    }
+
+    return (
+        <aside className="ps-widget--account-dashboard">
+            <div className="ps-widget__header">
+                <figure>
+                    <figcaption>Здравствуйте</figcaption>
+                    <p>{userStore.user.fullName} | {userStore.user.email}</p>
+                </figure>
+            </div>
+            <div className="ps-widget__content">
+                <ul>
+                    {data.map(link => (
+                        <li key={link.text} className={link.url === Router.pathname ? 'active' : ''}>
+                            <Link href={link.url}>
+                                <a>
+                                    <i className={link.icon}/>
+                                    {link.text}
+                                </a>
+                            </Link>
+                        </li>
+                    ))}
+                    <li onClick={onLogOut}>
+                        <a href="#">Выйти</a>
                     </li>
-                ))}
-                <li>
-                    <Link href="/account/my-account">
-                        <a>Выйти</a>
-                    </Link>
-                </li>
-            </ul>
-        </div>
-    </aside>
-);
+                </ul>
+            </div>
+        </aside>
+    )
+});
 
 export default AccountMenuSidebar;

@@ -1,14 +1,12 @@
+import { ORDERS, USER } from '../routes';
+
 export const accountLinks = [
 	{
 		text: 'Кабинет',
-		url: '/account/user-information',
+		url: USER,
 	},
 	{
 		text: 'Заказы',
-		url: '/account/invoices',
-	},
-	{
-		text: 'История покупак',
-		url: '/account/payments',
+		url: ORDERS,
 	},
 ];

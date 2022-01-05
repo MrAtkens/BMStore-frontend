@@ -1,17 +1,28 @@
 import axios from 'axios'
-import Cookies from 'js-cookie';
 
+import { getUser } from 'helper/commons/userHelper';
 import { BackendUrl } from '../settings'
-import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from 'constant/storageNames';
 
 axios.defaults.withCredentials = true
 
 const getUserApi = async () => {
-  const token = Cookies.get(USER_FIRST_PART) + "." + Cookies.get(USER_SECOND_PART) + "." + Cookies.get(USER_THIRD_PART);
   return await axios.get(`${BackendUrl}/user`,
       {headers:
-        { Authorization: `Bearer ${token}` }}).then(response => {
-    console.log(response)
+        { Authorization: `Bearer ${getUser()}` }}).then(response => {
+    return response
+  }).catch(error => {
+    return error.response
+  })
+}
+
+const editUserData = async (fullName, address, phone) => {
+  return await axios.put(`${BackendUrl}/user`,
+      {
+        fullName: fullName,
+        address: address,
+        phone: phone
+      }, {headers:
+            { Authorization: `Bearer ${getUser()}` }}).then(response => {
     return response
   }).catch(error => {
     return error.response
@@ -21,5 +32,5 @@ const getUserApi = async () => {
 
 export const userApiService = {
   getUserApi,
-
+  editUserData
 };

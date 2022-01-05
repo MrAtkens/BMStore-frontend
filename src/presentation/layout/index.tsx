@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import {ICategory} from 'domain/interfaces/ICategory';
 import productStore from 'data/stores/productStore';
 import cartStore from 'data/stores/cartStore';
+import userStore from 'data/stores/userStore'
 
 import Header from 'presentation/layout/headers/Header';
 import HeaderMobile from 'presentation/layout/headers/HeaderMobile';
@@ -25,6 +26,8 @@ const Layout = observer(({
     let titleView;
 
     useEffect(() => {
+        if(!userStore.isAuthenticated)
+            userStore.getUserData()
         cartStore.getCartFromApi()
         productStore.setWishList()
     }, [])

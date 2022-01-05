@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
 import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
 import { SHOP_PAGE } from 'constant/routes';
-import productStore from '../../../../data/stores/productStore';
+import productStore from 'data/stores/productStore';
 
-const SearchHeader = () => {
+const SearchHeader = observer(() => {
     const inputEl = useRef(null);
     const [keyword, setKeyword] = useState("");
     const Router = useRouter()
@@ -50,6 +51,6 @@ const SearchHeader = () => {
             <button type='submit'>Поиск</button>
         </form>
     );
-};
+});
 
 export default SearchHeader;

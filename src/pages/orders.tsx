@@ -2,12 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
-import { accountLinks } from 'data/static/accountLinks';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
-import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
 import Orders from 'presentation/page/account/Orders';
 import Layout from 'presentation/layout';
 
@@ -40,12 +38,7 @@ const OrdersPage = ({categories} : ILoginPage) => {
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
-							<div className="col-lg-4">
-								<div className="ps-page__left">
-									<AccountMenuSidebar data={accountLinks} />
-								</div>
-							</div>
-							<div className="col-lg-8">
+							<div className="col-lg-12">
 								<Orders/>
 							</div>
 						</div>

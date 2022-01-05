@@ -13,16 +13,15 @@ interface IModuleProductWideActions{
 const ModuleProductWideActions = observer(({ product } : IModuleProductWideActions) => {
     const { price } = useProduct();
 
-    function handleAddItemToCart(e : any) {
+    const handleAddItemToCart = async (e: any) => {
         e.preventDefault();
-        cartStore.addToCart(product.id, 1)
+        await cartStore.addToCart(product.id, 1, product.title)
     }
 
-    function handleAddItemToWishlist(e : any) {
+    const handleAddItemToWishlist = async (e: any) => {
         e.preventDefault();
-        productStore.addToWishList(product)
+        await productStore.addToWishList(product)
     }
-
 
     return (
         <div className="ps-product__shopping">

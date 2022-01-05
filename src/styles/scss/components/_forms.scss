@@ -248,9 +248,9 @@
 }
 
 .ps-form--account {
-    max-width: 430px;
+    max-width: 530px;
     margin: 0 auto !important;
-    padding-top: 130px;
+    padding-top: 60px;
     @extend %list-reset;
 
     .ps-tab-list {
@@ -341,7 +341,7 @@
     }
 
     .ps-form__content {
-        padding: 30px 30px 0;
+        padding: 40px 40px 40px;
 
         h5 {
             margin: 0 0 25px;
@@ -361,7 +361,18 @@
 
 .ps-form--order-tracking {
     max-width: 630px;
-    margin: 0 auto 50px;
+    margin: 60px auto 50px;
+
+    .ps-form__heading{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .ps-btn {
+        padding: 0 30px;
+        height: 50px;
+
+    }
 
     .form-group {
         margin-bottom: 30px;

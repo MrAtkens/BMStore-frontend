@@ -17,7 +17,7 @@ interface IMenu{
 }
 
 const CustomMenu = observer(({ source, className, mode } : IMenu) => {
-    const [current, setCurrent] = useState('f8959b59-bae3-4be6-98f9-2d3bfc1faed4');
+    const [current, setCurrent] = useState(source[0].id);
     const Router = useRouter()
     const { category, searchText } = Router.query
 

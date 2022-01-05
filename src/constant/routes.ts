@@ -5,6 +5,7 @@ export const PAYMENT = '/payment'
 export const WISHLIST = '/wishlist'
 export const CONTACTS = '/contacts'
 export const ABOUT_US = '/about'
+export const ORDERS = '/orders'
 
 //Products catalog
 export function SHOP_PAGE(name?: string, value?: string) : string {
@@ -17,11 +18,9 @@ export function SHOP_PAGE(name?: string, value?: string) : string {
 
 
 //User --- with authentication
-export const USER = '/account'
+export const USER = '/account/user'
 export const CART = '/account/cart'
 export const LOGIN = '/account/login';
 export const CHECKOUT = '/account/checkout'
 export const REGISTER = '/account/registration';
-export const PAYMENTS = '/account/payments'
-export const ORDERS = '/account/orders'
 

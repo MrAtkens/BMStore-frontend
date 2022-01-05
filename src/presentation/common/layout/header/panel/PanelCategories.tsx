@@ -1,42 +1,81 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Menu } from 'antd';
-import Link from 'next/link';
 
-import { SHOP_PAGE } from 'constant/routes';
+import { generateShopUrl } from 'helper/commons/products';
 import {ICategory} from "domain/interfaces/ICategory";
+import productStore from 'data/stores/productStore';
+import filterStore from 'data/stores/filtersStore';
+
+
+const { SubMenu } = Menu;
 
 interface IPanelCategories{
     categories: Array<ICategory>
 }
 
 const PanelCategories = ({ categories } : IPanelCategories) => {
-    const [openKeys, setOpenKeys] = useState(['sub1'])
+    const [current, setCurrent] = useState(categories[0].id);
+    const Router = useRouter()
+    const { category, searchText } = Router.query
 
-    const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+    useEffect(() => {
+        if(category !== undefined)
+            setCurrent(category.toString())
+    }, [])
 
-    const onOpenChange = (openKeys : Array<string>) => {
-        const latestOpenKey = openKeys.find(
-            key => openKeys.indexOf(key) === -1
-        );
-        if (rootSubmenuKeys.indexOf(latestOpenKey as string) === -1) {
-            setOpenKeys(openKeys)
-        } else {
-            setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
-        }
+    const handleClick = async e => {
+        setCurrent(e.key)
+        productStore.setProductLoading(false)
+        filterStore.setActiveFiltersFromUrl([])
+        await Router.push({
+                pathname: '/shop',
+                query: generateShopUrl(e.key, undefined, searchText?.toString(), undefined, undefined, 1)
+            }, undefined,
+            { shallow: false, scroll: false })
     };
+
+    const renderMultiple = (category : ICategory) => {
+        if(category.children.length != 0 )
+            return(
+                <SubMenu onTitleClick={handleClick} key={category.id} title={category.name}>
+                    {category.children?.map(itemDropDown => {
+                        if(itemDropDown.children.length != 0)
+                            return renderMultiple(itemDropDown)
+                        else
+                            return(<Menu.Item key={itemDropDown.id}>
+                                {itemDropDown.name}
+                            </Menu.Item>)
+                    })}
+                </SubMenu>
+            )
+        else
+            return(
+                <Menu.Item key={category.id}>
+                    {category.name}
+                </Menu.Item>
+            )
+    }
+
+    // Views
+    let menuView;
+
+    if (categories) {
+        menuView = categories.map((item) => {
+            return renderMultiple(item)
+        });
+    } else {
+        menuView = (
+            <Menu.Item>Здесь нет меню</Menu.Item>
+        );
+    }
 
     return (
         <Menu
             mode="inline"
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}>
-            {categories.map(category => (
-                <Menu.Item key={category.slug}>
-                    <Link href={SHOP_PAGE("category", category.id)}>
-                        {category.name}
-                    </Link>
-                </Menu.Item>
-            ))}
+            selectedKeys={[current]}
+            onClick={handleClick}>
+            {menuView}
         </Menu>
     );
 }

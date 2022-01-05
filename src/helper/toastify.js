@@ -1,180 +1,147 @@
-import {toast} from 'react-hot-toast';
+import { notification } from 'antd';
 
 //Errors Toast
 //Status 500 Iternal Server Error
 export const toastServerError = () => {
-    toast.error("Ошибка 500, на данный момент на стороне сервера ошибка, пожалуйста повторите попытку позже",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Ошибка 500",
+        description: "На данный момент на стороне сервера ошибка, пожалуйста повторите попытку позже",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 //Status 409 Conflict(Login occuped)
 export const toastLoginOccuped = () => {
-    toast.error("Ошибка 409, данный пользователь уже зарегистрирован",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Ошибка 409",
+        description: "Данный пользователь уже зарегистрирован",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 //Status 404
 export const toastUserNotFound = () => {
-    toast.error("Ошибка 404, данный пользователь не найден",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Ошибка 404",
+        description: "Данный пользователь не найден",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastProductNotFound = () => {
-    toast.error("Ошибка 404, данный товар не найден",
-        {
-            duration: 5000
-        });
-}
-//Status 403
-export const toastRoleError = () => {
-    toast.error("Ошибка 409, у вас не достаточно прав на данное действие",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Ошибка 404",
+        description: "Данный товар не найден",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 //Status 401
 export const toastAuthError = () => {
-    toast.error("Вы неверно ввели логин или пароль",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Ошибка 401",
+        description: "Вы неверно ввели логин или пароль",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastUnauthorizedError = () => {
-    toast.error("Вы не аутентифицированы, для выполнения этих действий вам надо зайти в систему",
-        {
-            duration: 5000
-        });
+    notification.error({
+        message: "Вы не аутентифицированы",
+        description: "Для выполнения этих действий вам надо зайти в систему",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 // warn
 export const toastRegistrationError = () => {
-    toast.error("Ошибка регистраций, данный номер уже зарегистрирован",
-        {
-            duration: 5000
-        });
+    notification.warning({
+        message: "Ошибка регистраций",
+        description: "Данный номер уже зарегистрирован",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
-export const toastWishListIsProduct = () => {
-    toast("Данный продукт уже пресутствует в вашем списке избранных",
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
-}
-
-export const toastCompareListIsProduct = () => {
-    toast("Данный продукт уже пресутствует в вашем списке сравнений",
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
-}
-
-
-
-// info
-
-//Cart Info
-export const toastProductAddToCart = (title) => {
-    toast(`Вы добавили товар под названием ${title}, в вашу корзину`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
-}
-
-export const toastProductRemoveFromCart = (title) => {
-    toast(`Вы удалили товар под названием ${title}, из вашей корзины`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
-}
-
-
-export const toastProductRemoveAllFromCart = () => {
-    toast(`Вы полностью очистили вашу корзину`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
-}
-
-//WishList Info
-
+//Wishlist
 export const toastProductAddToWishList = (title) => {
-    toast(`Вы добавили товар под названием ${title}, в ваш список избранных`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
+    notification.info({
+        message: "Вы успешно добавили товар в избранные",
+        description: `Вы добавили товар под названием ${title}, в ваши избранные`,
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastProductRemoveFromWishList = (title) => {
-    toast(`Вы удалили товар под названием ${title}, из вашего списка избранных`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
+    notification.info({
+        message: "Вы успешно удалили товар из избранные",
+        description: `Вы удалили товар под названием ${title}, из ваших избранных`,
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
-export const toastProductRemoveAllFromWishList = () => {
-    toast(`Вы полностью очистили ваш список желаний`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
+export const toastProductNotAddToWishList = () => {
+    notification.warning({
+        message: "Данный товар уже есть в вашем списке избранных",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
+//Cart
+export const toastProductAddToCart = (title) => {
+    notification.info({
+        message: "Вы успешно добавили товар в корзину",
+        description: `Вы добавили товар под названием ${title}, в вашу корзину`,
+        duration: 5,
+        placement: "bottomRight"
+    });
 
-//Compare Info
-export const toastProductAddToCompareList = (title) => {
-    toast(`Вы добавили товар под названием ${title}, в ваш список сравнений`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
 }
 
-export const toastProductRemoveFromCompareList = (title) => {
-    toast(`Вы удалили товар под названием ${title}, из вашего списка сравнений`,
-        {
-            duration: 5000,
-            icon: 'ℹ️'
-        });
+export const toastProductRemoveFromCart = (title) => {
+    notification.info({
+        message: "Вы успешно удалили товар из корзину",
+        description: `Вы удалили товар под названием ${title}, из вашей корзины`,
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
-
 
 //Status 200
 export const toastAuthorizationSuccess = () => {
-    toast.success('Вы успешно вошли в систему',
-        {
-            duration: 5000,
-        });
+    notification.success({
+        message: "Вы успешно вошли в систему",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastRegistrationSuccess = () => {
-    toast.success('Вы успешно зарегистрировались',
-        {
-            duration: 5000,
-        });
+    notification.success({
+        message: "Вы успешно зарегистрировались",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastBuySuccess = () => {
-    toast.success('Вы успешно создали заказ',
-        {
-            duration: 5000,
-        });
+    notification.success({
+        message: "Вы успешно создали заказ",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }
 
 export const toastEditSuccess = () => {
-    toast.success('Вы успешно изменили свой данные',
-        {
-            duration: 5000,
-        });
+    notification.success({
+        message: "Вы успешно изменили свой данные",
+        duration: 5,
+        placement: "bottomRight"
+    });
 }

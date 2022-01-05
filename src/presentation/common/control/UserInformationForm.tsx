@@ -1,10 +1,20 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { observer } from 'mobx-react-lite';
 
-const UserInformationForm = () => {
+import userStore from "data/stores/userStore"
+
+const UserInformationForm = observer(() => {
+
+	const onFinish = async (values: any) => {
+		console.log('Success:', values);
+		await userStore.userEdit(values.name, values.address, values.phone)
+	};
+
 	return (
-		<form className="ps-form--account-setting">
+		<Form
+			className="ps-form--account-setting"
+			onFinish={onFinish}>
 			<div className="ps-form__header">
 				<h3>Информация пользователя</h3>
 			</div>
@@ -13,13 +23,14 @@ const UserInformationForm = () => {
 					<div className="col-sm-12">
 						<Form.Item
 							name="name"
+							initialValue={userStore.user.fullName}
 							rules={[
 								{
 									required: true,
 									type: 'string',
 									min: 2,
 									max: 100,
-									message: 'Пожалуйста введите ваше ФИО!',
+									message: 'Пожалуйста введите ваше ФИО',
 								},
 							]}>
 							<Input
@@ -31,56 +42,74 @@ const UserInformationForm = () => {
 					</div>
 					<div className="col-sm-12">
 						<Form.Item
-							name="phone"
+							name="address"
+							initialValue={userStore.user.address}
 							rules={[
 								{
 									required: true,
-									type: 'number',
-									min: 11,
-									max: 11,
-									message: 'Пожалуйста введите ваш номер телефона!',
+									message: 'Пожалуйста введите ваш адресс',
 								},
 							]}>
 							<Input
 								className="form-control"
-								type="phone"
-								placeholder="Номер телефона"
+								placeholder="Ваш адресс"
 							/>
 						</Form.Item>
 					</div>
 					<div className="col-sm-12">
 						<Form.Item
-							className="form-group"
-							name="password"
+							name="phone"
+							initialValue={userStore.user.phone}
 							rules={[
 								{
 									required: true,
-									message:
-										'Пожалуйста, введите пароль!',
+									message: 'Пожалуйста введите ваш номер телефона',
 								},
 								{
-									pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
-									min: 8,
-									max: 60,
-									message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',
-								},
+									min: 10,
+									max: 20,
+									message: 'Не корректный номер телефона',
+								}
 							]}>
-							<Input.Password
+							<Input
 								className="form-control"
-								type="password"
-								iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-								placeholder="Пароль..."
+								placeholder="Номер телефона"
 							/>
 						</Form.Item>
 					</div>
+					{/*<div className="col-sm-12">*/}
+					{/*	<Form.Item*/}
+					{/*		className="form-group"*/}
+					{/*		name="password"*/}
+					{/*		rules={[*/}
+					{/*			{*/}
+					{/*				required: true,*/}
+					{/*				message:*/}
+					{/*					'Пожалуйста, введите пароль!',*/}
+					{/*			},*/}
+					{/*			{*/}
+					{/*				pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,*/}
+					{/*				min: 8,*/}
+					{/*				max: 60,*/}
+					{/*				message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не алфавитный символ',*/}
+					{/*			},*/}
+					{/*		]}>*/}
+					{/*		<Input.Password*/}
+					{/*			className="form-control"*/}
+					{/*			type="password"*/}
+					{/*			iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}*/}
+					{/*			placeholder="Пароль..."*/}
+					{/*		/>*/}
+					{/*	</Form.Item>*/}
+					{/*</div>*/}
 				</div>
 
-				<div className="form-group submit">
+				<div className="form-group submit mt-20">
 					<button className="ps-btn">Обновить профиль</button>
 				</div>
 			</div>
-		</form>
+		</Form>
 	);
-};
+});
 
 export default UserInformationForm;

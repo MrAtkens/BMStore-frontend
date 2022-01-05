@@ -22,7 +22,7 @@ const AccountQuickLinks = observer(() => {
         </li>
     ));
 
-    if (userStore.isAuthenticated) {
+    if (userStore.isAuthenticated) { 
         return (
             <div className="ps-block--user-account">
                 <i className='icon-user'/>

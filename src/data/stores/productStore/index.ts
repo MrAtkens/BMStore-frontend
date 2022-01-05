@@ -1,16 +1,15 @@
 import {makeAutoObservable} from "mobx";
-import { Modal } from 'antd';
+
+import { productAddToWishList, productNotAddToWishlist, productRemoveFromWishlist } from 'helper/responseStatus';
+import { getUserId } from 'helper/stores/userHelper';
 
 import { IProduct } from 'domain/interfaces/IProduct';
 import { IWishProduct } from 'domain/interfaces/IWishProduct';
-import { getRelatedItemsFromStorage } from 'helper/stores/productsHelper';
-import { getUserId } from 'helper/stores/userHelper';
 import { wishListApiService } from "data/API";
 
 interface IProductStore{
     products : Array<IProduct>,
     productCount: number,
-    relatedProducts: Array<IProduct>,
     wishList: Array<IWishProduct>
     product: IProduct,
     productCountPage: number,
@@ -21,7 +20,6 @@ interface IProductStore{
 class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
     productCount = 0;
-    relatedProducts = [] as Array<IProduct>;
     wishList = [] as Array<IWishProduct>;
 
     product = {
@@ -55,10 +53,6 @@ class ProductStore implements IProductStore{
     //     updateRelatedToStorage(this.relatedProducts)
     // }
 
-    setRelatedProducts(){
-       this.relatedProducts = getRelatedItemsFromStorage()
-    }
-
     async setWishList() {
         const response = await wishListApiService.getWishList(getUserId())
         console.log(response)
@@ -74,30 +68,21 @@ class ProductStore implements IProductStore{
                 if (item.productId === product.id)
                     isHas = true
             })
-
         if (isHas) {
-            const modal = Modal.success({
-                centered: true,
-                title: `Данный товар уже есть в списке избранных ${product.title}`,
-            });
-            modal.update;
+            productNotAddToWishlist()
         } else {
             const response = await wishListApiService.addToWishList(product.id, getUserId())
             console.log(response)
             this.wishList = response.data.value.data
-            const modal = Modal.success({
-                centered: true,
-                title: 'Успешно!',
-                content: `Вы добавили товар ${product.title} в избранное`,
-            });
-            modal.update;
+            productAddToWishList(response.status, product.title)
         }
     }
 
-    async removeFromWishList(productId: string) {
+    async removeFromWishList(productId: string, title) {
         const response = await wishListApiService.removeWishList(productId, getUserId())
         console.log(response)
         this.wishList = response.data.value.data
+        productRemoveFromWishlist(response.status, title)
     }
 
     setProductLoading(state : boolean){

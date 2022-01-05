@@ -1,17 +1,12 @@
 import React from 'react';
 
-import TableInvoices from 'presentation/common/control/account/TableInvoices';
+import OrderTracking from 'presentation/common/control/OrderTracking';
 
 const Orders = () => {
     return (
         <div className="ps-page__content">
             <div className="ps-section--account-setting">
-                <div className="ps-section__header">
-                    <h3>Заказы</h3>
-                </div>
-                <div className="ps-section__content">
-                    <TableInvoices />
-                </div>
+                <OrderTracking />
             </div>
         </div>
     );

@@ -10,9 +10,9 @@ import cartStore from "data/stores/cartStore"
 
 const MiniCart = observer(() => {
 
-    function handleRemoveItem(e : any, productId : string) {
+    const handleRemoveItem = async (e: any, productId: string, title: string) => {
         e.preventDefault();
-        cartStore.removeFromCart(productId);
+        await cartStore.removeFromCart(productId, title);
     }
 
     let cartItemsView;
@@ -23,7 +23,7 @@ const MiniCart = observer(() => {
                 <ProductOnCart product={item} key={item.productId} quantity={item.count}>
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveItem(e,item.productId)}>
+                        onClick={(e) => handleRemoveItem(e, item.productId, item.title)}>
                         <i className='icon-cross'/>
                     </a>
                 </ProductOnCart>

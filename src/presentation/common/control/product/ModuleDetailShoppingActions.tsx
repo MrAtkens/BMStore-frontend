@@ -21,19 +21,19 @@ const ModuleDetailShoppingActions = observer(({
 
     async function handleAddItemToCart(e) {
         e.preventDefault();
-        await cartStore.addToCart(product.id, quantity)
+        await cartStore.addToCart(product.id, quantity, product.title)
     }
 
     async function handleBuyNow(e) {
         e.preventDefault();
-        await cartStore.addToCart(product.id, quantity).then(() => {
+        await cartStore.addToCart(product.id, quantity, product.title).then(() => {
             Router.push(CHECKOUT);
         })
     }
 
-    const handleAddItemToWishlist = (e) => {
+    const handleAddItemToWishlist = async (e) => {
         e.preventDefault();
-        productStore.addToWishList(product)
+        await productStore.addToWishList(product)
     };
 
     function handleIncreaseItemQty(e) {

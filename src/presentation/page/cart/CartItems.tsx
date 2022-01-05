@@ -10,7 +10,7 @@ const CartItems = observer(() => {
 
     const handleRemoveItem = async (e, item : ICartProduct) => {
         e.preventDefault();
-        await cartStore.removeFromCart(item.productId)
+        await cartStore.removeFromCart(item.productId, item.title)
     }
 
     const handleIncreaseItemQty = async (e, item : ICartProduct) =>  {
