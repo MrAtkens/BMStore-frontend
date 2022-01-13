@@ -12,10 +12,6 @@ const nextConfig = withPWA({
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
-	env: {
-		title: 'CATS',
-		titleDescription: 'Магазин строй материалов',
-	},
 	pwa: {
 		dest: 'public',
 		register: true,
