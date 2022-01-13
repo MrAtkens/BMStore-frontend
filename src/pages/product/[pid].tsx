@@ -77,6 +77,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { pid } = context.query
     const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
     const productResponse = await productsApiService.getProductById(pid)
+    if(productResponse.status === 404)
+        return {
+            notFound: true,
+        }
     return {
         props:{ categoriesData: categoryResponse.data, product: productResponse.data},
     };

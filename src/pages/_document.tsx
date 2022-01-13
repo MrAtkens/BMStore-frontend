@@ -43,26 +43,8 @@ export default class MyDocument extends Document {
                     <link
                         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
                         rel="stylesheet"/>
-                    {/*<script dangerouslySetInnerHTML={{ __html: YANDEX_METRIKA }} />*/}
                 </Head>
                 <body>
-                {/*<noscript>*/}
-                {/*    <div>*/}
-                {/*        <img*/}
-                {/*            src="https://mc.yandex.ru/watch/70458280"*/}
-                {/*            style={{ position: 'absolute', left: '-9999px' }}*/}
-                {/*            alt=""*/}
-                {/*        />*/}
-                {/*    </div>*/}
-                {/*</noscript>*/}
-                <noscript>
-                    <iframe
-                        src="https://www.googletagmanager.com/ns.html?id=GTM-TH8Z9FN"
-                        height="0"
-                        width="0"
-                        style={{ display: 'none', visibility: 'hidden' }}
-                    />
-                </noscript>
                 <Main />
                 <NextScript />
                 </body>

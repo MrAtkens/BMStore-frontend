@@ -4,7 +4,11 @@ import {AppProps} from "next/app";
 import Script from 'next/script'
 
 import MasterLayout from 'presentation/layout/MasterLayout';
-import { GOOGLE_ANALYTICS, GTM } from 'constant/webAnalytics';
+import { getUser } from 'helper/commons/userHelper';
+
+import userStore from 'data/stores/userStore';
+import cartStore from 'data/stores/cartStore';
+import productStore from 'data/stores/productStore';
 
 import '../../public/static/fonts/Linearicons/Font/demo-files/demo.css';
 import '../../public/static/fonts/font-awesome/css/font-awesome.min.css';
@@ -21,50 +25,63 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 			if(nextLoaded !== null)
 				nextLoaded.classList.add('loaded')
 		}, 100);
+		if(getUser() !== 'undefined.undefined.undefined') {
+			userStore.getUserData().then(async () => {
+				await cartStore.getCartFromApi()
+				await productStore.setWishList()
+			})
+		}
+		else{
+			cartStore.getCartFromApi()
+			productStore.setWishList()
+		}
 	});
 
 	return (
 		<MasterLayout>
-			<Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-RKPH5DDHTX" />
 			<Script strategy="afterInteractive" src="https://widget.cloudpayments.ru/bundles/cloudpayments" />
-			<Script id="google-analytics" strategy="afterInteractive">
-				{GOOGLE_ANALYTICS}
-			</Script>
-			<Script id="google-tag-manager" strategy="afterInteractive">
-				{GTM}
-			</Script>
 			<Script id="payWindow" strategy="afterInteractive">
-				{`
-					 function getPayWindow(publicId, description, amount, currency, accountId, invoiceId, email) {
-						 var widget = new cp.CloudPayments();
-						 widget.pay('auth', // или 'charge'
-								{ //options
-									publicId: publicId, //id из личного кабинета
-									description: description, //назначение
-									amount: amount, //сумма
-									currency: currency, //валюта
-									accountId: accountId, //идентификатор плательщика (необязательно)
-									invoiceId: invoiceId, //номер заказа  (необязательно)
-									email: email, //email плательщика (необязательно)
-								},
-								{
-									onSuccess: function (options) { // success
-										console.log(options)
-									},
-									onFail: function (reason, options) { // fail
-										console.log(options)
-										//действие при неуспешной оплате
-									},
-									onComplete: function (paymentResult, options) {
-										console.log(options)
-										console.log(paymentResult)
-										return {paymentResult, options}
-										//например вызов вашей аналитики Facebook Pixel
-									}
-								}
-							)
-					};
-				`}
+				{`function getPayWindow(publicId, description, amount, currency, accountId, email) {
+					const widget = new cp.CloudPayments();
+					widget.pay('auth', // или 'charge'
+					{ //options
+						publicId: publicId, //id из личного кабинета
+						description: description, //назначение
+						amount: amount, //сумма
+						currency: currency, //валюта
+						accountId: accountId, //идентификатор плательщика (необязательно)
+						email: email, //email плательщика (необязательно)
+					},
+					{
+						onSuccess: "/",
+						onFail: async function(reason, options) {
+						const response = await fetch(\`https://bazarjok-group.com:20000/api/client/invoice?userId=\${accountId}&status=2\`, {
+						method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+						mode: 'cors', // no-cors, *cors, same-origin
+						cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+						credentials: 'same-origin', // include, *same-origin, omit
+						headers: {
+						'Content-Type': 'application/json'
+					},
+						redirect: 'follow', // manual, *follow, error
+						referrerPolicy: 'no-referrer', // no-referrer, *client
+					});
+						console.log(response)
+					},
+					onComplete: async function(paymentResult, options) {
+					if (paymentResult.success === true){
+					const response = await fetch(\`https://bazarjok-group.com:20000/api/client/invoice?userId=\${accountId}&status=\${paymentResult.code}\`, {
+					method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+					mode: 'cors', // no-cors, *cors, same-origin
+					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					referrerPolicy: 'no-referrer', // no-referrer, *client
+					});
+					console.log(response)
+					}}})}`}
 			</Script>
 			<Component {...pageProps}/>
 		</MasterLayout>

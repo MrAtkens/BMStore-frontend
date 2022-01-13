@@ -1,17 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
 import { Form, Input } from 'antd';
+import { observer } from 'mobx-react-lite';
+import AutoComplete from 'react-google-autocomplete';
 
 import { CART } from 'constant/routes';
 import { getWidget } from 'constant/payment';
 
-const FormCheckoutInformation = () =>{
+import { calculateAmount } from 'helper/stores/cartHelper';
+import cartStore from 'data/stores/cartStore';
+import userStore from 'data/stores/userStore'
+import { getUserId } from 'helper/stores/userHelper';
+import { invoiceApiService } from 'data/API';
+
+const FormCheckoutInformation = observer(() =>{
 
     const onFinish = async (values: any) => {
-        console.log('Success:', values);
-        // await userStore.authenticate(values.email, values.password)
-        getWidget('test_api_00000000000000000000001', 'Оплата товаров в example.com',
-            100, 'RUB', 'user@example.com', '1234567', 'user@example.com')
+        const amount = parseInt(calculateAmount(cartStore.cart))
+        let id;
+        if(userStore.user.id === "" || userStore.user.id === null)
+            id = getUserId()
+        else
+            id = userStore.user.id
+        await invoiceApiService.createInvoice(id, values.name, values.email, values.phoneNumber, values.address).then(response => {
+            console.log(response)
+            getWidget(process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'], 'Оплата товаров в магазине стройматериалов CATS', amount, 'KZT', id, values.email)
+        })
     };
 
     return (
@@ -21,25 +35,8 @@ const FormCheckoutInformation = () =>{
             <h3 className="ps-form__heading">Контактные данные</h3>
             <div className="form-group">
                 <Form.Item
-                    name="phoneNumber"
-                    rules={[
-                        {
-                            required: true,
-                            message:
-                                'Пожалуйста введите номер телефона!',
-                        },
-                    ]}>
-                    <Input
-                        className="form-control"
-                        placeholder="Номер телефона"
-                        type="text"
-                    />
-                </Form.Item>
-            </div>
-            <h3 className="ps-form__heading">Данные доставки</h3>
-            <div className="form-group">
-                <Form.Item
                     name="name"
+                    initialValue={userStore.user.fullName}
                     rules={[
                         {
                             required: true,
@@ -55,17 +52,69 @@ const FormCheckoutInformation = () =>{
             </div>
             <div className="form-group">
                 <Form.Item
-                    name="address"
+                    name="phoneNumber"
+                    initialValue={userStore.user.phone || "+7"}
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста введите адресс доставки',
+                            message: 'Пожалуйста введите номер телефона',
                         },
+                        {
+                            min: 10,
+                            max: 18,
+                            message: 'Не корректный номер телефона',
+                            pattern: /^[+][0-9]{10,18}$/i
+                        }
+                    ]}>
+                    <Input
+                        className="form-control"
+                        placeholder="Номер телефона"
+                        type="text"
+                    />
+                </Form.Item>
+            </div>
+            <div className="form-group">
+                <Form.Item
+                    name="email"
+                    initialValue={userStore.user.email}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Пожалуйста введите вашу почту',
+                        },
+                        {
+                            type: "email",
+                            message: 'Пожалуйста введите корректную почту',
+                        },
+
                     ]}>
                     <Input
                         className="form-control"
                         type="text"
-                        placeholder="Адресс"
+                        placeholder="Почта"
+                    />
+                </Form.Item>
+            </div>
+            <h3 className="ps-form__heading">Данные доставки</h3>
+            <div className="form-group">
+                <Form.Item
+                    name="address"
+                    initialValue={userStore.user.address}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Пожалуйста введите адрес доставки',
+                        },
+                    ]}>
+                    <AutoComplete
+                        className="form-control"
+                        apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
+                        placeholder="Адрес"
+                        options={{
+                            fields: ["address_components"],
+                            types: ["address"],
+                            componentRestrictions: { country: "kz" },
+                        }}
                     />
                 </Form.Item>
             </div>
@@ -89,11 +138,11 @@ const FormCheckoutInformation = () =>{
                     </a>
                 </Link>
                 <div className="ps-block__footer">
-                    <button className="ps-btn">Продолжить</button>
+                    <button type="submit" className="ps-btn">Продолжить</button>
                 </div>
             </div>
         </Form>
     );
-}
+})
 
 export default FormCheckoutInformation;

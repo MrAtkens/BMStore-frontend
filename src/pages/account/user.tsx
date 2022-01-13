@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
@@ -9,6 +10,7 @@ import { HOME } from 'constant/routes';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
 import UserInformation from 'presentation/page/account/UserInformation';
+import { getUser } from 'helper/commons/userHelper';
 import Layout from 'presentation/layout';
 
 interface ILoginPage{
@@ -16,6 +18,13 @@ interface ILoginPage{
 }
 
 const UserPage = ({categories} : ILoginPage) => {
+
+	const Router = useRouter()
+	useEffect(() => {
+		if(getUser() === 'undefined.undefined.undefined')
+			Router.push(HOME)
+	})
+
 	const breadCrumb = [
 		{
 			text: 'Главная',

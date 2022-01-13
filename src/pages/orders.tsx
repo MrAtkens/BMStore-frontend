@@ -1,19 +1,22 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { categoryApiService } from 'data/API';
+import { categoryApiService, ordersApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
+import { IOrder } from 'domain/interfaces/IOrder';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Orders from 'presentation/page/account/Orders';
 import Layout from 'presentation/layout';
+import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from '../constant/storageNames';
 
 interface ILoginPage{
-	categories: Array<ICategory>
+	categories: Array<ICategory>,
+	orders: Array<IOrder>
 }
 
-const OrdersPage = ({categories} : ILoginPage) => {
+const OrdersPage = ({categories, orders} : ILoginPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
@@ -39,7 +42,7 @@ const OrdersPage = ({categories} : ILoginPage) => {
 					<div className="container">
 						<div className="row">
 							<div className="col-lg-12">
-								<Orders/>
+								<Orders orders={orders}/>
 							</div>
 						</div>
 					</div>
@@ -49,11 +52,16 @@ const OrdersPage = ({categories} : ILoginPage) => {
 );
 };
 
-export async function getStaticProps({ locale, req } : any){
+export async function getServerSideProps({ locale, req } : any){
+	const { cookies } = req
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	let orders = []
+	if(cookies[USER_FIRST_PART] !== undefined && cookies[USER_SECOND_PART] !== undefined && cookies[USER_THIRD_PART] !== undefined) {
+		const response = await ordersApiService.getAuthorizeOrders(cookies[USER_FIRST_PART] + '.' + cookies[USER_SECOND_PART] + '.' + cookies[USER_THIRD_PART])
+		orders = response.data.orders
+	}
 	return {
-		props:{ categories: categoryResponse.data},
-		revalidate: 600
+		props:{ categories: categoryResponse.data, orders: orders},
 	};
 }
 

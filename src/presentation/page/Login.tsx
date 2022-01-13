@@ -57,8 +57,9 @@ const Login = observer(() => {
 										},
 										{
 											min: 10,
-											max: 20,
+											max: 18,
 											message: 'Не корректный номер телефона',
+											pattern: /^[+]7[0-9]{10,18}$/i
 										}
 									]}>
 									<Input

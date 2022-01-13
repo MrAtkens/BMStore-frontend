@@ -43,7 +43,7 @@ const UserInformationForm = observer(() => {
 					<div className="col-sm-12">
 						<Form.Item
 							name="address"
-							initialValue={userStore.user.address}
+							initialValue={userStore.getAddress}
 							rules={[
 								{
 									required: true,
@@ -67,8 +67,9 @@ const UserInformationForm = observer(() => {
 								},
 								{
 									min: 10,
-									max: 20,
+									max: 18,
 									message: 'Не корректный номер телефона',
+									pattern: /^[+][0-9]{10,18}$/i
 								}
 							]}>
 							<Input

@@ -1,12 +1,17 @@
 import React from 'react';
 
 import OrderTracking from 'presentation/common/control/OrderTracking';
+import { IOrder } from 'domain/interfaces/IOrder';
 
-const Orders = () => {
+interface IOrders{
+    orders: Array<IOrder>
+}
+
+const Orders = ({orders} : IOrders) => {
     return (
         <div className="ps-page__content">
             <div className="ps-section--account-setting">
-                <OrderTracking />
+                <OrderTracking orders={orders} />
             </div>
         </div>
     );

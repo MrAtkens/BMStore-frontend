@@ -3,7 +3,7 @@ import { USER_ID } from 'constant/storageNames';
 function generateGuid() {
 	let d = new Date().getTime();//Timestamp
 	let d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	return 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		let r = Math.random() * 16;//random number between 0 and 16
 		if(d > 0){//Use timestamp until depleted
 			r = (d + r)%16 | 0;
@@ -23,7 +23,6 @@ export function getUserId() {
 	} else {
 		let guid = generateGuid()
 		localStorage.setItem(USER_ID, JSON.stringify(guid));
-		console.log(guid)
 		return guid;
 	}
 }
