@@ -2,6 +2,8 @@ export { authenticationService } from './authenticationApi'
 export { categoryApiService } from "./categoryApi"
 export { productsApiService } from "./productApi"
 export { wishListApiService } from "./wishlistApi"
+export { invoiceApiService } from "./invoiceApi"
 export { filtersApiService } from "./filterApi"
+export { ordersApiService } from "./ordersApi"
 export { cartApiService } from "./cartApi"
 export { userApiService } from "./userApi"

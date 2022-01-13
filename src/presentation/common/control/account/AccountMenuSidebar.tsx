@@ -30,7 +30,7 @@ const AccountMenuSidebar = observer(({ data } : IAccountMenuSidebar) => {
             <div className="ps-widget__header">
                 <figure>
                     <figcaption>Здравствуйте</figcaption>
-                    <p>{userStore.user.fullName} | {userStore.user.email}</p>
+                    <p>{userStore.user.fullName}</p>
                 </figure>
             </div>
             <div className="ps-widget__content">

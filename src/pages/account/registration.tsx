@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
+import { getUser } from 'helper/commons/userHelper';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Register from 'presentation/page/Register';
 import Layout from 'presentation/layout';
+import { useRouter } from 'next/router';
 
 interface IRegisterPage{
 	categories: Array<ICategory>
@@ -15,6 +17,13 @@ interface IRegisterPage{
 
 
 const RegisterPage = ({categories} : IRegisterPage) => {
+
+	const Router = useRouter()
+	useEffect(() => {
+		if(getUser() !== 'undefined.undefined.undefined')
+			Router.push(HOME)
+	})
+
 	const breadCrumb = [
 		{
 			text: 'Главная',

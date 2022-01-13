@@ -1,5 +1,6 @@
 export const RELATED_PRODUCTS = 'RELATED'
 export const ACTIVE_LANGUAGE_KEY = 'ACTIVE_LANGUAGE_KEY'
+export const ORDERS_NOT_AUTH = 'ORDERS_NOT_AUTH'
 export const USER_ID = 'ID'
 export const USER_FIRST_PART = 'd937955a829d'
 export const USER_SECOND_PART = 'b59743b1390a'

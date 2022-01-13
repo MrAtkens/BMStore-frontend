@@ -1,68 +1,76 @@
 import React from 'react';
 import { Table } from 'antd';
 import Link from 'next/link';
+import { Popover } from 'antd';
 
-const TableInvoices = () => {
-    const tableData = [
-        {
-            id: '1',
-            invoiceId: '500884010',
-            title: 'Marshall Kilburn Portable Wireless Speaker',
-            dateCreate: '20-1-2020',
-            amount: '42.99',
-            status: 'Successful delivery',
-        },
-    ];
+import { IOrder } from 'domain/interfaces/IOrder';
+import { PRODUCT } from 'constant/routes';
+
+interface ITableInvoices{
+    orders: Array<IOrder>
+}
+
+const TableInvoices = ({orders} : ITableInvoices) => {
     const tableColumn = [
         {
             title: 'Id',
-            dataIndex: 'invoiceId',
-            rowKey: 'invoiceId',
-            key: 'invoiceId',
+            dataIndex: 'orderNumber',
+            rowKey: 'orderNumber',
+            key: 'orderNumber',
             width: '120px',
             render: (text, record) => (
-                <Link href="">
-                    {record.invoiceId}
-                </Link>
+                <Popover title={`ID оплаты ${record.invoiceId}`} trigger="hover">
+                    {record.orderNumber}
+                </Popover>
             ),
         },
         {
-            title: 'Название',
-            dataIndex: 'title',
-            rowKey: 'title',
-            key: 'title',
-        },
-        {
-            title: 'Дата',
-            rowKey: 'dateCreate',
-            dataIndex: 'dateCreate',
-            key: 'dateCreate',
-            width: '120px',
+            title: 'Товары',
+            dataIndex: 'productInOrders',
+            rowKey: 'productInOrders',
+            key: 'productInOrders',
+            render: productInOrders => {
+                return(
+                    <>
+                        {productInOrders.map(product => {
+                            console.log(product)
+                            return (
+                                <a key={product.id} className="ml-3">
+                                    <Link href={PRODUCT(product.id)}>
+                                        {product.title}
+                                    </Link>
+                                </a>
+                            );
+                        })}
+                    </>
+                )
+            },
         },
         {
             title: 'Сумма',
             rowKey: 'amount',
             dataIndex: 'amount',
             key: 'amount',
-            render: (text, record) => (
-                <span className="text-right">${record.amount}</span>
-            ),
+            render: (text, record) => {
+                let amount = 0
+                record.productInOrders.map(product => {
+                    amount += product.price * product.count
+                })
+                return <span className="text-right">{amount} тг</span>
+            },
         },
         {
             title: 'Статус',
-            key: 'status',
-            dataIndex: 'status',
-            rowKey: 'status',
+            key: 'orderStatusName',
+            dataIndex: 'orderStatusName',
+            rowKey: 'orderStatusName',
             width: '150px',
-            render: (text, record) => (
-                <span className="text-right">{record.amount}</span>
-            ),
         },
     ];
     return (
         <Table
             columns={tableColumn}
-            dataSource={tableData}
+            dataSource={orders}
             rowKey={record => record.id}
         />
     );

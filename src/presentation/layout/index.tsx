@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import Head from 'next/head';
 import { observer } from 'mobx-react-lite';
 
 import {ICategory} from 'domain/interfaces/ICategory';
-import productStore from 'data/stores/productStore';
-import cartStore from 'data/stores/cartStore';
-import userStore from 'data/stores/userStore'
-
 import Header from 'presentation/layout/headers/Header';
 import HeaderMobile from 'presentation/layout/headers/HeaderMobile';
 import Footer from 'presentation/layout/footers/Footer';
@@ -25,12 +21,6 @@ const Layout = observer(({
 } : IPageContainer) => {
     let titleView;
 
-    useEffect(() => {
-        if(!userStore.isAuthenticated)
-            userStore.getUserData()
-        cartStore.getCartFromApi()
-        productStore.setWishList()
-    }, [])
 
     if (title !== '') {
         titleView = process.env.title + ' | ' + title;

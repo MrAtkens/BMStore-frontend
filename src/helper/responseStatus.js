@@ -14,7 +14,7 @@ import {
     toastProductNotFound,
     toastProductRemoveFromCart,
     toastProductAddToWishList,
-    toastProductRemoveFromWishList, toastProductNotAddToWishList
+    toastProductRemoveFromWishList, toastProductNotAddToWishList, toastUserNotFoundAuth
 } from './toastify';
 
 
@@ -27,7 +27,7 @@ export const authorizationStatusValidation = (status) => {
     else if(status === 500)
         toastServerError()
     else if (status === 404)
-        toastUserNotFound()
+        toastUserNotFoundAuth()
     else if (status === 401)
         toastAuthError()
 }

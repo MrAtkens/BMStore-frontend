@@ -15,6 +15,16 @@ const getUserApi = async () => {
   })
 }
 
+const mergeUser = async (id) => {
+    return await axios.post(`${BackendUrl}/user/merge?anonymousUserId=${id}`, {},
+        {headers: { Authorization: `Bearer ${getUser()}` }}).then(response => {
+            console.log(response)
+            return response
+    }).catch(error => {
+        return error.response
+    })
+}
+
 const editUserData = async (fullName, address, phone) => {
   return await axios.put(`${BackendUrl}/user`,
       {
@@ -31,6 +41,7 @@ const editUserData = async (fullName, address, phone) => {
 
 
 export const userApiService = {
-  getUserApi,
-  editUserData
+    getUserApi,
+    editUserData,
+    mergeUser
 };

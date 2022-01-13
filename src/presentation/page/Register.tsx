@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
 import { Form, Input } from 'antd';
+import AutoComplete from "react-google-autocomplete";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import { LOGIN, REGISTER } from 'constant/routes';
@@ -11,20 +12,9 @@ import userStore from 'data/stores/userStore';
 
 const Register = observer(() => {
 
-	const [phone, setPhone] = useState(0)
-
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
 		await userStore.registration(values.name, values.phone, values.email, values.password, values.address)
-	};
-
-	const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newNumber = parseInt(e.target.value || '0', 10);
-		if (Number.isNaN(phone)) {
-			return;
-		}
-		else
-			setPhone(newNumber)
 	};
 
 	return (
@@ -55,8 +45,8 @@ const Register = observer(() => {
 										{
 											required: true,
 											type: 'string',
-											min: 2,
-											max: 100,
+											min: 3,
+											max: 60,
 											message: 'Пожалуйста введите ваше ФИО',
 										},
 									]}>
@@ -70,6 +60,7 @@ const Register = observer(() => {
 							<div className="form-group">
 								<Form.Item
 									name="phone"
+									initialValue="+7"
 									rules={[
 										{
 											required: true,
@@ -77,14 +68,12 @@ const Register = observer(() => {
 										},
 										{
 											min: 10,
-											max: 20,
+											max: 18,
 											message: 'Не корректный номер телефона',
+											pattern: /^[+][0-9]{10,18}$/i
 										}
 									]}>
 									<Input
-										defaultValue={""}
-										value={phone}
-										onChange={onNumberChange}
 										className="form-control"
 										placeholder="+7"
 									/>
@@ -118,15 +107,20 @@ const Register = observer(() => {
 										{
 											required: true,
 											type: 'string',
-											min: 2,
+											min: 3,
 											max: 200,
-											message: 'Пожалуйста введите адресс доставки',
+											message: 'Пожалуйста введите адрес доставки',
 										},
 									]}>
-									<Input
+									<AutoComplete
 										className="form-control"
-										type="text"
-										placeholder="Адресс"
+										apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
+										placeholder="Адрес"
+										options={{
+											fields: ["address_components"],
+											types: ["address"],
+											componentRestrictions: { country: "kz" },
+										}}
 									/>
 								</Form.Item>
 							</div>
