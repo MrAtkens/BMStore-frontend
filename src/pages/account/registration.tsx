@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
-import { getUser } from 'helper/commons/userHelper';
+import { isUserAuth } from 'helper/commons/userHelper';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { HOME } from 'constant/routes';
 
@@ -20,7 +20,7 @@ const RegisterPage = ({categories} : IRegisterPage) => {
 
 	const Router = useRouter()
 	useEffect(() => {
-		if(getUser() !== 'undefined.undefined.undefined')
+		if(isUserAuth())
 			Router.push(HOME)
 	})
 

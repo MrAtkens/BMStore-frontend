@@ -11,7 +11,7 @@ import {CART, LOGIN} from "constant/routes";
 const MobileHeaderActions = observer(() => {
     return (
         <div className="navigation__right">
-            <Link href={CART}>
+            <Link passHref href={CART}>
                 <a className="header__extra" href="#">
                     <i className='icon-bag2'/>
                     <span>
@@ -24,7 +24,7 @@ const MobileHeaderActions = observer(() => {
                 <AccountQuickLinksMobile />
             ) : (
                 <div className="header__extra">
-                    <Link href={LOGIN}>
+                    <Link passHref href={LOGIN}>
                         <i className='icon-user'/>
                     </Link>
                 </div>

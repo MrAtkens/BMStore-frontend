@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -15,6 +15,17 @@ import { invoiceApiService } from 'data/API';
 
 const FormCheckoutInformation = observer(() =>{
 
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        form.setFieldsValue({
+            name: userStore.user.fullName,
+            address: userStore.user.address,
+            email: userStore.user.email,
+            phone: userStore.user.phone
+        })
+    },[userStore.user.fullName, userStore.user.phone])
+
     const onFinish = async (values: any) => {
         const amount = parseInt(calculateAmount(cartStore.cart))
         let id;
@@ -22,7 +33,7 @@ const FormCheckoutInformation = observer(() =>{
             id = getUserId()
         else
             id = userStore.user.id
-        await invoiceApiService.createInvoice(id, values.name, values.email, values.phoneNumber, values.address).then(response => {
+        await invoiceApiService.createInvoice(id, values.name, values.email, values.phone, values.address).then(response => {
             console.log(response)
             getWidget(process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'], 'Оплата товаров в магазине стройматериалов CATS', amount, 'KZT', id, values.email)
         })
@@ -30,6 +41,7 @@ const FormCheckoutInformation = observer(() =>{
 
     return (
         <Form
+            form={form}
             className="ps-form__billing-info"
             onFinish={onFinish}>
             <h3 className="ps-form__heading">Контактные данные</h3>
@@ -52,7 +64,7 @@ const FormCheckoutInformation = observer(() =>{
             </div>
             <div className="form-group">
                 <Form.Item
-                    name="phoneNumber"
+                    name="phone"
                     initialValue={userStore.user.phone || "+7"}
                     rules={[
                         {

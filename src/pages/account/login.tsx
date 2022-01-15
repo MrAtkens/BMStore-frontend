@@ -9,7 +9,7 @@ import { HOME } from 'constant/routes';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Login from 'presentation/page/Login';
 import Layout from 'presentation/layout';
-import { getUser } from 'helper/commons/userHelper';
+import { isUserAuth } from 'helper/commons/userHelper';
 
 interface ILoginPage{
 	categories: Array<ICategory>
@@ -19,7 +19,7 @@ const LoginPage = ({categories} : ILoginPage) => {
 
 	const Router = useRouter()
 	useEffect(() => {
-		if(getUser() !== 'undefined.undefined.undefined')
+		if(isUserAuth())
 			Router.push(HOME)
 	})
 

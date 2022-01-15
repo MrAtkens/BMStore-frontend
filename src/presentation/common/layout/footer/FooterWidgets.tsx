@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ABOUT_US, CHECKOUT, CONTACTS, SHOP_PAGE, USER } from 'constant/routes';
+import { ABOUT_US, CHECKOUT, CONTACTS, ORDERS, SHOP_PAGE, USER } from 'constant/routes';
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
@@ -41,18 +41,13 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Ссылки</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link href="/page/blank">
-                        <a>Политика</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <a>Магазин</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Возвраты</a>
+                    <Link passHref href={ORDERS}>
+                        <a>Заказы</a>
                     </Link>
                 </li>
             </ul>
@@ -61,12 +56,12 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Компания</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link href={ABOUT_US}>
+                    <Link passHref href={ABOUT_US}>
                         <a>О нас</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href={CONTACTS}>
+                    <Link passHref href={CONTACTS}>
                         <a>Контакты</a>
                     </Link>
                 </li>
@@ -76,12 +71,12 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Магазин</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link href={CHECKOUT}>
-                        <a>Оплаты</a>
+                    <Link passHref href={CHECKOUT}>
+                        <a>Оплата</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href={USER}>
+                    <Link passHref href={USER}>
                         <a>Аккаунт</a>
                     </Link>
                 </li>

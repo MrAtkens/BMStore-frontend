@@ -1,7 +1,7 @@
 import React from 'react';
 
-import OrderTracking from 'presentation/common/control/OrderTracking';
 import { IOrder } from 'domain/interfaces/IOrder';
+import TableInvoices from 'presentation/common/control/account/TableInvoices';
 
 interface IOrders{
     orders: Array<IOrder>
@@ -10,9 +10,7 @@ interface IOrders{
 const Orders = ({orders} : IOrders) => {
     return (
         <div className="ps-page__content">
-            <div className="ps-section--account-setting">
-                <OrderTracking orders={orders} />
-            </div>
+            <TableInvoices orders={orders} />
         </div>
     );
 }

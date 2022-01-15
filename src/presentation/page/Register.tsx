@@ -25,12 +25,12 @@ const Register = observer(() => {
 					onFinish={onFinish}>
 					<ul className="ps-tab-list">
 						<li>
-							<Link href={LOGIN}>
+							<Link passHref href={LOGIN}>
 								<a>Вход</a>
 							</Link>
 						</li>
 						<li className="active">
-							<Link href={REGISTER}>
+							<Link passHref href={REGISTER}>
 								<a>Регистрация</a>
 							</Link>
 						</li>

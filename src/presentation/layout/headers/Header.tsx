@@ -1,23 +1,36 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {ICategory} from "domain/interfaces/ICategory";
 import { stickyHeader } from 'helper/commons/header';
-import { CONTACTS, HOME, ORDERS } from 'constant/routes';
+import { CONTACTS, HOME, LOGIN, ORDERS } from 'constant/routes';
 
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
 import CustomMenu from "presentation/common/typography/menu/CustomMenu";
+import { isUserAuth } from 'helper/commons/userHelper';
+import { Modal } from 'antd';
 
 interface IHeader{
     categories: Array<ICategory>
 }
 
 const Header = ({categories} : IHeader) => {
+    const Router = useRouter()
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     useEffect(() => {
         window.addEventListener('scroll', stickyHeader);
     }, []);
+
+    const onOrdersClick = async () => {
+        if(isUserAuth())
+            await Router.push(ORDERS)
+        else
+            setIsModalVisible(true)
+    }
 
     return (
         <header
@@ -31,7 +44,7 @@ const Header = ({categories} : IHeader) => {
                     <div className="header__right">
                         <ul className="header__top-links">
                             <li>
-                                <Link href={CONTACTS}>
+                                <Link passHref href={CONTACTS}>
                                     <a>Контакты</a>
                                 </Link>
                             </li>
@@ -41,9 +54,7 @@ const Header = ({categories} : IHeader) => {
                             {/*    </Link>*/}
                             {/*</li>*/}
                             <li>
-                                <Link href={ORDERS}>
-                                    <a>Узнать статус заказа</a>
-                                </Link>
+                                <a onClick={onOrdersClick}>Узнать статус заказа</a>
                             </li>
                         </ul>
                     </div>
@@ -52,7 +63,7 @@ const Header = ({categories} : IHeader) => {
             <div className="header__content">
                 <div className="container">
                     <div className="header__content-left">
-                        <Link href={HOME}>
+                        <Link passHref href={HOME}>
                             <a className="ps-logo mt-2">
                                 <Image
                                     width={156}
@@ -123,6 +134,10 @@ const Header = ({categories} : IHeader) => {
                     </div>
                 </div>
             </nav>
+            <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Зайти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
+                <p>1. Вы можете зайти в систему и просмотреть ваши заказы там, для это нажимите Зайти</p>
+                <p>2. Вы можете позвонить нам по номеру телефона: 88003355335</p>
+            </Modal>
         </header>
     );
 };

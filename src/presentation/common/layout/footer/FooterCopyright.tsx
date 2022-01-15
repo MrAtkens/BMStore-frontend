@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const FooterCopyright = () => (
     <div className="ps-footer__copyright">
@@ -6,19 +7,19 @@ const FooterCopyright = () => (
         <p>
             <span>Наши системы оплаты:</span>
             <a href="#">
-                <img src="/static/img/payment-method/1.jpg" alt="Martfury" />
+                <Image width={50} height={20} src="/static/img/payment-method/1.jpg" alt="Martfury" />
             </a>
             <a href="#">
-                <img src="/static/img/payment-method/2.jpg" alt="Martfury" />
+                <Image width={50} height={20} src="/static/img/payment-method/2.jpg" alt="Martfury" />
             </a>
             <a href="#">
-                <img src="/static/img/payment-method/3.jpg" alt="Martfury" />
+                <Image width={50} height={20} src="/static/img/payment-method/3.jpg" alt="Martfury" />
             </a>
             <a href="#">
-                <img src="/static/img/payment-method/4.jpg" alt="Martfury" />
+                <Image width={50} height={20} src="/static/img/payment-method/4.jpg" alt="Martfury" />
             </a>
             <a href="#">
-                <img src="/static/img/payment-method/5.jpg" alt="Martfury" />
+                <Image width={50} height={20} src="/static/img/payment-method/5.jpg" alt="Martfury" />
             </a>
         </p>
     </div>

@@ -42,7 +42,7 @@ const HeaderMobile = observer(() => {
                 <div className="header__right">
                     <ul className="navigation__extra">
                         <li>
-                            <Link href={ORDERS}>
+                            <Link passHref href={ORDERS}>
                                 <a>Узнать статус покупки</a>
                             </Link>
                         </li>
@@ -51,7 +51,7 @@ const HeaderMobile = observer(() => {
             </div>
             <div className="navigation--mobile">
                 <div className="navigation__left">
-                    <Link href={HOME}>
+                    <Link passHref href={HOME}>
                         <a className="ps-logo">
                             <Image
                                 width={156}

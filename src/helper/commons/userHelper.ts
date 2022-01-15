@@ -5,3 +5,6 @@ export const getUser = () => {
 	return Cookies.get(USER_FIRST_PART) + "." + Cookies.get(USER_SECOND_PART) + "." + Cookies.get(USER_THIRD_PART)
 }
 
+export const isUserAuth = () => {
+	return getUser() !== 'undefined.undefined.undefined';
+}
