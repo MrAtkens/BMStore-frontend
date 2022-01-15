@@ -14,7 +14,7 @@ const ModuleCartSummary = observer(() => {
         productItemsView = cartStore.cart.map((item) => (
             <li key={item.productId}>
                 <span className="ps-block__estimate">
-                    <Link href={PRODUCT(item.productId)}>
+                    <Link passHref href={PRODUCT(item.productId)}>
                         <a className="ps-product__title">
                             {item.title}
                             <br /> x {item.count}

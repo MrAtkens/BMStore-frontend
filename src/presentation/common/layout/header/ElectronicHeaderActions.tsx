@@ -10,7 +10,7 @@ import productStore from "data/stores/productStore"
 const ElectronicHeaderActions = observer(() => {
     return (
         <div className="header__actions">
-            <Link href={WISHLIST}>
+            <Link passHref href={WISHLIST}>
                 <a className="header__extra">
                     <i className='icon-heart'/>
                     <span>

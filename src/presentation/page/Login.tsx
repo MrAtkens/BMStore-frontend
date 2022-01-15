@@ -34,12 +34,12 @@ const Login = observer(() => {
 					onFinish={onFinish}>
 					<ul className="ps-tab-list">
 						<li className="active">
-							<Link href={LOGIN}>
+							<Link passHref href={LOGIN}>
 								<a>Вход</a>
 							</Link>
 						</li>
 						<li>
-							<Link href={REGISTER}>
+							<Link passHref href={REGISTER}>
 								<a>Регистрация</a>
 							</Link>
 						</li>

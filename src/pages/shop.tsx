@@ -11,7 +11,7 @@ import productStore from "data/stores/productStore"
 import { ICategory } from "domain/interfaces/ICategory";
 import { IFilter } from 'domain/interfaces/IFilter';
 import { IProduct } from 'domain/interfaces/IProduct';
-import { HOME } from 'constant/routes';
+import { HOME, SHOP_PAGE } from 'constant/routes';
 
 import Layout from "presentation/layout"
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
@@ -71,6 +71,11 @@ const Shop = observer(({ categoriesData, products, productCount, filtersData } :
 									<WidgetShopFilter key={item.slug} filter={item}/>
 							))}
 							<WidgetShopFilterByPriceRange />
+							<button
+								onClick={() => Router.push(SHOP_PAGE())}
+								className="ps-btn ps-btn--fullwidth">
+								Сбросить все фильтры
+							</button>
 						</div>
 						<div className="ps-layout__right">
 							<div className="ps-page__header">

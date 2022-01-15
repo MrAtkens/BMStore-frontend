@@ -936,16 +936,18 @@
     }
 
     .ps-block__item {
-        display: flex;
-        flex-flow: row wrap;
+        display: inline-flex;
         align-items: center;
         text-align: center;
+
+        .category-title{
+            margin-top: 10px;
+        }
 
         .image-container {
             display: block;
             width: 150px;
-            max-width: calc(100% / 8);
-            margin-bottom: 40px;
+            margin: 30px 15px 20px;
             overflow: hidden;
             cursor: pointer;
 
@@ -1055,6 +1057,9 @@
         }
     }
     @include media('<md') {
+        .ps-block__header {
+            padding: 0 15px;
+        }
         .ps-block__item {
             margin-bottom: 30px;
 
@@ -1064,8 +1069,8 @@
         }
     }
     @include media('<sm') {
-        .ps-tab {
-            padding: 20px 15px;
+        .ps-block__header {
+            padding: 0 10px;
         }
         .ps-block__item {
             margin-bottom: 30px;
@@ -1078,7 +1083,7 @@
     }
     @include media('<xs') {
         .ps-block__header {
-            padding: 0 15px;
+            padding: 0 5px;
         }
         .ps-block__item {
             .image-container {

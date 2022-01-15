@@ -10,7 +10,7 @@ import { HOME } from 'constant/routes';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
 import UserInformation from 'presentation/page/account/UserInformation';
-import { getUser } from 'helper/commons/userHelper';
+import { isUserAuth } from 'helper/commons/userHelper';
 import Layout from 'presentation/layout';
 
 interface ILoginPage{
@@ -21,7 +21,7 @@ const UserPage = ({categories} : ILoginPage) => {
 
 	const Router = useRouter()
 	useEffect(() => {
-		if(getUser() === 'undefined.undefined.undefined')
+		if(!isUserAuth)
 			Router.push(HOME)
 	})
 

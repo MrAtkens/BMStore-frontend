@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { IBread } from '../../../domain/interfaces/system/IBread';
+import { IBread } from 'domain/interfaces/system/IBread';
 
 interface IBreadCrumb{
     breadcrumb: Array<IBread>,
@@ -21,7 +21,7 @@ const BreadCrumb = ({ breadcrumb, layout = "not" } : IBreadCrumb) => {
                         } else {
                             return (
                                 <li key={item.text}>
-                                    <Link href={item.url}>
+                                    <Link passHref href={item.url}>
                                         <a>{item.text}</a>
                                     </Link>
                                 </li>

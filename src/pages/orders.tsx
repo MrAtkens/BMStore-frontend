@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { notification } from 'antd';
 import Head from 'next/head';
 
-import { categoryApiService, ordersApiService } from 'data/API';
-import { ICategory } from 'domain/interfaces/ICategory';
-import { IOrder } from 'domain/interfaces/IOrder';
+import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from 'constant/storageNames';
+import { isUserAuth } from 'helper/commons/userHelper';
 import { HOME } from 'constant/routes';
 
+import { categoryApiService, ordersApiService } from 'data/API';
+import { accountLinks } from 'data/static/accountLinks';
+import { ICategory } from 'domain/interfaces/ICategory';
+import { IOrder } from 'domain/interfaces/IOrder';
+
+
+import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Orders from 'presentation/page/account/Orders';
 import Layout from 'presentation/layout';
-import { USER_FIRST_PART, USER_SECOND_PART, USER_THIRD_PART } from '../constant/storageNames';
 
 interface ILoginPage{
 	categories: Array<ICategory>,
@@ -28,6 +35,20 @@ const OrdersPage = ({categories, orders} : ILoginPage) => {
 		},
 	];
 
+	const Router = useRouter()
+	useEffect(() => {
+		if(!isUserAuth()) {
+			Router.push(HOME)
+			notification.warn({
+				message: "Ошибка 401",
+				description: "Для того чтобы узнать статус заказа просим вас зайти в систему или позвонить нам",
+				duration: 10,
+				placement: "bottomRight"
+			});
+		}
+	})
+
+
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
 			<Head>
@@ -41,7 +62,12 @@ const OrdersPage = ({categories, orders} : ILoginPage) => {
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
-							<div className="col-lg-12">
+							<div className="col-lg-4">
+								<div className="ps-page__left">
+									<AccountMenuSidebar data={accountLinks} />
+								</div>
+							</div>
+							<div className="col-lg-8">
 								<Orders orders={orders}/>
 							</div>
 						</div>

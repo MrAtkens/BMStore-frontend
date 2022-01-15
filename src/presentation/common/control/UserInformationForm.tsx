@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
 
@@ -11,8 +11,19 @@ const UserInformationForm = observer(() => {
 		await userStore.userEdit(values.name, values.address, values.phone)
 	};
 
+	const [form] = Form.useForm();
+
+	useEffect(() => {
+		form.setFieldsValue({
+			name: userStore.user.fullName,
+			address: userStore.user.address,
+			phone: userStore.user.phone
+		})
+	},[userStore.user.fullName, userStore.user.phone])
+
 	return (
 		<Form
+			form={form}
 			className="ps-form--account-setting"
 			onFinish={onFinish}>
 			<div className="ps-form__header">
@@ -23,7 +34,6 @@ const UserInformationForm = observer(() => {
 					<div className="col-sm-12">
 						<Form.Item
 							name="name"
-							initialValue={userStore.user.fullName}
 							rules={[
 								{
 									required: true,
@@ -43,7 +53,6 @@ const UserInformationForm = observer(() => {
 					<div className="col-sm-12">
 						<Form.Item
 							name="address"
-							initialValue={userStore.getAddress}
 							rules={[
 								{
 									required: true,
@@ -59,7 +68,6 @@ const UserInformationForm = observer(() => {
 					<div className="col-sm-12">
 						<Form.Item
 							name="phone"
-							initialValue={userStore.user.phone}
 							rules={[
 								{
 									required: true,
