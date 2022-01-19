@@ -10,6 +10,7 @@
 		"format": "prettier --write \"./**/*.{js,json}\""
 	},
 	"dependencies": {
+		"@next/bundle-analyzer": "^12.0.8",
 		"antd": "^4.17.2",
 		"axios": "^0.21.1",
 		"framer-motion": "^5.3.1",

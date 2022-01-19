@@ -1,47 +1,38 @@
 {
-  "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": "./src",
-    "target": "es5",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "sourceMap": true,
-    "jsx": "preserve",
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "allowUnreachableCode": false,
-    "noUnusedLocals": true,
-    "noImplicitReturns": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "strict": false,
-    "downlevelIteration": true,
-    "noImplicitAny": false,
-    "rootDir": "src",
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
-    ],
-    "incremental": true
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "public"
-  ],
-  "compileOnSave": false
+	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "node",
+		"baseUrl": "./src",
+		"target": "es5",
+		"lib": ["esnext", "dom"],
+		"sourceMap": true,
+		"jsx": "preserve",
+		"allowJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"allowUnreachableCode": false,
+		"noUnusedLocals": true,
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"strict": false,
+		"downlevelIteration": true,
+		"noImplicitAny": false,
+		"rootDir": "src",
+		"plugins": [
+			{
+				"name": "typescript-styled-plugin"
+			}
+		],
+		"incremental": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "build", "public"],
+	"compileOnSave": false
 }

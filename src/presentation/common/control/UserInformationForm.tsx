@@ -56,7 +56,7 @@ const UserInformationForm = observer(() => {
 							rules={[
 								{
 									required: true,
-									message: 'Пожалуйста введите ваш адресс',
+									message: 'Пожалуйста введите ваш адрес',
 								},
 							]}>
 							<Input

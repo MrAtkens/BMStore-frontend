@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -10,20 +10,9 @@ import { LOGIN, REGISTER } from 'constant/routes';
 
 const Login = observer(() => {
 
-	const [phone, setPhone] = useState(0)
-
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
 		await userStore.authenticate(values.phone, values.password)
-	};
-
-	const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newNumber = parseInt(e.target.value || '0', 10);
-		if (Number.isNaN(phone)) {
-			return;
-		}
-		else
-			setPhone(newNumber)
 	};
 
 	return (
@@ -49,25 +38,22 @@ const Login = observer(() => {
 							<h5>Вход аккаунта</h5>
 							<div className="form-group">
 								<Form.Item
-									name="phone"
+									name="email"
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста введите ваш номер телефона',
+											message: 'Пожалуйста, введите вашу почту',
 										},
 										{
-											min: 10,
-											max: 18,
-											message: 'Не корректный номер телефона',
-											pattern: /^[+]7[0-9]{10,18}$/i
-										}
+											type: "email",
+											message: 'Введена некорректная почта',
+										},
+
 									]}>
 									<Input
-										defaultValue={""}
-										value={phone}
-										onChange={onNumberChange}
 										className="form-control"
-										placeholder="+7"
+										type="text"
+										placeholder="Почта"
 									/>
 								</Form.Item>
 							</div>
