@@ -17,14 +17,16 @@ interface IMenu{
 }
 
 const CustomMenu = observer(({ source, className, mode } : IMenu) => {
-    const [current, setCurrent] = useState(source[0].id);
+    const [current, setCurrent] = useState("");
     const Router = useRouter()
     const { category, searchText } = Router.query
 
     useEffect(() => {
         if(category !== undefined)
             setCurrent(category.toString())
-    }, [])
+        else
+            setCurrent("")
+    }, [category])
 
     const handleClick = async e => {
         setCurrent(e.key)

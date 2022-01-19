@@ -32,8 +32,9 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 			})
 		}
 		else{
-			cartStore.getCartFromApi()
-			productStore.setWishList()
+			cartStore.getCartFromApi().then(async () => {
+				await productStore.setWishList()
+			})
 		}
 	});
 

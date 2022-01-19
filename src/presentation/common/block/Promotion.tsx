@@ -7,8 +7,8 @@ import { HOME } from 'constant/routes';
 const Promotion = () => (
     <div className="ps-search-trending">
         <div className="container">
-            <Link href={HOME}>
-                <Image width={1200} height={245} src="/static/img/promotions/home-5/simple.jpg" alt="martfury" />
+            <Link passHref href={HOME}>
+                <Image width={1200} height={245} src="/static/img/promotions/simple.jpg" alt="martfury" />
             </Link>
         </div>
     </div>

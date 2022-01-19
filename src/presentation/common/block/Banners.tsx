@@ -30,34 +30,31 @@ const Banners = ({categories} : IBanners) => {
                 <div className="ps-section__center">
                     <Slider {...carouselSettings}>
                         <div className="item">
-                            <Link href={SHOP_PAGE()}>
+                            <Link passHref href={SHOP_PAGE()}>
                                 <img src="/static/img/slider/home-5/1.jpg" alt="CATS" />
                             </Link>
                         </div>
                         <div className='item'/>
                     </Slider>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <img src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
                     </Link>
                 </div>
                 <div className="ps-section__right">
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <Image width={191} height={193} src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
 
                     </Link>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <Image width={191} height={193} src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
-
                     </Link>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <Image width={382} height={194} src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
-
                     </Link>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <Image width={191} height={193} src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
-
                     </Link>
-                    <Link href={SHOP_PAGE()}>
+                    <Link passHref href={SHOP_PAGE()}>
                         <Image width={191} height={193} src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
                     </Link>
                 </div>

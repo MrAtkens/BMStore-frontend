@@ -47,7 +47,7 @@ const Register = observer(() => {
 											type: 'string',
 											min: 3,
 											max: 60,
-											message: 'Пожалуйста введите ваше ФИО',
+											message: 'Пожалуйста, введите ваше ФИО',
 										},
 									]}>
 									<Input
@@ -64,12 +64,12 @@ const Register = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста введите ваш номер телефона',
+											message: 'Пожалуйста, введите ваш номер телефона',
 										},
 										{
 											min: 10,
 											max: 18,
-											message: 'Не корректный номер телефона',
+											message: 'Некорректный номер телефона',
 											pattern: /^[+][0-9]{10,18}$/i
 										}
 									]}>
@@ -85,11 +85,11 @@ const Register = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста введите вашу почту',
+											message: 'Пожалуйста, введите вашу почту',
 										},
 										{
 											type: "email",
-											message: 'Пожалуйста введите корректную почту',
+											message: 'Введена некорректная почта',
 										},
 
 									]}>
@@ -109,7 +109,7 @@ const Register = observer(() => {
 											type: 'string',
 											min: 3,
 											max: 200,
-											message: 'Пожалуйста введите адрес доставки',
+											message: 'Пожалуйста, введите адрес доставки',
 										},
 									]}>
 									<AutoComplete

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import {ICategory} from "domain/interfaces/ICategory";
 import { stickyHeader } from 'helper/commons/header';
-import { CONTACTS, HOME, LOGIN, ORDERS } from 'constant/routes';
+import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
 
 import SearchHeader from 'presentation/common/layout/header/SearchHeader';
 import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
@@ -43,6 +43,11 @@ const Header = ({categories} : IHeader) => {
                     </div>
                     <div className="header__right">
                         <ul className="header__top-links">
+                            <li>
+                                <Link passHref href={SHOP_PAGE()}>
+                                    <a>Магазин</a>
+                                </Link>
+                            </li>
                             <li>
                                 <Link passHref href={CONTACTS}>
                                     <a>Контакты</a>

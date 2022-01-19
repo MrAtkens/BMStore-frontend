@@ -56,10 +56,21 @@ class UserStore implements IUserStore{
     async registration(fullName: string, phoneNumber: string, email:string, password : string, address: string){
         const response = await authenticationService.userSingUpApi(fullName, phoneNumber, email, password, address);
         registrationStatusValidation(response.status)
-        if(response.status === 200)
-            await Router.push("/account/login")
+        const token = response.data.token
+        if(response.status === 200){
+            const split = token.split('.');
+            console.log(split)
+            Cookies.set(USER_FIRST_PART, split[0], {expires: 7})
+            Cookies.set(USER_SECOND_PART, split[1], {expires: 7})
+            Cookies.set(USER_THIRD_PART, split[2], {expires: 7})
+            await userApiService.mergeUser(getUserId()).then(async () => {
+                await this.getUserData()
+            })
+            this.isSubmitting = false;
+            await Router.push("/")
+        }
         else
-            this.isSubmitting = false
+            this.isSubmitting = false;
     }
 
     async getUserData(){

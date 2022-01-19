@@ -6,20 +6,14 @@ const FooterCopyright = () => (
         <p>&copy;  2021 CATS. Все права защищены</p>
         <p>
             <span>Наши системы оплаты:</span>
-            <a href="#">
-                <Image width={50} height={20} src="/static/img/payment-method/1.jpg" alt="Martfury" />
+            <a href="https://cloudpayments.kz/">
+                <Image width={80} quality={100} height={50} src="/static/img/payment-method/1.png" alt="CloudPayments" />
             </a>
-            <a href="#">
-                <Image width={50} height={20} src="/static/img/payment-method/2.jpg" alt="Martfury" />
+            <a href="https://www.mastercard.kz/">
+                <Image width={80} quality={100} height={50} src="/static/img/payment-method/2.png" alt="MasterCard" />
             </a>
-            <a href="#">
-                <Image width={50} height={20} src="/static/img/payment-method/3.jpg" alt="Martfury" />
-            </a>
-            <a href="#">
-                <Image width={50} height={20} src="/static/img/payment-method/4.jpg" alt="Martfury" />
-            </a>
-            <a href="#">
-                <Image width={50} height={20} src="/static/img/payment-method/5.jpg" alt="Martfury" />
+            <a href="https://www.visa.com.kz/">
+                <Image width={70} quality={100} height={22} src="/static/img/payment-method/3.png" alt="Visa" />
             </a>
         </p>
     </div>
