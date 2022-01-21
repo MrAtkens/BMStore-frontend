@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import Slider from 'react-slick';
-import Image from "next/image"
+import Image from 'next/image';
 
 import NextArrow from 'presentation/common/typography/NextArrow';
 import PrevArrow from 'presentation/common/typography/PrevArrow';
@@ -47,10 +47,11 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
 
     const gallerySetting = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+        initialSlide: product.images.indexOf(mainImage),
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
     };
@@ -63,7 +64,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: true,
+                    infinite: false,
                 },
             },
             {
@@ -73,7 +74,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: true,
+                    infinite: false,
                 },
             },
             {
@@ -83,7 +84,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: true,
+                    infinite: false,
                 },
             },
         ],
@@ -128,9 +129,10 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                 ref={(slider) => (variantCarousel.current = slider)}
                 swipeToSlide={true}
                 arrows={false}
-                slidesToShow={6}
+                slidesToShow={5}
                 vertical={false}
                 centerMode={true}
+                {...variantSetting}
                 infinite={false}
                 focusOnSelect={true}
                 className="ps-product__variants">
