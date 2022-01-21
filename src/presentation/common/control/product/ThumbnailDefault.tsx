@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import Slider from 'react-slick';
-import Image from 'next/image';
-
+import Image from "next/image"
 
 import NextArrow from 'presentation/common/typography/NextArrow';
 import PrevArrow from 'presentation/common/typography/PrevArrow';
@@ -20,7 +19,12 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
     const [gallery, setGallery] = useState<any>(null);
     const [variant, setVariant] = useState<any>(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [photoIndex, setPhotoIndex] = useState(0);
+    let mainImage = { url: "", isMain: false}
+    product.images.map(image => {
+        if(image.isMain)
+            mainImage = image
+    })
+    const [photoIndex, setPhotoIndex] = useState(product.images.indexOf(mainImage));
     const [productImages, setProductImages] = useState([] as Array<string>);
 
     const handleOpenLightbox = (e, imageIndex) => {
@@ -59,7 +63,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: false,
+                    infinite: true,
                 },
             },
             {
@@ -69,7 +73,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: false,
+                    infinite: true,
                 },
             },
             {
@@ -79,7 +83,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                     dots: false,
                     arrows: false,
                     vertical: false,
-                    infinite: false,
+                    infinite: true,
                 },
             },
         ],
@@ -90,13 +94,13 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
     if (productImages.length > 0) {
         imagesView = productImages.map((item) => (
             <div className="item" key={item}>
-				<Image width={800} height={800} src={item} alt={item} />
-			</div>
+                <img src={item} alt={item} />
+            </div>
         ));
         galleryImagesView = productImages.map((item, index) => (
             <div className="item" key={item}>
                 <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
-					<Image width={800} height={800} src={item} alt={item} />
+                    <Image width={600} height={600} src={item} alt={item} />
                 </a>
             </div>
         ));
@@ -127,7 +131,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
                 slidesToShow={6}
                 vertical={false}
                 centerMode={true}
-                infinite={true}
+                infinite={false}
                 focusOnSelect={true}
                 className="ps-product__variants">
                 {imagesView}

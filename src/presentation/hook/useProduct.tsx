@@ -26,8 +26,8 @@ export default function useProduct() {
             return (
                 <LazyLoad>
                     <Image
-                        width={200}
-                        height={200}
+                        width={250}
+                        height={250}
                         src={getImageURL(product.images)}
                         alt={product.title}
                     />

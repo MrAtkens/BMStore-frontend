@@ -80,7 +80,7 @@ export const toastRegistrationError = () => {
 export const toastProductAddToWishList = (title) => {
 	notification.info({
 		message: 'Вы успешно добавили товар в избранные',
-		description: `Вы добавили товар под названием ${title}, в ваши избранные`,
+		description: `Вы добавили товар под названием ${title} в ваши избранные`,
 		duration: 5,
 		placement: 'bottomRight'
 	});
@@ -89,7 +89,7 @@ export const toastProductAddToWishList = (title) => {
 export const toastProductRemoveFromWishList = (title) => {
 	notification.info({
 		message: 'Вы успешно удалили товар из избранные',
-		description: `Вы удалили товар под названием ${title}, из ваших избранных`,
+		description: `Вы удалили товар под названием ${title} из ваших избранных`,
 		duration: 5,
 		placement: 'bottomRight'
 	});
@@ -107,7 +107,7 @@ export const toastProductNotAddToWishList = () => {
 export const toastProductAddToCart = (title) => {
 	notification.info({
 		message: 'Вы успешно добавили товар в корзину',
-		description: `Вы добавили товар под названием ${title}, в вашу корзину`,
+		description: `Вы добавили товар под названием ${title} в вашу корзину`,
 		duration: 5,
 		placement: 'bottomRight'
 	});
@@ -116,7 +116,7 @@ export const toastProductAddToCart = (title) => {
 export const toastProductRemoveFromCart = (title) => {
 	notification.info({
 		message: 'Вы успешно удалили товар из корзину',
-		description: `Вы удалили товар под названием ${title}, из вашей корзины`,
+		description: `Вы удалили товар под названием ${title} из вашей корзины`,
 		duration: 5,
 		placement: 'bottomRight'
 	});
