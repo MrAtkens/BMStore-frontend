@@ -14,7 +14,7 @@ const ElectronicHeaderActions = observer(() => {
                 <a className="header__extra">
                     <i className='icon-heart'/>
                     <span>
-                        <i>{productStore.wishList.length}</i>
+                        {productStore.wishList.length}
                     </span>
                 </a>
             </Link>

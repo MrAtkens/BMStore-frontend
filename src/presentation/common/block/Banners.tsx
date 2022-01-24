@@ -42,20 +42,29 @@ const Banners = ({categories} : IBanners) => {
                 </div>
                 <div className="ps-section__right">
                     <Link passHref href={SHOP_PAGE()}>
-                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
-
+                        <div className="image-container">
+                            <Image src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
+                        </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
-                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
+                        <div className="image-container">
+                            <Image src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
+                        </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
-                        <Image width={382} height={194} src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
+                        <div className="image-container-full">
+                            <Image src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
+                        </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
-                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
+                        <div className="image-container">
+                            <Image src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
+                        </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
-                        <Image width={191} height={193} src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
+                        <div className="image-container">
+                            <Image src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
+                        </div>
                     </Link>
                 </div>
             </div>

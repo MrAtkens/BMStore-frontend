@@ -61,7 +61,7 @@ const UserInformationForm = observer(() => {
 							]}>
 							<Input
 								className="form-control"
-								placeholder="Ваш адресс"
+								placeholder="Ваш адрес"
 							/>
 						</Form.Item>
 					</div>
