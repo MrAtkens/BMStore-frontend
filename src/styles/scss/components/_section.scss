@@ -379,7 +379,6 @@
         .ps-layout__left {
             max-width: 100%;
             padding-right: 0;
-            display: none;
         }
         .ps-layout__right {
             max-width: 100%;
@@ -387,7 +386,9 @@
         }
     }
 
+
     @include media('<sm') {
+        display: inherit;
         padding-bottom: 45px;
     }
 }

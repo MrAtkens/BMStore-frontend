@@ -7,14 +7,18 @@ import Image from 'next/image';
 
 import productStore from 'data/stores/productStore';
 import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
-import { HOME, ORDERS, SHOP_PAGE } from 'constant/routes';
+import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
+import { isUserAuth } from 'helper/commons/userHelper';
 
 import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
+import { Modal } from 'antd';
 
 const HeaderMobile = observer(() => {
+    const Router = useRouter()
     const inputEl = useRef(null);
     const [keyword, setKeyword] = useState('');
-    const Router = useRouter()
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const { filters, category, searchText, price_min, price_max, page } = Router.query
 
     function handleSubmit(e : any) {
@@ -33,6 +37,15 @@ const HeaderMobile = observer(() => {
                 }, undefined, { shallow: false, scroll: false })
         }
     }
+
+    const onOrdersClick = async () => {
+        if(isUserAuth())
+            await Router.push(ORDERS)
+        else
+            setIsModalVisible(true)
+    }
+
+
     return (
         <header className="header header--mobile">
             <div className="header__top">
@@ -42,9 +55,22 @@ const HeaderMobile = observer(() => {
                 <div className="header__right">
                     <ul className="navigation__extra">
                         <li>
-                            <Link passHref href={ORDERS}>
-                                <a>Узнать статус покупки</a>
+                            <Link passHref href={SHOP_PAGE()}>
+                                <a>Магазин</a>
                             </Link>
+                        </li>
+                        <li>
+                            <Link passHref href={CONTACTS}>
+                                <a>Контакты</a>
+                            </Link>
+                        </li>
+                        {/*<li>*/}
+                        {/*    <Link href={ABOUT_US}>*/}
+                        {/*        <a>О нас</a>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
+                        <li>
+                            <a onClick={onOrdersClick}>Узнать статус заказа</a>
                         </li>
                     </ul>
                 </div>
@@ -85,6 +111,10 @@ const HeaderMobile = observer(() => {
                     </div>
                 </form>
             </div>
+            <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Зайти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
+                <p>1. Вы можете зайти в систему и просмотреть ваши заказы там, для это нажимите Зайти</p>
+                <p>2. Вы можете позвонить нам по номеру телефона: 88003355335</p>
+            </Modal>
         </header>
     )
 })

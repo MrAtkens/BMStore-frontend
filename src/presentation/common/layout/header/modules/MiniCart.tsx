@@ -64,7 +64,7 @@ const MiniCart = observer(() => {
                 <a className="header__extra" href="#">
                     <i className='icon-bag2'/>
                     <span>
-                        <i>{cartStore.cart ? cartStore.cart.length : 0}</i>
+                        {cartStore.cart ? cartStore.cart.length : 0}
                     </span>
                 </a>
             </Link>

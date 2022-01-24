@@ -133,8 +133,8 @@ export const toastAuthorizationSuccess = () => {
 
 export const toastRegistrationSuccess = () => {
 	notification.success({
-		message: 'Вы успешно зарегистрировались',
-		duration: 5,
+		message: 'Вы успешно зарегистрировались, пожалуйста подтвердите свою почту через письмо которое мы отправили',
+		duration: 6000,
 		placement: 'bottomRight'
 	});
 };
