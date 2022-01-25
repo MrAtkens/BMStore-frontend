@@ -412,8 +412,8 @@
         display: inline-block;
 
         li {
-            margin-right: 10px;
-            padding-right: 10px;
+            margin-right: 5px;
+            padding-right: 5px;
 
             &:after {
                 display: none;
@@ -424,11 +424,6 @@
     .header__extra {
         span {
             background-color: $color-1st;
-        }
-        &:hover {
-            i {
-                color: #ffffff;
-            }
         }
     }
 
@@ -488,15 +483,11 @@
 
     .header__extra {
         span {
-            background-color: $color-header-text;
-            color: $color-heading;
-        }
-        i {
-            color: #ffffff;
-            font-weight: 600;
+            background-color: #000;
 
-            &.hover{
-                color: $color-heading;
+            i {
+                color: #ffffff;
+                font-weight: 600;
             }
         }
     }
@@ -592,7 +583,7 @@
             vertical-align: middle;
             margin-right: 0.5em;
             font-size: 24px;
-            color: $color-header-text;
+            color: $color-heading;
         }
     }
 

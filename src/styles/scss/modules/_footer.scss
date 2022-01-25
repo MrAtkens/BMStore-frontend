@@ -88,13 +88,23 @@
         }
     }
 
-    @include media('<md') {
+    @include media('<lg') {
+
+        margin-bottom: 50px;
         &__copyright {
             display: none;
         }
     }
 
+    @include media('<md') {
+        &__copyright {
+            display: none;
+        }
+        margin-bottom: 50px;
+
+    }
     @include media('<sm') {
+        margin-bottom: 50px;
 
         &__copyright {
             display: none;

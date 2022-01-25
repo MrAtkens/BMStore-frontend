@@ -39,7 +39,7 @@ const MiniCart = observer(() => {
                     </h3>
                     <figure>
                         <Link href={CART}>
-                            <a className="ps-btn">Посмотреть</a>
+                            <a className="ps-btn">Корзина</a>
                         </Link>
                         <Link href={CHECKOUT}>
                             <a className="ps-btn">Купить</a>
@@ -64,7 +64,7 @@ const MiniCart = observer(() => {
                 <a className="header__extra" href="#">
                     <i className='icon-bag2'/>
                     <span>
-                        {cartStore.cart ? cartStore.cart.length : 0}
+                        <i>{cartStore.cart ? cartStore.cart.length : 0}</i>
                     </span>
                 </a>
             </Link>
