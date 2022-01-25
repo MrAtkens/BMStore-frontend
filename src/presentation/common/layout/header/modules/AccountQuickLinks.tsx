@@ -8,9 +8,9 @@ import { LOGIN, REGISTER } from 'constant/routes';
 
 const AccountQuickLinks = observer(() => {
 
-    const handleLogout = (e : any) => {
+    const handleLogout = async (e : any) => {
         e.preventDefault();
-        userStore.singOut();
+        await userStore.singOut();
     };
 
     // View
@@ -22,7 +22,7 @@ const AccountQuickLinks = observer(() => {
         </li>
     ));
 
-    if (userStore.isAuthenticated) { 
+    if (userStore.isAuthenticated) {
         return (
             <div className="ps-block--user-account">
                 <i className='icon-user'/>

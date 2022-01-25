@@ -1,13 +1,9 @@
-import { ABOUT_US, CART, CHECKOUT, CONTACTS, SHOP_PAGE, USER, WISHLIST } from '../routes';
+import { ABOUT_US, CHECKOUT, CONTACTS, SHOP_PAGE, USER, WISHLIST } from '../routes';
 
 export const accountLinks = [
 	{
 		text: 'Кабинет',
 		url: USER,
-	},
-	{
-		text: 'Корзина',
-		url: CART,
 	},
 	{
 		text: 'Избранные',

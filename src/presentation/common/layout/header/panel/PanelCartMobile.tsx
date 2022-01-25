@@ -23,7 +23,7 @@ const PanelCartMobile = observer(() => {
         const items = cartStore.cart.map((item) => (
             <div className="ps-product--cart-mobile" key={item.productId}>
                 <div className="ps-product__thumbnail">
-                    <Link href={PRODUCT(item.productId)}>
+                    <Link passHref href={PRODUCT(item.productId)}>
                         <Image alt={item.title} src={item.imageUrl} width={100} height={100}/>
                     </Link>
                 </div>
@@ -33,13 +33,14 @@ const PanelCartMobile = observer(() => {
                         onClick={(e) => handleRemoveCartItem(e, item.productId, item.title)}>
                         <i className='icon-cross'/>
                     </a>
-                    {item.title}
-                    <Link href={PRODUCT(item.productId)}>
-                        <a className="ps-product__title">{item.title}</a>
-                    </Link>
-                    <small>
-                        {item.count} x ${item.price}
-                    </small>
+                    <div className="display-1">
+                        <Link href={PRODUCT(item.productId)}>
+                            <a className="ps-product__title">{item.title}</a>
+                        </Link>
+                        <small>
+                            {item.count} x {item.price} тг
+                        </small>
+                    </div>
                 </div>
             </div>
         ));
@@ -47,11 +48,11 @@ const PanelCartMobile = observer(() => {
         footerView = (
             <div className="ps-cart__footer">
                 <h3>
-                    Сумма:<strong>${amount}</strong>
+                    Сумма:<strong>{amount} тг</strong>
                 </h3>
                 <figure>
                     <Link href={CART}>
-                        <a className="ps-btn">Просмотреть корзину</a>
+                        <a className="ps-btn">Корзина</a>
                     </Link>
                     <Link href={CHECKOUT}>
                         <a className="ps-btn">Купить</a>

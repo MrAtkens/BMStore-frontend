@@ -3238,7 +3238,10 @@
     }
 
     .ps-list--arrow {
+        margin-top: 20px;
         li {
+            margin-left: 10px;
+            margin-right: 10px;
             a {
                 padding-left: 0;
                 color: $color-heading;
