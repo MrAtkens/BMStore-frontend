@@ -12,6 +12,8 @@ import userStore from 'data/stores/userStore';
 
 const Register = observer(() => {
 
+	const [form] = Form.useForm();
+
 	const onFinish = async (values: any) => {
 		console.log('Success:', values);
 		await userStore.registration(values.name, values.phone, values.email, values.password, values.address)
@@ -21,6 +23,7 @@ const Register = observer(() => {
 		<div className="ps-my-account">
 			<div className="container">
 				<Form
+					form={form}
 					className="ps-form--account"
 					onFinish={onFinish}>
 					<ul className="ps-tab-list">
@@ -116,8 +119,12 @@ const Register = observer(() => {
 										className="form-control"
 										apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
 										placeholder="Адрес"
+										onKeyDown={(e)=> e.key === "Enter" ? e.preventDefault(): ''}
+										onPlaceSelected={(place) => {
+											form.setFieldsValue({address: place.formatted_address})
+										}}
 										options={{
-											fields: ["address_components"],
+											fields: ["formatted_address"],
 											types: ["address"],
 											componentRestrictions: { country: "kz" },
 										}}
