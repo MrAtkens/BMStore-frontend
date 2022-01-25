@@ -3,6 +3,7 @@ import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
 
 import userStore from "data/stores/userStore"
+import AutoComplete from 'react-google-autocomplete';
 
 const UserInformationForm = observer(() => {
 
@@ -59,9 +60,19 @@ const UserInformationForm = observer(() => {
 									message: 'Пожалуйста введите ваш адрес',
 								},
 							]}>
-							<Input
+							<AutoComplete
 								className="form-control"
+								apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
 								placeholder="Ваш адрес"
+								onKeyDown={(e)=> e.key === "Enter" ? e.preventDefault(): ''}
+								onPlaceSelected={(place, inputRef, autocomplete) => {
+									form.setFieldsValue({address: place.formatted_address})
+								}}
+								options={{
+									fields: ["formatted_address"],
+									types: ["address"],
+									componentRestrictions: { country: "kz" },
+								}}
 							/>
 						</Form.Item>
 					</div>

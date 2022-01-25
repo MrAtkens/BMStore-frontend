@@ -33,6 +33,7 @@ const FormCheckoutInformation = observer(() =>{
             id = getUserId()
         else
             id = userStore.user.id
+        console.log(values.address)
         await invoiceApiService.createInvoice(id, values.name, values.email, values.phone, values.address).then(response => {
             console.log(response)
             getWidget(process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'], 'Оплата товаров в магазине стройматериалов CATS', amount, 'KZT', id, values.email)
@@ -44,6 +45,34 @@ const FormCheckoutInformation = observer(() =>{
             form={form}
             className="ps-form__billing-info"
             onFinish={onFinish}>
+            <h3 className="ps-form__heading">Данные доставки</h3>
+            <div className="form-group">
+                <Form.Item
+                    name="address"
+                    initialValue={userStore.user.address}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Пожалуйста введите адрес доставки',
+                        },
+                    ]}>
+                    <AutoComplete
+                        className="form-control"
+                        apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
+                        placeholder="Адрес"
+                        onKeyDown={(e)=> e.key === "Enter" ? e.preventDefault(): ''}
+                        onPlaceSelected={(place) => {
+                            console.log(place.formatted_address)
+                            form.setFieldsValue({address: place.formatted_address})
+                        }}
+                        options={{
+                            fields: ["formatted_address"],
+                            types: ["address"],
+                            componentRestrictions: { country: "kz" },
+                        }}
+                    />
+                </Form.Item>
+            </div>
             <h3 className="ps-form__heading">Контактные данные</h3>
             <div className="form-group">
                 <Form.Item
@@ -104,29 +133,6 @@ const FormCheckoutInformation = observer(() =>{
                         className="form-control"
                         type="text"
                         placeholder="Почта"
-                    />
-                </Form.Item>
-            </div>
-            <h3 className="ps-form__heading">Данные доставки</h3>
-            <div className="form-group">
-                <Form.Item
-                    name="address"
-                    initialValue={userStore.user.address}
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Пожалуйста введите адрес доставки',
-                        },
-                    ]}>
-                    <AutoComplete
-                        className="form-control"
-                        apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
-                        placeholder="Адрес"
-                        options={{
-                            fields: ["address_components"],
-                            types: ["address"],
-                            componentRestrictions: { country: "kz" },
-                        }}
                     />
                 </Form.Item>
             </div>
