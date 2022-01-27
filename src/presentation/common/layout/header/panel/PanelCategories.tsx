@@ -7,7 +7,6 @@ import {ICategory} from "domain/interfaces/ICategory";
 import productStore from 'data/stores/productStore';
 import filterStore from 'data/stores/filtersStore';
 
-
 const { SubMenu } = Menu;
 
 interface IPanelCategories{
@@ -43,16 +42,18 @@ const PanelCategories = ({ categories } : IPanelCategories) => {
                         if(itemDropDown.children.length != 0)
                             return renderMultiple(itemDropDown)
                         else
-                            return(<Menu.Item key={itemDropDown.id}>
-                                {itemDropDown.name}
-                            </Menu.Item>)
+                            return(
+                                <Menu.Item key={itemDropDown.id}>
+                                    <a>{itemDropDown.name}</a>
+                                </Menu.Item>
+                            )
                     })}
                 </SubMenu>
             )
         else
             return(
                 <Menu.Item key={category.id}>
-                    {category.name}
+                    <a>{category.name}</a>
                 </Menu.Item>
             )
     }
@@ -74,6 +75,7 @@ const PanelCategories = ({ categories } : IPanelCategories) => {
         <Menu
             mode="inline"
             selectedKeys={[current]}
+            className="menu--mobile-2"
             onClick={handleClick}>
             {menuView}
         </Menu>

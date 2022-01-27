@@ -12,8 +12,8 @@ const PanelMenu = () => {
     };
     const linksView = accountLinks.map((item) => (
         <Menu.Item key={item.text}>
-            <Link href={item.url}>
-                <a href="#">{item.text}</a>
+            <Link passHref href={item.url}>
+                <a>{item.text}</a>
             </Link>
         </Menu.Item>
     ));

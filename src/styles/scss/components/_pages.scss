@@ -80,6 +80,13 @@
             color: $color-heading;
             font-size: 24px;
         }
+
+        @include media('<lg') {
+            display: none;
+            h1{
+                display: none;
+            }
+        }
     }
 
     .ps-layout--shop {
@@ -209,12 +216,6 @@
             font-weight: 600;
         }
 
-        @include media('<lg') {
-            display: none;
-            h1{
-                display: none;
-            }
-        }
     }
 
     figure {
