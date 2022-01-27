@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CART, CHECKOUT, PRODUCT, SHOP_PAGE } from 'constant/routes';
+import { CHECKOUT, PRODUCT, SHOP_PAGE } from 'constant/routes';
 import cartStore from 'data/stores/cartStore'
 
 import { calculateAmount } from 'helper/stores/cartHelper';
@@ -51,9 +51,6 @@ const PanelCartMobile = observer(() => {
                     Сумма:<strong>{amount} тг</strong>
                 </h3>
                 <figure>
-                    <Link href={CART}>
-                        <a className="ps-btn">Корзина</a>
-                    </Link>
                     <Link href={CHECKOUT}>
                         <a className="ps-btn">Купить</a>
                     </Link>

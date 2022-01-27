@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+
+import { observer } from 'mobx-react-lite';
 
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { CART, HOME } from 'constant/routes';
+import cartStore  from "data/stores/cartStore"
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Checkout from 'presentation/page/Checkout';
 import Layout from "presentation/layout"
-import Head from 'next/head';
 
 
 interface ICheckoutPage{
     categories: Array<ICategory>
 }
 
-const CheckoutPage = ({ categories } : ICheckoutPage) => {
+const CheckoutPage = observer(({ categories } : ICheckoutPage) => {
+    const Router = useRouter()
+
+    useEffect(() => {
+           cartStore.getCartFromApi().then(() => {
+               if(cartStore.cart.length <= 0)
+                   Router.push(HOME);
+           })
+    })
+
     const breadCrumb = [
         {
             text: 'Главная',
@@ -44,7 +57,7 @@ const CheckoutPage = ({ categories } : ICheckoutPage) => {
             </div>
         </Layout>
     );
-};
+});
 
 export async function getStaticProps({ locale, req } : any){
     const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
