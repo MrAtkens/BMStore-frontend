@@ -33,13 +33,12 @@ const TableInvoices = ({orders} : ITableInvoices) => {
                 return(
                     <>
                         {productInOrders.map(product => {
-                            console.log(product)
                             return (
-                                <a key={product.id} className="ml-3">
-                                    <Link href={PRODUCT(product.id)}>
-                                        {product.title}
+                                    <Link key={product.productId} passHref href={PRODUCT(product.productId)}>
+                                        <a className="ml-3">
+                                            {product.title}<sup>{product.count}</sup>
+                                        </a>
                                     </Link>
-                                </a>
                             );
                         })}
                     </>

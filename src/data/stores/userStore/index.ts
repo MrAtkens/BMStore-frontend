@@ -56,7 +56,6 @@ class UserStore implements IUserStore{
     }
 
     async registration(fullName: string, phoneNumber: string, email:string, password : string, address: string){
-        console.log(address)
         const response = await authenticationService.userSingUpApi(fullName, phoneNumber, email, password, address);
         console.log(response)
         registrationStatusValidation(response.status)
