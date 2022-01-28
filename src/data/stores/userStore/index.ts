@@ -7,6 +7,8 @@ import {
     registrationStatusValidation, userEditStatus,
     userGetDataStatus
 } from 'helper/responseStatus';
+import { toastServerError } from 'helper/toastify';
+
 import { authenticationService, userApiService } from "data/API"
 import { USER_FIRST_PART, USER_ID, USER_SECOND_PART, USER_THIRD_PART } from 'constant/storageNames';
 import { IUser } from 'domain/interfaces/IUser';
@@ -66,11 +68,18 @@ class UserStore implements IUserStore{
 
     async getUserData(){
         const response = await userApiService.getUserApi();
-        userGetDataStatus(response.status)
-        if(response.status === 200) {
-            this.setUser(response.data.id, response.data.fullname, response.data.phone, response.data.email, response.data.address)
-            this.setIsAuth(true);
-            localStorage.setItem(USER_ID, JSON.stringify(response.data.id));
+        if(response === false){
+            await this.singOut().then(() => {
+                toastServerError()
+            })
+        }
+        else {
+            userGetDataStatus(response.status)
+            if (response.status === 200) {
+                this.setUser(response.data.id, response.data.fullname, response.data.phone, response.data.email, response.data.address)
+                this.setIsAuth(true);
+                localStorage.setItem(USER_ID, JSON.stringify(response.data.id));
+            }
         }
     }
 
