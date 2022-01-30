@@ -13,8 +13,8 @@ interface IBanners{
 
 const Banners = ({categories} : IBanners) => {
     const carouselSettings = {
-        dots: true,
-        arrows: true,
+        dots: false,
+        arrows: false,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
@@ -34,21 +34,19 @@ const Banners = ({categories} : IBanners) => {
                                 <img src="/static/img/slider/home-5/1.jpg" alt="CATS" />
                             </Link>
                         </div>
-                        <div className="item">
+                        <div className='item'>
                             <Link passHref href={SHOP_PAGE()}>
                                 <img src="/static/img/slider/home-5/2.jpg" alt="CATS" />
                             </Link>
                         </div>
-                        <div className="item">
+                        <div className='item'>
                             <Link passHref href={SHOP_PAGE()}>
                                 <img src="/static/img/slider/home-5/3.jpg" alt="CATS" />
                             </Link>
                         </div>
                     </Slider>
                     <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
-                        </div>
+                        <img src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
                     </Link>
                 </div>
                 <div className="ps-section__right">
