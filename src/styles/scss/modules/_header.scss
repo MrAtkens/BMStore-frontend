@@ -25,7 +25,6 @@
             width: 20px;
             height: 20px;
             color: #ffffff;
-            background-color: #000000;
             border-radius: 50%;
 
             i {
@@ -38,7 +37,10 @@
 
         &:hover {
             i {
-                color: #ffffff;
+                color: $color-1st;
+            }
+            span{
+                color: $color-header-text
             }
         }
     }
@@ -256,7 +258,7 @@
     }
 
     .header__content-center {
-        max-width: 600px;
+        max-width: 700px;
     }
 
     .menu--product-categories {
@@ -268,7 +270,7 @@
     }
 
     .ps-form--quick-search {
-        width: 600px;
+        width: 700px;
 
         button {
             background-color: $color-1st;
@@ -421,12 +423,6 @@
         }
     }
 
-    .header__extra {
-        span {
-            background-color: $color-1st;
-        }
-    }
-
     .header__actions {
         i {
             font-size: 24px;
@@ -487,7 +483,15 @@
 
             i {
                 color: #ffffff;
-                font-weight: 600;
+                font-weight: 700;
+            }
+        }
+        &:hover {
+            i {
+                color: $color-header-text !important;
+            }
+            span{
+                color: $color-heading !important;
             }
         }
     }

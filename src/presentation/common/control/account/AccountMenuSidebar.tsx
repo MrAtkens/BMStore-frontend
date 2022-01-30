@@ -29,7 +29,7 @@ const AccountMenuSidebar = observer(({ data } : IAccountMenuSidebar) => {
         <aside className="ps-widget--account-dashboard">
             <div className="ps-widget__header">
                 <figure>
-                    <figcaption>Здравствуйте</figcaption>
+                    <figcaption>Здравствуйте, </figcaption>
                     <p>{userStore.user.fullName}</p>
                 </figure>
             </div>

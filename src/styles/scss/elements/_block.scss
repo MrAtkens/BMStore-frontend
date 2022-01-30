@@ -900,39 +900,12 @@
 
     .ps-block__header {
         padding: 0 80px;
-    }
-
-    .ps-tab-list {
-        a {
-            display: block;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 2px solid transparent;
-
-            i {
-                font-size: 36px;
-            }
-
-            span {
-                display: block;
-            }
-
-            &:hover {
-                i {
-                    color: $color-1st;
-                }
-
-                border-color: $color-1st;
-            }
-
-            &.active {
-                i {
-                    color: $color-1st;
-                }
-
-                border-color: $color-1st;
-            }
-        }
+        display: inline-flex;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
     }
 
     .ps-block__item {
@@ -947,8 +920,10 @@
         .image-container {
             display: block;
             width: 150px;
-            margin: 30px 15px 20px;
             overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
             cursor: pointer;
 
             img {

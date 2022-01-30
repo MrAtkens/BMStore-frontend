@@ -53,7 +53,10 @@ const FormCheckoutInformation = observer(() =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста введите адрес доставки',
+                            type: 'string',
+                            min: 3,
+                            max: 200,
+                            message: 'Пожалуйста, введите адрес доставки',
                         },
                     ]}>
                     <AutoComplete
@@ -81,7 +84,10 @@ const FormCheckoutInformation = observer(() =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Введите ваше ФИО',
+                            type: 'string',
+                            min: 2,
+                            max: 100,
+                            message: 'Пожалуйста введите ваше ФИО',
                         },
                     ]}>
                     <Input
@@ -98,7 +104,7 @@ const FormCheckoutInformation = observer(() =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста введите номер телефона',
+                            message: 'Пожалуйста, введите номер телефона',
                         },
                         {
                             min: 10,
@@ -121,11 +127,11 @@ const FormCheckoutInformation = observer(() =>{
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста введите вашу почту',
+                            message: 'Пожалуйста, введите вашу почту',
                         },
                         {
                             type: "email",
-                            message: 'Пожалуйста введите корректную почту',
+                            message: 'Не корректная почта',
                         },
 
                     ]}>

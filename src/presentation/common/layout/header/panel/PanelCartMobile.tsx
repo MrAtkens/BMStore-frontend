@@ -33,7 +33,7 @@ const PanelCartMobile = observer(() => {
                         onClick={(e) => handleRemoveCartItem(e, item.productId, item.title)}>
                         <i className='icon-cross'/>
                     </a>
-                    <div className="display-1">
+                    <div className="ps-mobile__product__container">
                         <Link href={PRODUCT(item.productId)}>
                             <a className="ps-product__title">{item.title}</a>
                         </Link>

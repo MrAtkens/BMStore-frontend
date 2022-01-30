@@ -1,4 +1,4 @@
-import { ABOUT_US, CHECKOUT, CONTACTS, SHOP_PAGE, USER, WISHLIST } from '../routes';
+import { ABOUT_US, CONTACTS, SHOP_PAGE, USER, WISHLIST } from '../routes';
 
 export const accountLinks = [
 	{
@@ -8,10 +8,6 @@ export const accountLinks = [
 	{
 		text: 'Избранные',
 		url: WISHLIST,
-	},
-	{
-		text: 'Оплата',
-		url: CHECKOUT,
 	},
 	{
 		text: 'Магазин',

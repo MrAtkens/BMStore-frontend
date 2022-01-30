@@ -57,7 +57,10 @@ const UserInformationForm = observer(() => {
 							rules={[
 								{
 									required: true,
-									message: 'Пожалуйста введите ваш адрес',
+									type: 'string',
+									min: 3,
+									max: 200,
+									message: 'Пожалуйста, введите адрес доставки',
 								},
 							]}>
 							<AutoComplete
@@ -82,7 +85,7 @@ const UserInformationForm = observer(() => {
 							rules={[
 								{
 									required: true,
-									message: 'Пожалуйста введите ваш номер телефона',
+									message: 'Пожалуйста, введите номер телефона',
 								},
 								{
 									min: 10,

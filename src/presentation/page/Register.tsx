@@ -48,9 +48,9 @@ const Register = observer(() => {
 										{
 											required: true,
 											type: 'string',
-											min: 3,
-											max: 60,
-											message: 'Пожалуйста, введите ваше ФИО',
+											min: 2,
+											max: 100,
+											message: 'Пожалуйста введите ваше ФИО',
 										},
 									]}>
 									<Input
@@ -67,12 +67,12 @@ const Register = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста, введите ваш номер телефона',
+											message: 'Пожалуйста, введите номер телефона',
 										},
 										{
 											min: 10,
 											max: 18,
-											message: 'Некорректный номер телефона',
+											message: 'Не корректный номер телефона',
 											pattern: /^[+][0-9]{10,18}$/i
 										}
 									]}>
@@ -92,9 +92,8 @@ const Register = observer(() => {
 										},
 										{
 											type: "email",
-											message: 'Введена некорректная почта',
+											message: 'Не корректная почта',
 										},
-
 									]}>
 									<Input
 										className="form-control"

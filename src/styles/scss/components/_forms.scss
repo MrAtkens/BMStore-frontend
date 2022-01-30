@@ -669,11 +669,9 @@
     }
 
     .ps-form__submit {
-        @media (min-width: 768px) {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-        }
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
     }
 }

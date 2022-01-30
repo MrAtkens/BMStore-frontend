@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
             <Html lang="ru">
                 <Head>
                     <meta charSet="utf-8"/>
-                    <meta name="theme-color" content="#D10068"/>
+                    <meta name="theme-color" content="#0faa8a"/>
                     <meta name='application-name' content="CATS"/>
                     <meta name='apple-mobile-web-app-capable' content='yes'/>
                     <meta name='apple-mobile-web-app-status-bar-style' content='default'/>

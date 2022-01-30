@@ -2130,6 +2130,11 @@
         max-width: 56px;
     }
 
+    .ps-mobile__product__container{
+        display: inline-grid;
+        font-size: 16pt;
+    }
+
     .ps-product__content {
         position: relative;
         padding-right: 30px;

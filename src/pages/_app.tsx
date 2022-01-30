@@ -14,8 +14,8 @@ import '../../public/static/fonts/Linearicons/Font/demo-files/demo.css';
 import '../../public/static/fonts/font-awesome/css/font-awesome.min.css';
 import '../../public/static/css/bootstrap.min.css';
 import '../../public/static/css/slick.min.css';
-import 'styles/scss/style.scss';
 import 'styles/scss/home-default.scss';
+import 'styles/scss/style.scss';
 
 const App = observer(({ Component, pageProps } : AppProps) => {
 

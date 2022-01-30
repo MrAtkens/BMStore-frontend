@@ -733,16 +733,8 @@
         }
     }
 
-    @include media('<xs') {
-        .ps-section__header {
-            h3 {
-                font-size: 18px;
-
-                span {
-                    font-size: 12px;
-                }
-            }
-        }
+    @include media('<sm') {
+        display: none;
     }
 }
 
