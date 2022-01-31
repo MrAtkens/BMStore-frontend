@@ -51,13 +51,18 @@ const RegisterPage = ({categories} : IRegisterPage) => {
 );
 };
 
+
 export async function getStaticProps({ locale, req } : any){
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
+	if(categoryResponse.data === undefined)
+		return {
+			props:{ categories: []},
+			revalidate: 1800
+		};
 	return {
 		props:{ categories: categoryResponse.data},
-		revalidate: 600
+		revalidate: 1200
 	};
 }
-
 
 export default RegisterPage;

@@ -87,7 +87,7 @@ const FormCheckoutInformation = observer(() =>{
                             type: 'string',
                             min: 2,
                             max: 100,
-                            message: 'Пожалуйста введите ваше ФИО',
+                            message: 'Пожалуйста, введите ваше ФИО',
                         },
                     ]}>
                     <Input
@@ -109,7 +109,7 @@ const FormCheckoutInformation = observer(() =>{
                         {
                             min: 10,
                             max: 18,
-                            message: 'Не корректный номер телефона',
+                            message: 'Не корректный номер телефона, номера телефона начинаются с +',
                             pattern: /^[+][0-9]{10,18}$/i
                         }
                     ]}>

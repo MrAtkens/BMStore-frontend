@@ -15,11 +15,11 @@ import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Layout from 'presentation/layout';
 
 interface IProductPage{
-    categoriesData: Array<ICategory>,
+    categories: Array<ICategory>,
     product: IProduct,
 }
 
-const ProductPage = ({categoriesData, product} : IProductPage) => {
+const ProductPage = ({categories, product} : IProductPage) => {
     const Router = useRouter();
     const [pageProduct, setPageProduct] = useState(product)
     const [loading, setLoading] = useState(true);
@@ -54,7 +54,7 @@ const ProductPage = ({categoriesData, product} : IProductPage) => {
         productView = <SkeletonProductDetail />;
     }
     return (
-        <Layout categories={categoriesData} title={"Главная страница - CATS"}>
+        <Layout categories={categories} title={"Главная страница - CATS"}>
             <Head>
                 <title>Продукт - {pageProduct.title}</title>
                 <meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
@@ -77,12 +77,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { pid } = context.query
     const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
     const productResponse = await productsApiService.getProductById(pid)
+
     if(productResponse.status === 404)
         return {
             notFound: true,
         }
+
+    if(categoryResponse.data === undefined)
+        return {
+            props:{ categories: [], product: productResponse.data},
+        };
     return {
-        props:{ categoriesData: categoryResponse.data, product: productResponse.data},
+        props:{ categories: categoryResponse.data, product: productResponse.data},
     };
 }
 

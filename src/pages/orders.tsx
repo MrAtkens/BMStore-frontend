@@ -86,6 +86,10 @@ export async function getServerSideProps({ locale, req } : any){
 		const response = await ordersApiService.getAuthorizeOrders(cookies[USER_FIRST_PART] + '.' + cookies[USER_SECOND_PART] + '.' + cookies[USER_THIRD_PART])
 		orders = response.data.orders
 	}
+	if(categoryResponse.data === undefined)
+		return {
+			props:{ categories: [], orders: orders},
+		};
 	return {
 		props:{ categories: categoryResponse.data, orders: orders},
 	};

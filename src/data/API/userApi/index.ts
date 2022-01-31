@@ -9,8 +9,7 @@ const getUserApi = async () => {
   return await axios.get(`${BackendUrl}/user`,
       {headers:
         { Authorization: `Bearer ${getUser()}` }}).then(response => {
-            if(response.status === 500)
-                return false
+
         return response
   }).catch(error => {
     return error.response

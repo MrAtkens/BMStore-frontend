@@ -67,7 +67,7 @@ class UserStore implements IUserStore{
 
     async getUserData(){
         const response = await userApiService.getUserApi();
-        if(response === false){
+        if(response.data === undefined){
             await this.singOut().then(() => {
                 toastServerError()
             })

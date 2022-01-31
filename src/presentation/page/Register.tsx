@@ -50,7 +50,7 @@ const Register = observer(() => {
 											type: 'string',
 											min: 2,
 											max: 100,
-											message: 'Пожалуйста введите ваше ФИО',
+											message: 'Пожалуйста, введите ваше ФИО',
 										},
 									]}>
 									<Input
