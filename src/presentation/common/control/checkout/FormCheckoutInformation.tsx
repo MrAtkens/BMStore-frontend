@@ -109,7 +109,7 @@ const FormCheckoutInformation = observer(() =>{
                         {
                             min: 10,
                             max: 18,
-                            message: 'Не корректный номер телефона, номера телефона начинаются с +',
+                            message: 'Некорректный номер телефона. Номера телефонов начинаются со знаком "+"',
                             pattern: /^[+][0-9]{10,18}$/i
                         }
                     ]}>
@@ -131,7 +131,7 @@ const FormCheckoutInformation = observer(() =>{
                         },
                         {
                             type: "email",
-                            message: 'Не корректная почта',
+                            message: 'Некорректная почта',
                         },
 
                     ]}>
