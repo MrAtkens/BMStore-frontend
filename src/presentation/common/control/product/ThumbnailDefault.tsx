@@ -101,7 +101,7 @@ const ThumbnailDefault = ({ product, vertical = true } : IThumbnailDefault) => {
         galleryImagesView = productImages.map((item, index) => (
             <div className="item" key={item}>
                 <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
-                    <Image width={600} height={600} src={item} alt={item} />
+                    <Image layout='responsive' width={600} height={600} src={item} alt={item} />
                 </a>
             </div>
         ));

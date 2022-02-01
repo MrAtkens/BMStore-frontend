@@ -1,51 +1,53 @@
 import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Drawer } from 'antd';
-import PanelMenu from '../panel/PanelMenu';
-import PanelCartMobile from '../panel/PanelCartMobile';
-import PanelSearch from '../panel/PanelSearch';
-import PanelCategories from '../panel/PanelCategories';
+
 import {ICategory} from "domain/interfaces/ICategory";
+import cartStore from 'data/stores/cartStore';
+import PanelCartMobile from '../panel/PanelCartMobile';
+import PanelCategories from '../panel/PanelCategories';
+import PanelSearch from '../panel/PanelSearch';
+import PanelMenu from '../panel/PanelMenu';
 
 interface INavigationList{
     categories: Array<ICategory>
 }
 
-const NavigationList = ({categories} : INavigationList) => {
+const NavigationList = observer(({categories} : INavigationList) => {
     const [menuDrawer, setMenuDrawer] = useState(false);
-    const [cartDrawer, setCartDrawer] = useState(false);
     const [searchDrawer, setSearchDrawer] = useState(false);
     const [categoriesDrawer, setCategoriesDrawer] = useState(false);
 
     const handleDrawerClose = () => {
         setMenuDrawer(false)
-        setCartDrawer(false)
+        cartStore.setIsMobileCartOpen(false)
         setSearchDrawer(false)
         setCategoriesDrawer(false)
     };
 
     const handleShowMenuDrawer = () => {
         setMenuDrawer(!menuDrawer)
-        setCartDrawer(false)
+        cartStore.setIsMobileCartOpen(false)
         setSearchDrawer(false)
         setCategoriesDrawer(false)
     };
 
     const handleShowCartDrawer = () => {
         setMenuDrawer(false)
-        setCartDrawer(!cartDrawer)
+        cartStore.setIsMobileCartOpen(!cartStore.isMobileCartOpen)
         setSearchDrawer(false)
         setCategoriesDrawer(false)
     };
     const handleShowSearchDrawer = () => {
         setMenuDrawer(false)
-        setCartDrawer(false)
+        cartStore.setIsMobileCartOpen(false)
         setSearchDrawer(!searchDrawer)
         setCategoriesDrawer(false)
     };
 
     const handleShowCategoriesDrawer = () => {
         setMenuDrawer(false)
-        setCartDrawer(false)
+        cartStore.setIsMobileCartOpen(false)
         setSearchDrawer(false)
         setCategoriesDrawer(!categoriesDrawer)
     };
@@ -77,7 +79,7 @@ const NavigationList = ({categories} : INavigationList) => {
                 placement="right"
                 closable={false}
                 onClose={handleDrawerClose}
-                visible={cartDrawer}>
+                visible={cartStore.isMobileCartOpen}>
                 <div className="ps-panel--wrapper">
                     <div className="ps-panel__header">
                         <h3>Корзина</h3>
@@ -163,7 +165,7 @@ const NavigationList = ({categories} : INavigationList) => {
                 <a
                     href="#"
                     className={`navigation__item ${
-                        cartDrawer ? 'active' : ''
+                        cartStore.isMobileCartOpen ? 'active' : ''
                     }`}
                     onClick={handleShowCartDrawer}>
                     <i className='icon-bag2'/>
@@ -172,6 +174,6 @@ const NavigationList = ({categories} : INavigationList) => {
             </div>
         </div>
     );
-}
+})
 
 export default NavigationList;

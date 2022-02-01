@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import CustomMenu from 'presentation/common/typography/menu/CustomMenu';
+import CategoryMenu from 'presentation/common/typography/menu/CategoryMenu';
 
 interface IWidgetShopCategories{
     categories: Array<ICategory>
@@ -16,8 +16,8 @@ const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
         if (categories && categories.length > 0) {
             categoriesView =
                 <ul className="ps-list--categories">
-                    <CustomMenu
-                        mode={'vertical'}
+                    <CategoryMenu
+                        mode={'inline'}
                         source={categories}
                         className="menu--dropdown"
                     />

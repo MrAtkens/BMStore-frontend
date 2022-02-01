@@ -75,7 +75,6 @@ export const toastRegistrationError = () => {
 		placement: 'bottomRight'
 	});
 };
-
 //Wishlist
 export const toastProductAddToWishList = (title) => {
 	notification.info({

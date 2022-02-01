@@ -8,7 +8,6 @@ import AutoComplete from 'react-google-autocomplete';
 const UserInformationForm = observer(() => {
 
 	const onFinish = async (values: any) => {
-		console.log('Success:', values);
 		await userStore.userEdit(values.name, values.address, values.phone)
 	};
 

@@ -7,10 +7,12 @@ import { productAddToCart, productRemoveFromCart } from 'helper/responseStatus';
 
 interface ICartStore{
 	cart : Array<ICartProduct>,
+	isMobileCartOpen: boolean
 }
 
 class CartStore implements ICartStore{
 	cart = [] as Array<ICartProduct>;
+	isMobileCartOpen = false
 
 	constructor() {
 		makeAutoObservable(this)
@@ -36,10 +38,8 @@ class CartStore implements ICartStore{
 	}
 
 	async addToCart(productId: string, productQuantity: number, title: string){
-		console.log(productId)
 		const response = await cartApiService.addToCart(productId, getUserId(), productQuantity)
 		if(response.data !== undefined) {
-			console.log(response.status)
 			this.setCart(response.data.data)
 			productAddToCart(response.status, title)
 		}
@@ -48,7 +48,6 @@ class CartStore implements ICartStore{
 	async removeFromCart(productId: string, title: string) {
 		const response = await cartApiService.removeFromCart(productId, getUserId())
 		if (response.data !== undefined) {
-			console.log(response.status)
 			this.setCart(response.data.data)
 			productRemoveFromCart(response.status, title)
 		}
@@ -57,6 +56,10 @@ class CartStore implements ICartStore{
 
 	setCart(cart : Array<ICartProduct>){
 		this.cart = cart;
+	}
+
+	setIsMobileCartOpen(status: boolean){
+		this.isMobileCartOpen = status
 	}
 }
 

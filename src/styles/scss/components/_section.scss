@@ -733,6 +733,11 @@
         }
     }
 
+}
+
+.ps-promotion-footer{
+    padding: 70px 0;
+
     @include media('<sm') {
         display: none;
     }

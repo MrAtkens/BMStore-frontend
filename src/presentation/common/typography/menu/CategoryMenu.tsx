@@ -16,7 +16,7 @@ interface IMenu{
     mode: string
 }
 
-const CustomMenu = observer(({ source, className, mode } : IMenu) => {
+const CategoryMenu = observer(({ source, className, mode } : IMenu) => {
     const [current, setCurrent] = useState("");
     const Router = useRouter()
     const { category, searchText } = Router.query
@@ -42,7 +42,10 @@ const CustomMenu = observer(({ source, className, mode } : IMenu) => {
     const renderMultiple = (category : ICategory) => {
         if(category.children.length != 0 )
             return(
-                <SubMenu onTitleClick={handleClick} key={category.id} title={category.name}>
+                <SubMenu key={category.name} title={category.name}>
+                    <Menu.Item key={category.id}>
+                        Все {category.name}
+                    </Menu.Item>
                     {category.children?.map(itemDropDown => {
                         if(itemDropDown.children.length != 0)
                             return renderMultiple(itemDropDown)
@@ -77,7 +80,8 @@ const CustomMenu = observer(({ source, className, mode } : IMenu) => {
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'horizontal'} className={className}>{menuView}</Menu>;
     else if(mode === 'vertical')
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
-    return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
+    else
+        return <Menu onClick={handleClick} selectedKeys={[current]} mode={'inline'} className={className}>{menuView}</Menu>;
 });
 
-export default CustomMenu;
+export default CategoryMenu;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ABOUT_US, CHECKOUT, CONTACTS, ORDERS, SHOP_PAGE, USER } from 'constant/routes';
+import { CART, CHECKOUT, CONTACTS, ORDERS, SHOP_PAGE, WISHLIST } from 'constant/routes';
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
@@ -41,13 +41,13 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Ссылки</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <a>Магазин</a>
+                    <Link passHref href={ORDERS}>
+                        <a>Заказы</a>
                     </Link>
                 </li>
                 <li>
-                    <Link passHref href={ORDERS}>
-                        <a>Заказы</a>
+                    <Link passHref href={CHECKOUT}>
+                        <a>Оплата</a>
                     </Link>
                 </li>
             </ul>
@@ -55,11 +55,11 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer">
             <h4 className="widget-title">Компания</h4>
             <ul className="ps-list--link">
-                <li>
-                    <Link passHref href={ABOUT_US}>
-                        <a>О нас</a>
-                    </Link>
-                </li>
+                {/*<li>*/}
+                {/*    <Link passHref href={ABOUT_US}>*/}
+                {/*        <a>О нас</a>*/}
+                {/*    </Link>*/}
+                {/*</li>*/}
                 <li>
                     <Link passHref href={CONTACTS}>
                         <a>Контакты</a>
@@ -71,13 +71,18 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Магазин</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link passHref href={CHECKOUT}>
-                        <a>Оплата</a>
+                    <Link passHref href={SHOP_PAGE()}>
+                        <a>Магазин</a>
                     </Link>
                 </li>
                 <li>
-                    <Link passHref href={USER}>
-                        <a>Аккаунт</a>
+                    <Link passHref href={CART}>
+                        <a>Корзина</a>
+                    </Link>
+                </li>
+                <li>
+                    <Link passHref href={WISHLIST}>
+                        <a>Избранные</a>
                     </Link>
                 </li>
             </ul>

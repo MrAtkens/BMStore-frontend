@@ -8,15 +8,22 @@ import { PRODUCT } from 'constant/routes';
 
 function getImageURL(images : Array<IImage>) {
     let imageURL;
-
+    let isMainNotFound = true;
     if (images) {
         images.map(image => {
-            if(image.isMain)
-                imageURL = image.url;
+            if(image.isMain) {
+                if(image.url === null)
+                    imageURL = `/static/img/not-found.jpg`;
+                else
+                    imageURL = image.url;
+                isMainNotFound = false
+            }
         })
     } else {
         imageURL = `/static/img/not-found.jpg`;
     }
+    if(isMainNotFound)
+        imageURL = `/static/img/not-found.jpg`;
     return imageURL;
 }
 
@@ -26,6 +33,7 @@ export default function useProduct() {
             return (
                 <LazyLoad>
                     <Image
+                        layout='responsive'
                         width={250}
                         height={250}
                         src={getImageURL(product.images)}

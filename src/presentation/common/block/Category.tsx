@@ -21,30 +21,30 @@ const Category = ({categories} : ICategoryBlock) => {
                 <div className="ps-section__content">
                     <div className="ps-block--categories-tabs ps-tab-root">
                         <div className="ps-block__header">
-                            {categories.map((category) => {
-                                if(category.imageUrl !== null && category.imageUrl !== undefined)
-                                    return(
-                                        <div className="ps-block__item">
-                                            <Link
-                                                passHref
-                                                href={SHOP_PAGE("category", category.id)}
-                                                key={category.id}>
-                                                <div className="image-container">
-                                                    <Image
-                                                        layout='responsive'
-                                                        width={600}
-                                                        height={600}
-                                                        src={category.imageUrl}
-                                                        alt={category.name}
-                                                    />
-                                                    <span className="category-title">{category.name}</span>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    )
-                                else
-                                    return null;
-                            })}
+                            <div className="ps-block__item">
+                                {categories.map((category) => {
+                                    if(category.imageUrl !== null && category.imageUrl !== undefined)
+                                        return(
+                                                <Link
+                                                    passHref
+                                                    href={SHOP_PAGE("category", category.id)}
+                                                    key={category.id}>
+                                                    <div className="image-container">
+                                                        <Image
+                                                            layout='responsive'
+                                                            width={600}
+                                                            height={600}
+                                                            src={category.imageUrl}
+                                                            alt={category.name}
+                                                        />
+                                                        <span className="category-title">{category.name}</span>
+                                                    </div>
+                                                </Link>
+                                        )
+                                    else
+                                        return null;
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,6 @@ const nextConfig = withPWA({
 			'cdn4.vectorstock.com',
 			'encrypted-tbn0.gstatic.com',
 			'thumbs.dreamstime.com',
-			'truevalue.com',
 			'images.unsplash.com',
 		],
 		minimumCacheTTL: 60000

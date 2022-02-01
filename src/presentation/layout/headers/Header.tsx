@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import {ICategory} from "domain/interfaces/ICategory";
-import { stickyHeader } from 'helper/commons/header';
-import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
-
-import SearchHeader from 'presentation/common/layout/header/SearchHeader';
-import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
-import CustomMenu from "presentation/common/typography/menu/CustomMenu";
-import { isUserAuth } from 'helper/commons/userHelper';
 import { Modal } from 'antd';
+
+import { HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
+import { accountLinks } from "constant/menus/quickLinks";
+import { isUserAuth } from 'helper/commons/userHelper';
+import { ICategory } from "domain/interfaces/ICategory";
+import { stickyHeader } from 'helper/commons/header';
+
+import ElectronicHeaderActions from 'presentation/common/layout/header/ElectronicHeaderActions';
+import CategoryMenu from "presentation/common/typography/menu/CategoryMenu";
+import SearchHeader from 'presentation/common/layout/header/SearchHeader';
+import MenuCustom from 'presentation/common/typography/menu/MenuCustom';
+
 
 interface IHeader{
     categories: Array<ICategory>
@@ -48,11 +51,11 @@ const Header = ({categories} : IHeader) => {
                                     <a>Магазин</a>
                                 </Link>
                             </li>
-                            <li>
-                                <Link passHref href={CONTACTS}>
-                                    <a>Контакты</a>
-                                </Link>
-                            </li>
+                            {/*<li>*/}
+                            {/*    <Link passHref href={CONTACTS}>*/}
+                            {/*        <a>Контакты</a>*/}
+                            {/*    </Link>*/}
+                            {/*</li>*/}
                             {/*<li>*/}
                             {/*    <Link href={ABOUT_US}>*/}
                             {/*        <a>О нас</a>*/}
@@ -85,7 +88,7 @@ const Header = ({categories} : IHeader) => {
                                 <span> Категории</span>
                             </div>
                             <div className="menu__content">
-                                <CustomMenu
+                                <CategoryMenu
                                     source={categories}
                                     mode={'vertical'}
                                     className="menu--dropdown"
@@ -110,8 +113,8 @@ const Header = ({categories} : IHeader) => {
                                 <span> Категории</span>
                             </div>
                             <div className="menu__content">
-                                <CustomMenu
-                                    source={categories}
+                                <MenuCustom
+                                    source={accountLinks}
                                     mode={'vertical'}
                                     className="menu--dropdown"
                                 />
@@ -120,13 +123,15 @@ const Header = ({categories} : IHeader) => {
                     </div>
                     <div className="navigation__right">
                         {categories.length >= 4 ? (
-                            <CustomMenu
+                            <CategoryMenu
                                 source={categories.slice(0, 4)}
+                                className="menu--dropdown"
                                 mode={'horizontal'}
                             />
                         ) : (
-                            <CustomMenu
+                            <CategoryMenu
                                 source={categories}
+                                className="menu--dropdown"
                                 mode={'horizontal'}
                             />
                         )}

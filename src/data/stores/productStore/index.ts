@@ -55,14 +55,11 @@ class ProductStore implements IProductStore{
 
     async setWishList() {
         const response = await wishListApiService.getWishList(getUserId())
-        console.log(response)
         this.wishList = response.data.data
     }
 
     async addToWishList(product: IProduct) {
         let isHas = false
-        console.log(product)
-        console.log(this.wishList.length)
         if(this.wishList.length !== 0)
             this.wishList.map(item => {
                 if (item.productId === product.id)
@@ -72,7 +69,6 @@ class ProductStore implements IProductStore{
             productNotAddToWishlist()
         } else {
             const response = await wishListApiService.addToWishList(product.id, getUserId())
-            console.log(response)
             this.wishList = response.data.value.data
             productAddToWishList(response.status, product.title)
         }
@@ -80,7 +76,6 @@ class ProductStore implements IProductStore{
 
     async removeFromWishList(productId: string, title) {
         const response = await wishListApiService.removeWishList(productId, getUserId())
-        console.log(response)
         this.wishList = response.data.value.data
         productRemoveFromWishlist(response.status, title)
     }

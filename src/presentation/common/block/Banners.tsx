@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { SHOP_PAGE } from 'constant/routes';
-import CustomMenu from "presentation/common/typography/menu/CustomMenu"
+import CategoryMenu from "presentation/common/typography/menu/CategoryMenu"
 import {ICategory} from "domain/interfaces/ICategory";
 
 interface IBanners{
@@ -25,7 +25,7 @@ const Banners = ({categories} : IBanners) => {
         <section className="ps-home-banner">
             <div className="container">
                 <div className="ps-section__left">
-                    <CustomMenu mode={'inline'} source={categories} className="menu--dropdown" />
+                    <CategoryMenu mode={'inline'} source={categories} className="menu--dropdown" />
                 </div>
                 <div className="ps-section__center">
                     <Slider {...carouselSettings}>

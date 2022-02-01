@@ -15,7 +15,6 @@ const Register = observer(() => {
 	const [form] = Form.useForm();
 
 	const onFinish = async (values: any) => {
-		console.log('Success:', values);
 		await userStore.registration(values.name, values.phone, values.email, values.password, values.address)
 	};
 

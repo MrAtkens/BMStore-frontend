@@ -7,6 +7,7 @@ import AccountQuickLinksMobile from './modules/AccountQuickLinksMobile';
 import userStore from "data/stores/userStore"
 import { LOGIN, WISHLIST } from 'constant/routes';
 import productStore from 'data/stores/productStore';
+import cartStore from 'data/stores/cartStore';
 
 const MobileHeaderActions = observer(() => {
     return (
@@ -19,6 +20,12 @@ const MobileHeaderActions = observer(() => {
                     </span>
                 </a>
             </Link>
+            <a onClick={() => cartStore.setIsMobileCartOpen(true)} className="header__extra" href="#">
+                <i className='icon-bag2'/>
+                <span>
+                        {cartStore.cart ? cartStore.cart.length : 0}
+                </span>
+            </a>
             {userStore.isAuthenticated && Boolean(userStore.isAuthenticated) ? (
                 <AccountQuickLinksMobile />
             ) : (

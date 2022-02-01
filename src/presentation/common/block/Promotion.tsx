@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { HOME } from 'constant/routes';
 
 const Promotion = () => (
-    <div className="ps-search-trending">
+    <div className="ps-promotion-footer">
         <div className="container">
             <Link passHref href={HOME}>
                 <Image width={1200} height={245} src="/static/img/promotions/simple.jpg" alt="martfury" />

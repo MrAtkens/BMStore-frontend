@@ -11,7 +11,6 @@ import { LOGIN, REGISTER } from 'constant/routes';
 const Login = observer(() => {
 
 	const onFinish = async (values: any) => {
-		console.log('Success:', values);
 		await userStore.authenticate(values.email, values.password)
 	};
 

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Head from 'next/head';
 
 import { observer } from 'mobx-react-lite';
@@ -7,7 +6,6 @@ import { observer } from 'mobx-react-lite';
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { CART, HOME } from 'constant/routes';
-import cartStore  from "data/stores/cartStore"
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Checkout from 'presentation/page/Checkout';
@@ -19,14 +17,6 @@ interface ICheckoutPage{
 }
 
 const CheckoutPage = observer(({ categories } : ICheckoutPage) => {
-    const Router = useRouter()
-
-    useEffect(() => {
-           cartStore.getCartFromApi().then(() => {
-               if(cartStore.cart.length <= 0)
-                   Router.push(HOME);
-           })
-    })
 
     const breadCrumb = [
         {
