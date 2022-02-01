@@ -61,8 +61,8 @@ const Header = ({categories} : IHeader) => {
                             {/*        <a>О нас</a>*/}
                             {/*    </Link>*/}
                             {/*</li>*/}
-                            <li>
-                                <a href="#" onClick={onOrdersClick}>Узнать статус заказа</a>
+                            <li onClick={onOrdersClick}>
+                                Узнать статус заказа
                             </li>
                         </ul>
                     </div>

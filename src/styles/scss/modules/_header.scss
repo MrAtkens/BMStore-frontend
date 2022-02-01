@@ -153,6 +153,8 @@
             margin-right: 16px;
             padding-right: 15px;
             position: relative;
+            color: #666666;
+
 
             &:after {
                 content: '';
@@ -161,10 +163,6 @@
                 height: 15px;
                 width: 0;
                 border-right: 1px solid #e1e1e1;
-            }
-
-            > a {
-                color: #666666;
             }
 
             &:last-child {
