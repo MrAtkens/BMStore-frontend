@@ -31,48 +31,48 @@ const Banners = ({categories} : IBanners) => {
                     <Slider {...carouselSettings}>
                         <div className="item">
                             <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/1.jpg" alt="CATS" />
+                                <img src="/static/img/slider/home-5/1.webp" alt="CATS" />
                             </Link>
                         </div>
                         <div className='item'>
                             <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/2.jpg" alt="CATS" />
+                                <img src="/static/img/slider/home-5/2.webp" alt="CATS" />
                             </Link>
                         </div>
                         <div className='item'>
                             <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/3.jpg" alt="CATS" />
+                                <img src="/static/img/slider/home-5/3.webp" alt="CATS" />
                             </Link>
                         </div>
                     </Slider>
                     <Link passHref href={SHOP_PAGE()}>
-                        <img src="/static/img/slider/home-5/promotion-6.jpg" alt="CATS" />
+                        <img src="/static/img/slider/home-5/promotion-6.webp" alt="CATS" />
                     </Link>
                 </div>
                 <div className="ps-section__right">
                     <Link passHref href={SHOP_PAGE()}>
                         <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-1.jpg" alt="CATS" />
+                            <Image src="/static/img/slider/home-5/promotion-1.webp" alt="CATS" />
                         </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
                         <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-2.jpg" alt="CATS" />
+                            <Image src="/static/img/slider/home-5/promotion-2.webp" alt="CATS" />
                         </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
                         <div className="image-container-full">
-                            <Image src="/static/img/slider/home-5/promotion-3.jpg" alt="CATS" />
+                            <Image src="/static/img/slider/home-5/promotion-3.webp" alt="CATS" />
                         </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
                         <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-4.jpg" alt="CATS" />
+                            <Image src="/static/img/slider/home-5/promotion-4.webp" alt="CATS" />
                         </div>
                     </Link>
                     <Link passHref href={SHOP_PAGE()}>
                         <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-5.jpg" alt="CATS" />
+                            <Image src="/static/img/slider/home-5/promotion-5.webp" alt="CATS" />
                         </div>
                     </Link>
                 </div>
