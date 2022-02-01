@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Slider } from 'antd';
 import { useRouter } from 'next/router';
+import { Slider } from 'antd';
+
 import { generateShopUrl } from 'helper/commons/products';
 import productStore from 'data/stores/productStore';
 
@@ -22,17 +23,24 @@ const WidgetShopFilterByPriceRange = () => {
     }, [Router.query])
 
 
-    function handleChangeRange(value : any) {
+    function handleChangeRange(value: any) {
         setMin(value[0]);
         setMax(value[1]);
+    }
 
+    const handleAfterChange = async () => {
         productStore.setProductLoading(false)
         //Проверка на то есть ли у нас уже введённые данные о макс и мин цене в url и их изменение
-        if(Router.asPath.includes("price_min") || Router.asPath.includes("price_max")){
-            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, value[0], value[1], page)}, undefined, {shallow: false, scroll: false})
-        }
-        else {
-            Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, value[0], value[1], page)}, undefined, {shallow: false, scroll: false})
+        if (Router.asPath.includes("price_min") || Router.asPath.includes("price_max")) {
+            await Router.push({
+                pathname: '/shop',
+                query: generateShopUrl(category, filters, searchText, min, max, page)
+            }, undefined, { shallow: false, scroll: false })
+        } else {
+            await Router.push({
+                pathname: '/shop',
+                query: generateShopUrl(category, filters, searchText, min, max, page)
+            }, undefined, { shallow: false, scroll: false })
 
         }
     }
@@ -46,7 +54,8 @@ const WidgetShopFilterByPriceRange = () => {
                     value={[min, max]}
                     defaultValue={[50, 1000000]}
                     max={1000000}
-                    onChange={(e) => handleChangeRange(e)}
+                    onChange={handleChangeRange}
+                    onAfterChange={handleAfterChange}
                 />
                 <p>
                     Цена: {min} тг - {max} тг
