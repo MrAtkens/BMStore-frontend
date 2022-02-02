@@ -37,7 +37,10 @@ const PanelCategories = ({ categories } : IPanelCategories) => {
     const renderMultiple = (category : ICategory) => {
         if(category.children.length != 0 )
             return(
-                <SubMenu onTitleClick={handleClick} key={category.id} title={category.name}>
+                <SubMenu title={category.name}>
+                    <Menu.Item key={category.id}>
+                        <a>Все {category.name}</a>
+                    </Menu.Item>
                     {category.children?.map(itemDropDown => {
                         if(itemDropDown.children.length != 0)
                             return renderMultiple(itemDropDown)

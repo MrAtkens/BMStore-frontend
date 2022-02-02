@@ -2,16 +2,28 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { HOME } from 'constant/routes';
-
-const Promotion = () => (
-    <div className="ps-promotion-footer">
-        <div className="container">
-            <Link passHref href={HOME}>
-                <Image width={1200} height={245} src="/static/img/promotions/simple.jpg" alt="martfury" />
+const Promotion = ({ link, image }) => {
+    if (image) {
+        return (
+            <Link href={link}>
+                <a className="ps-collection">
+                    <div className="image-container-promotion">
+                        <Image src={image} alt="CATS" />
+                    </div>
+                </a>
             </Link>
-        </div>
-    </div>
-);
+        );
+    } else {
+        return (
+            <Link href={link ? link : '/shop'}>
+                <a className="ps-collection">
+                    <div className="image-container-promotion">
+                        <Image src={"/static/img/not-found.jpg"} alt="CATS" />
+                    </div>
+                </a>
+            </Link>
+        );
+    }
+};
 
 export default Promotion;

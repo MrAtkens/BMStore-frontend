@@ -14,7 +14,7 @@ const Error = () => {
 							<Image
 								width={800}
 								height={360}
-								src="/static/img/404.jpg"
+								src="/static/img/404.webp"
 								alt="CATS страница 404"
 							/>
 							<h3>Упс, похоже, страница не найдена</h3>

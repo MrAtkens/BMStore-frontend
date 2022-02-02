@@ -7,7 +7,7 @@ import { categoryApiService } from "data/API"
 import Layout from "presentation/layout"
 import Banners from 'presentation/common/block/Banners';
 import Category from 'presentation/common/block/Category';
-import Promotion from 'presentation/common/block/Promotion';
+import PromotionMainPage from 'presentation/common/block/PromotionMainPage';
 
 interface IHome{
 	categories: Array<ICategory>
@@ -23,11 +23,11 @@ const Home = ({ categories } : IHome) => {
 				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
 				<meta name="author" content="Bazar-Jok Group"/>
 			</Head>
-			<main id="homepage-5">
+			<main id="homepage-1">
+				<Banners/>
 				<div className="container">
-					<Banners categories={categories}/>
 					<Category categories={categories} />
-					<Promotion />
+					<PromotionMainPage />
 				</div>
 			</main>
 		</Layout>

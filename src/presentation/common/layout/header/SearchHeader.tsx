@@ -17,17 +17,16 @@ const SearchHeader = observer(() => {
             setKeyword(searchText.toString())
     }, [searchText])
 
-    function handleSubmit(e : any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         productStore.setProductLoading(false)
-        if(keyword === ''){
-            Router.push(SHOP_PAGE(), undefined, { scroll: false })
-        }
-        else {
+        if (keyword === '') {
+            await Router.push(SHOP_PAGE(), undefined, { scroll: false })
+        } else {
             if (keyword === '' && searchText !== undefined)
-                Router.push(removeParamFromUrl(Router.asPath, "searchText"))
+                await Router.push(removeParamFromUrl(Router.asPath, "searchText"))
             else
-                Router.push({
+                await Router.push({
                     pathname: '/shop', query: generateShopUrl(category, filters, keyword,
                         price_min, price_max, page)
                 }, undefined, { shallow: false, scroll: false })

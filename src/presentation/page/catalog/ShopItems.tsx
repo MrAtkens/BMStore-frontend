@@ -126,7 +126,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
             <div className="ps-shopping__footer text-center">
                 <div className="ps-pagination">
                     <Pagination
-                        total={Math.ceil(productStore.productCount/pageSize) > 1 ? Math.ceil(productStore.productCount/pageSize) : 1}
+                        total={Math.ceil(productStore.productCount/pageSize)}
                         pageSize={pageSize}
                         responsive={true}
                         showSizeChanger={false}

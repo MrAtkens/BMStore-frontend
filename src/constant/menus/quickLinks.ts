@@ -1,6 +1,6 @@
-import { CART, CHECKOUT, SHOP_PAGE, WISHLIST } from '../routes';
+import { CART, CHECKOUT, ORDERS, SHOP_PAGE, USER, WISHLIST } from '../routes';
 
-export const accountLinks = [
+export const menuLinks = [
 	{
 		text: 'Избранные',
 		url: WISHLIST,
@@ -18,3 +18,14 @@ export const accountLinks = [
 		url: SHOP_PAGE(),
 	},
 ];
+
+export const accountLinks = [
+	{
+		text: "Аккаунт",
+		url: USER
+	},
+	{
+		text: "Заказы",
+		url: ORDERS
+	}
+]

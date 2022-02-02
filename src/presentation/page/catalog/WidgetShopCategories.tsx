@@ -18,6 +18,7 @@ const WidgetShopCategories = ({categories} : IWidgetShopCategories) => {
                 <ul className="ps-list--categories">
                     <CategoryMenu
                         mode={'inline'}
+                        isDeep={true}
                         source={categories}
                         className="menu--dropdown"
                     />

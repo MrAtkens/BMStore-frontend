@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Modal } from 'antd';
 
 import { HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
-import { accountLinks } from "constant/menus/quickLinks";
+import { menuLinks } from 'constant/menus/quickLinks';
 import { isUserAuth } from 'helper/commons/userHelper';
 import { ICategory } from "domain/interfaces/ICategory";
 import { stickyHeader } from 'helper/commons/header';
@@ -76,7 +76,7 @@ const Header = ({categories} : IHeader) => {
                                 <Image
                                     width={156}
                                     height={32}
-                                    src="/static/img/logo.png"
+                                    src="/static/img/logo.webp"
                                     alt="martfury"
                                 />
                             </a>
@@ -89,6 +89,7 @@ const Header = ({categories} : IHeader) => {
                             </div>
                             <div className="menu__content">
                                 <CategoryMenu
+                                    isDeep={false}
                                     source={categories}
                                     mode={'vertical'}
                                     className="menu--dropdown"
@@ -113,8 +114,9 @@ const Header = ({categories} : IHeader) => {
                                 <span> Категории</span>
                             </div>
                             <div className="menu__content">
-                                <MenuCustom
-                                    source={accountLinks}
+                                <CategoryMenu
+                                    isDeep={false}
+                                    source={categories}
                                     mode={'vertical'}
                                     className="menu--dropdown"
                                 />
@@ -122,19 +124,11 @@ const Header = ({categories} : IHeader) => {
                         </div>
                     </div>
                     <div className="navigation__right">
-                        {categories.length >= 4 ? (
-                            <CategoryMenu
-                                source={categories.slice(0, 4)}
-                                className="menu--dropdown"
-                                mode={'horizontal'}
-                            />
-                        ) : (
-                            <CategoryMenu
-                                source={categories}
-                                className="menu--dropdown"
-                                mode={'horizontal'}
-                            />
-                        )}
+                        <MenuCustom
+                            source={menuLinks}
+                            className="menu--dropdown"
+                            mode={'horizontal'}
+                        />
                     </div>
                     <div className="ps-block--header-hotline inline">
                         <p>
@@ -145,7 +139,7 @@ const Header = ({categories} : IHeader) => {
                 </div>
             </nav>
             <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Зайти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
-                <p>1. Вы можете зайти в систему и просмотреть ваши заказы там, для это нажимите Зайти</p>
+                <p>1. Вы можете зайти в систему и просмотреть ваши заказы, для этого нажмите на кнопку Зайти</p>
                 <p>2. Вы можете позвонить нам по номеру телефона: 88003355335</p>
             </Modal>
         </header>

@@ -1,84 +1,61 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Slider from 'react-slick';
-import Image from 'next/image';
 import Link from 'next/link';
-
+import Promotion from 'presentation/common/block/Promotion';
+import NextArrow from '../typography/NextArrow';
+import PrevArrow from '../typography/PrevArrow';
 import { SHOP_PAGE } from 'constant/routes';
-import CategoryMenu from "presentation/common/typography/menu/CategoryMenu"
-import {ICategory} from "domain/interfaces/ICategory";
 
-interface IBanners{
-    categories: Array<ICategory>
-}
-
-const Banners = ({categories} : IBanners) => {
-    const carouselSettings = {
+const Banners = () => {
+    const [bannerItems] = useState([
+        {id: 1, imageUrl: "/static/img/slider/slide-1.webp"},
+        {id: 2, imageUrl: "/static/img/slider/slide-2.webp"},
+        {id: 3, imageUrl: "/static/img/slider/slide-3.webp"}
+    ])
+    const carouselSetting = {
         dots: false,
-        arrows: false,
         infinite: true,
-        speed: 1000,
+        speed: 750,
+        fade: true,
         slidesToShow: 1,
         slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
     };
 
+    // Views
+    let mainCarouselView;
+    if (bannerItems) {
+        const carouseItems = bannerItems.map((item) => (
+            <div key={item.id} className="item">
+                <Link passHref href={SHOP_PAGE()}>
+                    <img src={item.imageUrl} alt="CATS" />
+                </Link>
+            </div>
+        ));
+        mainCarouselView = (
+            <Slider {...carouselSetting} className="ps-carousel">
+                {carouseItems}
+            </Slider>
+        );
+    }
     return (
-        <section className="ps-home-banner">
-            <div className="container">
-                <div className="ps-section__left">
-                    <CategoryMenu mode={'inline'} source={categories} className="menu--dropdown" />
-                </div>
-                <div className="ps-section__center">
-                    <Slider {...carouselSettings}>
-                        <div className="item">
-                            <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/1.webp" alt="CATS" />
-                            </Link>
-                        </div>
-                        <div className='item'>
-                            <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/2.webp" alt="CATS" />
-                            </Link>
-                        </div>
-                        <div className='item'>
-                            <Link passHref href={SHOP_PAGE()}>
-                                <img src="/static/img/slider/home-5/3.webp" alt="CATS" />
-                            </Link>
-                        </div>
-                    </Slider>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <img src="/static/img/slider/home-5/promotion-6.webp" alt="CATS" />
-                    </Link>
-                </div>
+        <div className="ps-home-banner ps-home-banner--1">
+            <div className="ps-container">
+                <div className="ps-section__left">{mainCarouselView}</div>
                 <div className="ps-section__right">
-                    <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-1.webp" alt="CATS" />
-                        </div>
-                    </Link>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-2.webp" alt="CATS" />
-                        </div>
-                    </Link>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container-full">
-                            <Image src="/static/img/slider/home-5/promotion-3.webp" alt="CATS" />
-                        </div>
-                    </Link>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-4.webp" alt="CATS" />
-                        </div>
-                    </Link>
-                    <Link passHref href={SHOP_PAGE()}>
-                        <div className="image-container">
-                            <Image src="/static/img/slider/home-5/promotion-5.webp" alt="CATS" />
-                        </div>
-                    </Link>
+                    <Promotion
+                        link={SHOP_PAGE()}
+                        image={"/static/img/promotions/promotion-1.webp"}
+                    />
+                    <Promotion
+                        link={SHOP_PAGE()}
+                        image={"/static/img/promotions/promotion-2.webp"}
+                    />
                 </div>
             </div>
-        </section>
+        </div>
     );
-}
+};
 
 export default Banners;

@@ -13,17 +13,17 @@ function getImageURL(images : Array<IImage>) {
         images.map(image => {
             if(image.isMain) {
                 if(image.url === null)
-                    imageURL = `/static/img/not-found.jpg`;
+                    imageURL = `/static/img/not-found.webp`;
                 else
                     imageURL = image.url;
                 isMainNotFound = false
             }
         })
     } else {
-        imageURL = `/static/img/not-found.jpg`;
+        imageURL = `/static/img/not-found.webp`;
     }
     if(isMainNotFound)
-        imageURL = `/static/img/not-found.jpg`;
+        imageURL = `/static/img/not-found.webp`;
     return imageURL;
 }
 

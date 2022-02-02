@@ -6,7 +6,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 
 import userStore from "data/stores/userStore"
-import { LOGIN, REGISTER } from 'constant/routes';
+import { LOGIN, REGISTER, RESET } from 'constant/routes';
 
 const Login = observer(() => {
 
@@ -89,26 +89,9 @@ const Login = observer(() => {
 								</button>
 							</div>
 						</div>
-						{/*<div className="ps-form__footer">*/}
-						{/*	<p>Вход через соц сеть:</p>*/}
-						{/*	<ul className="ps-list--social">*/}
-						{/*		<li>*/}
-						{/*			<a className="facebook" href="#">*/}
-						{/*				<i className='fa fa-facebook'/>*/}
-						{/*			</a>*/}
-						{/*		</li>*/}
-						{/*		<li>*/}
-						{/*			<a className="google" href="#">*/}
-						{/*				<i className='fa fa-google-plus'/>*/}
-						{/*			</a>*/}
-						{/*		</li>*/}
-						{/*		<li>*/}
-						{/*			<a className="instagram" href="#">*/}
-						{/*				<i className='fa fa-instagram'/>*/}
-						{/*			</a>*/}
-						{/*		</li>*/}
-						{/*	</ul>*/}
-						{/*</div>*/}
+						<div className="ps-form__footer">
+							<Link href={RESET}>Забыли пароль?</Link>
+						</div>
 					</div>
 				</Form>
 			</div>

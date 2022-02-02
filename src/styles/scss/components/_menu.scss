@@ -363,6 +363,20 @@
             @include transform(scale3d(1, 1, 1) translateY(0));
         }
     }
+
+    ul:hover{
+        .menu__content {
+            @include show;
+            @include transform(scale3d(1, 1, 1) translateY(0));
+        }
+    }
+
+    li:hover{
+        .menu__content {
+            @include show;
+            @include transform(scale3d(1, 1, 1) translateY(0));
+        }
+    }
 }
 
 .menu--dropdown {

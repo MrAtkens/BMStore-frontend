@@ -13,7 +13,7 @@ function getImageURL(url : string) {
 	if (url) {
 		imageURL = url;
 	} else {
-		imageURL = `/static/img/not-found.jpg`;
+		imageURL = `/static/img/not-found.webp`;
 	}
 	return imageURL;
 }

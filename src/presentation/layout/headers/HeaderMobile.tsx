@@ -3,15 +3,15 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Modal } from 'antd';
 
 
-import productStore from 'data/stores/productStore';
 import { generateShopUrl, removeParamFromUrl } from 'helper/commons/products';
-import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
+import { HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
 import { isUserAuth } from 'helper/commons/userHelper';
+import productStore from 'data/stores/productStore';
 
 import MobileHeaderActions from "presentation/common/layout/header/MobileHeaderActions";
-import { Modal } from 'antd';
 
 const HeaderMobile = observer(() => {
     const Router = useRouter()
@@ -21,17 +21,16 @@ const HeaderMobile = observer(() => {
 
     const { filters, category, searchText, price_min, price_max, page } = Router.query
 
-    function handleSubmit(e : any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         productStore.setProductLoading(false)
-        if(keyword === ''){
-            Router.push(SHOP_PAGE(), undefined, { scroll: false })
-        }
-        else {
+        if (keyword === '') {
+            await Router.push(SHOP_PAGE(), undefined, { scroll: false })
+        } else {
             if (keyword === '' && searchText !== undefined)
-                Router.push(removeParamFromUrl(Router.asPath, "searchText"))
+                await Router.push(removeParamFromUrl(Router.asPath, "searchText"))
             else
-                Router.push({
+                await Router.push({
                     pathname: '/shop', query: generateShopUrl(category, filters, keyword,
                         price_min, price_max, page)
                 }, undefined, { shallow: false, scroll: false })
@@ -59,11 +58,11 @@ const HeaderMobile = observer(() => {
                                 <a>Магазин</a>
                             </Link>
                         </li>
-                        <li>
-                            <Link passHref href={CONTACTS}>
-                                <a>Контакты</a>
-                            </Link>
-                        </li>
+                        {/*<li>*/}
+                        {/*    <Link passHref href={CONTACTS}>*/}
+                        {/*        <a>Контакты</a>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         {/*<li>*/}
                         {/*    <Link href={ABOUT_US}>*/}
                         {/*        <a>О нас</a>*/}
@@ -82,7 +81,7 @@ const HeaderMobile = observer(() => {
                             <Image
                                 width={156}
                                 height={32}
-                                src="/static/img/logo_light.png"
+                                src="/static/img/logo_light.webp"
                                 alt="martfury"
                             />
                         </a>
@@ -112,7 +111,7 @@ const HeaderMobile = observer(() => {
                 </form>
             </div>
             <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Зайти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
-                <p>1. Вы можете зайти в систему и просмотреть ваши заказы там, для это нажимите Зайти</p>
+                <p>1. Вы можете зайти в систему и просмотреть ваши заказы, для этого нажмите на кнопку Зайти</p>
                 <p>2. Вы можете позвонить нам по номеру телефона: 88003355335</p>
             </Modal>
         </header>

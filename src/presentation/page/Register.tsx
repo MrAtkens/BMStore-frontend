@@ -6,7 +6,7 @@ import { Form, Input } from 'antd';
 import AutoComplete from "react-google-autocomplete";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-import { LOGIN, REGISTER } from 'constant/routes';
+import { LOGIN, REGISTER, RESET } from 'constant/routes';
 
 import userStore from 'data/stores/userStore';
 
@@ -129,7 +129,7 @@ const Register = observer(() => {
 									/>
 								</Form.Item>
 							</div>
-							<div className="form-group form-forgot">
+							<div className="form-group">
 								<Form.Item
 									name="password"
 									rules={[
@@ -159,6 +159,9 @@ const Register = observer(() => {
 									Регистрация
 								</button>
 							</div>
+						</div>
+						<div className="ps-form__footer">
+							<Link href={RESET}>Забыли пароль?</Link>
 						</div>
 					</div>
 				</Form>

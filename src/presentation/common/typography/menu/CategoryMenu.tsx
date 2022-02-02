@@ -13,10 +13,11 @@ const { SubMenu } = Menu;
 interface IMenu{
     source: Array<ICategory>,
     className?: string,
-    mode: string
+    mode: string,
+    isDeep: boolean
 }
 
-const CategoryMenu = observer(({ source, className, mode } : IMenu) => {
+const CategoryMenu = observer(({ source, className, mode, isDeep } : IMenu) => {
     const [current, setCurrent] = useState("");
     const Router = useRouter()
     const { category, searchText } = Router.query
@@ -40,24 +41,32 @@ const CategoryMenu = observer(({ source, className, mode } : IMenu) => {
     };
 
     const renderMultiple = (category : ICategory) => {
-        if(category.children.length != 0 )
-            return(
-                <SubMenu key={category.name} title={category.name}>
+        if(isDeep) {
+            if (category.children.length != 0)
+                return (
+                    <SubMenu key={category.name} title={category.name}>
+                        <Menu.Item key={category.id}>
+                            Все {category.name}
+                        </Menu.Item>
+                        {category.children?.map(itemDropDown => {
+                            if (itemDropDown.children.length != 0)
+                                return renderMultiple(itemDropDown)
+                            else
+                                return (<Menu.Item key={itemDropDown.id}>
+                                    {itemDropDown.name}
+                                </Menu.Item>)
+                        })}
+                    </SubMenu>
+                )
+            else
+                return (
                     <Menu.Item key={category.id}>
-                        Все {category.name}
+                        {category.name}
                     </Menu.Item>
-                    {category.children?.map(itemDropDown => {
-                        if(itemDropDown.children.length != 0)
-                            return renderMultiple(itemDropDown)
-                        else
-                            return(<Menu.Item key={itemDropDown.id}>
-                                {itemDropDown.name}
-                            </Menu.Item>)
-                    })}
-                </SubMenu>
-            )
+                )
+        }
         else
-            return(
+            return (
                 <Menu.Item key={category.id}>
                     {category.name}
                 </Menu.Item>
@@ -81,7 +90,7 @@ const CategoryMenu = observer(({ source, className, mode } : IMenu) => {
     else if(mode === 'vertical')
         return <Menu onClick={handleClick} selectedKeys={[current]} mode={'vertical'} className={className}>{menuView}</Menu>;
     else
-        return <Menu onClick={handleClick} selectedKeys={[current]} mode={'inline'} className={className}>{menuView}</Menu>;
+        return <Menu onClick={handleClick} inlineIndent={8} selectedKeys={[current]} mode={'inline'} className={className}>{menuView}</Menu>;
 });
 
 export default CategoryMenu;
