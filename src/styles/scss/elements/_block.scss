@@ -393,7 +393,7 @@
     }
 
     .ps-block__item {
-        display: flex;
+        display: inline-flex;
         flex-flow: row wrap;
         align-items: center;
         text-align: center;
@@ -403,8 +403,8 @@
         }
 
         .image-container {
-            display: block;
-            width: calc(100% / 4);
+            display: inherit;
+            width: calc(100% / 3);
             overflow: hidden;
             padding: 20px;
 
@@ -430,18 +430,8 @@
             }
 
             @include media('<md') {
-                display: block;
-                width: calc(100% / 3);
-                padding: 5px;
-
-            }
-            @include media('<sm') {
-                display: block;
                 width: calc(100% / 2);
-                padding: 10px;
-
             }
-
         }
     }
 

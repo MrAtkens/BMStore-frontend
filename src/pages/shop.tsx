@@ -95,19 +95,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	let categoriesList = [] as Array<ICategory>
 	let productsList = [] as Array<IProduct>
 	const {category, page, searchText, filters, price_min, price_max} = context.query
-
+	let currentPage = parseInt(page as string)
 	if(category !== undefined){
 		const response = await filtersApiService.getFilters("ru", category)
 		filterResponse = response.data.data;
 	}
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	const productResponse = await productsApiService.getProducts(parseInt(page as string)*12, (parseInt(page as string)-1)*12, searchText, category, filters, price_min, price_max)
+	if(currentPage <= 0 || isNaN(currentPage))
+		currentPage = 1
+	const productResponse = await productsApiService.getProducts(16, (currentPage-1)*16, searchText, category, filters, price_min, price_max)
 	if(categoryResponse.data !== undefined)
 		categoriesList = categoryResponse.data
 	if(productResponse.data !== undefined)
 		productsList = productResponse.data.data
 	return {
-		props:{ categoriesData: categoriesList, filtersData: filterResponse, products: productsList, productCount: productsList.length},
+		props:{ categoriesData: categoriesList, filtersData: filterResponse, products: productsList, productCount: productResponse.data.totalCount},
 	};
 }
 

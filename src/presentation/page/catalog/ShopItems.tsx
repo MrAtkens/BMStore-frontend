@@ -17,7 +17,7 @@ interface IShopItems{
     pageSize: number,
 }
 
-const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
+const ShopItems = observer(({ columns = 4, pageSize = 16 } : IShopItems) => {
     const Router = useRouter();
     const [page, setPage] = useState(1)
     const [listView, setListView] = useState(true);
@@ -33,7 +33,12 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
     }
 
     function handlePagination(pageNumber : number) {
-        Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, price_min, price_max, pageNumber)}, undefined, {shallow: false, scroll: false})
+        productStore.setProductLoading(false)
+        Router.push({pathname: '/shop', query: generateShopUrl(category, filters, searchText, price_min, price_max, pageNumber)}, undefined, {shallow: false, scroll: true}).then(() => {
+            setTimeout(() => {
+                productStore.setProductLoading(true)
+            },1000)
+        })
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +131,7 @@ const ShopItems = observer(({ columns = 4, pageSize = 12 } : IShopItems) => {
             <div className="ps-shopping__footer text-center">
                 <div className="ps-pagination">
                     <Pagination
-                        total={Math.ceil(productStore.productCount/pageSize)}
+                        total={productStore.productCount}
                         pageSize={pageSize}
                         responsive={true}
                         showSizeChanger={false}

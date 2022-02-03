@@ -24,8 +24,8 @@ const Home = ({ categories } : IHome) => {
 				<meta name="author" content="Bazar-Jok Group"/>
 			</Head>
 			<main id="homepage-1">
-				<Banners/>
 				<div className="container">
+					<Banners/>
 					<Category categories={categories} />
 					<PromotionMainPage />
 				</div>

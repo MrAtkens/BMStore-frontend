@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import Slider from 'react-slick';
-import Link from 'next/link';
 import Image from 'next/image';
 
-import Promotion from 'presentation/common/block/Promotion';
 import NextArrow from '../typography/NextArrow';
 import PrevArrow from '../typography/PrevArrow';
-import { SHOP_PAGE } from 'constant/routes';
 
 const Banners = () => {
     const [bannerItems] = useState([
@@ -16,47 +13,22 @@ const Banners = () => {
     ])
     const carouselSetting = {
         dots: false,
+        arrows: true,
         infinite: true,
-        speed: 750,
-        fade: true,
+        speed: 1000,
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
     };
-
-    // Views
-    let mainCarouselView;
-    if (bannerItems) {
-        const carouseItems = bannerItems.map((item) => (
-            <div key={item.id} className="item">
-                <Link passHref href={SHOP_PAGE()}>
-                    <a className="ps-banner-item--default">
-                        <Image loading="lazy" layout={'responsive'} priority objectFit={'cover'} src={item.imageUrl} alt="CATS" />
-                    </a>
-                </Link>
-            </div>
-        ));
-        mainCarouselView = (
-            <Slider {...carouselSetting} className="ps-carousel">
-                {carouseItems}
-            </Slider>
-        );
-    }
     return (
-        <div className="ps-home-banner ps-home-banner--1">
-            <div className="ps-container">
-                <div className="ps-section__left">{mainCarouselView}</div>
-                <div className="ps-section__right">
-                    <Promotion
-                        link={SHOP_PAGE()}
-                        image={"/static/img/promotions/promotion-1.webp"}
-                    />
-                    <Promotion
-                        link={SHOP_PAGE()}
-                        image={"/static/img/promotions/promotion-2.webp"}
-                    />
-                </div>
+        <div className="ps-shop-banner">
+            <div className="container">
+                <Slider {...carouselSetting} className="ps-carousel">
+                    {bannerItems.map((item) => (
+                        <Image key={item.id} loading="lazy" width={1200} height={500} priority objectFit={'cover'} src={item.imageUrl} alt="CATS" />
+                    ))}
+                </Slider>
             </div>
         </div>
     );
