@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import AutoComplete from 'react-google-autocomplete';
 import { observer } from 'mobx-react-lite';
 import { Form, Input, Result } from 'antd';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { CART } from 'constant/routes';
+import { CHECKOUT } from 'constant/routes';
 import { getWidget } from 'constant/payment';
 
 import { calculateAmount } from 'helper/stores/cartHelper';
@@ -14,9 +14,16 @@ import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
 
 const FormCheckoutInformation = observer(() =>{
-
     const [form] = Form.useForm();
     const [isProductEnough, setIsProductEnough] = useState(true)
+    const Router = useRouter();
+
+    useEffect(() => {
+        cartStore.getCartFromApi().then(() => {
+            if(cartStore.cart.length <= 0)
+                setIsProductEnough(false)
+        })
+    }, [])
 
     useEffect(() => {
         form.setFieldsValue({
@@ -28,9 +35,12 @@ const FormCheckoutInformation = observer(() =>{
     },[userStore.user.fullName, userStore.user.phone])
 
     useEffect(() => {
-        if(cartStore.cart.length <= 0)
-            setIsProductEnough(false)
+        cartStore.getCartFromApi().then(() => {
+            if(cartStore.cart.length <= 0)
+                setIsProductEnough(false)
+        })
     }, [cartStore.cart.length])
+
 
     const onFinish = async (values: any) => {
        if(cartStore.cart.length <= 0){
@@ -45,6 +55,19 @@ const FormCheckoutInformation = observer(() =>{
            })
        }
     };
+
+    const onReturnClick = async () => {
+        if (typeof window !== 'undefined') {
+            if(window.innerWidth > 800){
+                await Router.push(CHECKOUT)
+            }
+            else{
+                cartStore.setIsMobileCartOpen(true)
+            }
+        }
+        else
+            await Router.push(CHECKOUT)
+    }
 
 
     if(isProductEnough)
@@ -162,12 +185,10 @@ const FormCheckoutInformation = observer(() =>{
                 {/*    </div>*/}
                 {/*</div>*/}
                 <div className="ps-form__submit">
-                    <Link href={CART}>
-                        <a>
-                            <i className='icon-arrow-left mr-2'/>
-                            Вернуться в корзину
-                        </a>
-                    </Link>
+                    <div onClick={onReturnClick}>
+                        <i className='icon-arrow-left mr-2'/>
+                        Вернуться в корзину
+                    </div>
                     <div className="ps-block__footer">
                         <button type="submit" className="ps-btn">Продолжить</button>
                     </div>

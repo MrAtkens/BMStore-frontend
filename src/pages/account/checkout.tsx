@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { observer } from 'mobx-react-lite';
 
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -16,7 +15,7 @@ interface ICheckoutPage{
     categories: Array<ICategory>
 }
 
-const CheckoutPage = observer(({ categories } : ICheckoutPage) => {
+const CheckoutPage = ({ categories } : ICheckoutPage) => {
 
     const breadCrumb = [
         {
@@ -47,7 +46,7 @@ const CheckoutPage = observer(({ categories } : ICheckoutPage) => {
             </div>
         </Layout>
     );
-});
+}
 
 
 export async function getStaticProps({ locale, req } : any){

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Drawer } from 'antd';
 
@@ -8,15 +8,24 @@ import PanelCartMobile from '../panel/PanelCartMobile';
 import PanelCategories from '../panel/PanelCategories';
 import PanelSearch from '../panel/PanelSearch';
 import PanelMenu from '../panel/PanelMenu';
+import { useRouter } from 'next/router';
 
 interface INavigationList{
     categories: Array<ICategory>
 }
 
 const NavigationList = observer(({categories} : INavigationList) => {
+    const Router = useRouter();
     const [menuDrawer, setMenuDrawer] = useState(false);
     const [searchDrawer, setSearchDrawer] = useState(false);
     const [categoriesDrawer, setCategoriesDrawer] = useState(false);
+
+    useEffect(() => {
+        setMenuDrawer(false)
+        cartStore.setIsMobileCartOpen(false)
+        setSearchDrawer(false)
+        setCategoriesDrawer(false)
+    },[Router.pathname])
 
     const handleDrawerClose = () => {
         setMenuDrawer(false)

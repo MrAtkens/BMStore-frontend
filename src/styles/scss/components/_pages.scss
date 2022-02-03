@@ -49,23 +49,6 @@
             display: flex;
             flex-flow: row wrap;
 
-            .ps-block--category-vertical {
-                margin-bottom: 30px;
-                max-width: 20%;
-                padding: 30px 10px;
-                @include media('<lg') {
-                    max-width: 25%;
-                }
-                @include media('<md') {
-                    max-width: calc(100% / 3);
-                }
-                @include media('<sm') {
-                    max-width: 50%;
-                }
-                @include media('<xs') {
-                    max-width: 100%;
-                }
-            }
         }
     }
 }
@@ -174,84 +157,9 @@
     }
 }
 
-.ps-page--comming-soon {
-    text-align: center;
-    padding-bottom: 50px;
-    @extend %list-reset;
-
-    .ps-countdown {
-        li {
-            display: inline-block;
-            margin-right: 20px;
-
-            span {
-                margin-bottom: 0;
-                font-weight: 400;
-                font-size: 48px;
-                color: $color-heading;
-                line-height: 1em;
-            }
-
-            p {
-                margin-bottom: 0;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-
-    .ps-page__header {
-        padding: 50px 0;
-
-        .ps-logo {
-            display: inline-block;
-            margin-bottom: 50px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 36px;
-            font-weight: 600;
-        }
-
-    }
-
-    figure {
-        figcaption {
-            margin-bottom: 30px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .ps-countdown {
-            margin-bottom: 80px;
-        }
-    }
-
-    .ps-list--social {
-        li {
-            margin-right: 30px;
-
-            a {
-                color: #cccccc;
-
-                &:hover {
-                    color: $color-1st;
-                }
-            }
-        }
-    }
-}
-
 .ps-page--shop {
     .ps-shop-banner {
         padding: 30px 0 45px;
-    }
-
-    .ps-shop-brand {
-        margin-bottom: 45px;
     }
 
     .ps-shop-categories {
@@ -375,52 +283,6 @@
     background-color: #f1f1f1;
 }
 
-.ps-page--blog {
-    .ps-page__header {
-        padding: 90px 0;
-        text-align: center;
-
-        h1 {
-            margin: 0;
-            font-size: 48px;
-            font-weight: 600;
-            line-height: 1em;
-        }
-    }
-
-    .ps-breadcrumb {
-        background-color: transparent;
-    }
-
-    @include media('<md') {
-        .ps-page__header {
-            padding: 45px 0;
-
-            h1 {
-                font-size: 36px;
-            }
-        }
-    }
-    @include media('<sm') {
-        .ps-page__header {
-            padding: 30px 0;
-
-            h1 {
-                font-size: 32px;
-            }
-        }
-    }
-    @include media('<xs') {
-        .ps-page__header {
-            padding: 25px 0;
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    }
-}
-
 .ps-page--account {
     padding-top: 50px;
 
@@ -442,27 +304,5 @@
                 }
             }
         }
-    }
-}
-
-.ps-site-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    height: 100vh;
-    background-color: rgba(#000, 0.75);
-    @include transition(all 0.4s ease);
-    @include hidden;
-
-    &.active {
-        @include show;
-    }
-}
-
-.layout--product {
-    .navigation--list{
-        @include hidden;
     }
 }

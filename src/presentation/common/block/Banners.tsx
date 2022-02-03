@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Slider from 'react-slick';
 import Link from 'next/link';
+import Image from 'next/image';
+
 import Promotion from 'presentation/common/block/Promotion';
 import NextArrow from '../typography/NextArrow';
 import PrevArrow from '../typography/PrevArrow';
@@ -29,12 +31,9 @@ const Banners = () => {
         const carouseItems = bannerItems.map((item) => (
             <div key={item.id} className="item">
                 <Link passHref href={SHOP_PAGE()}>
-                    <a
-                        className="ps-banner-item--default bg--cover"
-                        style={{
-                            backgroundImage: `url(${item.imageUrl})`,
-                        }}
-                    />
+                    <a className="ps-banner-item--default">
+                        <Image loading="lazy" layout={'responsive'} priority objectFit={'cover'} src={item.imageUrl} alt="CATS" />
+                    </a>
                 </Link>
             </div>
         ));

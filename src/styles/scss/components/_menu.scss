@@ -104,75 +104,7 @@
     }
 }
 
-.mega-menu {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    padding: 15px 30px 10px;
-    background-color: #fff;
-    @include transition(all 0.4s ease);
-    border: 1px solid #ccc;
 
-    > * {
-        width: 100%;
-        padding: 10px 15px;
-    }
-
-    h4 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        color: $color-text;
-    }
-
-    .mega-menu__column {
-        min-width: 180px;
-    }
-
-    .mega-menu__list {
-        background-color: transparent;
-
-        li {
-            a {
-                display: block;
-                color: $color-text;
-                line-height: 20px;
-                padding: 5px 0;
-                font-size: 14px;
-                background-color: transparent;
-
-                &.has-badge {
-                    padding-right: 20px;
-
-                    &:after {
-                        content: 'New';
-                        display: inline-block;
-                        position: absolute;
-                        top: 5px;
-                        right: 0;
-                        font-size: 9px;
-                        color: #ffffff;
-                        padding: 0px 8px;
-                        line-height: 2em;
-                        @include border-radius(10px);
-                        background-color: $color-1st;
-                    }
-
-                    &.sale {
-                        color: $color-danger;
-
-                        &:after {
-                            content: 'Sale';
-                            background-color: #ffa800;
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
 
 .menu {
     text-align: left;
@@ -209,14 +141,6 @@
             @include transform(scale3d(1, 1, 0) translateY(10px));
         }
 
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            @include hidden;
-        }
-
         &.menu-item-has-children {
             position: relative;
 
@@ -248,23 +172,6 @@
             &:hover {
                 > .sub-menu {
                     @include transform(scale3d(1, 1, 1) translateY(0));
-                }
-            }
-        }
-
-        &.has-mega-menu {
-            position: relative;
-
-            .mega-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-            }
-
-            &:hover {
-                .mega-menu {
-                    @include show;
-                    @include transform(translateY(0));
                 }
             }
         }
@@ -404,17 +311,7 @@
             }
         }
 
-        &.has-mega-menu {
-            .mega-menu {
-                position: absolute;
-                top: 0;
-                left: 100%;
-                width: auto;
-                min-width: 530px;
-                @include hidden;
-                border-left: none;
-            }
-        }
+
 
     }
 }
@@ -432,43 +329,6 @@
             > a {
                 border: none;
                 padding: 10px 20px;
-            }
-        }
-    }
-
-    .mega-menu {
-        display: none;
-        @include flex-flow(row wrap);
-        max-width: 100%;
-        padding-left: 15px;
-        @include transition(all 0s ease);
-
-        h4 {
-            position: relative;
-            display: block;
-            margin-bottom: 0;
-            padding: 10px 0;
-            width: 100%;
-            line-height: 20px;
-        }
-
-        .mega-menu__column {
-            padding: 0;
-        }
-
-        .mega-menu__list {
-            display: none;
-            padding-left: 15px;
-
-            li {
-                a {
-                    color: $color-text;
-                    border: none;
-
-                    &:hover {
-                        color: $color-text;
-                    }
-                }
             }
         }
     }
@@ -505,27 +365,6 @@
         }
     }
 
-    .mega-menu {
-        border: none;
-
-        h4 {
-            font-weight: 500;
-        }
-    }
-
-    .mega-menu__list {
-        > li {
-            border-bottom: 1px solid #dedede;
-
-            a {
-                padding: 10px 0;
-            }
-
-            &:last-child {
-                border: none;
-            }
-        }
-    }
 }
 
 .menu--mobile-2 {

@@ -30,11 +30,8 @@ const nextConfig = withPWA({
 	},
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')]
-	}
+	},
+	compress: true
 });
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true'
-});
-
-module.exports = withPlugins([[withFonts], nextConfig, withBundleAnalyzer({})]);
+module.exports = withPlugins([[withFonts], nextConfig]);

@@ -8,7 +8,7 @@ const Promotion = ({ link, image }) => {
             <Link href={link}>
                 <a className="ps-collection">
                     <div className="image-container-promotion">
-                        <Image src={image} alt="CATS" />
+                        <Image loading="lazy" priority src={image} alt="CATS" />
                     </div>
                 </a>
             </Link>
@@ -18,7 +18,7 @@ const Promotion = ({ link, image }) => {
             <Link href={link ? link : '/shop'}>
                 <a className="ps-collection">
                     <div className="image-container-promotion">
-                        <Image src={"/static/img/not-found.jpg"} alt="CATS" />
+                        <Image loading="lazy" priority src={"/static/img/not-found.jpg"} alt="CATS" />
                     </div>
                 </a>
             </Link>

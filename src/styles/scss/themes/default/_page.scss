@@ -27,7 +27,7 @@
 
             .ps-banner-item--default {
                 display: block;
-                height: 40vh;
+                height: 50vh;
             }
         }
 
@@ -160,15 +160,15 @@
 .image-container-promotion {
     width: 100%;
     display:block;
-    height: 25vh;
+    height: 20vh;
     position: relative;
     @include media('<lg') {
-        height: 25vh;
-    }
-    @include media('<md') {
         height: 20vh;
     }
+    @include media('<md') {
+        height: 15vh;
+    }
     @include media('<sm') {
-        height: 17vh;
+        height: 10vh;
     }
 }
