@@ -18,12 +18,12 @@ import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Orders from 'presentation/page/account/Orders';
 import Layout from 'presentation/layout';
 
-interface ILoginPage{
+interface IOrdersPage{
 	categories: Array<ICategory>,
 	orders: Array<IOrder>
 }
 
-const OrdersPage = ({categories, orders} : ILoginPage) => {
+const OrdersPage = ({categories, orders} : IOrdersPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',

@@ -20,8 +20,8 @@ const AccountMenuSidebar = observer(({ data } : IAccountMenuSidebar) => {
     const Router = useRouter()
 
     const onLogOut = () => {
-        userStore.singOut().then(() => {
-            Router.push(HOME)
+        userStore.singOut().then(async () => {
+            await Router.push(HOME)
         })
     }
 

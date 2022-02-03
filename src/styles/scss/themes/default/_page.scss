@@ -27,6 +27,7 @@
 
             .ps-banner-item--default {
                 display: block;
+                height: 40vh;
             }
         }
 
@@ -150,12 +151,12 @@
     height: 25vh;
     position: relative;
     @include media('<lg') {
-        height: 22vh;
+        height: 25vh;
     }
     @include media('<md') {
-        height: 17vh;
+        height: 20vh;
     }
     @include media('<sm') {
-        height: 15vh;
+        height: 17vh;
     }
 }

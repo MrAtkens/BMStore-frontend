@@ -1,18 +1,6 @@
-import { CART, CHECKOUT, ORDERS, SHOP_PAGE, USER, WISHLIST } from '../routes';
+import { ORDERS, SHOP_PAGE, USER } from '../routes';
 
 export const menuLinks = [
-	{
-		text: 'Избранные',
-		url: WISHLIST,
-	},
-	{
-		text: 'Корзина',
-		url: CART,
-	},
-	{
-		text: 'Оплата',
-		url: CHECKOUT,
-	},
 	{
 		text: 'Магазин',
 		url: SHOP_PAGE(),

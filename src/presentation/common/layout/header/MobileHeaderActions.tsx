@@ -23,7 +23,7 @@ const MobileHeaderActions = observer(() => {
             <a onClick={() => cartStore.setIsMobileCartOpen(true)} className="header__extra" href="#">
                 <i className='icon-bag2'/>
                 <span>
-                        {cartStore.cart ? cartStore.cart.length : 0}
+                        <i>{cartStore.cart ? cartStore.cart.length : 0}</i>
                 </span>
             </a>
             {userStore.isAuthenticated && Boolean(userStore.isAuthenticated) ? (

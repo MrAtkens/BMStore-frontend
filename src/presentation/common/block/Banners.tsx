@@ -29,7 +29,12 @@ const Banners = () => {
         const carouseItems = bannerItems.map((item) => (
             <div key={item.id} className="item">
                 <Link passHref href={SHOP_PAGE()}>
-                    <img src={item.imageUrl} alt="CATS" />
+                    <a
+                        className="ps-banner-item--default bg--cover"
+                        style={{
+                            backgroundImage: `url(${item.imageUrl})`,
+                        }}
+                    />
                 </Link>
             </div>
         ));
