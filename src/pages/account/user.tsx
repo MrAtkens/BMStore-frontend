@@ -54,7 +54,7 @@ const UserPage = ({categories} : ILoginPage) => {
 									<AccountMenuSidebar data={accountLinks} />
 								</div>
 							</div>
-							<div className="col-lg-8">
+							<div className="col-lg-8 user-top">
 								<UserInformation/>
 							</div>
 						</div>
