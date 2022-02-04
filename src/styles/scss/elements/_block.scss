@@ -389,7 +389,9 @@
 
     .ps-block__header {
         padding: 20px 40px;
-
+        @include media('<md') {
+            padding: 20px 10px;
+        }
     }
 
     .ps-block__item {
@@ -431,6 +433,12 @@
 
             @include media('<md') {
                 width: calc(100% / 2);
+                padding: 10px;
+            }
+
+            @include media('<sm') {
+                width: calc(100% / 2);
+                padding: 5px;
             }
         }
     }
