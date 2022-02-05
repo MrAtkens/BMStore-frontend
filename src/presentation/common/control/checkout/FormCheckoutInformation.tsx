@@ -15,6 +15,7 @@ import { invoiceApiService } from 'data/API';
 
 const FormCheckoutInformation = observer(() =>{
     const [form] = Form.useForm();
+    const [isActiveButton, setIsActiveButton] = useState(false)
     const [isProductEnough, setIsProductEnough] = useState(true)
     const Router = useRouter();
 
@@ -43,8 +44,10 @@ const FormCheckoutInformation = observer(() =>{
 
 
     const onFinish = async (values: any) => {
-       if(cartStore.cart.length <= 0){
+       if(cartStore.cart.length > 0){
+           setIsActiveButton(true)
            const amount = parseInt(calculateAmount(cartStore.cart))
+           console.log(amount)
            let id;
            if(userStore.user.id === "" || userStore.user.id === null)
                id = getUserId()
@@ -52,7 +55,9 @@ const FormCheckoutInformation = observer(() =>{
                id = userStore.user.id
            await invoiceApiService.createInvoice(id, values.name, values.email, values.phone, values.address).then(response => {
                getWidget(process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'], 'Оплата товаров в магазине стройматериалов CATS', amount, 'KZT', id, values.email)
+               setIsActiveButton(false)
            })
+           setIsActiveButton(false)
        }
     };
 
@@ -190,7 +195,7 @@ const FormCheckoutInformation = observer(() =>{
                         Вернуться в корзину
                     </div>
                     <div className="ps-block__footer">
-                        <button type="submit" className="ps-btn">Продолжить</button>
+                        <button disabled={isActiveButton} type="submit" className="ps-btn">Продолжить</button>
                     </div>
                 </div>
             </Form>
