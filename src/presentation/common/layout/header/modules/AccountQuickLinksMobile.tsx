@@ -5,12 +5,13 @@ import { observer } from 'mobx-react-lite';
 
 import userStore from "data/stores/userStore"
 import { accountLinks } from 'constant/menus/quickLinks';
+import { USER } from '../../../../../constant/routes';
 
 const AccountQuickLinks  = observer(() => {
 
-    const handleLogout = (e: any) => {
+    const handleLogout = async (e: any) => {
         e.preventDefault();
-        userStore.singOut()
+        await userStore.singOut()
     };
 
     const menu = (
@@ -33,9 +34,11 @@ const AccountQuickLinks  = observer(() => {
 
     return (
         <Dropdown overlay={menu} placement="bottomLeft">
-            <a href="#" className="header__extra ps-user--mobile">
-                <i className='icon-user'/>
-            </a>
+            <Link href={USER} passHref>
+                <a className="header__extra ps-user--mobile">
+                    <i className='icon-user'/>
+                </a>
+            </Link>
         </Dropdown>
     );
 })
