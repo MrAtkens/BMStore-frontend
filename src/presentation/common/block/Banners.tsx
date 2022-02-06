@@ -30,9 +30,9 @@ const Banners = () => {
             window.addEventListener("resize", updateWidth);
             if(window.innerWidth < 700) {
                 setBannerItems([
-                    { id: 1, imageUrl: "/static/img/slider/1.jpg" },
-                    { id: 2, imageUrl: "/static/img/slider/2.jpg" },
-                    { id: 3, imageUrl: "/static/img/slider/3.jpg" }
+                    { id: 1, imageUrl: "/static/img/slider/1.webp" },
+                    { id: 2, imageUrl: "/static/img/slider/2.webp" },
+                    { id: 3, imageUrl: "/static/img/slider/3.webp" }
                 ])
                 setHeight(800)
             }
@@ -56,9 +56,9 @@ const Banners = () => {
             if(window.innerWidth < 600)
                 setHeight(800)
                 setBannerItems([
-                    {id: 1, imageUrl: "/static/img/slider/1.jpg"},
-                    {id: 2, imageUrl: "/static/img/slider/2.jpg"},
-                    {id: 3, imageUrl: "/static/img/slider/3.jpg"}
+                    {id: 1, imageUrl: "/static/img/slider/1.webp"},
+                    {id: 2, imageUrl: "/static/img/slider/2.webp"},
+                    {id: 3, imageUrl: "/static/img/slider/3.webp"}
                 ])
     }, [])
 
