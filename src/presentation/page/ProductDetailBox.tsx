@@ -6,6 +6,7 @@ import ThumbnailDefault from 'presentation/common/control/product/ThumbnailDefau
 import ModuleDetailTopInformation from 'presentation/common/control/product/ModuleDetailTopInformation';
 import ModuleDetailShoppingActions from 'presentation/common/control/product/ModuleDetailShoppingActions';
 import DescriptionBox from 'presentation/common/control/product/description/DescriptionBox';
+import ProductFeatures from 'presentation/common/control/product/description/ProductFeautures';
 
 interface IProductDetailBox{
     product : IProduct
@@ -20,6 +21,7 @@ const ProductDetailBox = ({ product } : IProductDetailBox) => (
                 {/*<ModuleProductDetailDescription product={product} />*/}
                 <ModuleDetailShoppingActions product={product} />
                 {/*<ModuleProductDetailSharing />*/}
+                <ProductFeatures/>
             </div>
         </div>
         <div className="ps-product__content">
