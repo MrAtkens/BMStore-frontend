@@ -47,9 +47,12 @@ const ModuleDetailShoppingActions = observer(({
             setQuantity(quantity - 1);
         }
     }
-    if (!extended) {
-        return (
-            <div className="ps-product__shopping">
+    let actionsView
+    if(product.isDeleted)
+        actionsView = <h3 className="ps-product__deleted">Данный продукт был удалён</h3>
+    else
+        if(product.isActive)
+            actionsView = <>
                 <figure>
                     <figcaption>Количество</figcaption>
                     <div className="form-group--number">
@@ -85,51 +88,16 @@ const ModuleDetailShoppingActions = observer(({
                         <i className='icon-heart'/>
                     </a>
                 </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="ps-product__shopping extend">
-                <div className="ps-product__btn-group">
-                    <figure>
-                        <figcaption>Количество</figcaption>
-                        <div className="form-group--number">
-                            <button
-                                className="up"
-                                onClick={(e) => handleIncreaseItemQty(e)}>
-                                <i className='fa fa-plus'/>
-                            </button>
-                            <button
-                                className="down"
-                                onClick={(e) => handleDecreaseItemQty(e)}>
-                                <i className='fa fa-minus'/>
-                            </button>
-                            <input
-                                className="form-control"
-                                type="text"
-                                placeholder={quantity.toString()}
-                                disabled
-                            />
-                        </div>
-                    </figure>
-                    <a
-                        className="ps-btn ps-btn--black"
-                        href="#"
-                        onClick={(e) => handleAddItemToCart(e)}>
-                        Добавить в корзину
-                    </a>
-                    <div className="ps-product__actions">
-                        <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
-                            <i className='icon-heart'/>
-                        </a>
-                    </div>
-                </div>
-                <a className="ps-btn" href="#" onClick={(e) => handleBuyNow(e)}>
-                    Купить
-                </a>
-            </div>
-        );
-    }
+            </>
+        else
+            actionsView = <h3 className="ps-product__deleted">Данного продукта нет в наличии</h3>
+
+
+    return (
+        <div className="ps-product__shopping">
+            {actionsView}
+        </div>
+    );
 })
 
 export default ModuleDetailShoppingActions;

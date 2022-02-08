@@ -22,10 +22,10 @@ const Product = ({product} : IProductComponent) => {
             <div className="ps-product__container">
                 <div className="ps-product__content">
                     {title(product)}
-                    {/*<div className="ps-product__rating">*/}
-                    {/*    <Rating />*/}
-                    {/*    <span>02</span>*/}
-                    {/*</div>*/}
+                    <div className="ps-product__rating">
+                        {/*<Rating />*/}
+                        {/*<span>02</span>*/}
+                    </div>
                     {price(product)}
                 </div>
                 <div className="ps-product__content hover">

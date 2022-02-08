@@ -262,6 +262,13 @@
     }
 }
 
+
+.ps-product__deleted{
+    font-family: $font-1st;
+    font-size: 36pt;
+    text-align: center;
+}
+
 .ps-product--wide {
     margin-bottom: 40px;
     display: flex;
@@ -315,6 +322,7 @@
             }
         }
     }
+
 
     .ps-product__shopping {
         flex-basis: 180px;
@@ -406,6 +414,12 @@
         .ps-product__container {
             padding: 0;
         }
+    }
+}
+
+.ps-customer-bought{
+    .slick-list{
+        height: 300px !important;
     }
 }
 

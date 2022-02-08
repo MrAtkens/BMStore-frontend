@@ -19,8 +19,8 @@ interface IProductStore{
 
 class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
-    productCount = 0;
     wishList = [] as Array<IWishProduct>;
+    productCount = 0;
 
     product = {
         id: "",
@@ -28,10 +28,13 @@ class ProductStore implements IProductStore{
         title: "",
         description: "",
         slug: "",
+        isActive: false,
+        isDeleted: false,
         images : [],
         categoryId: "",
         categoryName: "",
-        filters: []
+        filters: [],
+        productsSimilar: []
     };
 
     productCountPage = 8;

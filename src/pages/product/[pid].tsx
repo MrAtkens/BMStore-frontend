@@ -13,6 +13,7 @@ import ProductDetailBox from 'presentation/page/ProductDetailBox';
 import SkeletonProductDetail from 'presentation/common/block/skeletons/SkeletonProductDetail';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Layout from 'presentation/layout';
+import ModuleRecommendedProducts from '../../presentation/common/control/product/ModuleRecommendedProducts';
 
 interface IProductPage{
     categories: Array<ICategory>,
@@ -66,13 +67,13 @@ const ProductPage = ({categories, product} : IProductPage) => {
                 <div className="ps-page--product ps-page--product-box">
                     <div className="container">
                         {productView}
+                        <ModuleRecommendedProducts layout="fullwidth" productItems={product.productsSimilar} boxed={false}/>
                     </div>
                 </div>
             </div>
         </Layout>
     );
 };
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { pid } = context.query
     const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")

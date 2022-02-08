@@ -16,8 +16,11 @@ export interface IProduct{
 	title: string,
 	description: string
 	price : number,
+	isActive: boolean,
+	isDeleted: boolean,
 	images : Array<IImage>
 	filters : Array<ProductFilter>,
 	categoryId : string,
-	categoryName : string
+	categoryName : string,
+	productsSimilar: Array<IProduct>
 }
