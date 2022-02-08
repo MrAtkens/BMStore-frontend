@@ -8,7 +8,7 @@ interface IPartialDescription{
 const PartialDescription = ({product} : IPartialDescription) => (
     <div className="ps-document">
         <h3>{product.title}</h3>
-        <p>{product.description}</p>
+        <p><pre>{product.description}</pre></p>
     </div>
 );
 

@@ -7,7 +7,7 @@ interface IModuleProductDetailDescription{
 
 const ModuleProductDetailDescription = ({ product } : IModuleProductDetailDescription) => (
     <div className="ps-product__desc">
-        <p>{product.description}</p>
+        <p><pre>{product.description}</pre></p>
         <ul className="ps-list--dot">
             {product.filters.map(item => (
                 <li key={item.filterId}>{item.filterGroupName} : {item.name}</li>

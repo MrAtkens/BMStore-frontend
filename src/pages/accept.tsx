@@ -22,8 +22,8 @@ const Accept = () => {
 								<Image
 									width={800}
 									height={360}
-									src="/static/img/404.webp"
-									alt="CATS страница 404"
+									src="/static/img/accept.webp"
+									alt="Accept CATS"
 								/>
 								<h3>Подтверждение пароля</h3>
 								<p>

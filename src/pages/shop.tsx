@@ -103,6 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
 	if(currentPage <= 0 || isNaN(currentPage))
 		currentPage = 1
+	console.log(filters)
 	const productResponse = await productsApiService.getProducts(16, (currentPage-1)*16, searchText, category, filters, price_min, price_max)
 	if(categoryResponse.data !== undefined)
 		categoriesList = categoryResponse.data
