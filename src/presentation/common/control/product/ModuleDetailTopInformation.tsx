@@ -26,7 +26,7 @@ const ModuleDetailTopInformation = ({ product } : IModuleDetailTopInformation) =
 
     return (
         <header>
-            <h1>{product.title}</h1>
+            <h1 className="ps-product__name">{product.title}</h1>
             <div className="ps-product__meta">
                 <p>
                     Категория:

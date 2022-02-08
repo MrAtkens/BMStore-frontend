@@ -522,7 +522,7 @@
 
     h1 {
         margin-bottom: 10px;
-        font-size: 24px;
+        font-size: 20pt;
         color: #000;
         font-weight: 400;
         line-height: 1.2;
@@ -701,7 +701,6 @@
         margin-bottom: 20px;
         padding-bottom: 6px;
         border-bottom: 1px solid #e1e1e1;
-
         p {
             position: relative;
             display: inline-block;
@@ -709,6 +708,7 @@
             margin-right: 10px;
             padding-right: 10px;
             line-height: 20px;
+            font-size: 12pt;
 
             a {
                 color: #06c;
@@ -738,7 +738,7 @@
 
     .ps-product__price {
         margin-bottom: 20px;
-        font-size: 24px;
+        font-size: 18pt;
         font-weight: 600;
         color: $color-heading;
 
@@ -1802,6 +1802,7 @@
     }
 
     .ps-product__info {
+
         h5 {
             font-size: 12px;
             margin-bottom: 7px;
@@ -1813,11 +1814,12 @@
         .ps-product__name {
             font-weight: 600;
             color: $color-heading;
-            font-size: 18px;
+            font-size: 24pt;
         }
     }
 
     .ps-product__price {
+        font-size: 16pt;
         margin-bottom: 10px;
     }
 
