@@ -8,16 +8,14 @@ import { isUserAuth } from 'helper/commons/userHelper';
 import { HOME } from 'constant/routes';
 
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
-import ResetPassword from 'presentation/page/ResetPassword';
+import Reset from 'presentation/page/Reset';
 import Layout from 'presentation/layout';
-import { GetServerSideProps } from 'next';
 
-interface IResetPage{
-	categories: Array<ICategory>,
-	operationId: string
+interface IResetPageMail{
+	categories: Array<ICategory>
 }
 
-const ResetPage = ({categories, operationId} : IResetPage) => {
+const ResetPageMail = ({categories} : IResetPageMail) => {
 
 	const Router = useRouter()
 	useEffect(() => {
@@ -31,7 +29,7 @@ const ResetPage = ({categories, operationId} : IResetPage) => {
 			url: HOME,
 		},
 		{
-			text: 'Востановление пароля',
+			text: 'Запрос на востановление пароля',
 			url: null
 		},
 	];
@@ -46,30 +44,24 @@ const ResetPage = ({categories, operationId} : IResetPage) => {
 			</Head>
 			<div className="ps-page--my-account">
 			<BreadCrumb breadcrumb={breadCrumb} layout={"normal"}/>
-			<ResetPassword operationId={operationId} />
+			<Reset />
 			</div>
 		</Layout>
 );
 };
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { operationId } = context.query
-	if(operationId !== undefined)
-		return{
-			redirect: {
-				permanent: true,
-				destination: HOME,
-			},
-			props:{},
-		}
-	let category = []
+export async function getStaticProps({ locale, req } : any){
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse !== undefined)
-		category = categoryResponse.data
+	if(categoryResponse.data === undefined)
+		return {
+			props:{ categories: []},
+			revalidate: 1800
+		};
 	return {
-		props:{ categories: category, operationId: operationId},
+		props:{ categories: categoryResponse.data},
+		revalidate: 1200
 	};
 }
 
-export default ResetPage;
+export default ResetPageMail;

@@ -19,7 +19,7 @@ export function SHOP_PAGE(name?: string, value?: string) : string {
 //User --- with authentication
 export const USER = '/account/user'
 export const CART = '/account/cart'
-export const RESET = '/account/reset'
+export const RESET = '/account/reset-password'
 export const LOGIN = '/account/login'
 export const CHECKOUT = '/account/checkout'
 export const REGISTER = '/account/registration'

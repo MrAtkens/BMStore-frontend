@@ -60,7 +60,7 @@ const ModuleRecommendedProducts = ({ productItems, boxed, layout} : IModuleRecom
                 boxed ? 'boxed' : ''
             }`}>
             <div className="ps-section__header">
-                <h3>Покупатели также часто покупают данные товары</h3>
+                <h3>С этим товаром берут</h3>
             </div>
             <div className="ps-section__content">{carouselView}</div>
         </div>

@@ -24,6 +24,8 @@ import ShopItems from 'presentation/page/catalog/ShopItems'
 interface IShop{
 	categoriesData: Array<ICategory>,
 	products: Array<IProduct>,
+	minPrice: number,
+	maxPrice: number,
 	productCount: number,
 	filtersData: Array<IFilter>,
 }
@@ -39,7 +41,7 @@ const breadCrumb = [
 	},
 ];
 
-const Shop = observer(({ categoriesData, products, productCount, filtersData } : IShop) => {
+const Shop = observer(({ categoriesData, products, productCount, filtersData, minPrice, maxPrice } : IShop) => {
 	const Router = useRouter()
 	const { filters } = Router.query
 
@@ -51,6 +53,7 @@ const Shop = observer(({ categoriesData, products, productCount, filtersData } :
 	useEffect(() => {
 		filtersStore.setFilters(filtersData)
 		productStore.setProducts(products, productCount)
+		productStore.setPrice(minPrice, maxPrice)
 	}, [Router.query])
 
 	return (
@@ -94,6 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	let filterResponse = null
 	let categoriesList = [] as Array<ICategory>
 	let productsList = [] as Array<IProduct>
+	let totalCount, minPrice, maxPrice = 0
 	const {category, page, searchText, filters, price_min, price_max} = context.query
 	let currentPage = parseInt(page as string)
 	if(category !== undefined){
@@ -107,10 +111,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const productResponse = await productsApiService.getProducts(16, (currentPage-1)*16, searchText, category, filters, price_min, price_max)
 	if(categoryResponse.data !== undefined)
 		categoriesList = categoryResponse.data
-	if(productResponse.data !== undefined)
+	if(productResponse.data !== undefined) {
 		productsList = productResponse.data.data
+		totalCount = productResponse.data.totalCount
+		minPrice = productResponse.data.minPrice
+		maxPrice = productResponse.data.maxPrice
+	}
 	return {
-		props:{ categoriesData: categoriesList, filtersData: filterResponse, products: productsList, productCount: productResponse.data.totalCount},
+		props:{ categoriesData: categoriesList, filtersData: filterResponse, products: productsList,
+			productCount: totalCount, min: minPrice, max: maxPrice},
 	};
 }
 

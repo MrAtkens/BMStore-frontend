@@ -16,7 +16,11 @@ import {
 	toastProductAddToWishList,
 	toastProductRemoveFromWishList,
 	toastProductNotAddToWishList,
-	toastUserNotFoundAuth, toastMailAcceptError
+	toastUserNotFoundAuth,
+	toastMailAcceptError,
+	toastAcceptMailSuccess,
+	toastPasswordResetMailSuccess,
+	toastPasswordResetSuccess
 } from './toastify';
 
 import {
@@ -56,7 +60,7 @@ export const userEditStatus = (status) => {
 };
 
 export const userAcceptMailStatus = (status) => {
-	if (status === 200) toastEditSuccess();
+	if (status === 200) toastAcceptMailSuccess();
 	else if (status === 500) toastServerError();
 	else if (status === 404) toastUserNotFound();
 	else if (status === 401) {
@@ -66,6 +70,31 @@ export const userAcceptMailStatus = (status) => {
 	else if(status === 400)
 		toastMailAcceptError();
 };
+
+export const userResetPasswordMailStatus = (status) => {
+	if (status === 200) toastPasswordResetMailSuccess();
+	else if (status === 500) toastServerError();
+	else if (status === 404) toastUserNotFound();
+	else if (status === 401) {
+		toastUnauthorizedError();
+		leaveFromSystem();
+	}
+	else if(status === 400)
+		toastMailAcceptError();
+};
+
+export const userResetPasswordStatus = (status) => {
+	if (status === 200) toastPasswordResetSuccess();
+	else if (status === 500) toastServerError();
+	else if (status === 404) toastUserNotFound();
+	else if (status === 401) {
+		toastUnauthorizedError();
+		leaveFromSystem();
+	}
+	else if(status === 400)
+		toastMailAcceptError();
+};
+
 
 export const userBuy = (status) => {
 	if (status === 200) toastBuySuccess();

@@ -5,13 +5,18 @@ import { useRouter } from 'next/router';
 
 import userStore from "data/stores/userStore"
 import { HOME } from 'constant/routes';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-const ResetPassword = observer(() => {
+interface IResetPassword{
+	operationId: string
+}
+
+const ResetPassword = observer(({operationId} : IResetPassword) => {
 	const Router = useRouter()
 
 	//First state
 	const onMailFinish = async (values: any) => {
-		await userStore.userReset(values.email).then(async () => {
+		await userStore.userResetPassword(values.password, operationId).then(async () => {
 			await Router.push(HOME)
 		})
 	}
@@ -24,25 +29,29 @@ const ResetPassword = observer(() => {
 					onFinish={onMailFinish}>
 					<div className="ps-tab active" id="register">
 						<div className="ps-form__content">
-							<h3>Востановление пароля</h3>
+							<h3>Смена пароля</h3>
 							<div className="form-group">
 								<Form.Item
-									name="email"
+									name="password"
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста, введите вашу почту',
+											message:
+												'Пожалуйста, введите пароль',
 										},
 										{
-											type: "email",
-											message: 'Введена некорректная почта',
+											// pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
+											// message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не 1 знак',
+											min: 6,
+											max: 60,
+											message: 'Пароль должен содержать минимум 6 символов'
 										},
-
 									]}>
-									<Input
+									<Input.Password
 										className="form-control"
-										type="text"
-										placeholder="Почта"
+										type="password"
+										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+										placeholder="Пароль..."
 									/>
 								</Form.Item>
 							</div>
@@ -50,7 +59,7 @@ const ResetPassword = observer(() => {
 								<button
 									type="submit"
 									className="ps-btn ps-btn--fullwidth">
-									Подтвердить
+									Сменить пароль
 								</button>
 							</div>
 						</div>

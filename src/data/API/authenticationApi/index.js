@@ -34,17 +34,6 @@ const userSingUpApi = async (fullname, phone, email, password, address) => {
 		});
 };
 
-const userPasswordResetApi = async (email, responseUrl) => {
-	return await axios
-		.get(`${BackendUrl}/user/identity/PasswordReset`)
-		.then((response) => {
-			return response;
-		})
-		.catch((error) => {
-			return error.response;
-		});
-};
-
 const userMailAccepts = async (userId) => {
 	return await axios
 		.post(`${BackendUrl}/user/identity/ConfirmEmail/confirm?userId=${userId}`)
@@ -55,6 +44,18 @@ const userMailAccepts = async (userId) => {
 			return error.response;
 		});
 };
+
+const userPasswordResetApi = async (email) => {
+	return await axios
+		.get(`${BackendUrl}/user/identity/PasswordReset?email=${email}`)
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return error.response;
+		});
+};
+
 
 const userPostPasswordResetApi = async (password, operationId) => {
 	return await axios

@@ -141,6 +141,30 @@ export const toastAuthorizationSuccess = () => {
 	});
 };
 
+export const toastAcceptMailSuccess = () => {
+	notification.success({
+		message: 'Вы успешно подтвердили вашу почту',
+		duration: 30,
+		placement: 'bottomRight'
+	});
+};
+
+export const toastPasswordResetMailSuccess = () => {
+	notification.success({
+		message: 'Запрос на востановление пароля создан успешно! Мы отправили ссылку на востановление пароля от вашего аккаунта вам на почту.',
+		duration: 30,
+		placement: 'bottomRight'
+	});
+}
+
+export const toastPasswordResetSuccess = () => {
+	notification.success({
+		message: 'Вы успешно изменили свой пароль',
+		duration: 30,
+		placement: 'bottomRight'
+	});
+}
+
 export const toastRegistrationSuccess = () => {
 	notification.success({
 		message: 'Вы успешно зарегистрировались! Пожалуйста, подтвердите свою почту через письмо, которое мы вам отправили',

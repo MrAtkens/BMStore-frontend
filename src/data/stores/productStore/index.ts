@@ -14,6 +14,8 @@ interface IProductStore{
     product: IProduct,
     productCountPage: number,
     pageNumber: number,
+    minPrice: number,
+    maxPrice: number,
     productsLoading: boolean
 }
 
@@ -21,6 +23,8 @@ class ProductStore implements IProductStore{
     products = [] as Array<IProduct>;
     wishList = [] as Array<IWishProduct>;
     productCount = 0;
+    minPrice = 0;
+    maxPrice = 0;
 
     product = {
         id: "",
@@ -91,6 +95,11 @@ class ProductStore implements IProductStore{
         this.products = products
         this.productCount = count
         this.productsLoading = true
+    }
+
+    setPrice(min: number, max: number){
+        this.minPrice = min
+        this.maxPrice = max
     }
 
     get isProductsLoading(){

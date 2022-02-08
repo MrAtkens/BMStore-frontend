@@ -48,15 +48,28 @@ const Accept = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { userId } = context.query
-	console.log(userId)
 	const response = await authenticationService.userMailAccepts(userId)
-	console.log(response)
 	userAcceptMailStatus(response.status)
+	if(response.status === 200)
+		return{
+			redirect: {
+				permanent: true,
+				destination: HOME,
+			},
+			props:{},
+		}
+	else{
+		setTimeout(() => {
+			return{
+				redirect: {
+					permanent: true,
+					destination: HOME,
+				},
+				props:{},
+			}
+		}, 5000)
+	}
 	return{
-		redirect: {
-			permanent: true,
-			destination: HOME,
-		},
 		props:{},
 	}
 }

@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 import {
     authorizationStatusValidation,
     registrationStatusValidation, userEditStatus,
-    userGetDataStatus
+    userGetDataStatus, userResetPasswordMailStatus, userResetPasswordStatus
 } from 'helper/responseStatus';
 import { toastServerError } from 'helper/toastify';
 
@@ -96,8 +96,14 @@ class UserStore implements IUserStore{
             await this.getUserData()
     }
 
-    setId(id: string){
-        this.user.id = id
+    async userReset(mail: string){
+        const response = await authenticationService.userPasswordResetApi(mail)
+        userResetPasswordMailStatus(response.status)
+    }
+
+    async userResetPassword(password: string, operationId: string){
+        const response = await authenticationService.userPostPasswordResetApi(password, operationId)
+        userResetPasswordStatus(response.status)
     }
 
     setIsAuth(auth: boolean){
