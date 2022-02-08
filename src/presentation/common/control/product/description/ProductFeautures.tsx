@@ -4,7 +4,7 @@ const ProductFeatures = () => {
 	return (
 	<aside className="widget widget_product widget_features">
 		<p>
-			<i className='icon-network'/> Доставка по всему Казахтану
+			<i className='icon-network'/> Доставка по всему Казахстану
 		</p>
 		<p>
 			<i className='icon-rocket'/> Быстрая доставка

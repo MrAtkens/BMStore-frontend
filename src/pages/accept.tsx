@@ -2,7 +2,11 @@ import React from "react";
 import Head from 'next/head'
 import Image from 'next/image';
 import Link from 'next/link';
-import { HOME } from '../constant/routes';
+import { GetServerSideProps } from 'next';
+
+import { HOME } from 'constant/routes';
+import { authenticationService } from 'data/API';
+import { userAcceptMailStatus } from 'helper/responseStatus';
 
 const Accept = () => {
 
@@ -42,9 +46,18 @@ const Accept = () => {
 	);
 }
 
-export async function getServerSideProps({ locale, req } : any){
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const { userId } = context.query
+	console.log(userId)
+	const response = await authenticationService.userMailAccepts(userId)
+	console.log(response)
+	userAcceptMailStatus(response.status)
 	return{
-
+		redirect: {
+			permanent: true,
+			destination: HOME,
+		},
+		props:{},
 	}
 }
 

@@ -3,10 +3,10 @@ import { BackendUrl } from '../settings';
 
 axios.defaults.withCredentials = true;
 
-const userSingInApi = async (phone, password) => {
+const userSingInApi = async (email, password) => {
 	return await axios
 		.post(`${BackendUrl}/user/identity/SignIn`, {
-			phone: phone,
+			email: email,
 			password: password
 		})
 		.then((response) => {
@@ -45,6 +45,17 @@ const userPasswordResetApi = async (email, responseUrl) => {
 		});
 };
 
+const userMailAccepts = async (userId) => {
+	return await axios
+		.post(`${BackendUrl}/user/identity/ConfirmEmail/confirm?userId=${userId}`)
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return error.response;
+		});
+};
+
 const userPostPasswordResetApi = async (password, operationId) => {
 	return await axios
 		.post(`${BackendUrl}/user/identity/PostPasswordReset`, {
@@ -63,5 +74,6 @@ export const authenticationService = {
 	userSingInApi,
 	userSingUpApi,
 	userPasswordResetApi,
-	userPostPasswordResetApi
+	userPostPasswordResetApi,
+	userMailAccepts
 };
