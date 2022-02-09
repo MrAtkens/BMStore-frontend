@@ -8,9 +8,14 @@ import productStore from 'data/stores/productStore';
 
 const WidgetShopFilterByPriceRange = observer(() => {
     const Router = useRouter();
-    const [min, setMin] = useState(productStore.minPrice);
-    const [max, setMax] = useState(productStore.maxPrice);
+    const [min, setMin] = useState(0);
+    const [max, setMax] = useState(50000);
     const { filters, category, searchText, page } = Router.query;
+
+    useEffect(() => {
+        setMin(productStore.minPrice)
+        setMax(productStore.maxPrice)
+    }, [])
 
     useEffect(() => {
         if(Router.query.price_min !== undefined)
@@ -22,6 +27,7 @@ const WidgetShopFilterByPriceRange = observer(() => {
         else
             setMax(productStore.maxPrice)
     }, [Router.query])
+
 
 
     function handleChangeRange(value: any) {
@@ -55,6 +61,7 @@ const WidgetShopFilterByPriceRange = observer(() => {
                     value={[min, max]}
                     defaultValue={[productStore.minPrice, productStore.maxPrice]}
                     max={productStore.maxPrice}
+                    min={productStore.minPrice}
                     onChange={handleChangeRange}
                     onAfterChange={handleAfterChange}
                 />

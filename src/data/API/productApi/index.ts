@@ -30,8 +30,6 @@ function getProductsUrl(take, skip, searchText, categoryId, filters, price_min, 
     if(price_max !== undefined)
         shopUrl += `&PriceMax=${price_max}`
 
-    console.log(shopUrl)
-
     return shopUrl
 }
 

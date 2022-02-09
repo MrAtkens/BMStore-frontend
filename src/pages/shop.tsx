@@ -48,6 +48,7 @@ const Shop = observer(({ categoriesData, products, productCount, filtersData, mi
 	useEffect(() => {
 		if(filters !== undefined)
 			filtersStore.setActiveFiltersFromUrl(filters)
+		productStore.setPrice(minPrice, maxPrice)
 	}, [])
 
 	useEffect(() => {
@@ -114,6 +115,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const productResponse = await productsApiService.getProducts(16, (currentPage-1)*16, searchText, category, filters, price_min, price_max)
 	if(categoryResponse.data !== undefined)
 		categoriesList = categoryResponse.data
+	console.log(productResponse.data.minPrice)
+	console.log(productResponse.data.maxPrice)
 	if(productResponse.data !== undefined) {
 		productsList = productResponse.data.data
 		totalCount = productResponse.data.totalCount
@@ -122,7 +125,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	}
 	return {
 		props:{ categoriesData: categoriesList, filtersData: filterResponse, products: productsList,
-			productCount: totalCount, min: minPrice, max: maxPrice},
+			productCount: totalCount, minPrice: minPrice, maxPrice: maxPrice},
 	};
 }
 
