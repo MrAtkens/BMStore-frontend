@@ -14,7 +14,6 @@ interface IHome{
 }
 
 const Home = ({ categories } : IHome) => {
-	console.log(categories)
 	return (
 		<Layout categories={categories} title={"Главная страница - CATS"}>
 			<Head>

@@ -11,7 +11,6 @@ interface ICategoryBlock{
 }
 
 const Category = ({categories} : ICategoryBlock) => {
-
     const carouselSetting = {
         dots: true,
         arrows: false,
@@ -25,60 +24,8 @@ const Category = ({categories} : ICategoryBlock) => {
     let listBuffer : any = []
     if(categories.length >= 6){
         categories.map((category) => {
-            if(category.imageUrl !== null && category.imageUrl !== undefined) {
-                count++;
-                if(count === 6){
-                    const categoryItem = (
-                        <Link
-                            passHref
-                            href={SHOP_PAGE('category', category.id)}
-                            key={category.id}>
-                            <div className='image-container'>
-                                <Image
-                                    loading='lazy'
-                                    layout='responsive'
-                                    width={600}
-                                    height={600}
-                                    src={category.imageUrl}
-                                    alt={category.name}
-                                />
-                                <span className='category-title'>{category.name}</span>
-                            </div>
-                        </Link>
-                    )
-                    listBuffer.push(categoryItem)
-                    list.push(listBuffer)
-                    listBuffer = []
-                    count = 0;
-                }
-                else{
-                    const categoryItem = (
-                        <Link
-                            passHref
-                            href={SHOP_PAGE('category', category.id)}
-                            key={category.id}>
-                            <div className='image-container'>
-                                <Image
-                                    loading='lazy'
-                                    layout='responsive'
-                                    width={600}
-                                    height={600}
-                                    src={category.imageUrl}
-                                    alt={category.name}
-                                />
-                                <span className='category-title'>{category.name}</span>
-                            </div>
-                        </Link>
-                    )
-                    listBuffer.push(categoryItem)
-                }
-            }
-        })
-    }
-    else {
-        categories.map((category) => {
-            if (category.imageUrl !== null && category.imageUrl !== undefined) {
-                count++;
+            count++;
+            if(count === 6){
                 const categoryItem = (
                     <Link
                         passHref
@@ -98,11 +45,60 @@ const Category = ({categories} : ICategoryBlock) => {
                     </Link>
                 )
                 listBuffer.push(categoryItem)
+                list.push(listBuffer)
+                listBuffer = []
+                count = 0;
+            }
+            else{
+                const categoryItem = (
+                    <Link
+                        passHref
+                        href={SHOP_PAGE('category', category.id)}
+                        key={category.id}>
+                        <div className='image-container'>
+                            <Image
+                                loading='lazy'
+                                layout='responsive'
+                                width={600}
+                                height={600}
+                                src={category.imageUrl !== null && category.imageUrl !== undefined ? category.imageUrl : '/static/img/not-found.webp'}
+                                alt={category.name}
+                            />
+                            <span className='category-title'>{category.name}</span>
+                        </div>
+                    </Link>
+                )
+                listBuffer.push(categoryItem)
+            }
+        })
+    }
+    else {
+        categories.map((category) => {
+            if (category.imageUrl !== null && category.imageUrl !== undefined) {
+                count++;
+                const categoryItem = (
+                    <Link
+                        passHref
+                        href={SHOP_PAGE('category', category.id)}
+                        key={category.id}>
+                        <div className='image-container'>
+                            <Image
+                                loading='lazy'
+                                layout='responsive'
+                                width={600}
+                                height={600}
+                                src={category.imageUrl !== null && category.imageUrl !== undefined ? category.imageUrl : '/static/img/not-found.webp'}
+                                alt={category.name}
+                            />
+                            <span className='category-title'>{category.name}</span>
+                        </div>
+                    </Link>
+                )
+                listBuffer.push(categoryItem)
             }
         })
         list.push(listBuffer)
     }
-
     return (
         <div className="ps-search-trending">
             <div className="container">

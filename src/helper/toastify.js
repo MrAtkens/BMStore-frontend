@@ -48,11 +48,22 @@ export const toastProductNotFound = () => {
 		placement: 'bottomRight'
 	});
 };
+
+//Status 403
+export const toastAuthVerificationError = () => {
+	notification.error({
+		message: 'Ошибка 403',
+		description: 'Вы не подтвердили свою почту через ссылку, которую мы отправили в письме',
+		duration: 5,
+		placement: 'bottomRight'
+	});
+};
+
 //Status 401
 export const toastAuthError = () => {
 	notification.error({
 		message: 'Ошибка 401',
-		description: 'Вы неверно ввели логин или пароль',
+		description: 'Вы неверно ввели почту или пароль',
 		duration: 5,
 		placement: 'bottomRight'
 	});

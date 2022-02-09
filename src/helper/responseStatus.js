@@ -20,7 +20,7 @@ import {
 	toastMailAcceptError,
 	toastAcceptMailSuccess,
 	toastPasswordResetMailSuccess,
-	toastPasswordResetSuccess
+	toastPasswordResetSuccess, toastAuthVerificationError
 } from './toastify';
 
 import {
@@ -33,6 +33,7 @@ export const authorizationStatusValidation = (status) => {
 	if (status === 200) toastAuthorizationSuccess();
 	else if (status === 500) toastServerError();
 	else if (status === 404) toastUserNotFoundAuth();
+	else if (status === 403) toastAuthVerificationError();
 	else if (status === 401) toastAuthError();
 };
 
