@@ -41,7 +41,7 @@ class ProductStore implements IProductStore{
         productsSimilar: []
     };
 
-    productCountPage = 8;
+    productCountPage = 16;
     pageNumber = 0;
 
     productsLoading = false

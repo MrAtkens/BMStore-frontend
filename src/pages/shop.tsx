@@ -85,7 +85,7 @@ const Shop = observer(({ categoriesData, products, productCount, filtersData, mi
 							<div className="ps-page__header">
 								<h1>Каталог</h1>
 							</div>
-							<ShopItems columns={4} pageSize={12}/>
+							<ShopItems columns={4} pageSize={16}/>
 						</div>
 					</div>
 				</div>
@@ -115,8 +115,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const productResponse = await productsApiService.getProducts(16, (currentPage-1)*16, searchText, category, filters, price_min, price_max)
 	if(categoryResponse.data !== undefined)
 		categoriesList = categoryResponse.data
-	console.log(productResponse.data.minPrice)
-	console.log(productResponse.data.maxPrice)
 	if(productResponse.data !== undefined) {
 		productsList = productResponse.data.data
 		totalCount = productResponse.data.totalCount

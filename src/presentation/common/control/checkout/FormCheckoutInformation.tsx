@@ -47,7 +47,6 @@ const FormCheckoutInformation = observer(() =>{
        if(cartStore.cart.length > 0){
            setIsActiveButton(true)
            const amount = parseInt(calculateAmount(cartStore.cart))
-           console.log(amount)
            let id;
            if(userStore.user.id === "" || userStore.user.id === null)
                id = getUserId()

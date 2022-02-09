@@ -67,7 +67,6 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 						redirect: 'follow', // manual, *follow, error
 						referrerPolicy: 'no-referrer', // no-referrer, *client
 					});
-						console.log(response)
 					},
 					onComplete: async function(paymentResult, options) {
 					if (paymentResult.success === true){
@@ -81,7 +80,6 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 					},
 					referrerPolicy: 'no-referrer', // no-referrer, *client
 					});
-					console.log(response)
 					}}})}`}
 			</Script>
 			<Component {...pageProps}/>

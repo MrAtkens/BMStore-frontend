@@ -21,7 +21,6 @@ const NavigationList = observer(({categories} : INavigationList) => {
     const [categoriesDrawer, setCategoriesDrawer] = useState(false);
 
     useEffect(() => {
-        console.log(Router.asPath)
         setMenuDrawer(false)
         cartStore.setIsMobileCartOpen(false)
         setSearchDrawer(false)
