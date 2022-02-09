@@ -104,6 +104,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		const response = await filtersApiService.getFilters("ru", category)
 		filterResponse = response.data.data;
 	}
+	else{
+		const response = await filtersApiService.getFilters("ru", "00000000-0000-0000-0000-000000000000")
+		filterResponse = response.data.data;
+	}
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
 	if(currentPage <= 0 || isNaN(currentPage))
 		currentPage = 1
