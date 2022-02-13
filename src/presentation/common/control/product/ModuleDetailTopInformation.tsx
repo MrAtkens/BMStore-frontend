@@ -15,17 +15,18 @@ const ModuleDetailTopInformation = ({ product } : IModuleDetailTopInformation) =
     // if (product.is_sale) {
     //     priceView = (
     //         <h4 className="ps-product__price sale">
-    //             <del className="mr-2">&{product.sale_price}</del>$
-    //             {product.price}
+    //             <del className="mr-2">&{product.sale_price}</del>
+    //             {product.price} тг
     //         </h4>
     //     );
     // } else {
-    //     priceView = <h4 className="ps-product__price">${product.price}</h4>;
+    //     priceView = <h4 className="ps-product__price">{product.price} тг</h4>;
     // }
     priceView = <h4 className="ps-product__price">{product.price} тг</h4>;
 
     return (
         <header>
+            <h5 className="ps-product__articul">Артикул: {product.articul}</h5>
             <h1 className="ps-product__name">{product.title}</h1>
             <div className="ps-product__meta">
                 <p>

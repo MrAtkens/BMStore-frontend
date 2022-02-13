@@ -42,6 +42,19 @@ export default function useProduct() {
                 </LazyLoad>
             )
         },
+        getRecommendImage: (productUrl: string, productAlt: string) => {
+            return (
+                <LazyLoad>
+                    <Image
+                        layout='responsive'
+                        width={250}
+                        height={250}
+                        src={productUrl !== undefined || true ? productUrl : '/static/img/not-found.webp'}
+                        alt={productAlt}
+                    />
+                </LazyLoad>
+            )
+        },
         price: (product : IProduct) => {
             // Для скидок
             // let view;

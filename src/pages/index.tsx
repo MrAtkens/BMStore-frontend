@@ -15,10 +15,10 @@ interface IHome{
 
 const Home = ({ categories } : IHome) => {
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={"Главная страница - TACS"}>
 			<Head>
 				<title>CATS — Интернет-магазин стройматериалов</title>
-				<meta name="description" content="CATS — Интернет-магазин стройматериалов"/>
+				<meta name="description" content="TACS — Интернет-магазин стройматериалов"/>
 				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
 				<meta name="author" content="Bazar-Jok Group"/>
 			</Head>

@@ -7,8 +7,8 @@ import {
 } from 'helper/carousel-helpers';
 import { IProduct } from 'domain/interfaces/IProduct';
 import { generateTempArray } from 'helper/commons/header';
-import Product from 'presentation/common/control/products/Product';
 import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
+import ProductRecommend from '../products/ProductRecommend';
 
 interface IModuleRecommendedProducts{
     productItems: Array<IProduct>,
@@ -26,7 +26,7 @@ const ModuleRecommendedProducts = ({ productItems, boxed, layout} : IModuleRecom
                 carouselView = (
                     <Slider {...carouselFullwidth} className="ps-carousel outside">
                         {productItems.map((item : IProduct) => {
-                            return <Product product={item} key={item.id} />;
+                            return <ProductRecommend product={item} key={item.id} />;
                         })}
                     </Slider>
                 );
@@ -34,7 +34,7 @@ const ModuleRecommendedProducts = ({ productItems, boxed, layout} : IModuleRecom
                 carouselView = (
                     <Slider {...carouselStandard} className="ps-carousel outside">
                         {productItems.map((item : IProduct) => {
-                            return <Product product={item} key={item.id} />;
+                            return <ProductRecommend product={item} key={item.id} />;
                         })}
                     </Slider>
                 );

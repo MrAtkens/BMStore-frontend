@@ -29,6 +29,7 @@ class ProductStore implements IProductStore{
     product = {
         id: "",
         price : 0,
+        articul: "",
         title: "",
         description: "",
         slug: "",
@@ -38,7 +39,8 @@ class ProductStore implements IProductStore{
         categoryId: "",
         categoryName: "",
         filters: [],
-        productsSimilar: []
+        productsSimilar: [],
+        imageUrl: ""
     };
 
     productCountPage = 16;

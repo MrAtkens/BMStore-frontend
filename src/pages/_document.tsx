@@ -8,10 +8,10 @@ export default class MyDocument extends Document {
                 <Head>
                     <meta charSet="utf-8"/>
                     <meta name="theme-color" content="#0faa8a"/>
-                    <meta name='application-name' content="CATS"/>
+                    <meta name='application-name' content="TACS"/>
                     <meta name='apple-mobile-web-app-capable' content='yes'/>
                     <meta name='apple-mobile-web-app-status-bar-style' content='default'/>
-                    <meta name='apple-mobile-web-app-title' content='CATS'/>
+                    <meta name='apple-mobile-web-app-title' content='TACS'/>
                     <meta name='format-detection' content='telephone=no'/>
                     <meta name='mobile-web-app-capable' content='yes'/>
                     <meta name='msapplication-config' content='/static/icons/browserconfig.xml'/>
@@ -20,9 +20,9 @@ export default class MyDocument extends Document {
                     <meta name="msapplication-TileImage" content="/static/icons/mstile-144x144.png"/>
 
                     <meta property='og:type' content='website'/>
-                    <meta property='og:title' content='CATS'/>
+                    <meta property='og:title' content='TACS'/>
                     <meta property='og:description' content='Интернет магазин стройматериалов'/>
-                    <meta property='og:site_name' content='CATS'/>
+                    <meta property='og:site_name' content='TACS'/>
 
                     <link rel='shortcut icon' href='/favicon.ico' />
                     <link rel="manifest" href="/manifest.json"/>

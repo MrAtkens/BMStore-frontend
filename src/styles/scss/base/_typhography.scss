@@ -161,6 +161,10 @@ figure {
                 color: $color-heading;
             }
         }
+        pre{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     }
 
     blockquote {

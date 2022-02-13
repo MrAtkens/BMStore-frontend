@@ -12,6 +12,7 @@ export interface IImage{
 
 export interface IProduct{
 	id : string,
+	articul: string,
 	slug : string,
 	title: string,
 	description: string
@@ -22,5 +23,6 @@ export interface IProduct{
 	filters : Array<ProductFilter>,
 	categoryId : string,
 	categoryName : string,
-	productsSimilar: Array<IProduct>
+	productsSimilar: Array<IProduct>,
+	imageUrl: string
 }

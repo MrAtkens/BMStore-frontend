@@ -49,7 +49,7 @@ const ModuleDetailShoppingActions = observer(({
     }
     let actionsView
     if(product.isDeleted)
-        actionsView = <h3 className="ps-product__deleted">Данный продукт был удалён</h3>
+        actionsView = <h3 className="ps-product__deleted">Продукт удален</h3>
     else
         if(product.isActive)
             actionsView = <>
@@ -90,7 +90,7 @@ const ModuleDetailShoppingActions = observer(({
                 </div>
             </>
         else
-            actionsView = <h3 className="ps-product__deleted">Данного продукта нет в наличии</h3>
+            actionsView = <h3 className="ps-product__deleted">Нет в наличии</h3>
 
 
     return (

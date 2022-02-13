@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Modal } from 'antd';
 
-import { HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
+import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
 import { menuLinks } from 'constant/menus/quickLinks';
 import { isUserAuth } from 'helper/commons/userHelper';
 import { ICategory } from "domain/interfaces/ICategory";
@@ -42,7 +42,7 @@ const Header = ({categories} : IHeader) => {
             <div className="header__top">
                 <div className="container">
                     <div className="header__left">
-                        <p>Приветствуем в интернет-магазине CATS!</p>
+                        <p>Приветствуем в интернет-магазине TACS!</p>
                     </div>
                     <div className="header__right">
                         <ul className="header__top-links">
@@ -51,11 +51,11 @@ const Header = ({categories} : IHeader) => {
                                     <a>Магазин</a>
                                 </Link>
                             </li>
-                            {/*<li>*/}
-                            {/*    <Link passHref href={CONTACTS}>*/}
-                            {/*        <a>Контакты</a>*/}
-                            {/*    </Link>*/}
-                            {/*</li>*/}
+                            <li>
+                                <Link passHref href={CONTACTS}>
+                                    <a>Контакты</a>
+                                </Link>
+                            </li>
                             {/*<li>*/}
                             {/*    <Link href={ABOUT_US}>*/}
                             {/*        <a>О нас</a>*/}
@@ -72,12 +72,12 @@ const Header = ({categories} : IHeader) => {
                 <div className="container">
                     <div className="header__content-left">
                         <Link passHref href={HOME}>
-                            <a className="ps-logo mt-2">
+                            <a className="ps-logo">
                                 <Image
-                                    width={156}
-                                    height={32}
+                                    width={150}
+                                    height={80}
                                     src="/static/img/logo.webp"
-                                    alt="martfury"
+                                    alt="TACS logo"
                                 />
                             </a>
                         </Link>
@@ -138,8 +138,8 @@ const Header = ({categories} : IHeader) => {
                     </div>
                 </div>
             </nav>
-            <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Зайти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
-                <p>1. Вы можете зайти в систему и просмотреть ваши заказы, для этого нажмите на кнопку Зайти</p>
+            <Modal title="Как узнать статус заказа?" visible={isModalVisible} okText={"Войти"} cancelText={"Закрыть"} onOk={() => Router.push(LOGIN)} onCancel={() => setIsModalVisible(false)}>
+                <p>1. Вы можете зайти в систему и просмотреть ваши заказы, для этого нажмите на кнопку Войти</p>
                 <p>2. Вы можете позвонить нам по номеру телефона: 88003355335</p>
             </Modal>
         </header>
