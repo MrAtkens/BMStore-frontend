@@ -10,13 +10,14 @@ interface IProductComponent{
 }
 
 const Product = ({product} : IProductComponent) => {
-    const { getImage, price, title } = useProduct();
+    const { getImage, price, badge, title } = useProduct();
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
                 <Link href={PRODUCT(product.id)}>
                     <a>{getImage(product)}</a>
                 </Link>
+                {badge(product)}
                 <ModuleProductActions product={product} />
             </div>
             <div className="ps-product__container">

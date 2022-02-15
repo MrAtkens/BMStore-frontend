@@ -29,6 +29,7 @@ class ProductStore implements IProductStore{
     product = {
         id: "",
         price : 0,
+        discountPrice: 0,
         articul: "",
         title: "",
         description: "",

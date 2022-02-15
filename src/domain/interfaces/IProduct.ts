@@ -15,8 +15,9 @@ export interface IProduct{
 	articul: string,
 	slug : string,
 	title: string,
-	description: string
+	description: string,
 	price : number,
+	discountPrice: number,
 	isActive: boolean,
 	isDeleted: boolean,
 	images : Array<IImage>

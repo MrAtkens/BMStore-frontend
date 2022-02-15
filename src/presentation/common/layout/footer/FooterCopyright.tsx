@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const FooterCopyright = () => (
     <div className="ps-footer__copyright">
-        <p>&copy;  2021 CATS. Все права защищены</p>
+        <p>&copy;  2022 TACS. Все права защищены</p>
         <p>
             <span>Наши системы оплаты:</span>
             <a href="https://cloudpayments.kz/">
