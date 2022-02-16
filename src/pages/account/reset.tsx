@@ -13,64 +13,68 @@ import ResetPassword from 'presentation/page/ResetPassword';
 import Layout from 'presentation/layout';
 import { GetServerSideProps } from 'next';
 
-interface IResetPage{
-	categories: Array<ICategory>,
-	operationId: string
+interface IResetPage {
+	categories: Array<ICategory>;
+	operationId: string;
 }
 
-const ResetPage = ({categories, operationId} : IResetPage) => {
-
-	const Router = useRouter()
+const ResetPage = ({ categories, operationId }: IResetPage) => {
+	const Router = useRouter();
 	useEffect(() => {
-		if(isUserAuth())
-			Router.push(HOME)
-	})
+		if (isUserAuth()) Router.push(HOME);
+	});
 
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: HOME,
+			url: HOME
 		},
 		{
 			text: 'Востановление пароля',
 			url: null
-		},
+		}
 	];
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
-				<title>Авторизация - CATS</title>
-				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>Смена пароля - TACS</title>
+				<meta
+					name="description"
+					content="TACS-Магазин стройматериалов в Нур-Султан"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="ps-page--my-account">
-			<BreadCrumb breadcrumb={breadCrumb} layout={"normal"}/>
-			<ResetPassword operationId={operationId} />
+				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
+				<ResetPassword operationId={operationId} />
 			</div>
 		</Layout>
-);
+	);
 };
 
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { operationId } = context.query
-	if(operationId === undefined || !uuidValidate(operationId))
-		return{
+	const { operationId } = context.query;
+	if (operationId === undefined || !uuidValidate(operationId))
+		return {
 			redirect: {
 				permanent: true,
-				destination: HOME,
+				destination: HOME
 			},
-			props:{},
-		}
-	let category = []
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse !== undefined)
-		category = categoryResponse.data
+			props: {}
+		};
+	let category = [];
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
+		'ru'
+	);
+	if (categoryResponse !== undefined) category = categoryResponse.data;
 	return {
-		props:{ categories: category, operationId: operationId},
+		props: { categories: category, operationId: operationId }
 	};
-}
+};
 
 export default ResetPage;

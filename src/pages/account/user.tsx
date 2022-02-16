@@ -13,39 +13,43 @@ import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuS
 import UserInformation from 'presentation/page/account/UserInformation';
 import Layout from 'presentation/layout';
 
-interface ILoginPage{
-	categories: Array<ICategory>
+interface ILoginPage {
+	categories: Array<ICategory>;
 }
 
-const UserPage = ({categories} : ILoginPage) => {
-
-	const Router = useRouter()
+const UserPage = ({ categories }: ILoginPage) => {
+	const Router = useRouter();
 	useEffect(() => {
-		if(!isUserAuth)
-			Router.push(HOME)
-	})
+		if (!isUserAuth) Router.push(HOME);
+	});
 
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: HOME,
+			url: HOME
 		},
 		{
 			text: 'Заказы',
 			url: null
-		},
+		}
 	];
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
-				<title>Заказы - CATS</title>
-				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>Кабинет - TACS</title>
+				<meta
+					name="description"
+					content="TACS-Магазин стройматериалов в Нур-Султан"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="ps-page--my-account">
-				<BreadCrumb breadcrumb={breadCrumb} layout={"normal"}/>
+				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
@@ -55,26 +59,27 @@ const UserPage = ({categories} : ILoginPage) => {
 								</div>
 							</div>
 							<div className="col-lg-8 user-top">
-								<UserInformation/>
+								<UserInformation />
 							</div>
 						</div>
 					</div>
 				</section>
 			</div>
 		</Layout>
-);
+	);
 };
 
-
-export async function getStaticProps({ locale, req } : any){
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse.data === undefined)
+export async function getStaticProps({ locale, req }: any) {
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
+		'ru'
+	);
+	if (categoryResponse.data === undefined)
 		return {
-			props:{ categories: []},
+			props: { categories: [] },
 			revalidate: 1800
 		};
 	return {
-		props:{ categories: categoryResponse.data},
+		props: { categories: categoryResponse.data },
 		revalidate: 1200
 	};
 }

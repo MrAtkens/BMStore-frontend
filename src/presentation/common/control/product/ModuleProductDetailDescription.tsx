@@ -21,13 +21,13 @@ const ModuleProductDetailDescription = ({
 				</Link>
 			) : product.isActive ? (
 				<Link passHref href={HOME}>
-					<strong className="ps-tag--out-stock"> В наличий</strong>
+					<strong className="ps-tag--out-stock"> В наличии</strong>
 				</Link>
 			) : (
 				<Link passHref href={HOME}>
 					<strong className="ps-tag--out-stock">
 						{' '}
-						Нет в наличий
+						Нет в наличии
 					</strong>
 				</Link>
 			)}

@@ -10,32 +10,38 @@ import ContactInfo from 'presentation/page/contact/ContactInfo';
 import ContactMap from 'presentation/page/contact/ContactMap';
 import Layout from 'presentation/layout';
 
-interface IContactUsPage{
-	categories: Array<ICategory>
+interface IContactUsPage {
+	categories: Array<ICategory>;
 }
 
-const ContactUsPage = ({ categories } : IContactUsPage) => {
+const ContactUsPage = ({ categories }: IContactUsPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: HOME,
+			url: HOME
 		},
 		{
 			text: 'Контакты',
 			url: null
-		},
+		}
 	];
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
-				<title>CATS — Контакты</title>
-				<meta name="description" content="CATS — Интернет-магазин стройматериалов"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>TACS — Контакты</title>
+				<meta
+					name="description"
+					content="TACS — Интернет-магазин стройматериалов"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="ps-page--single" id="contact-us">
-				<BreadCrumb breadcrumb={breadCrumb} layout={"default"} />
+				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />
 				<ContactMap />
 				<ContactInfo />
 			</div>
@@ -43,19 +49,19 @@ const ContactUsPage = ({ categories } : IContactUsPage) => {
 	);
 };
 
-
-export async function getStaticProps({ locale, req } : any){
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse.data === undefined)
+export async function getStaticProps({ locale, req }: any) {
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
+		'ru'
+	);
+	if (categoryResponse.data === undefined)
 		return {
-			props:{ categories: []},
+			props: { categories: [] },
 			revalidate: 1800
 		};
 	return {
-		props:{ categories: categoryResponse.data},
+		props: { categories: categoryResponse.data },
 		revalidate: 600
 	};
 }
-
 
 export default ContactUsPage;

@@ -11,55 +11,60 @@ import Login from 'presentation/page/Login';
 import Layout from 'presentation/layout';
 import { isUserAuth } from 'helper/commons/userHelper';
 
-interface ILoginPage{
-	categories: Array<ICategory>
+interface ILoginPage {
+	categories: Array<ICategory>;
 }
 
-const LoginPage = ({categories} : ILoginPage) => {
-
-	const Router = useRouter()
+const LoginPage = ({ categories }: ILoginPage) => {
+	const Router = useRouter();
 	useEffect(() => {
-		if(isUserAuth())
-			Router.push(HOME)
-	})
+		if (isUserAuth()) Router.push(HOME);
+	});
 
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: HOME,
+			url: HOME
 		},
 		{
 			text: 'Вход в аккаунт',
 			url: null
-		},
+		}
 	];
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
-				<title>Авторизация - CATS</title>
-				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>Авторизация - TACS</title>
+				<meta
+					name="description"
+					content="TACS-Магазин стройматериалов в Нур-Султан"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="ps-page--my-account">
-			<BreadCrumb breadcrumb={breadCrumb} layout={"normal"}/>
-			<Login />
+				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
+				<Login />
 			</div>
 		</Layout>
-);
+	);
 };
 
-
-export async function getStaticProps({ locale, req } : any){
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse.data === undefined)
+export async function getStaticProps({ locale, req }: any) {
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
+		'ru'
+	);
+	if (categoryResponse.data === undefined)
 		return {
-			props:{ categories: []},
+			props: { categories: [] },
 			revalidate: 1800
 		};
 	return {
-		props:{ categories: categoryResponse.data},
+		props: { categories: categoryResponse.data },
 		revalidate: 1200
 	};
 }

@@ -11,55 +11,60 @@ import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Reset from 'presentation/page/Reset';
 import Layout from 'presentation/layout';
 
-interface IResetPageMail{
-	categories: Array<ICategory>
+interface IResetPageMail {
+	categories: Array<ICategory>;
 }
 
-const ResetPageMail = ({categories} : IResetPageMail) => {
-
-	const Router = useRouter()
+const ResetPageMail = ({ categories }: IResetPageMail) => {
+	const Router = useRouter();
 	useEffect(() => {
-		if(isUserAuth())
-			Router.push(HOME)
-	})
+		if (isUserAuth()) Router.push(HOME);
+	});
 
 	const breadCrumb = [
 		{
 			text: 'Главная',
-			url: HOME,
+			url: HOME
 		},
 		{
 			text: 'Запрос на востановление пароля',
 			url: null
-		},
+		}
 	];
 
 	return (
-		<Layout categories={categories} title={"Главная страница - CATS"}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
-				<title>Авторизация - CATS</title>
-				<meta name="description" content="CATS-Магазин стройматериалов в Нур-Султан"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>Смена пароля - TACS</title>
+				<meta
+					name="description"
+					content="TACS-Магазин стройматериалов в Нур-Султан"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="ps-page--my-account">
-			<BreadCrumb breadcrumb={breadCrumb} layout={"normal"}/>
-			<Reset />
+				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
+				<Reset />
 			</div>
 		</Layout>
-);
+	);
 };
 
-
-export async function getStaticProps({ locale, req } : any){
-	const categoryResponse = await categoryApiService.getCategoriesByLanguage("ru")
-	if(categoryResponse.data === undefined)
+export async function getStaticProps({ locale, req }: any) {
+	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
+		'ru'
+	);
+	if (categoryResponse.data === undefined)
 		return {
-			props:{ categories: []},
+			props: { categories: [] },
 			revalidate: 1800
 		};
 	return {
-		props:{ categories: categoryResponse.data},
+		props: { categories: categoryResponse.data },
 		revalidate: 1200
 	};
 }

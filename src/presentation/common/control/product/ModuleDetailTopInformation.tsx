@@ -17,8 +17,8 @@ const ModuleDetailTopInformation = ({
 	if (product.discountPrice < product.price) {
 		priceView = (
 			<h4 className="ps-product__price sale">
-				<del className="mr-2">&{product.discountPrice}</del>
-				{product.price} тг
+				<del className="mr-2">{product.price}</del>
+				{product.discountPrice} тг
 			</h4>
 		);
 	} else {

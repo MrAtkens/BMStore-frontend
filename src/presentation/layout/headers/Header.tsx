@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Modal } from 'antd';
 
 import { CONTACTS, HOME, LOGIN, ORDERS, SHOP_PAGE } from 'constant/routes';
@@ -70,10 +71,10 @@ const Header = ({ categories }: IHeader) => {
 					<div className="header__content-left">
 						<Link passHref href={HOME}>
 							<a className="ps-logo">
-								<img
-									// width={220}
-									// height={90}
-									// quality={100}
+								<Image
+									width={220}
+									height={70}
+									quality={100}
 									src="/static/img/logo.webp"
 									alt="TACS logo"
 								/>

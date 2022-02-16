@@ -1,5 +1,5 @@
-import React from "react";
-import Head from 'next/head'
+import React from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
@@ -9,14 +9,19 @@ import { authenticationService } from 'data/API';
 import { userAcceptMailStatus } from 'helper/responseStatus';
 
 const Accept = () => {
-
 	return (
 		<>
 			<Head>
-				<title>CATS — Интернет-магазин стройматериалов</title>
-				<meta name="description" content="CATS — Интернет-магазин стройматериалов"/>
-				<meta name="keywords" content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"/>
-				<meta name="author" content="Bazar-Jok Group"/>
+				<title>TACS — Интернет-магазин стройматериалов</title>
+				<meta
+					name="description"
+					content="TACS — Интернет-магазин стройматериалов"
+				/>
+				<meta
+					name="keywords"
+					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
+				/>
+				<meta name="author" content="Bazar-Jok Group" />
 			</Head>
 			<div className="site-content">
 				<div className="ps-page--404">
@@ -31,7 +36,8 @@ const Accept = () => {
 								/>
 								<h3>Подтверждение пароля</h3>
 								<p>
-									Ожидайте вас должно перекинуть на главную страницу
+									Ожидайте вас должно перекинуть на главную
+									страницу
 									<br />
 									<Link href={HOME}>
 										<a>Вернуться на главную</a>
@@ -44,34 +50,34 @@ const Accept = () => {
 			</div>
 		</>
 	);
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { userId } = context.query
-	const response = await authenticationService.userMailAccepts(userId)
-	userAcceptMailStatus(response.status)
-	if(response.status === 200)
-		return{
+	const { userId } = context.query;
+	const response = await authenticationService.userMailAccepts(userId);
+	userAcceptMailStatus(response.status);
+	if (response.status === 200)
+		return {
 			redirect: {
 				permanent: true,
-				destination: HOME,
+				destination: HOME
 			},
-			props:{},
-		}
-	else{
+			props: {}
+		};
+	else {
 		setTimeout(() => {
-			return{
+			return {
 				redirect: {
 					permanent: true,
-					destination: HOME,
+					destination: HOME
 				},
-				props:{},
-			}
-		}, 5000)
+				props: {}
+			};
+		}, 5000);
 	}
-	return{
-		props:{},
-	}
-}
+	return {
+		props: {}
+	};
+};
 
 export default Accept;

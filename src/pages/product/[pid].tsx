@@ -55,12 +55,12 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 		productView = <SkeletonProductDetail />;
 	}
 	return (
-		<Layout categories={categories} title={'Главная страница - CATS'}>
+		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
 				<title>Продукт - {pageProduct.title}</title>
 				<meta
 					name="description"
-					content="CATS-Магазин стройматериалов в Нур-Султан"
+					content="TACS-Магазин стройматериалов в Нур-Султан"
 				/>
 				<meta
 					name="keywords"
