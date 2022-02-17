@@ -62,36 +62,33 @@ const ThumbnailDefault = ({ product, vertical = true }: IThumbnailDefault) => {
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 4,
-					slidesToScroll: 4,
+					slidesToScroll: 2,
 					dots: false,
 					arrows: false,
 					vertical: false,
-					infinite: false,
-					rows: 1
+					infinite: false
 				}
 			},
 			{
 				breakpoint: 768,
 				settings: {
 					slidesToShow: 4,
-					slidesToScroll: 4,
+					slidesToScroll: 2,
 					dots: false,
 					arrows: false,
 					vertical: false,
-					infinite: false,
-					rows: 1
+					infinite: false
 				}
 			},
 			{
 				breakpoint: 480,
 				settings: {
 					slidesToShow: 4,
-					slidesToScroll: 4,
+					slidesToScroll: 2,
 					dots: false,
 					arrows: false,
 					vertical: false,
-					infinite: false,
-					rows: 1
+					infinite: false
 				}
 			}
 		]
@@ -144,7 +141,7 @@ const ThumbnailDefault = ({ product, vertical = true }: IThumbnailDefault) => {
 				swipeToSlide={true}
 				arrows={false}
 				slidesToShow={5}
-				slidesToScroll={5}
+				slidesToScroll={2}
 				rows={1}
 				vertical={false}
 				{...variantSetting}

@@ -421,12 +421,10 @@
 
     background: $color-header-text;
     .ps-section__header{
-        margin-top: 20px;
         margin-bottom: 20px !important;
         margin-left: 20px;
         margin-right: 20px;
-        border-bottom: 1px solid #e3e3e3;
-        padding: 0 20px;
+        padding-top: 20px;
     }
     .slick-list{
         height: 320px !important;
@@ -1443,10 +1441,6 @@
             text-align: center;
             width: 100%;
 
-            .slick-track {
-                width: 100% !important;
-            }
-
             .slick-slide {
                 margin-bottom: 0;
                 margin-right: 10px;
@@ -1460,6 +1454,9 @@
 
             .slick-list {
                 margin-right: -10px;
+                .slick-track{
+                    width: 1080px !important;
+                }
             }
 
             .slick-arrow {
