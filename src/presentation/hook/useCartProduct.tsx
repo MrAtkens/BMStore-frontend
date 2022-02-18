@@ -35,9 +35,8 @@ export default function useCartProduct() {
 			let view;
 			if (product.discountPrice < product.price) {
 				const discountPercent = (
-					((product.price - product.discountPrice) /
-						product.discountPrice) *
-					100
+					100 -
+					(product.discountPrice / product.price) * 100
 				).toFixed(0);
 				return (
 					<div className="ps-product__badge">-{discountPercent}%</div>
