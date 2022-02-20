@@ -1,38 +1,38 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from 'mobx';
 import { ICategory } from 'domain/interfaces/ICategory';
 
-interface ICategoryStore{
-    categories : Array<ICategory>
-    activeCategory: ICategory
+interface ICategoryStore {
+	categories: Array<ICategory>;
+	activeCategory: ICategory;
 }
 
 class CategoryStore implements ICategoryStore {
-    categories = [] as Array<ICategory>;
-    activeCategory = {
-        id: "",
-        imageUrl: "",
-        children: [],
-        name: "",
-        slug: "",
-    };
+	categories = [] as Array<ICategory>;
+	activeCategory = {
+		id: '',
+		imageUrl: '',
+		children: [] as Array<any>,
+		name: '',
+		slug: ''
+	};
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-    // setActive(category: ICategory) {
-    //     this.activeCategory = category
-    // }
+	setActive(category: ICategory) {
+		this.activeCategory = category;
+	}
 
-    setActiveDefault(){
-        this.activeCategory = {
-            id: "",
-            imageUrl: "",
-            children: [],
-            name: "",
-            slug: "",
-        }
-    }
+	setActiveDefault() {
+		this.activeCategory = {
+			id: '',
+			imageUrl: '',
+			children: [],
+			name: '',
+			slug: ''
+		};
+	}
 }
 
 export default new CategoryStore();

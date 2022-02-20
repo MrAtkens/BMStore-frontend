@@ -356,6 +356,7 @@
     }
 
     @include media('<lg') {
+        display: inherit;
         flex-flow: column-reverse wrap;
         .ps-layout__left {
             max-width: 100%;
@@ -504,7 +505,6 @@
 
     @include media('<sm') {
         .ps-shopping__header {
-            flex-flow: row nowrap;
             justify-content: space-between;
 
             > * {
@@ -529,7 +529,6 @@
 
     @include media('<xs') {
         .ps-shopping__header {
-            flex-flow: row wrap;
 
             p {
                 display: block;
@@ -788,4 +787,9 @@
             }
         }
     }
+}
+
+.ps--category-tag{
+    padding: 5px 8px 5px 8px;
+    font-size: 12pt;
 }

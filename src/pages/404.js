@@ -9,7 +9,7 @@ const Error = () => {
 	return (
 		<>
 			<Head>
-				<title>404 потеряна страница TACS</title>
+				<title>404 TACS</title>
 				<meta
 					name="description"
 					content="TACS-Магазин стройматериалов в Нур-Султан"

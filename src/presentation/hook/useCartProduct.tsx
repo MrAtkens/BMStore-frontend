@@ -34,10 +34,9 @@ export default function useCartProduct() {
 		badge: (product: ICartProduct) => {
 			let view;
 			if (product.discountPrice < product.price) {
-				const discountPercent = (
+				const discountPercent =
 					100 -
-					(product.discountPrice / product.price) * 100
-				).toFixed(0);
+					Math.floor((product.discountPrice / product.price) * 100);
 				return (
 					<div className="ps-product__badge">-{discountPercent}%</div>
 				);
