@@ -26,6 +26,7 @@ function getImageURL(images: Array<IImage>) {
 
 export default function useProduct() {
 	return {
+		// Сборщик картинок
 		getImage: (product: IProduct) => {
 			return (
 				<LazyLoad>
@@ -39,6 +40,7 @@ export default function useProduct() {
 				</LazyLoad>
 			);
 		},
+		// Сборщик картинок рекомендованных товаров
 		getRecommendImage: (productUrl: string, productAlt: string) => {
 			return (
 				<LazyLoad>
@@ -56,6 +58,7 @@ export default function useProduct() {
 				</LazyLoad>
 			);
 		},
+		// Сборщик цены и скидочной цены
 		price: (product: IProduct) => {
 			let view;
 			if (product.discountPrice < product.price) {
@@ -79,6 +82,7 @@ export default function useProduct() {
 			}
 			return view;
 		},
+		// Бадж для скидок в процентах
 		badge: (product: IProduct) => {
 			let view;
 			if (product.discountPrice < product.price) {
@@ -91,6 +95,7 @@ export default function useProduct() {
 			}
 			return view;
 		},
+		// Сборщик фильтров продукта
 		filters: (product: IProduct) => {
 			return product.filters.map((filter) => (
 				<a key={filter.filterId} className="text-capitalize">
@@ -98,6 +103,7 @@ export default function useProduct() {
 				</a>
 			));
 		},
+		// Заголовок ссылка
 		title: (product: IProduct) => {
 			return (
 				<Link href={PRODUCT(product.id)}>

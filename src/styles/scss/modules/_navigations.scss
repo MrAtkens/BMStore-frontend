@@ -73,6 +73,7 @@
     }
 
     .navigation__right {
+        color: $color-header-text;
         flex-flow: row nowrap;
         justify-content: flex-end;
         .header__extra {

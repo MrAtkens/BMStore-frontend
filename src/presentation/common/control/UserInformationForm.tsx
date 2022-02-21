@@ -2,30 +2,31 @@ import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
 
-import userStore from "data/stores/userStore"
+import userStore from 'data/stores/userStore';
 import AutoComplete from 'react-google-autocomplete';
 
 const UserInformationForm = observer(() => {
-
 	const onFinish = async (values: any) => {
-		await userStore.userEdit(values.name, values.address, values.phone)
+		await userStore.userEdit(values.name, values.address, values.phone);
 	};
 
 	const [form] = Form.useForm();
 
+	//Инициализация формы данными с api
 	useEffect(() => {
 		form.setFieldsValue({
 			name: userStore.user.fullName,
 			address: userStore.user.address,
 			phone: userStore.user.phone
-		})
-	},[userStore.user.fullName, userStore.user.phone])
+		});
+	}, [userStore.user.fullName, userStore.user.phone]);
 
 	return (
 		<Form
 			form={form}
 			className="ps-form--account-setting"
-			onFinish={onFinish}>
+			onFinish={onFinish}
+		>
 			<div className="ps-form__header">
 				<h3>Информация пользователя</h3>
 			</div>
@@ -40,9 +41,10 @@ const UserInformationForm = observer(() => {
 									type: 'string',
 									min: 2,
 									max: 100,
-									message: 'Пожалуйста, введите ваше ФИО',
-								},
-							]}>
+									message: 'Пожалуйста, введите ваше ФИО'
+								}
+							]}
+						>
 							<Input
 								className="form-control"
 								type="text"
@@ -59,21 +61,33 @@ const UserInformationForm = observer(() => {
 									type: 'string',
 									min: 3,
 									max: 200,
-									message: 'Пожалуйста, введите адрес доставки',
-								},
-							]}>
+									message:
+										'Пожалуйста, введите адрес доставки'
+								}
+							]}
+						>
 							<AutoComplete
 								className="form-control"
-								apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
+								apiKey={
+									process.env['NEXT_PUBLIC_PLACES_API_KEY']
+								}
 								placeholder="Ваш адрес"
-								onKeyDown={(e)=> e.key === "Enter" ? e.preventDefault(): ''}
-								onPlaceSelected={(place, inputRef, autocomplete) => {
-									form.setFieldsValue({address: place.formatted_address})
+								onKeyDown={(e) =>
+									e.key === 'Enter' ? e.preventDefault() : ''
+								}
+								onPlaceSelected={(
+									place,
+									inputRef,
+									autocomplete
+								) => {
+									form.setFieldsValue({
+										address: place.formatted_address
+									});
 								}}
 								options={{
-									fields: ["formatted_address"],
-									types: ["address"],
-									componentRestrictions: { country: "kz" },
+									fields: ['formatted_address'],
+									types: ['address'],
+									componentRestrictions: { country: 'kz' }
 								}}
 							/>
 						</Form.Item>
@@ -84,15 +98,18 @@ const UserInformationForm = observer(() => {
 							rules={[
 								{
 									required: true,
-									message: 'Пожалуйста, введите номер телефона',
+									message:
+										'Пожалуйста, введите номер телефона'
 								},
 								{
 									min: 10,
 									max: 18,
-									message: 'Некорректный номер телефона. Номера телефонов начинаются со знаком "+"',
+									message:
+										'Некорректный номер телефона. Номера телефонов начинаются со знаком "+"',
 									pattern: /^[+][0-9]{10,18}$/i
 								}
-							]}>
+							]}
+						>
 							<Input
 								className="form-control"
 								placeholder="Номер телефона"

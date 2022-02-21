@@ -398,7 +398,6 @@
         display: inline-flex;
         flex-flow: row wrap;
         align-items: center;
-        text-align: center;
 
         .category-title{
             margin-top: 10px;
@@ -409,6 +408,7 @@
             width: calc(100% / 3);
             overflow: hidden;
             padding: 20px;
+            text-align: center;
 
             cursor: pointer;
 

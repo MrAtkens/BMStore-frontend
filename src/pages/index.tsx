@@ -6,7 +6,7 @@ import { categoryApiService } from 'data/API';
 
 import Layout from 'presentation/layout';
 import Banners from 'presentation/common/block/Banners';
-import Category from 'presentation/common/block/Category';
+import CategoryMainPage from 'presentation/common/block/CategoryMainPage/CategoryMainPage';
 import PromotionMainPage from 'presentation/common/block/PromotionMainPage';
 
 interface IHome {
@@ -31,7 +31,7 @@ const Home = ({ categories }: IHome) => {
 			<main id="homepage-1">
 				<div className="container">
 					<Banners />
-					<Category categories={categories} />
+					<CategoryMainPage categories={categories} />
 					<PromotionMainPage />
 				</div>
 			</main>

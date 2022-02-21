@@ -19,6 +19,7 @@ function getImageURL(url: string) {
 
 export default function useCartProduct() {
 	return {
+		// Сборщик картинок
 		getImage: (product: ICartProduct) => {
 			return (
 				<LazyLoad>
@@ -31,6 +32,7 @@ export default function useCartProduct() {
 				</LazyLoad>
 			);
 		},
+		// Бадж для скидок в процентах
 		badge: (product: ICartProduct) => {
 			let view;
 			if (product.discountPrice < product.price) {
@@ -43,6 +45,7 @@ export default function useCartProduct() {
 			}
 			return view;
 		},
+		// Заголовок ссылка
 		title: (product: ICartProduct) => {
 			return (
 				<Link href={PRODUCT(product.productId)}>
