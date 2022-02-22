@@ -323,3 +323,17 @@
 .ps-categories-mobile::-webkit-scrollbar {
     display: none;
 }
+
+.ps-categories-mobile-container{
+    display: block;
+}
+
+.mobile-image-container{
+    padding: 30px;
+    text-align: center;
+
+    .category-title{
+        margin-top: 10px;
+        font-size: 12pt;
+    }
+}

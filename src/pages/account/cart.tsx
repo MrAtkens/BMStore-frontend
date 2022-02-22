@@ -87,7 +87,7 @@ const ShoppingCartScreen = observer(({ categories }: IShoppingCartScreen) => {
 				<title>TACS — Корзина</title>
 				<meta
 					name="description"
-					content="CATS — Интернет-магазин стройматериалов"
+					content="TACS — Интернет-магазин стройматериалов"
 				/>
 				<meta
 					name="keywords"

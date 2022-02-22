@@ -107,6 +107,9 @@ const defaultCategories = (categories: Array<ICategory>) => {
 		});
 		list.push(listBuffer);
 	}
+	// Проверка на пустой array в последним элементе
+	if (list[list.length - 1].length === 0 || list[list.length - 1] === null)
+		list.pop();
 	return list;
 };
 

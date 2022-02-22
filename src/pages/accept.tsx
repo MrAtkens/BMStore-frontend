@@ -32,7 +32,7 @@ const Accept = () => {
 									width={800}
 									height={360}
 									src="/static/img/accept.webp"
-									alt="Accept CATS"
+									alt="Accept TACS"
 								/>
 								<h3>Подтверждение пароля</h3>
 								<p>

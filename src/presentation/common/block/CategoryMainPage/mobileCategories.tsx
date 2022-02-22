@@ -14,7 +14,6 @@ const mobileCategories = (categories: Array<ICategory>) => {
 	let listBuffer: any = [];
 	if (categories.length >= 2) {
 		categories.map((category) => {
-			console.log(count);
 			count++;
 			if (count === 2) {
 				const categoryItem = (
@@ -23,7 +22,7 @@ const mobileCategories = (categories: Array<ICategory>) => {
 						href={SHOP_PAGE('category', category.id)}
 						key={category.id}
 					>
-						<div className="image-container">
+						<div className="mobile-image-container">
 							<Image
 								loading="lazy"
 								layout="responsive"
@@ -49,7 +48,7 @@ const mobileCategories = (categories: Array<ICategory>) => {
 						href={SHOP_PAGE('category', category.id)}
 						key={category.id}
 					>
-						<div className="image-container">
+						<div className="mobile-image-container">
 							<Image
 								loading="lazy"
 								layout="responsive"
@@ -83,7 +82,7 @@ const mobileCategories = (categories: Array<ICategory>) => {
 						href={SHOP_PAGE('category', category.id)}
 						key={category.id}
 					>
-						<div className="image-container">
+						<div className="mobile-image-container">
 							<Image
 								loading="lazy"
 								layout="responsive"
@@ -108,6 +107,9 @@ const mobileCategories = (categories: Array<ICategory>) => {
 		});
 		list.push(listBuffer);
 	}
+	// Проверка на пустой array в последним элементе
+	if (list[list.length - 1].length === 0 || list[list.length - 1] === null)
+		list.pop();
 	return list;
 };
 
