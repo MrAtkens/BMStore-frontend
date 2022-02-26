@@ -12,7 +12,6 @@
 .ps-panel--mobile {
     .ant-menu-inline {
         border-right: none !important;
-
         .ant-menu-submenu-title {
             padding: 0 !important;
         }
@@ -20,7 +19,12 @@
         .ant-menu-item {
             padding: 0 !important;
         }
+        @include media('<=tn') {
+            margin-left: 25px;
+            width: 100vw;
+        }
     }
+
 
     .ant-drawer-body {
         padding: 0 !important;

@@ -346,7 +346,6 @@
 
     .ps-layout__left {
         width: 100%;
-        min-width: 320px;
         max-width: 310px;
         padding-right: 30px;
     }
@@ -417,6 +416,7 @@
                 }
             }
         }
+
     }
 
     .ps-shopping__actions {
@@ -534,7 +534,6 @@
                 display: block;
                 max-width: 100%;
                 flex-basis: 100%;
-                margin-bottom: 10px;
             }
 
             .ps-shopping__actions {
@@ -790,6 +789,7 @@
 }
 
 .ps--category-tag{
-    padding: 5px 8px 5px 8px;
+    padding: 10px 10px;
     font-size: 12pt;
+    background-color: $color-1st !important;
 }

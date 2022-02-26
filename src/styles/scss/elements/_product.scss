@@ -274,8 +274,8 @@
     display: flex;
     padding: 0;
     flex-flow: row nowrap;
-    border: 1px solid transparent;
-    border-bottom: 1px solid #f0f0f0;
+    border: 2px solid transparent;
+    border-bottom: 2px solid #f0f0f0;
 
     > * {
         width: 100%;
@@ -326,7 +326,7 @@
 
     .ps-product__shopping {
         flex-basis: 180px;
-
+        min-width: 200px;
         .ps-btn {
             width: 100%;
             text-align: center;
@@ -405,7 +405,6 @@
     }
 
     @include media('<xs') {
-        flex-flow: row wrap;
         .ps-product__thumbnail {
             margin-bottom: 30px;
             max-width: 100%;

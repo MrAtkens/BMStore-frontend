@@ -1,23 +1,38 @@
-import { CONTACTS, ORDERS, SHOP_PAGE, USER } from '../routes';
+import {
+	ADDRESS,
+	CONTACTS,
+	ORDERS,
+	PENALTIES,
+	SHOP_PAGE,
+	USER
+} from '../routes';
 
 export const menuLinks = [
 	{
 		text: 'Магазин',
-		url: SHOP_PAGE(),
+		url: SHOP_PAGE()
 	},
 	{
 		text: 'Контакты',
-		url: CONTACTS,
-	},
+		url: CONTACTS
+	}
 ];
 
 export const accountLinks = [
 	{
-		text: "Аккаунт",
+		text: 'Аккаунт',
 		url: USER
 	},
 	{
-		text: "Заказы",
+		text: 'Aдреса',
+		url: ADDRESS
+	},
+	{
+		text: 'Штрафы',
+		url: PENALTIES
+	},
+	{
+		text: 'Заказы',
 		url: ORDERS
 	}
-]
+];

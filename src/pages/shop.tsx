@@ -18,12 +18,14 @@ import { IProduct } from 'domain/interfaces/IProduct';
 import { HOME, SHOP_PAGE } from 'constant/routes';
 
 import Layout from 'presentation/layout';
+import ShopItems from 'presentation/page/catalog/ShopItems';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
+import CategoryMenuMobile from 'presentation/common/typography/CategoryMenuMobile';
+
 import WidgetShopFilter from 'presentation/page/catalog/WidgetShopFilter';
 import WidgetShopCategories from 'presentation/page/catalog/WidgetShopCategories';
+import WidgetShopFilterMobile from 'presentation/page/catalog/WidgetShopFilterMobile';
 import WidgetShopFilterByPriceRange from 'presentation/page/catalog/WidgetShopFilterByPriceRange';
-import ShopItems from 'presentation/page/catalog/ShopItems';
-import CategoryMenuMobile from 'presentation/common/typography/CategoryMenuMobile';
 
 interface IShop {
 	categoriesData: Array<ICategory>;
@@ -118,7 +120,7 @@ const Shop = observer(
 									<>
 										{filtersStore.filters === null ||
 											filtersStore.filters.map((item) => (
-												<WidgetShopFilter
+												<WidgetShopFilterMobile
 													key={item.slug}
 													filter={item}
 												/>
@@ -164,7 +166,11 @@ const Shop = observer(
 								<div className="ps-page__header">
 									<h1>Каталог</h1>
 								</div>
-								<ShopItems columns={4} pageSize={16} />
+								<ShopItems
+									columns={4}
+									pageSize={16}
+									size={size}
+								/>
 							</div>
 						</div>
 					</div>

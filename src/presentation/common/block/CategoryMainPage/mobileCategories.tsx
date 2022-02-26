@@ -26,8 +26,8 @@ const mobileCategories = (categories: Array<ICategory>) => {
 							<Image
 								loading="lazy"
 								layout="responsive"
-								width={500}
-								height={500}
+								width={200}
+								height={200}
 								src={category.imageUrl}
 								alt={category.name}
 							/>
@@ -52,8 +52,8 @@ const mobileCategories = (categories: Array<ICategory>) => {
 							<Image
 								loading="lazy"
 								layout="responsive"
-								width={500}
-								height={500}
+								width={200}
+								height={200}
 								src={
 									category.imageUrl !== null &&
 									category.imageUrl !== undefined
@@ -86,8 +86,8 @@ const mobileCategories = (categories: Array<ICategory>) => {
 							<Image
 								loading="lazy"
 								layout="responsive"
-								width={500}
-								height={500}
+								width={200}
+								height={200}
 								src={
 									category.imageUrl !== null &&
 									category.imageUrl !== undefined

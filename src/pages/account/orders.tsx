@@ -18,7 +18,7 @@ import { IOrder } from 'domain/interfaces/IOrder';
 
 import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
-import Orders from 'presentation/page/account/Orders';
+import OrdersTable from 'presentation/page/account/OrdersTable';
 import Layout from 'presentation/layout';
 
 interface IOrdersPage {
@@ -77,7 +77,7 @@ const OrdersPage = ({ categories, orders }: IOrdersPage) => {
 								</div>
 							</div>
 							<div className="col-lg-8 orders-top">
-								<Orders orders={orders} />
+								<OrdersTable orders={orders} />
 							</div>
 						</div>
 					</div>

@@ -90,7 +90,7 @@ const HeaderMobile = observer(() => {
 						<a className="ps-logo">
 							<Image
 								width={156}
-								height={32}
+								height={40}
 								src="/static/img/logo_light.webp"
 								alt="martfury"
 							/>
