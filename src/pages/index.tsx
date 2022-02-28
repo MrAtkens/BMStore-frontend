@@ -2,18 +2,21 @@ import React from 'react';
 import Head from 'next/head';
 
 import { ICategory } from 'domain/interfaces/ICategory';
-import { categoryApiService } from 'data/API';
+import { IProduct } from 'domain/interfaces/IProduct';
+import { categoryApiService, productsApiService } from 'data/API';
 
 import Layout from 'presentation/layout';
 import Banners from 'presentation/common/block/Banners';
 import CategoryMainPage from 'presentation/common/block/CategoryMainPage/CategoryMainPage';
 import PromotionMainPage from 'presentation/common/block/PromotionMainPage';
+import ActualProducts from 'presentation/common/control/ActualProducts';
 
 interface IHome {
 	categories: Array<ICategory>;
+	actualProducts: Array<IProduct>;
 }
 
-const Home = ({ categories }: IHome) => {
+const Home = ({ categories, actualProducts }: IHome) => {
 	return (
 		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>
@@ -33,6 +36,12 @@ const Home = ({ categories }: IHome) => {
 					<Banners />
 					<CategoryMainPage categories={categories} />
 					<PromotionMainPage />
+					{actualProducts.length > 0 ? (
+						<ActualProducts
+							layout="fullwidth"
+							productItems={actualProducts}
+						/>
+					) : null}
 				</div>
 			</main>
 		</Layout>
@@ -43,13 +52,21 @@ export async function getStaticProps({ locale, req }: any) {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
 	);
-	if (categoryResponse.data === undefined)
+	const actualProductsResponse =
+		await productsApiService.getProductActualProducts();
+	if (
+		categoryResponse.data === undefined ||
+		actualProductsResponse.data.data === undefined
+	)
 		return {
-			props: { categories: [] },
+			props: { categories: [], actualProducts: [] },
 			revalidate: 1800
 		};
 	return {
-		props: { categories: categoryResponse.data },
+		props: {
+			categories: categoryResponse.data,
+			actualProducts: actualProductsResponse.data.data
+		},
 		revalidate: 600
 	};
 }

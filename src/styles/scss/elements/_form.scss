@@ -59,6 +59,20 @@ textarea.form-control {
     }
 }
 
+.ps-address-table__operations{
+    display: flex;
+    justify-content: space-around;
+    i{
+        font-size: 12pt;
+        color: $color-1st;
+    }
+}
+
+.ps-address-form-buttons{
+    display: flex;
+    justify-content: space-around;
+}
+
 .ps-number {
     position: relative;
 

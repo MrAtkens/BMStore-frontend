@@ -392,6 +392,9 @@
         @include media('<md') {
             padding: 20px 10px;
         }
+        @include media('<sm') {
+            padding: 0px
+        }
     }
 
     .ps-block__item {
@@ -409,6 +412,7 @@
             overflow: hidden;
             padding: 20px;
             text-align: center;
+
 
             cursor: pointer;
 

@@ -71,12 +71,12 @@ const OrdersPage = ({ categories, orders }: IOrdersPage) => {
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
-							<div className="col-lg-4">
+							<div className="col-lg-3">
 								<div className="ps-page__left">
 									<AccountMenuSidebar data={accountLinks} />
 								</div>
 							</div>
-							<div className="col-lg-8 orders-top">
+							<div className="col-lg-9 orders-top">
 								<OrdersTable orders={orders} />
 							</div>
 						</div>

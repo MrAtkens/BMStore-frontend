@@ -25,7 +25,22 @@ const ProductOnCart = ({ product, children, quantity }: IProductOnCart) => {
 				{title(product)}
 				<p>
 					<small>
-						{product.price} x {quantity} тг
+						{product.discountPrice < product.price ? (
+							<p className="ps-product__price sale">
+								{product.discountPrice}
+								<span>тг</span>
+								<del className="ml-2">
+									{product.price}
+									<span>тг</span>
+								</del>
+							</p>
+						) : (
+							<p className="ps-product__price">
+								{product.price}
+								<span>тг</span>
+							</p>
+						)}
+						x {quantity} тг
 					</small>
 				</p>{' '}
 				{children}

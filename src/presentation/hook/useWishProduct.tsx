@@ -31,6 +31,18 @@ export default function useCartProduct() {
 				</LazyLoad>
 			);
 		},
+		badge: (product: IWishProduct) => {
+			let view;
+			if (product.discountPrice < product.price) {
+				const discountPercent =
+					100 -
+					Math.floor((product.discountPrice / product.price) * 100);
+				return (
+					<div className="ps-product__badge">-{discountPercent}%</div>
+				);
+			}
+			return view;
+		},
 		title: (product: IWishProduct) => {
 			return (
 				<Link href={PRODUCT(product.productId)}>

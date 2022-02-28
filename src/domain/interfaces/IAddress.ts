@@ -1,4 +1,6 @@
 export interface IAddress {
+	addressId: string;
 	address: string;
-	id: string;
+	city: string;
+	additionalInfo: string;
 }

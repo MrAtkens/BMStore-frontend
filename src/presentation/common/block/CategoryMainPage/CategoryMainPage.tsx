@@ -47,7 +47,8 @@ const CategoryMainPage = ({ categories }: ICategoryBlock) => {
 			<div className="container">
 				<div className="ps-section__header">
 					<h3>
-						Категории <span>популярных товаров</span>
+						Категории
+						{isMobile ? null : <span>популярных товаров</span>}
 					</h3>
 				</div>
 				<div className="ps-section__content">

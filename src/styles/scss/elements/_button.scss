@@ -238,6 +238,37 @@ button.ps-btn {
     }
 }
 
+.ps-btn-whatsapp{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    right: 38px;
+    bottom: 102px;
+    width: 60px;
+    height: 60px;
+    position: fixed !important;
+    z-index: 110000;
+    background-color: #28A219;
+    border-color: #28A219;
+
+    i {
+        color: $color-header-text;
+        font-size: 26pt;
+        margin-left: 15px;
+    }
+
+    &:hover {
+        border-color: #28A219;
+        background-color: #28A219;
+    }
+
+
+    @include media('<sm') {
+        right: 38px;
+        bottom: 140px;
+    }
+}
+
 .ps-btn--backtop {
     display: flex;
     justify-content: center;

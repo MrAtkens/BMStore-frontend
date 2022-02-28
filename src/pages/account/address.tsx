@@ -11,7 +11,7 @@ import {
 import { isUserAuth } from 'helper/commons/userHelper';
 import { HOME } from 'constant/routes';
 
-import { categoryApiService, ordersApiService } from 'data/API';
+import { categoryApiService, addressApiService } from 'data/API';
 import { accountLinks } from 'data/static/accountLinks';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { IAddress } from 'domain/interfaces/IAddress';
@@ -71,12 +71,12 @@ const AddressPage = ({ categories, address }: IAddressPage) => {
 				<section className="ps-my-account ps-page--account">
 					<div className="container">
 						<div className="row">
-							<div className="col-lg-4">
+							<div className="col-lg-3">
 								<div className="ps-page__left">
 									<AccountMenuSidebar data={accountLinks} />
 								</div>
 							</div>
-							<div className="col-lg-8 orders-top">
+							<div className="col-lg-9 orders-top">
 								<TableAddress address={address} />
 							</div>
 						</div>
@@ -92,27 +92,27 @@ export async function getServerSideProps({ locale, req }: any) {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
 	);
-	let orders = [];
+	let address = [];
 	if (
 		cookies[USER_FIRST_PART] !== undefined &&
 		cookies[USER_SECOND_PART] !== undefined &&
 		cookies[USER_THIRD_PART] !== undefined
 	) {
-		const response = await ordersApiService.getAuthorizeOrders(
+		const response = await addressApiService.getAddresses(
 			cookies[USER_FIRST_PART] +
 				'.' +
 				cookies[USER_SECOND_PART] +
 				'.' +
 				cookies[USER_THIRD_PART]
 		);
-		orders = response.data.orders;
+		address = response.data.data;
 	}
 	if (categoryResponse.data === undefined)
 		return {
-			props: { categories: [], orders: orders }
+			props: { categories: [], address: address }
 		};
 	return {
-		props: { categories: categoryResponse.data, orders: orders }
+		props: { categories: categoryResponse.data, address: address }
 	};
 }
 
