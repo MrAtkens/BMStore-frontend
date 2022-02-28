@@ -53,7 +53,8 @@ export const toastProductNotFound = () => {
 export const toastAuthVerificationError = () => {
 	notification.error({
 		message: 'Ошибка 403',
-		description: 'Вы не подтвердили свою почту через ссылку, которую мы отправили в письме',
+		description:
+			'Вы не подтвердили свою почту через ссылку, которую мы отправили в письме',
 		duration: 5,
 		placement: 'bottomRight'
 	});
@@ -162,11 +163,12 @@ export const toastAcceptMailSuccess = () => {
 
 export const toastPasswordResetMailSuccess = () => {
 	notification.success({
-		message: 'Запрос на востановление пароля создан успешно! Мы отправили ссылку на востановление пароля от вашего аккаунта вам на почту.',
+		message:
+			'Запрос на востановление пароля создан успешно! Мы отправили ссылку на востановление пароля от вашего аккаунта вам на почту.',
 		duration: 30,
 		placement: 'bottomRight'
 	});
-}
+};
 
 export const toastPasswordResetSuccess = () => {
 	notification.success({
@@ -174,11 +176,12 @@ export const toastPasswordResetSuccess = () => {
 		duration: 30,
 		placement: 'bottomRight'
 	});
-}
+};
 
 export const toastRegistrationSuccess = () => {
 	notification.success({
-		message: 'Вы успешно зарегистрировались! Пожалуйста, подтвердите свою почту через письмо, которое мы вам отправили',
+		message:
+			'Вы успешно зарегистрировались! Пожалуйста, подтвердите свою почту через письмо, которое мы вам отправили',
 		duration: 120,
 		placement: 'bottomRight'
 	});
@@ -195,6 +198,14 @@ export const toastBuySuccess = () => {
 export const toastEditSuccess = () => {
 	notification.success({
 		message: 'Вы успешно изменили свой данные',
+		duration: 5,
+		placement: 'bottomRight'
+	});
+};
+
+export const toastPaymentDeliverySuccess = () => {
+	notification.success({
+		message: 'Вы успешно создали заказ с оплатой курьеру',
 		duration: 5,
 		placement: 'bottomRight'
 	});

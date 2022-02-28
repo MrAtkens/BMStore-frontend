@@ -118,13 +118,6 @@ const TableAddress = ({ address }: ITableAddress) => {
 
 	const columns = [
 		{
-			title: 'Id',
-			dataIndex: 'addressId',
-			rowKey: 'addressId',
-			key: 'addressId',
-			width: '120px'
-		},
-		{
 			title: 'Город',
 			dataIndex: 'city',
 			rowKey: 'city',

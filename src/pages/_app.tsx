@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import {observer} from "mobx-react-lite";
-import {AppProps} from "next/app";
-import Script from 'next/script'
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { AppProps } from 'next/app';
+import Script from 'next/script';
 
 import MasterLayout from 'presentation/layout/MasterLayout';
 import { getUser } from 'helper/commons/userHelper';
@@ -17,30 +17,30 @@ import '../../public/static/css/slick.min.css';
 import 'styles/scss/home-default.scss';
 import 'styles/scss/style.scss';
 
-const App = observer(({ Component, pageProps } : AppProps) => {
-
+const App = observer(({ Component, pageProps }: AppProps) => {
 	useEffect(() => {
-		const nextLoaded = document.getElementById('__next')
+		const nextLoaded = document.getElementById('__next');
 		setTimeout(function () {
-			if(nextLoaded !== null)
-				nextLoaded.classList.add('loaded')
+			if (nextLoaded !== null) nextLoaded.classList.add('loaded');
 		}, 100);
-		if(getUser() !== 'undefined.undefined.undefined') {
+		if (getUser() !== 'undefined.undefined.undefined') {
 			userStore.getUserData().then(async () => {
-				await cartStore.getCartFromApi()
-				await productStore.setWishList()
-			})
-		}
-		else{
+				await cartStore.getCartFromApi();
+				await productStore.setWishList();
+			});
+		} else {
 			cartStore.getCartFromApi().then(async () => {
-				await productStore.setWishList()
-			})
+				await productStore.setWishList();
+			});
 		}
 	});
 
 	return (
 		<MasterLayout>
-			<Script strategy="afterInteractive" src="https://widget.cloudpayments.ru/bundles/cloudpayments" />
+			<Script
+				strategy="afterInteractive"
+				src="https://widget.cloudpayments.ru/bundles/cloudpayments"
+			/>
 			<Script id="payWindow" strategy="afterInteractive">
 				{`function getPayWindow(publicId, description, amount, currency, accountId, email) {
 					const widget = new cp.CloudPayments();
@@ -54,7 +54,7 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 						email: email, //email плательщика (необязательно)
 					},
 					{
-						onSuccess: "/",
+						onSuccess: "#",
 						onFail: async function(reason, options) {
 						const response = await fetch(\`https://bazarjok-group.com:20000/api/client/invoice?userId=\${accountId}&status=2\`, {
 						method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -80,11 +80,12 @@ const App = observer(({ Component, pageProps } : AppProps) => {
 					},
 					referrerPolicy: 'no-referrer', // no-referrer, *client
 					});
+					return response;
 					}}})}`}
 			</Script>
-			<Component {...pageProps}/>
+			<Component {...pageProps} />
 		</MasterLayout>
 	);
-})
+});
 
-export default App
+export default App;

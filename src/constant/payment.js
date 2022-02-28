@@ -6,7 +6,7 @@ export const getWidget = (
 	accountId,
 	email
 ) => {
-	window.getPayWindow(
+	const response = window.getPayWindow(
 		publicId,
 		description,
 		amount,
@@ -14,4 +14,5 @@ export const getWidget = (
 		accountId,
 		email
 	);
+	return response;
 };

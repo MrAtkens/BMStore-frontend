@@ -19,6 +19,18 @@ const createInvoice = async (userId, fullName, email, phone, userAddress) => {
 		});
 };
 
+const editInvoiceStatus = async (userId, status) => {
+	return await axios
+		.put(`${BackendUrl}/invoice?userId=${userId}&status=${status}`)
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return error.response;
+		});
+};
+
 export const invoiceApiService = {
-	createInvoice
+	createInvoice,
+	editInvoiceStatus
 };

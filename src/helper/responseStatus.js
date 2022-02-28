@@ -20,7 +20,9 @@ import {
 	toastMailAcceptError,
 	toastAcceptMailSuccess,
 	toastPasswordResetMailSuccess,
-	toastPasswordResetSuccess, toastAuthVerificationError
+	toastPasswordResetSuccess,
+	toastAuthVerificationError,
+	toastPaymentDeliverySuccess
 } from './toastify';
 
 import {
@@ -67,9 +69,7 @@ export const userAcceptMailStatus = (status) => {
 	else if (status === 401) {
 		toastUnauthorizedError();
 		leaveFromSystem();
-	}
-	else if(status === 400)
-		toastMailAcceptError();
+	} else if (status === 400) toastMailAcceptError();
 };
 
 export const userResetPasswordMailStatus = (status) => {
@@ -79,9 +79,7 @@ export const userResetPasswordMailStatus = (status) => {
 	else if (status === 401) {
 		toastUnauthorizedError();
 		leaveFromSystem();
-	}
-	else if(status === 400)
-		toastMailAcceptError();
+	} else if (status === 400) toastMailAcceptError();
 };
 
 export const userResetPasswordStatus = (status) => {
@@ -91,14 +89,21 @@ export const userResetPasswordStatus = (status) => {
 	else if (status === 401) {
 		toastUnauthorizedError();
 		leaveFromSystem();
-	}
-	else if(status === 400)
-		toastMailAcceptError();
+	} else if (status === 400) toastMailAcceptError();
 };
-
 
 export const userBuy = (status) => {
 	if (status === 200) toastBuySuccess();
+	else if (status === 500) toastServerError();
+	else if (status === 404) toastUserNotFound();
+	else if (status === 401) {
+		toastUnauthorizedError();
+		leaveFromSystem();
+	}
+};
+
+export const paymentDelivery = (status) => {
+	if (status === 204) toastPaymentDeliverySuccess();
 	else if (status === 500) toastServerError();
 	else if (status === 404) toastUserNotFound();
 	else if (status === 401) {
