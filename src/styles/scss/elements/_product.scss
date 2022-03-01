@@ -1925,11 +1925,16 @@
                 color: $color-heading;
                 font-weight: 500;
             }
+
+            .ps-product__price{
+                margin-right: 5px;
+            }
         }
 
         small {
             font-size: 14px;
             color: $color-heading;
+            display: flex;
         }
     }
 }

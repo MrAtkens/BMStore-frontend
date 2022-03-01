@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AutoComplete from 'react-google-autocomplete';
 import { observer } from 'mobx-react-lite';
-import { Form, Input, Result, Switch } from 'antd';
+import { Form, Input, Result, Radio } from 'antd';
 import { useRouter } from 'next/router';
 
 import { CHECKOUT, HOME } from 'constant/routes';
@@ -9,10 +9,10 @@ import { getWidget } from 'constant/payment';
 
 import { calculateAmount } from 'helper/stores/cartHelper';
 import { getUserId } from 'helper/stores/userHelper';
+import { paymentDelivery, userBuy } from 'helper/responseStatus';
 import cartStore from 'data/stores/cartStore';
 import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
-import { paymentDelivery, userBuy } from '../../../../helper/responseStatus';
 
 const FormCheckoutInformation = observer(() => {
 	const [form] = Form.useForm();
@@ -49,6 +49,7 @@ const FormCheckoutInformation = observer(() => {
 			if (userStore.user.id === '' || userStore.user.id === null)
 				id = getUserId();
 			else id = userStore.user.id;
+			console.log(values);
 			await invoiceApiService
 				.createInvoice(
 					id,
@@ -205,7 +206,12 @@ const FormCheckoutInformation = observer(() => {
 				</div>
 				<div className="form-group">
 					<Form.Item label="Оплата при доставке" name="isDelivery">
-						<Switch autoFocus />
+						<Radio.Group defaultValue={false}>
+							<Radio value={false}>
+								Онлайн оплата (cloudpayments)
+							</Radio>
+							<Radio value={true}>Оплата курьеру</Radio>
+						</Radio.Group>
 					</Form.Item>
 				</div>
 				{/*<div className="form-group">*/}

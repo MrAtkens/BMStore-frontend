@@ -34,7 +34,7 @@ export const toastUserNotFound = () => {
 export const toastUserNotFoundAuth = () => {
 	notification.error({
 		message: 'Ошибка входа',
-		description: 'Возможно вы не верно ввели номер телефона или пароль',
+		description: 'Возможно вы не верно ввели почту или пароль',
 		duration: 5,
 		placement: 'bottomRight'
 	});
