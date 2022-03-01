@@ -35,7 +35,7 @@ const UserPage = ({ categories }: ILoginPage) => {
 	];
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
+		<Layout categories={categories} title={'Кабинет - TACS'}>
 			<Head>
 				<title>Кабинет - TACS</title>
 				<meta

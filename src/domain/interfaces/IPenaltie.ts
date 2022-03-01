@@ -1,4 +1,4 @@
-export interface IPenalties {
+export interface IPenaltie {
 	id: string;
 	amount: number;
 	reason: string;

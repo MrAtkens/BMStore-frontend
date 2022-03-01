@@ -1,6 +1,8 @@
 import {
+	ABOUT_US,
 	ADDRESS,
 	CONTACTS,
+	INVOICES,
 	ORDERS,
 	PENALTIES,
 	SHOP_PAGE,
@@ -15,6 +17,10 @@ export const menuLinks = [
 	{
 		text: 'Контакты',
 		url: CONTACTS
+	},
+	{
+		text: 'О нас',
+		url: ABOUT_US
 	}
 ];
 
@@ -25,14 +31,22 @@ export const accountLinks = [
 	},
 	{
 		text: 'Aдреса',
-		url: ADDRESS
+		url: ADDRESS,
+		icon: 'icon-apartment'
 	},
 	{
 		text: 'Штрафы',
-		url: PENALTIES
+		url: PENALTIES,
+		icon: 'icon-bullhorn'
 	},
 	{
 		text: 'Заказы',
-		url: ORDERS
+		url: ORDERS,
+		icon: 'icon-cart'
+	},
+	{
+		text: 'Финансы',
+		url: INVOICES,
+		icon: 'icon-tag'
 	}
 ];

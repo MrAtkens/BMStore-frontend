@@ -2,10 +2,10 @@ import React from 'react';
 import { Table } from 'antd';
 import { Popover } from 'antd';
 
-import { IPenalties } from 'domain/interfaces/IPenalties';
+import { IPenaltie } from 'domain/interfaces/IPenaltie';
 
 interface ITablePenalties {
-	penalties: Array<IPenalties>;
+	penalties: Array<IPenaltie>;
 }
 
 const TablePenalties = ({ penalties }: ITablePenalties) => {

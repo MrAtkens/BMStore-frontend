@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IOrder } from 'domain/interfaces/IOrder';
-import TableInvoices from 'presentation/common/control/account/TableInvoices';
+import TableOrders from 'presentation/common/control/account/TableOrders';
 
 interface IOrders {
 	orders: Array<IOrder>;
@@ -10,7 +10,7 @@ interface IOrders {
 const OrdersTable = ({ orders }: IOrders) => {
 	return (
 		<div className="ps-page__content">
-			<TableInvoices orders={orders} />
+			<TableOrders orders={orders} />
 		</div>
 	);
 };

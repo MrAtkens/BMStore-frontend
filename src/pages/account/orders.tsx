@@ -53,7 +53,7 @@ const OrdersPage = ({ categories, orders }: IOrdersPage) => {
 	});
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
+		<Layout categories={categories} title={'Заказы - TACS'}>
 			<Head>
 				<title>Заказы - TACS</title>
 				<meta

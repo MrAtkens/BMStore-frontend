@@ -11,29 +11,29 @@ import {
 import { isUserAuth } from 'helper/commons/userHelper';
 import { HOME } from 'constant/routes';
 
-import { categoryApiService, addressApiService } from 'data/API';
+import { categoryApiService, ordersApiService } from 'data/API';
 import { accountLinks } from 'data/static/accountLinks';
 import { ICategory } from 'domain/interfaces/ICategory';
-import { IAddress } from 'domain/interfaces/IAddress';
+import { IPenaltie } from 'domain/interfaces/IPenaltie';
 
 import AccountMenuSidebar from 'presentation/common/control/account/AccountMenuSidebar';
+import TablePenalties from 'presentation/common/control/account/TablePenalties';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Layout from 'presentation/layout';
-import AddressTable from 'presentation/page/account/AddressTable';
 
-interface IAddressPage {
+interface IPenaltiesPage {
 	categories: Array<ICategory>;
-	address: Array<IAddress>;
+	penalties: Array<IPenaltie>;
 }
 
-const AddressPage = ({ categories, address }: IAddressPage) => {
+const PenaltiesPage = ({ categories, penalties }: IPenaltiesPage) => {
 	const breadCrumb = [
 		{
 			text: 'Главная',
 			url: HOME
 		},
 		{
-			text: 'Адреса',
+			text: 'Штрафы',
 			url: null
 		}
 	];
@@ -53,9 +53,9 @@ const AddressPage = ({ categories, address }: IAddressPage) => {
 	});
 
 	return (
-		<Layout categories={categories} title={'Адреса - TACS'}>
+		<Layout categories={categories} title={'Штрафы - TACS'}>
 			<Head>
-				<title>Адреса - TACS</title>
+				<title>Штрафы - TACS</title>
 				<meta
 					name="description"
 					content="TACS-Магазин стройматериалов в Нур-Султан"
@@ -77,7 +77,7 @@ const AddressPage = ({ categories, address }: IAddressPage) => {
 								</div>
 							</div>
 							<div className="col-lg-9 orders-top">
-								<AddressTable address={address} />
+								<TablePenalties penalties={penalties} />
 							</div>
 						</div>
 					</div>
@@ -92,28 +92,28 @@ export async function getServerSideProps({ locale, req }: any) {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
 	);
-	let address = [];
+	let orders = [];
 	if (
 		cookies[USER_FIRST_PART] !== undefined &&
 		cookies[USER_SECOND_PART] !== undefined &&
 		cookies[USER_THIRD_PART] !== undefined
 	) {
-		const response = await addressApiService.getAddresses(
+		const response = await ordersApiService.getAuthorizeOrders(
 			cookies[USER_FIRST_PART] +
 				'.' +
 				cookies[USER_SECOND_PART] +
 				'.' +
 				cookies[USER_THIRD_PART]
 		);
-		address = response.data.data;
+		orders = response.data.orders;
 	}
 	if (categoryResponse.data === undefined)
 		return {
-			props: { categories: [], address: address }
+			props: { categories: [], orders: orders }
 		};
 	return {
-		props: { categories: categoryResponse.data, address: address }
+		props: { categories: categoryResponse.data, orders: orders }
 	};
 }
 
-export default AddressPage;
+export default PenaltiesPage;

@@ -1,4 +1,11 @@
-import { ADDRESS, ORDERS, PENALTIES, USER, WISHLIST } from 'constant/routes';
+import {
+	ADDRESS,
+	INVOICES,
+	ORDERS,
+	PENALTIES,
+	USER,
+	WISHLIST
+} from 'constant/routes';
 
 export const accountLinks = [
 	{
@@ -14,12 +21,17 @@ export const accountLinks = [
 	{
 		text: 'Штрафы',
 		url: PENALTIES,
-		icon: 'icon-tag'
+		icon: 'icon-bullhorn'
 	},
 	{
 		text: 'Заказы',
 		url: ORDERS,
 		icon: 'icon-cart'
+	},
+	{
+		text: 'Финансы',
+		url: INVOICES,
+		icon: 'icon-tag'
 	},
 	{
 		text: 'Избранные',
