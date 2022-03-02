@@ -103,7 +103,8 @@ export const userBuy = (status) => {
 };
 
 export const paymentDelivery = (status) => {
-	if (status === 204) toastPaymentDeliverySuccess();
+	if (status === 200) toastPaymentDeliverySuccess();
+	else if (status === 204) toastPaymentDeliverySuccess();
 	else if (status === 500) toastServerError();
 	else if (status === 404) toastUserNotFound();
 	else if (status === 401) {

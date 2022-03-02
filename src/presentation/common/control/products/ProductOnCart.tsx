@@ -11,7 +11,7 @@ interface IProductOnCart {
 }
 
 const ProductOnCart = ({ product, children, quantity }: IProductOnCart) => {
-	const { getImage, badge, title } = useCartProduct();
+	const { getImage, title } = useCartProduct();
 
 	return (
 		<div className="ps-product--cart-mobile">
@@ -19,7 +19,6 @@ const ProductOnCart = ({ product, children, quantity }: IProductOnCart) => {
 				<Link href={PRODUCT(product.productId)}>
 					<a>{getImage(product)}</a>
 				</Link>
-				{badge(product)}
 			</div>
 			<div className="ps-product__content">
 				{title(product)}

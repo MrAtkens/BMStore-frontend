@@ -31,6 +31,26 @@
             box-shadow: 0 0 0 transparent;
         }
     }
+    &.ant-select-selector {
+        height: 50px;
+        border-radius: 0;
+        border: 1px solid #dddddd;
+        &:focus {
+            border-color: $color-1st;
+            outline: none;
+            box-shadow: 0 0 0 transparent;
+        }
+    }
+    &.ant-select-show-search{
+        height: 50px;
+        border-radius: 0;
+        border: 1px solid #dddddd;
+        &:focus {
+            border-color: $color-1st;
+            outline: none;
+            box-shadow: 0 0 0 transparent;
+        }
+    }
 }
 
 .ant-select {

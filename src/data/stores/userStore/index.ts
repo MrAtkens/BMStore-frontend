@@ -119,6 +119,7 @@ class UserStore implements IUserStore {
 		Cookies.remove(USER_SECOND_PART);
 		Cookies.remove(USER_THIRD_PART);
 		this.setIsAuth(false);
+		this.setUserDefault();
 		localStorage.removeItem(USER_ID);
 		window.location.href = '/';
 	}
@@ -163,6 +164,16 @@ class UserStore implements IUserStore {
 		this.user.phone = phone;
 		this.user.email = email;
 		this.user.address = address;
+	}
+
+	setUserDefault() {
+		this.user = {
+			id: '',
+			fullName: '',
+			phone: '',
+			email: '',
+			address: ''
+		};
 	}
 
 	get getAddress() {

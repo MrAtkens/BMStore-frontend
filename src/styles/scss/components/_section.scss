@@ -793,3 +793,10 @@
     font-size: 12pt;
     background-color: $color-1st !important;
 }
+
+.ps-product__price-container{
+    display: inline-flex !important;
+    span{
+        display: inline-flex !important;
+    }
+}

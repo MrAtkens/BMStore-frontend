@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import AutoComplete from 'react-google-autocomplete';
+import useGoogle from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
 import { observer } from 'mobx-react-lite';
-import { Form, Input, Result, Radio } from 'antd';
+import { Form, Input, Result, Radio, AutoComplete } from 'antd';
 import { useRouter } from 'next/router';
 
 import { CHECKOUT, HOME } from 'constant/routes';
@@ -13,12 +13,36 @@ import { paymentDelivery, userBuy } from 'helper/responseStatus';
 import cartStore from 'data/stores/cartStore';
 import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
+import { isUserAuth } from 'helper/commons/userHelper';
 
 const FormCheckoutInformation = observer(() => {
 	const [form] = Form.useForm();
+	const Router = useRouter();
 	const [isActiveButton, setIsActiveButton] = useState(false);
 	const [isProductEnough, setIsProductEnough] = useState(true);
-	const Router = useRouter();
+	const [options, setOptions] = useState<{ value: string }[]>([]);
+
+	const { placePredictions, getPlacePredictions } = useGoogle({
+		apiKey: process.env['NEXT_PUBLIC_PLACES_API_KEY'],
+		options: {
+			fields: ['formatted_address'],
+			types: ['address'],
+			componentRestrictions: { country: 'kz' }
+		}
+	});
+
+	useEffect(() => {
+		if (placePredictions.length) {
+			let places = [] as any;
+			if (isUserAuth()) {
+				places.push({ value: userStore.user.address });
+			}
+			placePredictions.map((item) => {
+				places.push({ value: item.description });
+			});
+			setOptions(places);
+		}
+	}, [placePredictions]);
 
 	useEffect(() => {
 		cartStore.getCartFromApi().then(() => {
@@ -93,6 +117,18 @@ const FormCheckoutInformation = observer(() => {
 		} else await Router.push(CHECKOUT);
 	};
 
+	const onSearchAddress = (value: string) => {
+		getPlacePredictions({
+			input: value
+		});
+	};
+
+	const onSelectAddress = (data: string) => {
+		form.setFieldsValue({
+			address: data
+		});
+	};
+
 	if (isProductEnough)
 		return (
 			<Form
@@ -116,23 +152,16 @@ const FormCheckoutInformation = observer(() => {
 						]}
 					>
 						<AutoComplete
-							className="form-control"
-							apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
-							placeholder="Адрес"
-							onKeyDown={(e) =>
-								e.key === 'Enter' ? e.preventDefault() : ''
-							}
-							onPlaceSelected={(place) => {
-								form.setFieldsValue({
-									address: place.formatted_address
-								});
-							}}
-							options={{
-								fields: ['formatted_address'],
-								types: ['address'],
-								componentRestrictions: { country: 'kz' }
-							}}
-						/>
+							options={options}
+							onSearch={onSearchAddress}
+							onSelect={onSelectAddress}
+						>
+							<Input
+								className="form-control"
+								type="text"
+								placeholder="Адрес"
+							/>
+						</AutoComplete>
 					</Form.Item>
 				</div>
 				<h3 className="ps-form__heading">Контактные данные</h3>
@@ -214,18 +243,6 @@ const FormCheckoutInformation = observer(() => {
 						</Radio.Group>
 					</Form.Item>
 				</div>
-				{/*<div className="form-group">*/}
-				{/*    <div className="ps-checkbox">*/}
-				{/*        <input*/}
-				{/*            className="form-control"*/}
-				{/*            type="checkbox"*/}
-				{/*            id="keep-update"*/}
-				{/*        />*/}
-				{/*        <label htmlFor="keep-update">*/}
-				{/*            Keep me up to date on news and exclusive offers?*/}
-				{/*        </label>*/}
-				{/*    </div>*/}
-				{/*</div>*/}
 				<div className="ps-form__submit">
 					<div onClick={onReturnClick}>
 						<i className="icon-arrow-left mr-2" />

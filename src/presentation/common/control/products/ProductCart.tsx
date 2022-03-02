@@ -11,14 +11,13 @@ interface ProductCart {
 }
 
 const ProductCart = ({ product }: ProductCart) => {
-	const { getImage, badge, title } = useCartProduct();
+	const { getImage, title } = useCartProduct();
 	return (
 		<div className="ps-product--cart">
 			<div className="ps-product__thumbnail">
 				<Link href={PRODUCT(product.productId)}>
 					<a>{getImage(product)}</a>
 				</Link>
-				{badge(product)}
 			</div>
 			<div className="ps-product__content">{title(product)}</div>
 		</div>

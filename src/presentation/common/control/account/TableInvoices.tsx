@@ -52,11 +52,9 @@ const TableInvoices = ({ invoices }: ITableInvoices) => {
 			dataIndex: 'fullPrice',
 			key: 'fullPrice',
 			render: (text, record) => {
-				let amount = 0;
-				record.productInInvoices.map((product) => {
-					amount += product.price * product.count;
-				});
-				return <span className="text-right">{amount} тг</span>;
+				return (
+					<span className="text-right">{record.fullPrice} тг</span>
+				);
 			}
 		},
 		{

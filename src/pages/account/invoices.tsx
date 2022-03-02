@@ -105,7 +105,7 @@ export async function getServerSideProps({ locale, req }: any) {
 				'.' +
 				cookies[USER_THIRD_PART]
 		);
-		console.log(response);
+		console.log(response.data);
 		invoices = response.data;
 	}
 	if (categoryResponse.data === undefined || invoices === undefined)
