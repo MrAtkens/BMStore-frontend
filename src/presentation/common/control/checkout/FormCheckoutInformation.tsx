@@ -35,7 +35,11 @@ const FormCheckoutInformation = observer(() => {
 		if (placePredictions.length) {
 			let places = [] as any;
 			if (isUserAuth()) {
-				places.push({ value: userStore.user.address });
+				const addresses = userStore.user.addresses;
+				if (addresses.length > 0)
+					addresses.map((item) => {
+						places.push({ value: item });
+					});
 			}
 			placePredictions.map((item) => {
 				places.push({ value: item.description });
@@ -53,7 +57,6 @@ const FormCheckoutInformation = observer(() => {
 	useEffect(() => {
 		form.setFieldsValue({
 			name: userStore.user.fullName,
-			address: userStore.user.address,
 			email: userStore.user.email,
 			phone: userStore.user.phone
 		});
@@ -140,7 +143,6 @@ const FormCheckoutInformation = observer(() => {
 				<div className="form-group">
 					<Form.Item
 						name="address"
-						initialValue={userStore.user.address}
 						rules={[
 							{
 								required: true,
@@ -234,7 +236,7 @@ const FormCheckoutInformation = observer(() => {
 					</Form.Item>
 				</div>
 				<div className="form-group">
-					<Form.Item label="Оплата при доставке" name="isDelivery">
+					<Form.Item label="Способ оплаты" name="isDelivery">
 						<Radio.Group defaultValue={false}>
 							<Radio value={false}>
 								Онлайн оплата (cloudpayments)

@@ -4,22 +4,26 @@ import { Form, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-
-import userStore from "data/stores/userStore"
+import userStore from 'data/stores/userStore';
 import { LOGIN, REGISTER, RESET } from 'constant/routes';
 
 const Login = observer(() => {
+	const [form] = Form.useForm();
 
 	const onFinish = async (values: any) => {
-		await userStore.authenticate(values.email, values.password)
+		await userStore.authenticate(values.email, values.password).then(() => {
+			form.setFieldsValue({ email: '', password: '' });
+		});
 	};
 
 	return (
 		<div className="ps-my-account">
 			<div className="container">
 				<Form
+					form={form}
 					className="ps-form--account"
-					onFinish={onFinish}>
+					onFinish={onFinish}
+				>
 					<ul className="ps-tab-list">
 						<li className="active">
 							<Link passHref href={LOGIN}>
@@ -41,14 +45,16 @@ const Login = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста, введите вашу почту',
+											message:
+												'Пожалуйста, введите вашу почту'
 										},
 										{
-											type: "email",
-											message: 'Введена некорректная почта',
-										},
-
-									]}>
+											type: 'email',
+											message:
+												'Введена некорректная почта'
+										}
+									]}
+								>
 									<Input
 										className="form-control"
 										type="text"
@@ -63,20 +69,28 @@ const Login = observer(() => {
 										{
 											required: true,
 											message:
-												'Пожалуйста, введите пароль',
+												'Пожалуйста, введите пароль'
 										},
 										{
 											// pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i,
 											// message: 'Пароль должен содержать минимум 8 символов и содержать минимум 1 заглавный символ и не 1 знак',
 											min: 6,
 											max: 60,
-											message: 'Пароль должен содержать минимум 6 символов'
-										},
-									]}>
+											message:
+												'Пароль должен содержать минимум 6 символов'
+										}
+									]}
+								>
 									<Input.Password
 										className="form-control"
 										type="password"
-										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+										iconRender={(visible) =>
+											visible ? (
+												<EyeTwoTone />
+											) : (
+												<EyeInvisibleOutlined />
+											)
+										}
 										placeholder="Пароль..."
 									/>
 								</Form.Item>
@@ -84,7 +98,8 @@ const Login = observer(() => {
 							<div className="form-group submit">
 								<button
 									type="submit"
-									className="ps-btn ps-btn--fullwidth">
+									className="ps-btn ps-btn--fullwidth"
+								>
 									Войти
 								</button>
 							</div>
@@ -97,6 +112,6 @@ const Login = observer(() => {
 			</div>
 		</div>
 	);
-})
+});
 
 export default Login;

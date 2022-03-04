@@ -15,7 +15,6 @@ const UserInformationForm = observer(() => {
 	useEffect(() => {
 		form.setFieldsValue({
 			name: userStore.user.fullName,
-			address: userStore.user.address,
 			phone: userStore.user.phone
 		});
 	}, [userStore.user.fullName, userStore.user.phone]);

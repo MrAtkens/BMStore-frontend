@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'antd';
-import { Popover } from 'antd';
 
 import { IInvoice } from 'domain/interfaces/IInvoice';
 
@@ -10,18 +9,6 @@ interface ITableInvoices {
 
 const TableInvoices = ({ invoices }: ITableInvoices) => {
 	const tableColumn = [
-		{
-			title: 'Id',
-			dataIndex: 'id',
-			rowKey: 'id',
-			key: 'id',
-			width: '80px',
-			render: (text, record) => (
-				<Popover title={`ID заказа ${record.orderId}`} trigger="hover">
-					{record.id}
-				</Popover>
-			)
-		},
 		{
 			title: 'ФИО',
 			dataIndex: 'fullname',
@@ -63,7 +50,13 @@ const TableInvoices = ({ invoices }: ITableInvoices) => {
 			dataIndex: 'creationDate',
 			rowKey: 'creationDate',
 			render: (text, record) => {
-				return <>{new Date(record.creationDate).getUTCDate()}</>;
+				return (
+					<>
+						{new Date(record.creationDate).getUTCDate()}.
+						{new Date(record.creationDate).getUTCMonth()}.
+						{new Date(record.creationDate).getUTCFullYear()}
+					</>
+				);
 			}
 		}
 	];

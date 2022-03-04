@@ -30,14 +30,12 @@ const refreshAddresses = async () => {
 		});
 };
 
-const addAddress = async (city, address, additionalInfo) => {
+const addAddress = async (address) => {
 	return await axios
 		.post(
 			`${BackendUrl}/addresses?lang=ru`,
 			{
-				city: city,
-				address: address,
-				additionalInfo: additionalInfo
+				address: address
 			},
 			{
 				headers: { Authorization: `Bearer ${getUser()}` }
@@ -51,14 +49,12 @@ const addAddress = async (city, address, additionalInfo) => {
 		});
 };
 
-const editAddress = async (addressId, city, address, additionalInfo) => {
+const editAddress = async (addressId, address) => {
 	return await axios
 		.put(
 			`${BackendUrl}/addresses/${addressId}?lang=ru`,
 			{
-				city: city,
-				address: address,
-				additionalInfo: additionalInfo
+				address: address
 			},
 			{
 				headers: { Authorization: `Bearer ${getUser()}` }

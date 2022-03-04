@@ -238,6 +238,21 @@ button.ps-btn {
     }
 }
 
+.ps-btn--address-add{
+    font-size: 10pt;
+    padding: 8px;
+    background-color: $color-1st;
+    border: 1px solid $color-1st;
+    border-radius: 2px;
+    color: $color-header-text;
+
+    &:hover {
+        border-color: $color-1st;
+        background-color: $color-1st;
+        color: $color-header-text;
+    }
+}
+
 .ps-btn-whatsapp{
     display: flex;
     text-align: center;

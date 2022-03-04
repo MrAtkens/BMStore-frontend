@@ -1,5 +1,6 @@
 import React from 'react';
-import { BackTop, Button } from 'antd';
+import { BackTop, Button, ConfigProvider } from 'antd';
+import ruRu from 'antd/lib/locale/ru_RU';
 
 import PageLoader from 'presentation/common/block/PageLoader';
 import { useRouter } from 'next/router';
@@ -14,7 +15,7 @@ const MasterLayout = ({ children }: any) => {
 	};
 
 	return (
-		<>
+		<ConfigProvider locale={ruRu}>
 			{children}
 			<PageLoader />
 			<BackTop>
@@ -29,7 +30,7 @@ const MasterLayout = ({ children }: any) => {
 			>
 				<i className="fa fa-whatsapp" />
 			</Button>
-		</>
+		</ConfigProvider>
 	);
 };
 

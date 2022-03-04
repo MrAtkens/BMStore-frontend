@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import {
 	Table,
-	Input,
-	InputNumber,
 	Popconfirm,
 	Form,
 	Typography,
 	Tooltip,
-	Modal
+	Modal,
+	Input
 } from 'antd';
 
 import { IAddress } from 'domain/interfaces/IAddress';
 import { addressApiService } from 'data/API';
+import AutoComplete from 'react-google-autocomplete';
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 	editing: boolean;
 	dataIndex: string;
 	title: any;
-	inputType: 'number' | 'text';
+	inputType: 'number' | 'text' | 'address';
 	record: IAddress;
 	index: number;
 	children: React.ReactNode;
@@ -33,7 +33,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 	children,
 	...restProps
 }) => {
-	const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+	const inputNode = <Input />;
 
 	return (
 		<td {...restProps}>
@@ -68,13 +68,11 @@ const TableAddress = ({ address }: ITableAddress) => {
 	const [editingKey, setEditingKey] = useState<any>('');
 
 	const onFinish = async (values: any) => {
-		await addressApiService
-			.addAddress(values.city, values.address, values.additionalInfo)
-			.then(async () => {
-				const response = await addressApiService.refreshAddresses();
-				setData(response.data.data);
-				setIsVisible(false);
-			});
+		await addressApiService.addAddress(values.address).then(async () => {
+			const response = await addressApiService.refreshAddresses();
+			setData(response.data.data);
+			setIsVisible(false);
+		});
 	};
 	const isEditing = (record: IAddress) => record.addressId === editingKey;
 
@@ -104,7 +102,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 		try {
 			const row = (await form.validateFields()) as IAddress;
 			await addressApiService
-				.editAddress(key, row.city, row.address, row.additionalInfo)
+				.editAddress(key, row.address)
 				.then(async () => {
 					const response = await addressApiService.refreshAddresses();
 					setData(response.data.data);
@@ -118,13 +116,6 @@ const TableAddress = ({ address }: ITableAddress) => {
 
 	const columns = [
 		{
-			title: 'Город',
-			dataIndex: 'city',
-			rowKey: 'city',
-			key: 'city',
-			editable: true
-		},
-		{
 			title: 'Адресс',
 			dataIndex: 'address',
 			rowKey: 'address',
@@ -132,15 +123,9 @@ const TableAddress = ({ address }: ITableAddress) => {
 			editable: true
 		},
 		{
-			title: 'Дополнительная информация',
-			dataIndex: 'additionalInfo',
-			rowKey: 'additionalInfo',
-			key: 'additionalInfo',
-			editable: true
-		},
-		{
 			title: 'Операций',
 			dataIndex: 'operation',
+			width: '100px',
 			render: (_: any, record: IAddress) => {
 				const editable = isEditing(record);
 				return editable ? (
@@ -159,15 +144,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 						</Popconfirm>
 					</span>
 				) : (
-					<div className="ps-address-table__operations">
-						<Typography.Link
-							disabled={editingKey !== ''}
-							onClick={add}
-						>
-							<Tooltip title="Добавить адресс" color="#196354">
-								<i className="icon-plus-circle" />
-							</Tooltip>
-						</Typography.Link>
+					<div className="btn ps-address-table__operations">
 						<Typography.Link
 							disabled={editingKey !== ''}
 							onClick={() => edit(record)}
@@ -198,7 +175,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 			...col,
 			onCell: (record: IAddress) => ({
 				record,
-				inputType: col.dataIndex === 'age' ? 'number' : 'text',
+				inputType: col.dataIndex === 'address' ? 'address' : 'text',
 				dataIndex: col.dataIndex,
 				title: col.title,
 				editing: isEditing(record)
@@ -209,6 +186,9 @@ const TableAddress = ({ address }: ITableAddress) => {
 	return (
 		<>
 			<Form form={form} component={false}>
+				<button className="ps-btn--address-add mb-3" onClick={add}>
+					Добавить адресс
+				</button>
 				<Table
 					components={{
 						body: {
@@ -233,67 +213,43 @@ const TableAddress = ({ address }: ITableAddress) => {
 						<div className="row">
 							<div className="col-sm-12">
 								<Form.Item
-									name="city"
-									rules={[
-										{
-											required: true,
-											type: 'string',
-											min: 2,
-											max: 100,
-											message: 'Пожалуйста, введите город'
-										}
-									]}
-								>
-									<Input
-										className="form-control"
-										type="text"
-										placeholder="Город"
-									/>
-								</Form.Item>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-sm-12">
-								<Form.Item
 									name="address"
 									rules={[
 										{
 											required: true,
 											type: 'string',
-											min: 2,
-											max: 180,
+											min: 3,
+											max: 200,
 											message:
-												'Пожалуйста, введите адресс'
+												'Пожалуйста, введите адрес доставки'
 										}
 									]}
 								>
-									<Input
+									<AutoComplete
 										className="form-control"
-										type="text"
-										placeholder="Адресс"
-									/>
-								</Form.Item>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-sm-12">
-								<Form.Item
-									name="additionalInfo"
-									rules={[
-										{
-											required: true,
-											type: 'string',
-											min: 2,
-											max: 100,
-											message:
-												'Пожалуйста, введите дополнительную информацию'
+										apiKey={
+											process.env[
+												'NEXT_PUBLIC_PLACES_API_KEY'
+											]
 										}
-									]}
-								>
-									<Input
-										className="form-control"
-										type="text"
-										placeholder="Дополнительная информация"
+										placeholder="Адрес"
+										onKeyDown={(e) =>
+											e.key === 'Enter'
+												? e.preventDefault()
+												: ''
+										}
+										onPlaceSelected={(place) => {
+											form.setFieldsValue({
+												address: place.formatted_address
+											});
+										}}
+										options={{
+											fields: ['formatted_address'],
+											types: ['address'],
+											componentRestrictions: {
+												country: 'kz'
+											}
+										}}
 									/>
 								</Form.Item>
 							</div>

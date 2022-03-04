@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
 import { Form, Input } from 'antd';
-import AutoComplete from "react-google-autocomplete";
+import AutoComplete from 'react-google-autocomplete';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import { LOGIN, REGISTER, RESET } from 'constant/routes';
@@ -11,11 +11,26 @@ import { LOGIN, REGISTER, RESET } from 'constant/routes';
 import userStore from 'data/stores/userStore';
 
 const Register = observer(() => {
-
 	const [form] = Form.useForm();
 
 	const onFinish = async (values: any) => {
-		await userStore.registration(values.name, values.phone, values.email, values.password, values.address)
+		await userStore
+			.registration(
+				values.name,
+				values.phone,
+				values.email,
+				values.password,
+				values.address
+			)
+			.then(() => {
+				form.setFieldsValue({
+					name: '',
+					phone: '',
+					email: '',
+					password: '',
+					address: ''
+				});
+			});
 	};
 
 	return (
@@ -24,7 +39,8 @@ const Register = observer(() => {
 				<Form
 					form={form}
 					className="ps-form--account"
-					onFinish={onFinish}>
+					onFinish={onFinish}
+				>
 					<ul className="ps-tab-list">
 						<li>
 							<Link passHref href={LOGIN}>
@@ -49,9 +65,11 @@ const Register = observer(() => {
 											type: 'string',
 											min: 2,
 											max: 100,
-											message: 'Пожалуйста, введите ваше ФИО',
-										},
-									]}>
+											message:
+												'Пожалуйста, введите ваше ФИО'
+										}
+									]}
+								>
 									<Input
 										className="form-control"
 										type="text"
@@ -66,15 +84,18 @@ const Register = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста, введите номер телефона',
+											message:
+												'Пожалуйста, введите номер телефона'
 										},
 										{
 											min: 10,
 											max: 18,
-											message: 'Некорректный номер телефона. Номера телефонов начинаются со знаком "+"',
+											message:
+												'Некорректный номер телефона. Номера телефонов начинаются со знаком "+"',
 											pattern: /^[+][0-9]{10,18}$/i
 										}
-									]}>
+									]}
+								>
 									<Input
 										className="form-control"
 										placeholder="+7"
@@ -87,13 +108,15 @@ const Register = observer(() => {
 									rules={[
 										{
 											required: true,
-											message: 'Пожалуйста, введите вашу почту',
+											message:
+												'Пожалуйста, введите вашу почту'
 										},
 										{
-											type: "email",
-											message: 'Некорректная почта',
-										},
-									]}>
+											type: 'email',
+											message: 'Некорректная почта'
+										}
+									]}
+								>
 									<Input
 										className="form-control"
 										type="text"
@@ -110,21 +133,35 @@ const Register = observer(() => {
 											type: 'string',
 											min: 3,
 											max: 200,
-											message: 'Пожалуйста, введите адрес доставки',
-										},
-									]}>
+											message:
+												'Пожалуйста, введите адрес доставки'
+										}
+									]}
+								>
 									<AutoComplete
 										className="form-control"
-										apiKey={process.env['NEXT_PUBLIC_PLACES_API_KEY']}
+										apiKey={
+											process.env[
+												'NEXT_PUBLIC_PLACES_API_KEY'
+											]
+										}
 										placeholder="Адрес"
-										onKeyDown={(e)=> e.key === "Enter" ? e.preventDefault(): ''}
+										onKeyDown={(e) =>
+											e.key === 'Enter'
+												? e.preventDefault()
+												: ''
+										}
 										onPlaceSelected={(place) => {
-											form.setFieldsValue({address: place.formatted_address})
+											form.setFieldsValue({
+												address: place.formatted_address
+											});
 										}}
 										options={{
-											fields: ["formatted_address"],
-											types: ["address"],
-											componentRestrictions: { country: "kz" },
+											fields: ['formatted_address'],
+											types: ['address'],
+											componentRestrictions: {
+												country: 'kz'
+											}
 										}}
 									/>
 								</Form.Item>
@@ -136,18 +173,26 @@ const Register = observer(() => {
 										{
 											required: true,
 											message:
-												'Пожалуйста, введите пароль!',
+												'Пожалуйста, введите пароль!'
 										},
 										{
 											min: 6,
 											max: 60,
-											message: 'Пароль должен содержать минимум 6 символов'
-										},
-									]}>
+											message:
+												'Пароль должен содержать минимум 6 символов'
+										}
+									]}
+								>
 									<Input.Password
 										className="form-control"
 										type="password"
-										iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+										iconRender={(visible) =>
+											visible ? (
+												<EyeTwoTone />
+											) : (
+												<EyeInvisibleOutlined />
+											)
+										}
 										placeholder="Пароль..."
 									/>
 								</Form.Item>
@@ -155,7 +200,8 @@ const Register = observer(() => {
 							<div className="form-group submit">
 								<button
 									type="submit"
-									className="ps-btn ps-btn--fullwidth">
+									className="ps-btn ps-btn--fullwidth"
+								>
 									Регистрация
 								</button>
 							</div>
@@ -168,6 +214,6 @@ const Register = observer(() => {
 			</div>
 		</div>
 	);
-})
+});
 
 export default Register;

@@ -36,7 +36,7 @@ class UserStore implements IUserStore {
 		fullName: '',
 		phone: '',
 		email: '',
-		address: ''
+		addresses: []
 	};
 
 	constructor() {
@@ -156,14 +156,14 @@ class UserStore implements IUserStore {
 		fullName: string,
 		phone: string,
 		email: string,
-		address: string
+		addresses: any
 	) {
 		this.user.id = id;
 		this.user.email = email;
 		this.user.fullName = fullName;
 		this.user.phone = phone;
 		this.user.email = email;
-		this.user.address = address;
+		this.user.addresses = addresses;
 	}
 
 	setUserDefault() {
@@ -172,12 +172,8 @@ class UserStore implements IUserStore {
 			fullName: '',
 			phone: '',
 			email: '',
-			address: ''
+			addresses: []
 		};
-	}
-
-	get getAddress() {
-		return this.user.address;
 	}
 }
 
