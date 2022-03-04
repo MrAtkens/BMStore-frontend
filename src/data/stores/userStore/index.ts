@@ -106,7 +106,7 @@ class UserStore implements IUserStore {
 					response.data.fullname,
 					response.data.phone,
 					response.data.email,
-					response.data.address
+					response.data.addresses
 				);
 				this.setIsAuth(true);
 				localStorage.setItem(USER_ID, JSON.stringify(response.data.id));
