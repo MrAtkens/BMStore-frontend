@@ -32,19 +32,6 @@ export default function useCartProduct() {
 				</LazyLoad>
 			);
 		},
-		// Бадж для скидок в процентах
-		badge: (product: ICartProduct) => {
-			let view;
-			if (product.discountPrice < product.price) {
-				const discountPercent =
-					100 -
-					Math.floor((product.discountPrice / product.price) * 100);
-				return (
-					<div className="ps-product__badge">-{discountPercent}%</div>
-				);
-			}
-			return view;
-		},
 		// Заголовок ссылка
 		title: (product: ICartProduct) => {
 			return (

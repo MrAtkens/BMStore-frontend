@@ -22,17 +22,15 @@ const ModuleCartSummary = observer(() => {
 								{item.count} x{' '}
 								{item.discountPrice < item.price ? (
 									<p className="ps-product__price sale">
-										{item.discountPrice}
+										{item.discountPrice}&nbsp;
 										<span>тг </span>
 										<del className="ml-2">
-											{item.price}
-											<span>тг </span>
+											{item.price}&nbsp;<span>тг </span>
 										</del>
 									</p>
 								) : (
 									<p className="ps-product__price">
-										{item.price}
-										<span>тг </span>
+										{item.price}&nbsp;<span>тг </span>
 									</p>
 								)}
 							</a>
@@ -49,7 +47,7 @@ const ModuleCartSummary = observer(() => {
 				<div className="ps-block__content">
 					<ul className="ps-block__product">{productItemsView}</ul>
 					<h3>
-						Сумма <span>{amount} тг</span>
+						Сумма <span>{amount}&nbsp;тг</span>
 					</h3>
 				</div>
 			</div>

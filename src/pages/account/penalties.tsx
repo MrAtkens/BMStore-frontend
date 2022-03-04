@@ -11,7 +11,7 @@ import {
 import { isUserAuth } from 'helper/commons/userHelper';
 import { HOME } from 'constant/routes';
 
-import { categoryApiService, ordersApiService } from 'data/API';
+import { categoryApiService, finesApiService } from 'data/API';
 import { accountLinks } from 'data/static/accountLinks';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { IPenaltie } from 'domain/interfaces/IPenaltie';
@@ -92,27 +92,27 @@ export async function getServerSideProps({ locale, req }: any) {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
 	);
-	let orders = [];
+	let penalties = [];
 	if (
 		cookies[USER_FIRST_PART] !== undefined &&
 		cookies[USER_SECOND_PART] !== undefined &&
 		cookies[USER_THIRD_PART] !== undefined
 	) {
-		const response = await ordersApiService.getAuthorizeOrders(
+		const response = await finesApiService.getFines(
 			cookies[USER_FIRST_PART] +
 				'.' +
 				cookies[USER_SECOND_PART] +
 				'.' +
 				cookies[USER_THIRD_PART]
 		);
-		orders = response.data.orders;
+		penalties = response.data.orders;
 	}
 	if (categoryResponse.data === undefined)
 		return {
-			props: { categories: [], orders: orders }
+			props: { categories: [], penalties: penalties }
 		};
 	return {
-		props: { categories: categoryResponse.data, orders: orders }
+		props: { categories: categoryResponse.data, penalties: penalties }
 	};
 }
 

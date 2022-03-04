@@ -37,17 +37,14 @@ const CartItems = observer(() => {
 				<td data-label="price" className="price">
 					{item.discountPrice < item.price ? (
 						<p className="ps-product__price sale">
-							{item.discountPrice}
-							<span>тг </span>
+							{item.discountPrice}&nbsp;<span>тг </span>
 							<del className="ml-2">
-								{item.price}
-								<span>тг </span>
+								{item.price}&nbsp;<span>тг </span>
 							</del>
 						</p>
 					) : (
 						<p className="ps-product__price">
-							{item.price}
-							<span>тг </span>
+							{item.price}&nbsp;<span>тг </span>
 						</p>
 					)}
 				</td>
@@ -78,8 +75,8 @@ const CartItems = observer(() => {
 						{(item.discountPrice < item.price
 							? item.discountPrice
 							: item.price * item.count
-						).toFixed(2)}{' '}
-						тг
+						).toFixed(2)}
+						&nbsp; тг
 					</strong>
 				</td>
 				<td>

@@ -26,16 +26,16 @@ const ProductOnCart = ({ product, children, quantity }: IProductOnCart) => {
 					<small>
 						{product.discountPrice < product.price ? (
 							<p className="ps-product__price sale">
-								{product.discountPrice}
+								{product.discountPrice}&nbsp;
 								<span>тг </span>
 								<del className="ml-2">
-									{product.price}
+									{product.price}&nbsp;
 									<span>тг </span>
 								</del>
 							</p>
 						) : (
 							<p className="ps-product__price">
-								{product.price}
+								{product.price}&nbsp;
 								<span>тг </span>
 							</p>
 						)}

@@ -34,12 +34,6 @@ const PanelCartMobile = observer(() => {
 							height={100}
 						/>
 					</Link>
-					<div className="ps-product__badge">
-						-
-						{100 -
-							Math.floor((item.discountPrice / item.price) * 100)}
-						%
-					</div>
 				</div>
 				<div className="ps-product__content">
 					<a
@@ -58,16 +52,16 @@ const PanelCartMobile = observer(() => {
 							{item.count} x
 							{item.discountPrice < item.price ? (
 								<p className="ps-product__price sale">
-									{item.discountPrice}
+									{item.discountPrice}&nbsp;
 									<span>тг</span>
 									<del className="ml-2">
-										{item.price}
+										{item.price}&nbsp;
 										<span>тг</span>
 									</del>
 								</p>
 							) : (
 								<p className="ps-product__price">
-									{item.price}
+									{item.price}&nbsp;
 									<span>тг</span>
 								</p>
 							)}

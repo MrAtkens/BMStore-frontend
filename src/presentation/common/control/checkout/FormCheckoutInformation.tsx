@@ -18,7 +18,6 @@ import { isUserAuth } from 'helper/commons/userHelper';
 const FormCheckoutInformation = observer(() => {
 	const [form] = Form.useForm();
 	const Router = useRouter();
-	const [isActiveButton, setIsActiveButton] = useState(false);
 	const [isProductEnough, setIsProductEnough] = useState(true);
 	const [options, setOptions] = useState<{ value: string }[]>([]);
 
@@ -70,13 +69,11 @@ const FormCheckoutInformation = observer(() => {
 
 	const onFinish = async (values: any) => {
 		if (cartStore.cart.length > 0) {
-			setIsActiveButton(true);
 			const amount = parseInt(calculateAmount(cartStore.cart));
 			let id;
 			if (userStore.user.id === '' || userStore.user.id === null)
 				id = getUserId();
 			else id = userStore.user.id;
-			console.log(values);
 			await invoiceApiService
 				.createInvoice(
 					id,
@@ -103,10 +100,8 @@ const FormCheckoutInformation = observer(() => {
 						);
 						console.log(response);
 						userBuy(response.status);
-						setIsActiveButton(false);
 					}
 				});
-			setIsActiveButton(false);
 		}
 	};
 
@@ -251,11 +246,7 @@ const FormCheckoutInformation = observer(() => {
 						Вернуться в корзину
 					</div>
 					<div className="ps-block__footer">
-						<button
-							disabled={isActiveButton}
-							type="submit"
-							className="ps-btn"
-						>
+						<button type="submit" className="ps-btn">
 							Продолжить
 						</button>
 					</div>

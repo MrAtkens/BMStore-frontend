@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import Link from 'next/link';
 import { Popover } from 'antd';
@@ -11,6 +11,29 @@ interface ITableOrders {
 }
 
 const TableOrders = ({ orders }: ITableOrders) => {
+	const [size, setSize] = useState(0);
+	const [isMobile, setIsMobile] = useState(false);
+
+	const updateWidth = () => {
+		if (typeof window !== 'undefined') setSize(window.innerWidth);
+	};
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') updateWidth();
+	}, []);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', updateWidth);
+			if (window.innerWidth < 700) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+			return () => window.removeEventListener('resize', updateWidth);
+		} else return () => null;
+	}, [size]);
+
 	const tableColumn = [
 		{
 			title: 'Id',
@@ -64,7 +87,18 @@ const TableOrders = ({ orders }: ITableOrders) => {
 				record.productInOrders.map((product) => {
 					amount += product.price * product.count;
 				});
-				return <span className="text-right">{amount} тг</span>;
+				return <span className="text-right">{amount}&nbsp;тг</span>;
+			},
+			sorter: (a, b) => {
+				let amountFirst,
+					amountSecond = 0;
+				a.productInOrders.map((product) => {
+					amountFirst += product.price * product.count;
+				});
+				b.productInOrders.map((product) => {
+					amountSecond += product.price * product.count;
+				});
+				return amountFirst - amountSecond;
 			}
 		},
 		{
@@ -75,13 +109,23 @@ const TableOrders = ({ orders }: ITableOrders) => {
 			width: '150px'
 		}
 	];
-	return (
-		<Table
-			columns={tableColumn}
-			dataSource={orders}
-			rowKey={(record) => record.id}
-		/>
-	);
+	if (isMobile)
+		return (
+			<Table
+				scroll={{ x: 1200, y: 500 }}
+				columns={tableColumn}
+				dataSource={orders}
+				rowKey={(record) => record.id}
+			/>
+		);
+	else
+		return (
+			<Table
+				columns={tableColumn}
+				dataSource={orders}
+				rowKey={(record) => record.id}
+			/>
+		);
 };
 
 export default TableOrders;

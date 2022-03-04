@@ -64,19 +64,16 @@ export default function useProduct() {
 			if (product.discountPrice < product.price) {
 				view = (
 					<p className="ps-product__price sale">
-						{product.discountPrice}
-						<span>тг</span>
+						{product.discountPrice}&nbsp;<span>тг</span>
 						<del className="ml-2">
-							{product.price}
-							<span>тг</span>
+							{product.price}&nbsp;<span>тг</span>
 						</del>
 					</p>
 				);
 			} else {
 				view = (
 					<p className="ps-product__price">
-						{product.price}
-						<span>тг</span>
+						{product.price}&nbsp;<span>тг</span>
 					</p>
 				);
 			}

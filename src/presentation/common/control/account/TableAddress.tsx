@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Table,
 	Popconfirm,
@@ -67,6 +67,29 @@ const TableAddress = ({ address }: ITableAddress) => {
 	const [data, setData] = useState(address);
 	const [editingKey, setEditingKey] = useState<any>('');
 
+	const [size, setSize] = useState(0);
+	const [isMobile, setIsMobile] = useState(false);
+
+	const updateWidth = () => {
+		if (typeof window !== 'undefined') setSize(window.innerWidth);
+	};
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') updateWidth();
+	}, []);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', updateWidth);
+			if (window.innerWidth < 700) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+			return () => window.removeEventListener('resize', updateWidth);
+		} else return () => null;
+	}, [size]);
+
 	const onFinish = async (values: any) => {
 		await addressApiService.addAddress(values.address).then(async () => {
 			const response = await addressApiService.refreshAddresses();
@@ -116,14 +139,15 @@ const TableAddress = ({ address }: ITableAddress) => {
 
 	const columns = [
 		{
-			title: 'Адресс',
+			title: 'Адрес',
 			dataIndex: 'address',
 			rowKey: 'address',
 			key: 'address',
-			editable: true
+			editable: true,
+			sorter: (a, b) => a.address - b.address
 		},
 		{
-			title: 'Операций',
+			title: 'Операции',
 			dataIndex: 'operation',
 			width: '100px',
 			render: (_: any, record: IAddress) => {
@@ -189,18 +213,34 @@ const TableAddress = ({ address }: ITableAddress) => {
 				<button className="ps-btn--address-add mb-3" onClick={add}>
 					Добавить адресс
 				</button>
-				<Table
-					components={{
-						body: {
-							cell: EditableCell
-						}
-					}}
-					bordered
-					dataSource={data}
-					rowKey={(record) => record.addressId}
-					columns={mergedColumns}
-					rowClassName="editable-row"
-				/>
+				{isMobile ? (
+					<Table
+						scroll={{ x: 900, y: 500 }}
+						components={{
+							body: {
+								cell: EditableCell
+							}
+						}}
+						bordered
+						dataSource={data}
+						rowKey={(record) => record.addressId}
+						columns={mergedColumns}
+						rowClassName="editable-row"
+					/>
+				) : (
+					<Table
+						components={{
+							body: {
+								cell: EditableCell
+							}
+						}}
+						bordered
+						dataSource={data}
+						rowKey={(record) => record.addressId}
+						columns={mergedColumns}
+						rowClassName="editable-row"
+					/>
+				)}
 			</Form>
 			<Modal
 				visible={isVisible}

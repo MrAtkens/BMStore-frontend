@@ -13,18 +13,18 @@ const ModulePaymentOrderSummary = observer(() => {
 	if (cartStore.cart && cartStore.cart.length > 0) {
 		amount = calculateAmount(cartStore.cart);
 		listItemsView = cartStore.cart.map((item) => (
-			<Link href={PRODUCT(item.productId)} key={item.productId}>
+			<Link key={item.productId} href={PRODUCT(item.productId)}>
 				<a>
 					<strong>
 						{item.title}
 						<span>x{item.count}</span>
 					</strong>
-					<small>
+					<small className="ps-checkout--price-container">
 						{item.count *
 							(item.discountPrice < item.price
 								? item.discountPrice
-								: item.price)}{' '}
-						тг
+								: item.price)}
+						&nbsp; тг
 					</small>
 				</a>
 			</Link>
@@ -72,7 +72,7 @@ const ModulePaymentOrderSummary = observer(() => {
 				<figure>
 					<figcaption>
 						<strong>Общая сумма</strong>
-						<small>{amount} тг</small>
+						<small>{amount}&nbsp;тг</small>
 					</figcaption>
 				</figure>
 				{/*{shippingView}*/}
