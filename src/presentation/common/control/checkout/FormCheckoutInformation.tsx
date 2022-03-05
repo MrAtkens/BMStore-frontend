@@ -9,7 +9,7 @@ import { getWidget } from 'constant/payment';
 
 import { calculateAmount } from 'helper/stores/cartHelper';
 import { getUserId } from 'helper/stores/userHelper';
-import { paymentDelivery, userBuy } from 'helper/responseStatus';
+import { paymentDelivery } from 'helper/responseStatus';
 import cartStore from 'data/stores/cartStore';
 import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
@@ -90,7 +90,7 @@ const FormCheckoutInformation = observer(() => {
 							paymentDelivery(response.status);
 						});
 					} else {
-						const response = getWidget(
+						getWidget(
 							process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'],
 							'Оплата товаров в магазине стройматериалов CATS',
 							amount,
@@ -98,8 +98,6 @@ const FormCheckoutInformation = observer(() => {
 							id,
 							values.email
 						);
-						console.log(response);
-						userBuy(response.status);
 					}
 				});
 		}

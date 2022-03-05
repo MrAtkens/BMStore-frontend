@@ -83,10 +83,17 @@ const TableInvoices = ({ invoices }: ITableInvoices) => {
 			render: (text, record) => {
 				return (
 					<>
-						{new Date(record.creationDate).getUTCDate()}.
-						{new Date(record.creationDate).getUTCMonth() <= 10
-							? new Date(record.creationDate).getUTCMonth()
-							: `0${new Date(record.creationDate).getUTCMonth()}`}
+						{new Date(record.creationDate).getUTCDay() >= 10
+							? new Date(record.creationDate).getUTCDay()
+							: `0${new Date(record.creationDate).getUTCDay()}`}
+						.
+						{new Date(record.creationDate).getUTCMonth() >= 10
+							? new Date(record.creationDate).getUTCMonth() + 1
+							: `0${
+									new Date(
+										record.creationDate
+									).getUTCMonth() + 1
+							  }`}
 						.{new Date(record.creationDate).getUTCFullYear()}
 					</>
 				);

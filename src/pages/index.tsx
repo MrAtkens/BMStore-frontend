@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { ICategory } from 'domain/interfaces/ICategory';
 import { IProduct } from 'domain/interfaces/IProduct';
 import { categoryApiService, productsApiService } from 'data/API';
+import { toastBuySuccess } from 'helper/toastify';
 
 import Layout from 'presentation/layout';
 import Banners from 'presentation/common/block/Banners';
@@ -17,6 +19,11 @@ interface IHome {
 }
 
 const Home = ({ categories, actualProducts }: IHome) => {
+	const Router = useRouter();
+	useEffect(() => {
+		if (Router.asPath === '/?status=true') toastBuySuccess();
+	}, []);
+
 	return (
 		<Layout categories={categories} title={'Главная страница - TACS'}>
 			<Head>

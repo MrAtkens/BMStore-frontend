@@ -54,7 +54,7 @@ const App = observer(({ Component, pageProps }: AppProps) => {
 						email: email, //email плательщика (необязательно)
 					},
 					{
-						onSuccess: "#",
+						onSuccess: "/?status=true",
 						onFail: async function(reason, options) {
 						const response = await fetch(\`https://bazarjok-group.com:20000/api/client/invoice?userId=\${accountId}&status=2\`, {
 						method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -80,6 +80,7 @@ const App = observer(({ Component, pageProps }: AppProps) => {
 					},
 					referrerPolicy: 'no-referrer', // no-referrer, *client
 					});
+					window.location.href='/?status=true'
 					return response;
 					}}})}`}
 			</Script>

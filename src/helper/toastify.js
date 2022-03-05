@@ -189,7 +189,7 @@ export const toastRegistrationSuccess = () => {
 
 export const toastBuySuccess = () => {
 	notification.success({
-		message: 'Вы успешно создали заказ',
+		message: 'Вы успешно оплатили заказ',
 		duration: 5,
 		placement: 'bottomRight'
 	});
