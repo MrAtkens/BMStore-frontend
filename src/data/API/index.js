@@ -1,3 +1,4 @@
+export { auctionBannerApiService } from './auctionBannerApi';
 export { authenticationService } from './authenticationApi';
 export { categoryApiService } from './categoryApi';
 export { productsApiService } from './productApi';

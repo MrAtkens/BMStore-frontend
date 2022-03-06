@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
+import { IAuctionBanner } from 'domain/interfaces/IAuctionBanner';
 import { ICategory } from 'domain/interfaces/ICategory';
 import { IProduct } from 'domain/interfaces/IProduct';
 import { categoryApiService, productsApiService } from 'data/API';
@@ -12,13 +13,15 @@ import Banners from 'presentation/common/block/Banners';
 import CategoryMainPage from 'presentation/common/block/CategoryMainPage/CategoryMainPage';
 import PromotionMainPage from 'presentation/common/block/PromotionMainPage';
 import ActualProducts from 'presentation/common/control/ActualProducts';
+import { auctionBannerApiService } from '../data/API';
 
 interface IHome {
 	categories: Array<ICategory>;
 	actualProducts: Array<IProduct>;
+	bannerItems: Array<IAuctionBanner>;
 }
 
-const Home = ({ categories, actualProducts }: IHome) => {
+const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 	const Router = useRouter();
 	useEffect(() => {
 		if (Router.asPath === '/?status=true') toastBuySuccess();
@@ -40,7 +43,7 @@ const Home = ({ categories, actualProducts }: IHome) => {
 			</Head>
 			<main id="homepage-1">
 				<div className="container">
-					<Banners />
+					<Banners bannerItems={bannerItems} />
 					<CategoryMainPage categories={categories} />
 					<PromotionMainPage />
 					{actualProducts.length > 0 ? (
@@ -61,18 +64,20 @@ export async function getStaticProps({ locale, req }: any) {
 	);
 	const actualProductsResponse =
 		await productsApiService.getProductActualProducts();
-	if (
-		categoryResponse.data === undefined ||
-		actualProductsResponse.data.data === undefined
-	)
-		return {
-			props: { categories: [], actualProducts: [] },
-			revalidate: 1800
-		};
+	const bannerResponse = await auctionBannerApiService.getAuctionBanner();
+
 	return {
 		props: {
-			categories: categoryResponse.data,
-			actualProducts: actualProductsResponse.data.data
+			categories:
+				categoryResponse.data === undefined
+					? []
+					: categoryResponse.data,
+			actualProducts:
+				actualProductsResponse.data.data === undefined
+					? []
+					: actualProductsResponse.data.data,
+			bannerItems:
+				bannerResponse.data === undefined ? [] : bannerResponse.data
 		},
 		revalidate: 600
 	};
