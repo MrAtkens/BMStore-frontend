@@ -81,7 +81,7 @@ const TableOrders = ({ orders }: ITableOrders) => {
 			rowKey: 'amount',
 			dataIndex: 'amount',
 			key: 'amount',
-			width: '25%',
+			width: '13%',
 			render: (text, record) => {
 				let amount = 0;
 				record.productInOrders.map((product) => {

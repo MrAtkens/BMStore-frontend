@@ -36,36 +36,32 @@ const TableInvoices = ({ invoices }: ITableInvoices) => {
 			title: 'ФИО',
 			dataIndex: 'fullname',
 			rowKey: 'fullname',
-			key: 'fullname',
-			sorter: (a, b) => a.fullname - b.fullname
+			key: 'fullname'
 		},
 		{
 			title: 'Почта',
 			dataIndex: 'email',
 			rowKey: 'email',
-			key: 'email',
-			sorter: (a, b) => a.email - b.email
-		},
-		{
-			title: 'Телефон',
-			dataIndex: 'phone',
-			rowKey: 'phone',
-			key: 'phone',
-			sorter: (a, b) => a.phone - b.phone
+			key: 'email'
 		},
 		{
 			title: 'Адрес',
 			dataIndex: 'userAddress',
 			rowKey: 'userAddress',
-			key: 'userAddress',
-			sorter: (a, b) => a.userAddress - b.userAddress
+			key: 'userAddress'
+		},
+		{
+			title: 'Телефон',
+			dataIndex: 'phone',
+			rowKey: 'phone',
+			key: 'phone'
 		},
 		{
 			title: 'Сумма',
 			rowKey: 'fullPrice',
 			dataIndex: 'fullPrice',
 			key: 'fullPrice',
-			width: '150px',
+			width: '13%',
 			render: (text, record) => {
 				return (
 					<span className="text-right">
