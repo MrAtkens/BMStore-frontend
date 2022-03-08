@@ -105,7 +105,7 @@ export async function getServerSideProps({ locale, req }: any) {
 				'.' +
 				cookies[USER_THIRD_PART]
 		);
-		penalties = response.data.orders;
+		penalties = response.data.data;
 	}
 	if (categoryResponse.data === undefined)
 		return {

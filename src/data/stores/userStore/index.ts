@@ -145,6 +145,18 @@ class UserStore implements IUserStore {
 			operationId
 		);
 		userResetPasswordStatus(response.status);
+		const token = response.data.token;
+		if (response.status === 200) {
+			const split = token.split('.');
+			Cookies.set(USER_FIRST_PART, split[0], { expires: 7 });
+			Cookies.set(USER_SECOND_PART, split[1], { expires: 7 });
+			Cookies.set(USER_THIRD_PART, split[2], { expires: 7 });
+			await userApiService.mergeUser(getUserId()).then(async () => {
+				await this.getUserData();
+			});
+			this.isSubmitting = false;
+			await Router.push('/');
+		} else this.isSubmitting = false;
 	}
 
 	setIsAuth(auth: boolean) {

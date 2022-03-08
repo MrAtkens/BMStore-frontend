@@ -173,7 +173,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 							disabled={editingKey !== ''}
 							onClick={() => edit(record)}
 						>
-							<Tooltip title="Изменить адресс" color="#196354">
+							<Tooltip title="Изменить адрес" color="#196354">
 								<i className="icon-pencil" />
 							</Tooltip>
 						</Typography.Link>
@@ -181,7 +181,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 							disabled={editingKey !== ''}
 							onClick={() => deleteRecord(record)}
 						>
-							<Tooltip title="Удалить адресс" color="#196354">
+							<Tooltip title="Удалить адрес" color="#196354">
 								<i className="icon-trash" />
 							</Tooltip>
 						</Typography.Link>
@@ -211,7 +211,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 		<>
 			<Form form={form} component={false}>
 				<button className="ps-btn--address-add mb-3" onClick={add}>
-					Добавить адресс
+					Добавить адрес
 				</button>
 				{isMobile ? (
 					<Table
@@ -246,7 +246,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 				visible={isVisible}
 				onCancel={handleCancel}
 				footer={<></>}
-				title="Добавление адресса"
+				title="Добавление адреса"
 			>
 				<Form form={form} onFinish={onFinish}>
 					<div className="ps-form__content">
