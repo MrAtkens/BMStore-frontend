@@ -95,6 +95,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 			const response = await addressApiService.refreshAddresses();
 			setData(response.data.data);
 			setIsVisible(false);
+			form.setFieldsValue({ address: '' });
 		});
 	};
 	const isEditing = (record: IAddress) => record.addressId === editingKey;
@@ -130,11 +131,13 @@ const TableAddress = ({ address }: ITableAddress) => {
 					const response = await addressApiService.refreshAddresses();
 					setData(response.data.data);
 				});
+			form.setFieldsValue({ address: '' });
 		} catch (errInfo) {}
 	};
 
 	const handleCancel = async () => {
 		setIsVisible(false);
+		form.setFieldsValue({ address: '' });
 	};
 
 	const columns = [
@@ -143,8 +146,7 @@ const TableAddress = ({ address }: ITableAddress) => {
 			dataIndex: 'address',
 			rowKey: 'address',
 			key: 'address',
-			editable: true,
-			sorter: (a, b) => a.address - b.address
+			editable: true
 		},
 		{
 			title: 'Операции',
