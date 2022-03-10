@@ -12,15 +12,6 @@ export const toastServerError = () => {
 	});
 };
 
-//Status 409 Conflict(Login occuped)
-export const toastLoginOccuped = () => {
-	notification.error({
-		message: 'Ошибка 409',
-		description: 'Данный пользователь уже зарегистрирован',
-		duration: 5,
-		placement: 'bottomRight'
-	});
-};
 //Status 404
 export const toastUserNotFound = () => {
 	notification.error({
@@ -88,6 +79,26 @@ export const toastMailAcceptError = () => {
 		placement: 'bottomRight'
 	});
 };
+
+export const toastPhoneOccuped = () => {
+	notification.error({
+		message: 'Ошибка изменение',
+		description: 'Данный номер телефона уже зарегистрирован',
+		duration: 7,
+		placement: 'bottomRight'
+	});
+};
+
+export const toastUnActiveProduct = () => {
+	notification.error({
+		message: 'Ошибка оформление заказа',
+		description:
+			'Невозможно оформить заказ, отсутсвует как минимум один из товаров на складе',
+		duration: 10,
+		placement: 'bottomRight'
+	});
+};
+
 // warn
 export const toastRegistrationError = () => {
 	notification.warning({

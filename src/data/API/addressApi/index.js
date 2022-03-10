@@ -52,13 +52,9 @@ const addAddress = async (address) => {
 const editAddress = async (addressId, address) => {
 	return await axios
 		.put(
-			`${BackendUrl}/addresses/${addressId}?lang=ru`,
-			{
-				address: address
-			},
-			{
-				headers: { Authorization: `Bearer ${getUser()}` }
-			}
+			`${BackendUrl}/addresses/${addressId}?address=${address}`,
+			{},
+			{ headers: { Authorization: `Bearer ${getUser()}` } }
 		)
 		.then((response) => {
 			return response;

@@ -14,6 +14,7 @@ import cartStore from 'data/stores/cartStore';
 import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
 import { isUserAuth } from 'helper/commons/userHelper';
+import { toastUnActiveProduct } from '../../../../helper/toastify';
 
 const FormCheckoutInformation = observer(() => {
 	const [form] = Form.useForm();
@@ -83,21 +84,29 @@ const FormCheckoutInformation = observer(() => {
 					values.address
 				)
 				.then(async (responseCreate) => {
-					if (values.isDelivery) {
-						const response =
-							await invoiceApiService.editInvoiceStatus(id, 3);
-						await Router.push(HOME).then(() => {
-							paymentDelivery(response.status);
-						});
-					} else {
-						getWidget(
-							process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'],
-							'Оплата товаров в магазине стройматериалов CATS',
-							amount,
-							'KZT',
-							id,
-							values.email
-						);
+					console.log(responseCreate);
+					if (responseCreate.status === 200) {
+						if (values.isDelivery) {
+							const response =
+								await invoiceApiService.editInvoiceStatus(
+									id,
+									3
+								);
+							await Router.push(HOME).then(() => {
+								paymentDelivery(response.status);
+							});
+						} else {
+							getWidget(
+								process.env['NEXT_PUBLIC_CLOUD_PAYMENTS_ID'],
+								'Оплата товаров в магазине стройматериалов CATS',
+								amount,
+								'KZT',
+								id,
+								values.email
+							);
+						}
+					} else if (responseCreate.status === 400) {
+						toastUnActiveProduct();
 					}
 				});
 		}

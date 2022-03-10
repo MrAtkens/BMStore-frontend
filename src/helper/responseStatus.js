@@ -22,7 +22,8 @@ import {
 	toastPasswordResetMailSuccess,
 	toastPasswordResetSuccess,
 	toastAuthVerificationError,
-	toastPaymentDeliverySuccess
+	toastPaymentDeliverySuccess,
+	toastPhoneOccuped
 } from './toastify';
 
 import {
@@ -59,7 +60,7 @@ export const userEditStatus = (status) => {
 	else if (status === 401) {
 		toastUnauthorizedError();
 		leaveFromSystem();
-	}
+	} else if (status === 400) toastPhoneOccuped();
 };
 
 export const userAcceptMailStatus = (status) => {

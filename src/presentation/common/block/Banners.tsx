@@ -38,7 +38,6 @@ const Banners = ({ bannerItems }: IBanners) => {
 							height={600}
 							onClick={() => clickHandle(item.redirectUrl)}
 							priority
-							objectFit={'cover'}
 							src={item.imageUrl}
 							alt="CATS"
 						/>
