@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { BackendUrl } from '../settings';
-import { getUser } from '../../../helper/commons/userHelper';
+import { getUser } from 'helper/commons/userHelper';
 
 axios.defaults.withCredentials = true;
 
 const getAddresses = async (jwtToken) => {
 	return await axios
-		.get(`${BackendUrl}/addresses?lang=ru`, {
+		.get(`${BackendUrl}/addresses`, {
 			headers: { Authorization: `Bearer ${jwtToken}` }
 		})
 		.then((response) => {
@@ -19,7 +19,7 @@ const getAddresses = async (jwtToken) => {
 
 const refreshAddresses = async () => {
 	return await axios
-		.get(`${BackendUrl}/addresses?lang=ru`, {
+		.get(`${BackendUrl}/addresses`, {
 			headers: { Authorization: `Bearer ${getUser()}` }
 		})
 		.then((response) => {
@@ -33,10 +33,8 @@ const refreshAddresses = async () => {
 const addAddress = async (address) => {
 	return await axios
 		.post(
-			`${BackendUrl}/addresses?lang=ru`,
-			{
-				address: address
-			},
+			`${BackendUrl}/addresses?address=${address}`,
+			{},
 			{
 				headers: { Authorization: `Bearer ${getUser()}` }
 			}
@@ -66,7 +64,7 @@ const editAddress = async (addressId, address) => {
 
 const removeAddress = async (addressId) => {
 	return await axios
-		.delete(`${BackendUrl}/addresses/${addressId}?lang=ru`, {
+		.delete(`${BackendUrl}/addresses/${addressId}`, {
 			headers: { Authorization: `Bearer ${getUser()}` }
 		})
 		.then((response) => {
