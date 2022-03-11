@@ -72,8 +72,8 @@ const Header = ({ categories }: IHeader) => {
 						<Link passHref href={HOME}>
 							<a className="ps-logo">
 								<Image
-									width={220}
-									height={70}
+									width={300}
+									height={225}
 									quality={100}
 									src="/static/img/logo.webp"
 									alt="TACS logo"
