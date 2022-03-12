@@ -98,12 +98,16 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 30px;
+    padding: 10px 10px;
     border-top: 1px solid #ccc;
     background-color: #ffffff;
 
     .navigation__item {
         text-align: center;
+
+        .badge{
+            display: initial;
+        }
 
         i {
             font-size: 24px;

@@ -2,8 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import Slider from 'react-slick';
 
-import NextArrow from '../typography/NextArrow';
-import PrevArrow from '../typography/PrevArrow';
+import NextArrow from '../../typography/NextArrow';
+import PrevArrow from '../../typography/PrevArrow';
 import { IAuctionBanner } from 'domain/interfaces/IAuctionBanner';
 
 interface IBanners {
@@ -27,7 +27,7 @@ const Banners = ({ bannerItems }: IBanners) => {
 	};
 
 	return (
-		<div className="ps-shop-banner">
+		<div className="ps-home-banner">
 			<div className="container">
 				<Slider {...carouselSetting} className="ps-carousel">
 					{bannerItems.map((item) => (

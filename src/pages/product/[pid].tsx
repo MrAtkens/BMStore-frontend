@@ -10,10 +10,11 @@ import { HOME, SHOP_PAGE } from 'constant/routes';
 
 import ProductDetailBox from 'presentation/page/ProductDetailBox';
 
-import SkeletonProductDetail from 'presentation/common/block/skeletons/SkeletonProductDetail';
+import SkeletonProductDetail from 'presentation/common/block/normal/skeletons/SkeletonProductDetail';
 import ModuleRecommendedProducts from 'presentation/common/control/product/ModuleRecommendedProducts';
 import BreadCrumb from 'presentation/common/typography/BreadCrumb';
 import Layout from 'presentation/layout';
+import ActualProductsMobile from '../../presentation/common/control/ActualProductsMobile';
 
 interface IProductPage {
 	categories: Array<ICategory>;
@@ -24,6 +25,29 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 	const Router = useRouter();
 	const [pageProduct, setPageProduct] = useState(product);
 	const [loading, setLoading] = useState(true);
+
+	const [size, setSize] = useState(0);
+	const [isMobile, setIsMobile] = useState(false);
+
+	const updateWidth = () => {
+		if (typeof window !== 'undefined') setSize(window.innerWidth);
+	};
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') updateWidth();
+	}, []);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', updateWidth);
+			if (window.innerWidth < 700) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+			return () => window.removeEventListener('resize', updateWidth);
+		} else return () => null;
+	}, [size]);
 
 	useEffect(() => {
 		setPageProduct(product);
@@ -73,10 +97,16 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 				<div className="ps-page--product ps-page--product-box">
 					<div className="container">
 						{productView}
-						<ModuleRecommendedProducts
-							layout="fullwidth"
-							productItems={product.productsSimilar}
-						/>
+						{isMobile ? (
+							<ActualProductsMobile
+								productItems={product.productsSimilar}
+							/>
+						) : (
+							<ModuleRecommendedProducts
+								layout="fullwidth"
+								productItems={product.productsSimilar}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

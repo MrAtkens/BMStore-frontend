@@ -5,7 +5,7 @@ import { Pagination } from 'antd';
 
 import Product from 'presentation/common/control/products/Product';
 import ProductWide from 'presentation/common/control/products/ProductWide';
-import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
+import SkeletonProduct from 'presentation/common/block/normal/skeletons/SkeletonProduct';
 
 import productStore from 'data/stores/productStore';
 

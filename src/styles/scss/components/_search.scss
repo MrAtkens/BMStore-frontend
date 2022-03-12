@@ -1,5 +1,10 @@
 .ps-search--mobile {
-    max-width: 450px;
+    width: 100%;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 10px 10px;
+
+    a{
+        margin-left: 5px;
+        margin-right: 10px;
+    }
 }

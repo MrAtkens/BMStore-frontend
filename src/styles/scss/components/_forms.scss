@@ -392,21 +392,19 @@
 }
 
 .ps-form--search-mobile {
-    input {
-        height: 40px;
-        background-color: #ffffff;
-        border: none;
-        border-radius: 0;
-    }
-
-    button {
-        min-width: 40px;
-        height: 40px;
-        background-color: #000;
-        border: none;
-
+    width: 100%;
+    .form-group--nest{
         i {
-            color: #ffffff;
+            color: #a6a6a6;
+        }
+
+        input {
+            width: 100%;
+            background-color: #f0f0f0;
+            color: #a4a4a4;
+            height: 40px;
+            border: none;
+            border-radius: 15px;
         }
     }
 }

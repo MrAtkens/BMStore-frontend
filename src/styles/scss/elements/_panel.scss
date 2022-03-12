@@ -62,19 +62,6 @@
         margin: 0 20px;
     }
 
-    .ps-panel__search-results {
-        padding-top: 20px;
-        min-height: 70vh;
-        overflow: auto;
-        max-height: 100%;
-        .ps-form--search-mobile {
-            margin-bottom: 30px;
-            input {
-                border: 1px solid #ddd;
-            }
-        }
-    }
-
     .ant-menu {
         .ant-menu-item {
             &.ant-menu-item-selected {

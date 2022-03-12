@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import { carouselFullwidth, carouselStandard } from 'helper/carousel-helpers';
 import { IProduct } from 'domain/interfaces/IProduct';
 import { generateTempArray } from 'helper/commons/header';
-import SkeletonProduct from 'presentation/common/block/skeletons/SkeletonProduct';
+import SkeletonProduct from 'presentation/common/block/normal/skeletons/SkeletonProduct';
 import Product from 'presentation/common/control/products/Product';
 
 interface IActualProducts {

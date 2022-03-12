@@ -2,6 +2,94 @@
     padding: 70px 0;
     background-color: #eeeeee;
 
+    @include media("<md") {
+        padding: 0;
+
+    }
+
+    .ps-shop-banner--mobile{
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: $color-header-text;
+
+        .banner--mobile-image{
+            margin-right: 10px;
+            margin-left: 10px;
+
+            img{
+                width: 180px;
+                height: 130px;
+                border-radius: 15px;
+            }
+        }
+    }
+
+    .ps-category--mobile{
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin-top: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: $color-header-text;
+
+        .category--mobile-image-container{
+            display: block;
+            .category--mobile-image{
+                margin-right: 10px;
+                margin-left: 10px;
+                text-align: center;
+                h3{
+                    text-align: center;
+                    font-size: 9pt;
+                }
+                img{
+                    width: 130px;
+                    height: 130px;
+                }
+            }
+        }
+    }
+
+    .ps-actual-products--mobile{
+        display: inline-flex;
+        margin-top: 20px;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: $color-header-text;
+        margin-bottom: 100px;
+        align-items: baseline;
+        .ps-product{
+            margin-left: 10px;
+            margin-right: 10px;
+            img{
+                width: 130px;
+                height: 130px;
+            }
+        }
+    }
+
+    .ps-actual-products--mobile::-webkit-scrollbar {
+        display: none;
+    }
+
+    .ps-category--mobile::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .ps-shop-banner--mobile::-webkit-scrollbar {
+        display: none;
+    }
+
     .ps-home-banner {
         padding-top: 30px;
         margin-bottom: 30px;

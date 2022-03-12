@@ -34,7 +34,7 @@ const Register = observer(() => {
 	};
 
 	return (
-		<div className="ps-my-account">
+		<div className="ps-my-account-registration">
 			<div className="container">
 				<Form
 					form={form}

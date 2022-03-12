@@ -568,18 +568,13 @@ textarea.form-control {
 .form-group--nest {
     display: flex;
     flex-flow: row nowrap;
-
-    .ps-btn {
-        border-radius: 0 4px 4px 0;
-        padding-left: 25px;
-        padding-right: 25px;
+    background-color: #f0f0f0;
+    color: #ababab;
+    border-radius: 8px;
+    .form-item--search{
+        margin: 0 !important;
     }
 
-    input {
-        border-radius: 4px 0 0 4px;
-        border-color: #ccc;
-        border-right: none;
-    }
 }
 
 .form-group--icon {

@@ -31,6 +31,7 @@ interface IUserStore {
 class UserStore implements IUserStore {
 	isAuthenticated = false;
 	isSubmitting = false;
+	isMenuDrawer = false;
 	user = {
 		id: '',
 		fullName: '',
@@ -161,6 +162,10 @@ class UserStore implements IUserStore {
 
 	setIsAuth(auth: boolean) {
 		this.isAuthenticated = auth;
+	}
+
+	setIsMenuDrawer(isDrawer: boolean) {
+		this.isMenuDrawer = isDrawer;
 	}
 
 	setUser(
