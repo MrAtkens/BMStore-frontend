@@ -54,8 +54,8 @@ const HeaderMobile = observer(() => {
 					<Link passHref href={HOME}>
 						<a className="ps-logo">
 							<Image
-								width={100}
-								height={70}
+								width={80}
+								height={60}
 								quality={100}
 								src="/static/img/logo.webp"
 								alt="TACS logo"
