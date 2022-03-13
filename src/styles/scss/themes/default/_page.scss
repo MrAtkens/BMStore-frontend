@@ -37,6 +37,7 @@
         padding-top: 20px;
         padding-bottom: 20px;
         background-color: $color-header-text;
+        justify-content: space-evenly;
 
         .category--mobile-image-container{
             display: block;
@@ -48,6 +49,7 @@
                     text-align: center;
                     font-size: 8pt;
                     font-weight: 500;
+                    width: 100px;
                 }
                 img{
                     width: 100px;

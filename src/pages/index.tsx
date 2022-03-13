@@ -47,7 +47,7 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.addEventListener('resize', updateWidth);
-			if (window.innerWidth < 700) {
+			if (window.innerWidth < 500) {
 				setIsMobile(true);
 			} else {
 				setIsMobile(false);

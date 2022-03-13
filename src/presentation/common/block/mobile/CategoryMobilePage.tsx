@@ -1,7 +1,9 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
+import Link from 'next/link';
 
 import { ICategory } from 'domain/interfaces/ICategory';
+import { SHOP_PAGE } from 'constant/routes';
 interface ICategoryBlock {
 	categories: Array<ICategory>;
 }
@@ -17,12 +19,18 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 		count++;
 		if (count === 2) {
 			const categoryItem = (
-				<div key={item.id} className="category--mobile-image">
-					<LazyLoad>
-						<img src={item.imageUrl} alt="CATS" />
-					</LazyLoad>
-					<h3>{item.name}</h3>
-				</div>
+				<Link
+					passHref
+					href={SHOP_PAGE('category', item.id)}
+					key={item.id}
+				>
+					<div className="category--mobile-image">
+						<LazyLoad>
+							<img src={item.imageUrl} alt="CATS" />
+						</LazyLoad>
+						<h3>{item.name}</h3>
+					</div>
+				</Link>
 			);
 			listBuffer.push(categoryItem);
 			listBuffer = [];
@@ -30,12 +38,18 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 			list.push(listBuffer);
 		} else {
 			const categoryItem = (
-				<div key={item.id} className="category--mobile-image">
-					<LazyLoad>
-						<img src={item.imageUrl} alt="CATS" />
-					</LazyLoad>
-					<h3>{item.name}</h3>
-				</div>
+				<Link
+					passHref
+					href={SHOP_PAGE('category', item.id)}
+					key={item.id}
+				>
+					<div className="category--mobile-image">
+						<LazyLoad>
+							<img src={item.imageUrl} alt="CATS" />
+						</LazyLoad>
+						<h3>{item.name}</h3>
+					</div>
+				</Link>
 			);
 			listBuffer.push(categoryItem);
 		}
