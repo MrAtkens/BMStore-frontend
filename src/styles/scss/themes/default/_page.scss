@@ -47,6 +47,7 @@
                 h3{
                     text-align: center;
                     font-size: 9pt;
+                    font-weight: 500;
                 }
                 img{
                     width: 130px;
@@ -56,23 +57,32 @@
         }
     }
 
-    .ps-actual-products--mobile{
-        display: inline-flex;
+    .ps-actual-products--mobile-container {
+        display: block;
         margin-top: 20px;
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background-color: $color-header-text;
-        margin-bottom: 100px;
-        align-items: baseline;
-        .ps-product{
-            margin-left: 10px;
-            margin-right: 10px;
-            img{
-                width: 130px;
-                height: 130px;
+
+        h4{
+            text-align: center;
+        }
+        .ps-actual-products--mobile {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: $color-header-text;
+            align-items: baseline;
+            display: inline-flex;
+            margin-bottom: 160px;
+
+            .ps-product {
+                margin-left: 10px;
+                margin-right: 10px;
+
+                img {
+                    width: 130px;
+                    height: 130px;
+                }
             }
         }
     }

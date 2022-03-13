@@ -78,6 +78,7 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 						{actualProducts.length > 0 ? (
 							<ActualProductsMobile
 								productItems={actualProducts}
+								isRecommended={false}
 							/>
 						) : null}
 					</div>

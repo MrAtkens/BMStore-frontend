@@ -100,6 +100,7 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 						{isMobile ? (
 							<ActualProductsMobile
 								productItems={product.productsSimilar}
+								isRecommended={true}
 							/>
 						) : (
 							<ModuleRecommendedProducts
