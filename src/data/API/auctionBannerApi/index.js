@@ -3,7 +3,7 @@ import { BackendUrl } from '../settings';
 
 axios.defaults.withCredentials = true;
 
-const getAuctionBanner = async (language) => {
+const getAuctionBanner = async () => {
 	return await axios
 		.get(`${BackendUrl}/auction-banner`)
 		.then((response) => {

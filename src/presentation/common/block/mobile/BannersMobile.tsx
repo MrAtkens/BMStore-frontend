@@ -14,17 +14,27 @@ const BannersMobile = ({ bannerItems }: IBanners) => {
 	};
 	return (
 		<div className="ps-shop-banner--mobile">
-			{bannerItems.map((item) => (
-				<div key={item.imageUrl} className="banner--mobile-image">
-					<LazyLoad>
-						<img
-							onClick={() => clickHandle(item.redirectUrl)}
-							src={item.imageUrl}
-							alt="CATS"
-						/>
-					</LazyLoad>
-				</div>
-			))}
+			{bannerItems.map((item) => {
+				if (item.imageUrl === null || item.redirectUrl === null) {
+					return null;
+				} else
+					return (
+						<div
+							key={item.imageUrl}
+							className="banner--mobile-image"
+						>
+							<LazyLoad>
+								<img
+									onClick={() =>
+										clickHandle(item.redirectUrl)
+									}
+									src={item.imageUrl}
+									alt="CATS"
+								/>
+							</LazyLoad>
+						</div>
+					);
+			})}
 		</div>
 	);
 };

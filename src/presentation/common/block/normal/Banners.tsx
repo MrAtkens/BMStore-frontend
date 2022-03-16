@@ -30,18 +30,28 @@ const Banners = ({ bannerItems }: IBanners) => {
 		<div className="ps-home-banner">
 			<div className="container">
 				<Slider {...carouselSetting} className="ps-carousel">
-					{bannerItems.map((item) => (
-						<Image
-							key={item.imageUrl}
-							loading="lazy"
-							width={1250}
-							height={600}
-							onClick={() => clickHandle(item.redirectUrl)}
-							priority
-							src={item.imageUrl}
-							alt="CATS"
-						/>
-					))}
+					{bannerItems.map((item) => {
+						if (
+							item.imageUrl === null ||
+							item.redirectUrl === null
+						) {
+							return null;
+						} else
+							return (
+								<Image
+									key={item.imageUrl}
+									loading="lazy"
+									width={1250}
+									height={600}
+									onClick={() =>
+										clickHandle(item.redirectUrl)
+									}
+									priority
+									src={item.imageUrl}
+									alt="CATS"
+								/>
+							);
+					})}
 				</Slider>
 			</div>
 		</div>

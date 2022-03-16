@@ -19,7 +19,7 @@ import PromotionMainPage from 'presentation/common/block/normal/PromotionMainPag
 import BannersMobile from 'presentation/common/block/mobile/BannersMobile';
 import ActualProducts from 'presentation/common/control/ActualProducts';
 import CategoryMobilePage from 'presentation/common/block/mobile/CategoryMobilePage';
-import ActualProductsMobile from '../presentation/common/control/ActualProductsMobile';
+import ActualProductsMobile from 'presentation/common/control/ActualProductsMobile';
 
 interface IHome {
 	categories: Array<ICategory>;
@@ -107,7 +107,9 @@ export async function getStaticProps({ locale, req }: any) {
 	const actualProductsResponse =
 		await productsApiService.getProductActualProducts();
 	const bannerResponse = await auctionBannerApiService.getAuctionBanner();
-
+	console.log(bannerResponse.data);
+	console.log(actualProductsResponse.data);
+	console.log(categoryResponse.data);
 	return {
 		props: {
 			categories:
