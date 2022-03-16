@@ -107,9 +107,6 @@ export async function getStaticProps({ locale, req }: any) {
 	const actualProductsResponse =
 		await productsApiService.getProductActualProducts();
 	const bannerResponse = await auctionBannerApiService.getAuctionBanner();
-	console.log(bannerResponse.data);
-	console.log(actualProductsResponse.data);
-	console.log(categoryResponse.data);
 	return {
 		props: {
 			categories:

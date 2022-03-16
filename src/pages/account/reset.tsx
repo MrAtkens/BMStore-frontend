@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { validate as uuidValidate } from 'uuid';
 import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
@@ -59,7 +58,7 @@ const ResetPage = ({ categories, operationId }: IResetPage) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { operationId } = context.query;
-	if (operationId === undefined || !uuidValidate(operationId))
+	if (operationId === undefined)
 		return {
 			redirect: {
 				permanent: true,
