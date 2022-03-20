@@ -14,7 +14,7 @@ import cartStore from 'data/stores/cartStore';
 import userStore from 'data/stores/userStore';
 import { invoiceApiService } from 'data/API';
 import { isUserAuth } from 'helper/commons/userHelper';
-import { toastUnActiveProduct } from '../../../../helper/toastify';
+import { toastNotEnoughProducts, toastUnActiveProduct } from 'helper/toastify';
 
 const FormCheckoutInformation = observer(() => {
 	const [form] = Form.useForm();
@@ -107,6 +107,17 @@ const FormCheckoutInformation = observer(() => {
 						}
 					} else if (responseCreate.status === 400) {
 						toastUnActiveProduct();
+					} else if (responseCreate.status === 406) {
+						cartStore.cart.map((item) => {
+							responseCreate.data.data.map((itemProduct) => {
+								if (item.productId === itemProduct.productId) {
+									toastNotEnoughProducts(
+										item.title,
+										itemProduct.count
+									);
+								}
+							});
+						});
 					}
 				});
 		}

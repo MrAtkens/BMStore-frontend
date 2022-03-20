@@ -12,6 +12,23 @@ export const toastServerError = () => {
 	});
 };
 
+//Status 406
+export const toastNotEnoughProducts = (title, count) => {
+	if (count === 0) {
+		notification.error({
+			message: 'Ошибка 406',
+			description: `К сожалению на складе нету достаточного количества продукта ${title}, вы не можете заказать`,
+			duration: 60,
+			placement: 'bottomRight'
+		});
+	}
+	notification.error({
+		message: 'Ошибка 406',
+		description: `К сожалению на складе нету достаточного количества продукта ${title}, вы можете заказать только ${count} количества`,
+		duration: 60,
+		placement: 'bottomRight'
+	});
+};
 //Status 404
 export const toastUserNotFound = () => {
 	notification.error({
