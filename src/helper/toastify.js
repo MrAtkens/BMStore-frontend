@@ -21,13 +21,14 @@ export const toastNotEnoughProducts = (title, count) => {
 			duration: 60,
 			placement: 'bottomRight'
 		});
+	} else {
+		notification.error({
+			message: 'Ошибка 406',
+			description: `К сожалению на складе нету достаточного количества продукта ${title}, вы можете заказать только ${count} количества`,
+			duration: 60,
+			placement: 'bottomRight'
+		});
 	}
-	notification.error({
-		message: 'Ошибка 406',
-		description: `К сожалению на складе нету достаточного количества продукта ${title}, вы можете заказать только ${count} количества`,
-		duration: 60,
-		placement: 'bottomRight'
-	});
 };
 //Status 404
 export const toastUserNotFound = () => {
