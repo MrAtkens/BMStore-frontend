@@ -12,7 +12,7 @@ const nextConfig = withPWA({
 			'cdn4.vectorstock.com',
 			'encrypted-tbn0.gstatic.com',
 			'thumbs.dreamstime.com',
-			'images.unsplash.com',
+			'images.unsplash.com'
 		],
 		minimumCacheTTL: 60000
 	},
@@ -31,7 +31,8 @@ const nextConfig = withPWA({
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')]
 	},
-	compress: true
+	compress: true,
+	staticPageGenerationTimeout: 180
 });
 
 module.exports = withPlugins([[withFonts], nextConfig]);
