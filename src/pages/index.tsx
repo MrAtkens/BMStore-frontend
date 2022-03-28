@@ -110,15 +110,12 @@ export async function getStaticProps({ locale, req }: any) {
 	return {
 		props: {
 			categories:
-				categoryResponse.data === undefined
-					? []
-					: categoryResponse.data,
+				categoryResponse === undefined ? [] : categoryResponse.data,
 			actualProducts:
-				actualProductsResponse.data.data === undefined
+				actualProductsResponse === undefined
 					? []
 					: actualProductsResponse.data.data,
-			bannerItems:
-				bannerResponse.data === undefined ? [] : bannerResponse.data
+			bannerItems: bannerResponse === undefined ? [] : bannerResponse.data
 		},
 		revalidate: 600
 	};

@@ -107,7 +107,7 @@ export async function getServerSideProps({ locale, req }: any) {
 		);
 		penalties = response.data.data;
 	}
-	if (categoryResponse.data === undefined)
+	if (categoryResponse === undefined)
 		return {
 			props: { categories: [], penalties: penalties }
 		};

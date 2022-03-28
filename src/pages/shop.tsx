@@ -192,13 +192,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	let currentPage = parseInt(page as string);
 	if (category !== undefined) {
 		const response = await filtersApiService.getFilters('ru', category);
-		filterResponse = response.data.data;
+		if (response !== undefined) filterResponse = response.data.data;
 	} else {
 		const response = await filtersApiService.getFilters(
 			'ru',
 			'00000000-0000-0000-0000-000000000000'
 		);
-		filterResponse = response.data.data;
+		if (response !== undefined) filterResponse = response.data.data;
 	}
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
@@ -213,9 +213,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		price_min,
 		price_max
 	);
-	if (categoryResponse.data !== undefined)
-		categoriesList = categoryResponse.data;
-	if (productResponse.data !== undefined) {
+	if (categoryResponse !== undefined) categoriesList = categoryResponse.data;
+	if (productResponse !== undefined) {
 		productsList = productResponse.data.data;
 		totalCount = productResponse.data.totalCount;
 		minPrice = productResponse.data.minPrice;

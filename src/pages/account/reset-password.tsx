@@ -58,7 +58,7 @@ export async function getStaticProps({ locale, req }: any) {
 	const categoryResponse = await categoryApiService.getCategoriesByLanguage(
 		'ru'
 	);
-	if (categoryResponse.data === undefined)
+	if (categoryResponse === undefined)
 		return {
 			props: { categories: [] },
 			revalidate: 1800

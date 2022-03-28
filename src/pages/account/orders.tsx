@@ -107,7 +107,7 @@ export async function getServerSideProps({ locale, req }: any) {
 		);
 		orders = response.data.orders;
 	}
-	if (categoryResponse.data === undefined)
+	if (categoryResponse === undefined)
 		return {
 			props: { categories: [], orders: orders }
 		};
