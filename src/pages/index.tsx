@@ -36,6 +36,8 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 	const [size, setSize] = useState(0);
 	const [isMobile, setIsMobile] = useState(false);
 
+	console.log(actualProducts.length);
+
 	const updateWidth = () => {
 		if (typeof window !== 'undefined') setSize(window.innerWidth);
 	};
@@ -110,12 +112,23 @@ export async function getStaticProps({ locale, req }: any) {
 	return {
 		props: {
 			categories:
-				categoryResponse === undefined ? [] : categoryResponse.data,
+				categoryResponse === undefined
+					? []
+					: Array.isArray(categoryResponse.data)
+					? categoryResponse.data
+					: [],
 			actualProducts:
 				actualProductsResponse === undefined
 					? []
-					: actualProductsResponse.data.data,
-			bannerItems: bannerResponse === undefined ? [] : bannerResponse.data
+					: Array.isArray(actualProductsResponse.data)
+					? actualProductsResponse.data
+					: [],
+			bannerItems:
+				bannerResponse === undefined
+					? []
+					: Array.isArray(bannerResponse.data)
+					? bannerResponse.data
+					: []
 		},
 		revalidate: 600
 	};
