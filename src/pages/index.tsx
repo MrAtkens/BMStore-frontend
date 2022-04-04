@@ -36,8 +36,6 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 	const [size, setSize] = useState(0);
 	const [isMobile, setIsMobile] = useState(false);
 
-	console.log(actualProducts.length);
-
 	const updateWidth = () => {
 		if (typeof window !== 'undefined') setSize(window.innerWidth);
 	};
@@ -70,7 +68,7 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<main id="homepage-1">
 				{isMobile ? (

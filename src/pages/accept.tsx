@@ -21,7 +21,7 @@ const Accept = () => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<div className="site-content">
 				<div className="ps-page--404">

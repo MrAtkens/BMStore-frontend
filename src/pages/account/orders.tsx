@@ -64,7 +64,7 @@ const OrdersPage = ({ categories, orders }: IOrdersPage) => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<div className="ps-page--my-account">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
