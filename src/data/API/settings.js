@@ -1,1 +1,1 @@
-export const BackendUrl = 'https://bazarjok-group.com:20000/api/client';
+export const BackendUrl = process.env['NEXT_PUBLIC_PLACES_API_KEY'] ;
