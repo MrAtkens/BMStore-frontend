@@ -5,7 +5,7 @@ const path = require('path');
 
 const nextConfig = withPWA({
 	images: {
-		domains: ['vg123-test.s3.eu-central-1.amazonaws.com'],
+		domains: ['tacs-bucker.s3.eu-central-1.amazonaws.com'],
 		minimumCacheTTL: 60000
 	},
 	eslint: {
