@@ -118,8 +118,8 @@ export async function getStaticProps({ locale, req }: any) {
 			actualProducts:
 				actualProductsResponse === undefined
 					? []
-					: Array.isArray(actualProductsResponse.data)
-					? actualProductsResponse.data
+					: Array.isArray(actualProductsResponse.data.data)
+					? actualProductsResponse.data.data
 					: [],
 			bannerItems:
 				bannerResponse === undefined

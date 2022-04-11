@@ -16,7 +16,6 @@ const CategoryMainPage = ({ categories }: ICategoryBlock) => {
 		slidesToShow: 1,
 		slidesToScroll: 1
 	};
-
 	return (
 		<div className="ps-search-trending">
 			<div className="container">
