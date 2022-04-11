@@ -90,7 +90,7 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<div className="ps-page--simple">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />

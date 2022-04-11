@@ -68,7 +68,7 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<main id="homepage-1">
 				{isMobile ? (
@@ -110,12 +110,23 @@ export async function getStaticProps({ locale, req }: any) {
 	return {
 		props: {
 			categories:
-				categoryResponse === undefined ? [] : categoryResponse.data,
+				categoryResponse === undefined
+					? []
+					: Array.isArray(categoryResponse.data)
+					? categoryResponse.data
+					: [],
 			actualProducts:
 				actualProductsResponse === undefined
 					? []
-					: actualProductsResponse.data.data,
-			bannerItems: bannerResponse === undefined ? [] : bannerResponse.data
+					: Array.isArray(actualProductsResponse.data.data)
+					? actualProductsResponse.data.data
+					: [],
+			bannerItems:
+				bannerResponse === undefined
+					? []
+					: Array.isArray(bannerResponse.data)
+					? bannerResponse.data
+					: []
 		},
 		revalidate: 600
 	};

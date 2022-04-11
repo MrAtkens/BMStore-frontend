@@ -37,7 +37,7 @@ const About = ({ categories }: IAbout) => {
 					name="keywords"
 					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 				/>
-				<meta name="author" content="Bazar-Jok Group" />
+				<meta name="author" content="TACS" />
 			</Head>
 			<div className="ps-page--single" id="about-us">
 				<img src="/static/img/about/about-us.webp" alt="TACS О нас" />

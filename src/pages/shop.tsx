@@ -109,7 +109,7 @@ const Shop = observer(
 						name="keywords"
 						content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
 					/>
-					<meta name="author" content="Bazar-Jok Group" />
+					<meta name="author" content="TACS" />
 				</Head>
 				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />
 				<div className="ps-page--shop" id="shop-sidebar">

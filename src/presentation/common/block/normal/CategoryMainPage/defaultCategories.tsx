@@ -28,7 +28,11 @@ const defaultCategories = (categories: Array<ICategory>) => {
 								layout={'responsive'}
 								width={500}
 								height={500}
-								src={category.imageUrl}
+								src={
+									category.imageUrl !== null
+										? category.imageUrl
+										: '/static/img/not-found.webp'
+								}
 								alt={category.name}
 							/>
 							<span className="category-title">
@@ -55,8 +59,7 @@ const defaultCategories = (categories: Array<ICategory>) => {
 								width={500}
 								height={500}
 								src={
-									category.imageUrl !== null &&
-									category.imageUrl !== undefined
+									category.imageUrl !== null
 										? category.imageUrl
 										: '/static/img/not-found.webp'
 								}
@@ -89,8 +92,7 @@ const defaultCategories = (categories: Array<ICategory>) => {
 								width={500}
 								height={500}
 								src={
-									category.imageUrl !== null &&
-									category.imageUrl !== undefined
+									category.imageUrl !== null
 										? category.imageUrl
 										: '/static/img/not-found.webp'
 								}

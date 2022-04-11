@@ -26,7 +26,14 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 					>
 						<div className="category--mobile-image">
 							<LazyLoad>
-								<img src={item.imageUrl} alt="CATS" />
+								<img
+									src={
+										item.imageUrl !== null
+											? item.imageUrl
+											: '/static/img/not-found.webp'
+									}
+									alt="CATS"
+								/>
 							</LazyLoad>
 							<h3>{item.name}</h3>
 						</div>
@@ -44,7 +51,14 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 					>
 						<div className="category--mobile-image">
 							<LazyLoad>
-								<img src={item.imageUrl} alt="CATS" />
+								<img
+									src={
+										item.imageUrl !== null
+											? item.imageUrl
+											: '/static/img/not-found.webp'
+									}
+									alt="CATS"
+								/>
 							</LazyLoad>
 							<h3>{item.name}</h3>
 						</div>
@@ -63,7 +77,14 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 					>
 						<div className="category--mobile-image">
 							<LazyLoad>
-								<img src={item.imageUrl} alt="CATS" />
+								<img
+									src={
+										item.imageUrl !== null
+											? item.imageUrl
+											: '/static/img/not-found.webp'
+									}
+									alt="CATS"
+								/>
 							</LazyLoad>
 							<h3>{item.name}</h3>
 						</div>
@@ -81,7 +102,14 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 					>
 						<div className="category--mobile-image">
 							<LazyLoad>
-								<img src={item.imageUrl} alt="CATS" />
+								<img
+									src={
+										item.imageUrl !== null
+											? item.imageUrl
+											: '/static/img/not-found.webp'
+									}
+									alt="CATS"
+								/>
 							</LazyLoad>
 							<h3>{item.name}</h3>
 						</div>
@@ -99,7 +127,14 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 					>
 						<div className="category--mobile-image">
 							<LazyLoad>
-								<img src={item.imageUrl} alt="CATS" />
+								<img
+									src={
+										item.imageUrl !== null
+											? item.imageUrl
+											: '/static/img/not-found.webp'
+									}
+									alt="CATS"
+								/>
 							</LazyLoad>
 							<h3>{item.name}</h3>
 						</div>

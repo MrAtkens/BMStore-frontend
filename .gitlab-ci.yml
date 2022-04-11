@@ -1,0 +1,12 @@
+stages:
+  - build
+
+build-docker-api-job:
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker login -u aotus -p Nuke1042
+    - docker build -t aotus/tacs-front-end:prod -f Dockerfile .
+    - docker push aotus/tacs-front-end:prod
