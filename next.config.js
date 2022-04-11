@@ -24,7 +24,15 @@ const nextConfig = withPWA({
 		includePaths: [path.join(__dirname, 'styles')]
 	},
 	compress: true,
-	staticPageGenerationTimeout: 180
+	staticPageGenerationTimeout: 180,
+	httpAgentOptions: {
+		keepAlive: true,
+		proxy: {
+			protocol: 'https',
+			host: 'https://tacs.kz',
+			port: 443
+		}
+	}
 });
 
 module.exports = withPlugins([[withFonts], nextConfig]);
