@@ -26,7 +26,7 @@ const nextConfig = withPWA({
 	compress: true,
 	staticPageGenerationTimeout: 180,
 	httpAgentOptions: {
-		keepAlive: true,
+		keepAlive: false,
 		proxy: {
 			protocol: 'https',
 			host: 'https://tacs.kz',
