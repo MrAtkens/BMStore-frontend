@@ -2,6 +2,7 @@ FROM node:current-alpine AS base
 WORKDIR /app
 COPY package.json ./
 RUN npm install
+RUN npm audit fix
 COPY . .
 
 FROM base AS build
