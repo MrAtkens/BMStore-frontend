@@ -25,6 +25,9 @@ const nextConfig = withPWA({
 	},
 	compress: true,
 	staticPageGenerationTimeout: 180,
+	experimental: {
+		outputStandalone: true
+	},
 	httpAgentOptions: {
 		keepAlive: false,
 		proxy: {
