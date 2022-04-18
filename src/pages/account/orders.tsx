@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { notification } from 'antd';
-import Head from 'next/head';
 
 import {
 	USER_FIRST_PART,
@@ -53,19 +52,7 @@ const OrdersPage = ({ categories, orders }: IOrdersPage) => {
 	});
 
 	return (
-		<Layout categories={categories} title={'Заказы - TACS'}>
-			<Head>
-				<title>Заказы - TACS</title>
-				<meta
-					name="description"
-					content="TACS-Магазин стройматериалов в Нур-Султан"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Заказы'}>
 			<div className="ps-page--my-account">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
 				<section className="ps-my-account ps-page--account">

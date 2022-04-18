@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
 import { isUserAuth } from 'helper/commons/userHelper';
@@ -33,19 +32,7 @@ const RegisterPage = ({ categories }: IRegisterPage) => {
 	];
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>Регистрация - TACS</title>
-				<meta
-					name="description"
-					content="TACS-Магазин стройматериалов в Нур-Султан"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Регистрация'}>
 			<div className="ps-page--my-account">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
 				<Register />

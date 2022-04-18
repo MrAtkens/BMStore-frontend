@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -35,19 +34,7 @@ const ResetPage = ({ categories, operationId }: IResetPage) => {
 	];
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>Смена пароля - TACS</title>
-				<meta
-					name="description"
-					content="TACS-Магазин стройматериалов в Нур-Султан"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Сброс пароля'}>
 			<div className="ps-page--my-account">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
 				<ResetPassword operationId={operationId} />

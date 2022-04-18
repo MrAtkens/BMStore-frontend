@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 
 import { categoryApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -27,19 +26,7 @@ const ContactUsPage = ({ categories }: IContactUsPage) => {
 	];
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>TACS — Контакты</title>
-				<meta
-					name="description"
-					content="TACS — Интернет-магазин стройматериалов"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Контакты'}>
 			<div className="ps-page--single" id="contact-us">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />
 				<ContactMap />

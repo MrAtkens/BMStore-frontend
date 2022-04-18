@@ -16,7 +16,7 @@ interface IPanelCategories {
 const PanelCategories = ({ categories }: IPanelCategories) => {
 	const [current, setCurrent] = useState(categories[0].id);
 	const Router = useRouter();
-	const { category, searchText } = Router.query;
+	const { category } = Router.query;
 
 	useEffect(() => {
 		if (category !== undefined) setCurrent(category.toString());
@@ -36,7 +36,7 @@ const PanelCategories = ({ categories }: IPanelCategories) => {
 				query: generateShopUrl(
 					e.key,
 					undefined,
-					searchText?.toString(),
+					undefined,
 					undefined,
 					undefined,
 					1

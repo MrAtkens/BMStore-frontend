@@ -15,7 +15,7 @@ const Accept = () => {
 				<title>TACS — Интернет-магазин стройматериалов</title>
 				<meta
 					name="description"
-					content="TACS — Интернет-магазин стройматериалов"
+					content={process.env['NEXT_PUBLIC_DESCRIPTION']}
 				/>
 				<meta
 					name="keywords"

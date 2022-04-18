@@ -111,7 +111,9 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 									alt="CATS"
 								/>
 							</LazyLoad>
-							<h3>{item.name}</h3>
+							<h3 className="category--mobile-title">
+								{item.name}
+							</h3>
 						</div>
 					</Link>
 				);
@@ -136,7 +138,9 @@ const CategoryMobilePage = ({ categories }: ICategoryBlock) => {
 									alt="CATS"
 								/>
 							</LazyLoad>
-							<h3>{item.name}</h3>
+							<h3 className="category--mobile-title">
+								{item.name}
+							</h3>
 						</div>
 					</Link>
 				);

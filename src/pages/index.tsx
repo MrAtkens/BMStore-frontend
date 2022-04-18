@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 import { IAuctionBanner } from 'domain/interfaces/IAuctionBanner';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -57,19 +56,10 @@ const Home = ({ categories, actualProducts, bannerItems }: IHome) => {
 	}, [size]);
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>TACS — Интернет-магазин стройматериалов</title>
-				<meta
-					name="description"
-					content="TACS — Интернет-магазин стройматериалов"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout
+			categories={categories}
+			title="интернет магазин строительных материалов"
+		>
 			<main id="homepage-1">
 				{isMobile ? (
 					<div>

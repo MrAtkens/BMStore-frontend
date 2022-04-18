@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 import {
 	categoryApiService,
@@ -95,22 +94,7 @@ const Shop = observer(
 		}, [Router.query]);
 
 		return (
-			<Layout
-				categories={categoriesData}
-				title={'Главная страница - TACS'}
-			>
-				<Head>
-					<title>Каталог - TACS</title>
-					<meta
-						name="description"
-						content="TACS-Магазин стройматериалов в Нур-Султан"
-					/>
-					<meta
-						name="keywords"
-						content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-					/>
-					<meta name="author" content="TACS" />
-				</Head>
+			<Layout categories={categoriesData} title={'Каталог'}>
 				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />
 				<div className="ps-page--shop" id="shop-sidebar">
 					<div className="container">
@@ -167,8 +151,8 @@ const Shop = observer(
 									<h1>Каталог</h1>
 								</div>
 								<ShopItems
-									columns={4}
-									pageSize={16}
+									columns={3}
+									pageSize={15}
 									size={size}
 								/>
 							</div>

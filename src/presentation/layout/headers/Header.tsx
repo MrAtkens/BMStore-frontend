@@ -133,7 +133,7 @@ const Header = ({ categories }: IHeader) => {
 						<p>
 							<i className="icon-telephone" />
 							Телефон:
-							<strong> 88003355335</strong>
+							<strong> {process.env['NEXT_PUBLIC_PHONE']}</strong>
 						</p>
 					</div>
 				</div>
@@ -152,7 +152,8 @@ const Header = ({ categories }: IHeader) => {
 					нажмите на кнопку «Войти»
 				</p>
 				<p>
-					2. Вы можете позвонить нам по номеру телефона: 88003355335
+					2. Вы можете позвонить нам по номеру телефона:{' '}
+					{process.env['NEXT_PUBLIC_PHONE']}
 				</p>
 			</Modal>
 		</header>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
-import Head from 'next/head';
 
 import { CHECKOUT, HOME, SHOP_PAGE } from 'constant/routes';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -82,19 +81,7 @@ const ShoppingCartScreen = observer(({ categories }: IShoppingCartScreen) => {
 	}
 
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>TACS — Корзина</title>
-				<meta
-					name="description"
-					content="TACS — Интернет-магазин стройматериалов"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Корзина'}>
 			<div className="ps-page--simple">
 				<BreadCrumb breadcrumb={breadCrumb} layout="default" />
 				<div className="ps-section--shopping ps-shopping-cart">

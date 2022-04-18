@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 import { categoryApiService, productsApiService } from 'data/API';
 import { ICategory } from 'domain/interfaces/ICategory';
@@ -79,19 +78,7 @@ const ProductPage = ({ categories, product }: IProductPage) => {
 		productView = <SkeletonProductDetail />;
 	}
 	return (
-		<Layout categories={categories} title={'Главная страница - TACS'}>
-			<Head>
-				<title>Продукт - {pageProduct.title}</title>
-				<meta
-					name="description"
-					content="TACS-Магазин стройматериалов в Нур-Султан"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={product.title}>
 			<div className="ps-page--simple">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'default'} />
 				<div className="ps-page--product ps-page--product-box">

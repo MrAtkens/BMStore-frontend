@@ -71,6 +71,9 @@ const ShopItems = observer(
 			switch (columns) {
 				case 2:
 					setClasses('col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6');
+					return 2;
+				case 3:
+					setClasses('col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6');
 					return 3;
 				case 4:
 					setClasses('col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6');

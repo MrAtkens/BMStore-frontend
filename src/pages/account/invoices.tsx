@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { notification } from 'antd';
-import Head from 'next/head';
 
 import {
 	USER_FIRST_PART,
@@ -53,19 +52,7 @@ const InvoicePage = ({ categories, invoices }: IInvoicePage) => {
 	});
 
 	return (
-		<Layout categories={categories} title={'Финансы - TACS'}>
-			<Head>
-				<title>Финансы - TACS</title>
-				<meta
-					name="description"
-					content="TACS-Магазин стройматериалов в Нур-Султан"
-				/>
-				<meta
-					name="keywords"
-					content="стройматериалы, ремонт, материалы, инструменты, техника, стройка"
-				/>
-				<meta name="author" content="TACS" />
-			</Head>
+		<Layout categories={categories} title={'Финансы'}>
 			<div className="ps-page--my-account">
 				<BreadCrumb breadcrumb={breadCrumb} layout={'normal'} />
 				<section className="ps-my-account ps-page--account">
